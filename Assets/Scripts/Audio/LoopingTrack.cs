@@ -1,20 +1,23 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class LoopingTrack : AudioTrack{
 
 	private bool shouldClone = true;
 	private LoopingTrack clone;
 
-	public override void AddEventAtTime(TrackEventDelegate newEvent, float occurOnTime){
-		base.AddEventAtTime (newEvent, occurOnTime);
+	public override void AddEventAtTime (TrackEventDelegate newEvent, float eventTime)
+	{
+		base.AddEventAtTime (newEvent, eventTime);
 		if (clone)
-			clone.AddEventAtTime (newEvent, occurOnTime);
+			clone.AddEventAtTime (newEvent, eventTime);
 	}
 
-	public override void AddEventAtTimeRemaining(TrackEventDelegate newEvent, float occurOnTimeRemaining){
-		base.AddEventAtTimeRemaining (newEvent, occurOnTimeRemaining);
+	public override void AddStateEventAtTime (TrackEventDelegate newEvent, float eventTime)
+	{
+		base.AddStateEventAtTime (newEvent, eventTime);
 		if (clone)
-			clone.AddEventAtTimeRemaining (newEvent, occurOnTimeRemaining);
+			clone.AddStateEventAtTime (newEvent, eventTime);
 	}
 
 	public void Clone(){

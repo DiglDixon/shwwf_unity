@@ -170,7 +170,7 @@ public class MediaPlayerCtrl : MonoBehaviour {
 
 		#endif		
 	}
-
+	// UNUSED
 	public void SetTargetObject(GameObject go){
 		m_TargetMaterial = new GameObject[]{go};
 		ReloadTargetObjects ();
@@ -739,6 +739,7 @@ public class MediaPlayerCtrl : MonoBehaviour {
 	
 	public void Stop()
 	{
+		SeekTo (0); // DIGL - at export this isn't working as it looks like it should.
 		if(m_CurrentState == MEDIAPLAYER_STATE.PLAYING)
 			Call_Pause();
 		

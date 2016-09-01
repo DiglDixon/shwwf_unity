@@ -10,8 +10,8 @@ public class LoopingTracklistEntry : AudioTracklistEntry{
 		cloneTrack = clone;
 	}
 
-	public override void LoadTrack (){
-		base.LoadTrack ();
+	public override void AssignTrack (){
+		base.AssignTrack ();
 		((LoopingTrack) track).Clone ();
 	}
 

@@ -11,7 +11,7 @@ public class Tracklist : MonoBehaviour{
 
 	private void InitialiseEntries(){
 		for (int k = 0; k < entries.Length; k++) {
-			entries [k].LoadTrack ();
+			entries [k].AssignTrack ();
 		}
 	}
 

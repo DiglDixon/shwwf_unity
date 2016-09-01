@@ -19,9 +19,21 @@ public abstract class EventTrackPlayer : TrackOutput{
 		}
 	}
 
-	protected void Update (){
+	protected virtual void Update (){
 		if (eventTrack != null) {
 			eventTrack.UpdateTimeElapsed (GetTimeElapsed ());
+		}
+	}
+
+	protected void EnableEvents(){
+		if (eventTrack != null) {
+			eventTrack.EnableEvents ();
+		}
+	}
+
+	protected void DisableEvents(){
+		if (eventTrack != null) {
+			eventTrack.DisableEvents ();
 		}
 	}
 }

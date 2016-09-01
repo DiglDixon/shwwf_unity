@@ -10,6 +10,10 @@ public class VideoPlaybackSystem : WrappedTrackOutput{
 		}
 	}
 
+	public TrackOutput GetPlayer(){
+		return WrappedOutput;
+	}
+
 	private void Awake(){
 		GameObject playerObject;
 		#if UNITY_EDITOR

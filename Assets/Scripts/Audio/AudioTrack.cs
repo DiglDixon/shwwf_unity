@@ -13,9 +13,11 @@ public class AudioTrack : EventTrack {
 	private AudioClip audioClip;
 
 	private void Awake(){
-		if (!audioClip)
-			throw new UnassignedReferenceException ("Track missing AudioClip at Awake");
-		SetAudioClip (audioClip);
+		if (audioClip) {
+			SetAudioClip (audioClip);
+		} else {
+			Diglbug.LogWarning ("AudioClip not found at Awake for " + name + ", this must be set before use");
+		}
 	}
 
 	public void SetAudioClip(AudioClip c){
@@ -46,13 +48,21 @@ public class AudioTrack : EventTrack {
 	}
 
 	public override void Load(){
-		Diglbug.Log ("Loading track " + audioClip.name, PrintStream.AUDIO_LOAD);
-		audioClip.LoadAudioData ();
+		if (IsLoaded ()) {
+			Diglbug.Log ("Skipping load call due to already being loaded "+GetTrackName(), PrintStream.AUDIO_LOAD);
+		} else {
+			Diglbug.Log ("Loading track " + audioClip.name, PrintStream.AUDIO_LOAD);
+			audioClip.LoadAudioData ();
+		}
 	}
 
 	public override void Unload(){
-		Diglbug.Log ("Unloading track " + audioClip.name, PrintStream.AUDIO_LOAD);
-		audioClip.UnloadAudioData ();
+		if (IsLoaded ()) {
+			Diglbug.Log ("Unloading track " + audioClip.name, PrintStream.AUDIO_LOAD);
+			audioClip.UnloadAudioData ();
+		} else {
+			Diglbug.Log ("Skipping unload call due to already being not-loaded ("+audioClip.loadState+"), "+GetTrackName(), PrintStream.AUDIO_LOAD);
+		}
 	}
 
 	public override bool IsLoaded(){

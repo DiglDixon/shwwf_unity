@@ -1,12 +1,13 @@
 ﻿
 using UnityEngine;
 using UnityEngine.UI;
-
+#if UNITY_EDITOR
 [RequireComponent (typeof(DesktopVideoTrack))]
+#endif
 [RequireComponent (typeof(MobileVideoTrack))]
 public class VideoTracklistEntry : TracklistEntry{
 
-	public override void LoadTrack(){
+	public override void AssignTrack(){
 		#if UNITY_EDITOR
 		track = GetComponent<DesktopVideoTrack>();
 		#else

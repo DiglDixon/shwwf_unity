@@ -5,7 +5,7 @@ public abstract class TracklistEntry : ListEntry{
 	
 	protected ITrack track;
 
-	public abstract void LoadTrack ();
+	public abstract void AssignTrack ();
 
 	public virtual ITrack GetTrack(){
 		return track;

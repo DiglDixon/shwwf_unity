@@ -8,11 +8,8 @@ public class MobileVideoTrack : VideoTrack{
 	private float inverse_trackLength;
 	private float trackLength;
 
-	public void InitialiseToControls(MediaPlayerCtrl controls){
+	public void SetControls(MediaPlayerCtrl controls){
 		mobileControls = controls;
-		mobileControls.Load (videoFileName); // this is where its parameter is set m_str;
-		trackLength = mobileControls.GetDuration ();
-		inverse_trackLength = 1f / trackLength;
 	}
 
 	public override string GetTrackName(){
@@ -36,12 +33,17 @@ public class MobileVideoTrack : VideoTrack{
 	}
 
 	public override void Load(){
+		Diglbug.LogMobile ("Loading " + GetTrackName (), "VIDEO_LOAD");
 		Diglbug.Log ("Loading track " + GetTrackName(), PrintStream.VIDEO);
-		// this is done in the InitialiseToControls functions. We blank this out to avoid duplicate calls.
+		mobileControls.Load (videoFileName); // this is where its parameter is set m_str;
+		// unfortunately, now is the only time we can call these.
+		trackLength = mobileControls.GetDuration ();
+		inverse_trackLength = 1f / trackLength;
 	}
 
 
 	public override void Unload(){
+		Diglbug.LogMobile ("Unloading " + GetTrackName (), "VIDEO_LOAD");
 		Diglbug.Log ("Unloading track " + GetTrackName(), PrintStream.VIDEO);
 		mobileControls.UnLoad ();
 	}
@@ -51,7 +53,7 @@ public class MobileVideoTrack : VideoTrack{
 	}
 
 	public override float FadeTime(){
-		return 0;
+		return 0f;
 	}
 
 	private void OnValidate()

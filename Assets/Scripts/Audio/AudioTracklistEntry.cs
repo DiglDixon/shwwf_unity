@@ -3,7 +3,7 @@
 [RequireComponent (typeof(AudioTrack))]
 public class AudioTracklistEntry : TracklistEntry{
 	
-	public override void LoadTrack(){
+	public override void AssignTrack(){
 		track = GetComponent<AudioTrack> ();
 	}
 

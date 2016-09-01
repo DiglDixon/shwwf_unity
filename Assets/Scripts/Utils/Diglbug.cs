@@ -24,12 +24,27 @@ public static class Diglbug{
 			PrintToUnityLog ("[" + stream + "] " + message);
 	}
 
+	public static void LogWarning(string message){
+		Debug.LogWarning (message);
+	}
+
 	public static void LogError(string message){
 		Debug.LogError (message);
 	}
 
 	private static void PrintToUnityLog(string s){
 		Debug.Log (s);
+	}
+
+	private static MobileDebugger mobileDebugger;
+
+	public static void LogMobile(string message, string channel){
+		if (mobileDebugger == null) {
+			GameObject obj = GameObject.Instantiate (Resources.Load ("Mobile_Debugger")) as GameObject;
+			obj.transform.SetAsLastSibling ();
+			mobileDebugger = obj.GetComponentInChildren<MobileDebugger> ();
+		}
+		mobileDebugger.LogMessage (message, channel);
 	}
 
 
