@@ -1,0 +1,1237 @@
+fileFormatVersion: 2
+guid: 385de2b26a06549aa85a4c5d555569ee
+timeCreated: 1456659762
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: ps_desktop_background
+    21300002: ps_itunesStore_icon
+    21300004: ps_calendar_icon
+    21300006: ps_clock_icon
+    21300008: ps_camera_icon
+    21300010: ps_messages_camera_icon
+    21300012: ps_status_battery
+    21300014: ps_status_signal_bar
+    21300016: ps_status_battery_white
+    21300018: ps_messages_bubble
+    21300020: ps_status_signal_large
+    21300022: ps_status_signal
+    21300024: ps_phone_icon
+    21300026: ps_music_icon
+    21300028: ps_maps_icon
+    21300030: ps_news_icon
+    21300032: ps_contacts_icon
+    21300034: ps_skype_icon
+    21300036: twwf_phone_sheet_28
+    21300038: ps_messages_icon
+    21300040: ps_mail_icon
+    21300042: ps_safari_icon
+    21300044: ps_trigger_icon
+    21300046: ps_desktop_bar
+    21300048: ps_contacts_headStrip
+    21300050: ps_contacts_searchStrip
+    21300052: ps_contacts_sepStrip
+    21300054: ps_contacts_seach9s
+    21300056: ps_contacts_magnifyingGlass
+    21300058: ps_messages_speech
+    21300060: ps_messages_pastSpeech
+    21300062: ps_circle
+    21300064: ps_phone_phoneIcon
+    21300066: ps_phone_messageIcon
+    21300068: ps_phone_clockIcon
+    21300070: ps_circle_stroke
+    21300072: ps_phone_speakerIcon
+    21300074: ps_phone_contactsIcon
+    21300076: ps_phone_keypadIcon
+    21300078: ps_phone_muteIcon
+    21300080: ps_phone_endButton
+    21300082: ps_messages_toby
+    21300084: ps_ios_leftArrow
+    21300086: ps_ios_rightArrow
+    21300088: ps_ios_refresh
+    21300090: ps_ios_add
+    21300092: ps_contacts_messageIcon
+    21300094: ps_contacts_phoneIcon
+    21300096: ps_lock_icon
+    21300098: ps_blank_button
+    21300100: ps_twwf_title
+    21300102: ps_twwf_hero
+    21300104: ps_nzfest_logo
+    21300106: ps_twwf_appbutton
+    21300108: ps_redial_button
+    21300110: tick
+    21300112: ps_photos_icon
+    21300114: ps_calc_icon
+    21300116: ps_weather_icon
+    21300118: ps_youtube_icon
+    21300120: ps_contacts_skypeIcon
+    21300122: photos_photoIconGrey
+    21300124: photos_multipleIconBlue
+    21300126: photos_photoIconBlue
+    21300128: photos_multipleIconGrey
+    21300130: skype_hangup_icon
+    21300132: skype_videoIcon
+    21300134: ps_books_icon
+    21300136: ps_passport_icon
+    21300138: ps_star_icon
+    21300140: ps_user_cyn
+    21300142: ps_user_icon_3
+    21300144: ps_user_icon_2
+    21300146: ps_user_icon_4
+    21300148: ps_user_icon_5
+    21300150: ps_user_icon_6
+    21300152: ps_user_icon_7
+    21300154: ps_user_icon_10
+    21300156: ps_user_icon_9
+    21300158: ps_user_icon_8
+    21300160: ps_user_icon_11
+    21300162: ps_user_icon_12
+    21300164: ps_user_icon_13
+    21300166: ps_user_icon_16
+    21300168: ps_user_icon_15
+    21300170: ps_user_icon_14
+    21300172: ps_notepad_icon
+    21300174: ps_settings_icon
+    21300176: logo_cnz
+    21300178: logo_qt
+    21300180: logo_storybox
+    21300182: logo_bm
+    21300184: ps_writeMessage
+    21300186: ps_skype_logo
+    21300188: skype_loadIcon
+    21300190: skype_contact_icon
+    21300192: ps_arrow_right_white
+    21300194: ps_user_daveadams
+    21300196: ps_user_mike
+    21300198: ps_emoticon_smiley
+    21300200: ps_emoticon_grin
+    21300202: ps_emoticon_tongue
+    21300204: ps_emoticon_wink
+    21300206: ps_maps_walker
+    21300208: ps_distance_tail
+    21300210: ps_distance_body
+    21300212: ps_nextButton
+    21300214: ps_rainy_icon
+    21300216: ps_sunny_icon
+    21300218: ps_bottombar_right
+    21300220: ps_bottombar_middle
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: ps_desktop_background
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 907
+        width: 640
+        height: 1136
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_itunesStore_icon
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 1892
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_calendar_icon
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 1891
+        width: 121
+        height: 122
+      alignment: 9
+      pivot: {x: .468727797, y: .546524823}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_clock_icon
+      rect:
+        serializedVersion: 2
+        x: 924
+        y: 1891
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_camera_icon
+      rect:
+        serializedVersion: 2
+        x: 1057
+        y: 1891
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_messages_camera_icon
+      rect:
+        serializedVersion: 2
+        x: 1296
+        y: 1942
+        width: 98
+        height: 73
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_status_battery
+      rect:
+        serializedVersion: 2
+        x: 1402
+        y: 1989
+        width: 63
+        height: 24
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_status_signal_bar
+      rect:
+        serializedVersion: 2
+        x: 1476
+        y: 2003
+        width: 67
+        height: 11
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_status_battery_white
+      rect:
+        serializedVersion: 2
+        x: 1402
+        y: 1956
+        width: 63
+        height: 24
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_messages_bubble
+      rect:
+        serializedVersion: 2
+        x: 1289
+        y: 1863
+        width: 113
+        height: 70
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_status_signal_large
+      rect:
+        serializedVersion: 2
+        x: 1406
+        y: 1909
+        width: 44
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_status_signal
+      rect:
+        serializedVersion: 2
+        x: 1413
+        y: 1877
+        width: 26
+        height: 20
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_phone_icon
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 1765
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_music_icon
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 1765
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_maps_icon
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 1765
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_news_icon
+      rect:
+        serializedVersion: 2
+        x: 1058
+        y: 1765
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_contacts_icon
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 1637
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_skype_icon
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 1637
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_messages_icon
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 1510
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_mail_icon
+      rect:
+        serializedVersion: 2
+        x: 963
+        y: 1511
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_safari_icon
+      rect:
+        serializedVersion: 2
+        x: 1114
+        y: 1511
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_desktop_bar
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 688
+        width: 640
+        height: 192
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_contacts_headStrip
+      rect:
+        serializedVersion: 2
+        x: 1556
+        y: 1955
+        width: 1
+        height: 87
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_contacts_searchStrip
+      rect:
+        serializedVersion: 2
+        x: 1562
+        y: 1956
+        width: 1
+        height: 86
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_contacts_sepStrip
+      rect:
+        serializedVersion: 2
+        x: 1567
+        y: 1996
+        width: 1
+        height: 46
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_contacts_seach9s
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 1981
+        width: 96
+        height: 61
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 32, y: 28, z: 32, w: 30}
+    - name: ps_contacts_magnifyingGlass
+      rect:
+        serializedVersion: 2
+        x: 1573
+        y: 1942
+        width: 31
+        height: 32
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_messages_speech
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 560
+        width: 439
+        height: 115
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 89, y: 54, z: 70, w: 53}
+    - name: ps_messages_pastSpeech
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 559
+        width: 159
+        height: 116
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 76, y: 56, z: 71, w: 55}
+    - name: ps_circle
+      rect:
+        serializedVersion: 2
+        x: 1610
+        y: 1636
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 95, y: 95, z: 95, w: 95}
+    - name: ps_phone_phoneIcon
+      rect:
+        serializedVersion: 2
+        x: 1701
+        y: 1857
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_phone_messageIcon
+      rect:
+        serializedVersion: 2
+        x: 1703
+        y: 1935
+        width: 46
+        height: 39
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_phone_clockIcon
+      rect:
+        serializedVersion: 2
+        x: 1701
+        y: 1986
+        width: 52
+        height: 50
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_circle_stroke
+      rect:
+        serializedVersion: 2
+        x: 1610
+        y: 1433
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 95, y: 95, z: 95, w: 95}
+    - name: ps_phone_speakerIcon
+      rect:
+        serializedVersion: 2
+        x: 1780
+        y: 1821
+        width: 85
+        height: 69
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_phone_contactsIcon
+      rect:
+        serializedVersion: 2
+        x: 1778
+        y: 1902
+        width: 57
+        height: 54
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_phone_keypadIcon
+      rect:
+        serializedVersion: 2
+        x: 1780
+        y: 1962
+        width: 68
+        height: 66
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_phone_muteIcon
+      rect:
+        serializedVersion: 2
+        x: 1818
+        y: 1726
+        width: 53
+        height: 79
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_phone_endButton
+      rect:
+        serializedVersion: 2
+        x: 1816
+        y: 1675
+        width: 44
+        height: 36
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 16, y: 13, z: 15, w: 15}
+    - name: ps_messages_toby
+      rect:
+        serializedVersion: 2
+        x: 1272
+        y: 1576
+        width: 202
+        height: 270
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_ios_leftArrow
+      rect:
+        serializedVersion: 2
+        x: 1610
+        y: 1937
+        width: 22
+        height: 37
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_ios_rightArrow
+      rect:
+        serializedVersion: 2
+        x: 1638
+        y: 1937
+        width: 22
+        height: 37
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_ios_refresh
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 1890
+        width: 36
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_ios_add
+      rect:
+        serializedVersion: 2
+        x: 1903
+        y: 1768
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_contacts_phoneIcon
+      rect:
+        serializedVersion: 2
+        x: 1895
+        y: 1973
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_lock_icon
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 955
+        width: 184
+        height: 256
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_blank_button
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 1372
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 30, y: 30, z: 30, w: 30}
+    - name: ps_twwf_title
+      rect:
+        serializedVersion: 2
+        x: 701
+        y: 183
+        width: 646
+        height: 124
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_twwf_hero
+      rect:
+        serializedVersion: 2
+        x: 701
+        y: 317
+        width: 646
+        height: 600
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_nzfest_logo
+      rect:
+        serializedVersion: 2
+        x: 701
+        y: 102
+        width: 239
+        height: 40
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_redial_button
+      rect:
+        serializedVersion: 2
+        x: 1816
+        y: 1633
+        width: 44
+        height: 36
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 16, y: 13, z: 15, w: 14}
+    - name: tick
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 287
+        width: 78
+        height: 79
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_photos_icon
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 1639
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_calc_icon
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 1640
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_weather_icon
+      rect:
+        serializedVersion: 2
+        x: 1802
+        y: 1495
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_youtube_icon
+      rect:
+        serializedVersion: 2
+        x: 1923
+        y: 1495
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_contacts_skypeIcon
+      rect:
+        serializedVersion: 2
+        x: 1895
+        y: 1900
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_contacts_messageIcon
+      rect:
+        serializedVersion: 2
+        x: 1895
+        y: 1827
+        width: 62
+        height: 62
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_photoIconGrey
+      rect:
+        serializedVersion: 2
+        x: 1495
+        y: 1774
+        width: 53
+        height: 41
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_multipleIconBlue
+      rect:
+        serializedVersion: 2
+        x: 1494
+        y: 1710
+        width: 49
+        height: 41
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_photoIconBlue
+      rect:
+        serializedVersion: 2
+        x: 1495
+        y: 1654
+        width: 53
+        height: 41
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_multipleIconGrey
+      rect:
+        serializedVersion: 2
+        x: 1494
+        y: 1590
+        width: 49
+        height: 41
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: skype_hangup_icon
+      rect:
+        serializedVersion: 2
+        x: 1479
+        y: 1535
+        width: 80
+        height: 26
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: skype_videoIcon
+      rect:
+        serializedVersion: 2
+        x: 1492
+        y: 1488
+        width: 56
+        height: 27
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_books_icon
+      rect:
+        serializedVersion: 2
+        x: 1802
+        y: 1371
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_passport_icon
+      rect:
+        serializedVersion: 2
+        x: 1925
+        y: 1371
+        width: 121
+        height: 122
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_cyn
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 1072
+        width: 190
+        height: 191
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_3
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 879
+        width: 190
+        height: 191
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_2
+      rect:
+        serializedVersion: 2
+        x: 1430
+        y: 879
+        width: 190
+        height: 191
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_4
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 881
+        width: 190
+        height: 191
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_5
+      rect:
+        serializedVersion: 2
+        x: 1430
+        y: 689
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_6
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 689
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_7
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 689
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_10
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 499
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_9
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 498
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_8
+      rect:
+        serializedVersion: 2
+        x: 1430
+        y: 499
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_11
+      rect:
+        serializedVersion: 2
+        x: 1430
+        y: 309
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_12
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 308
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_13
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 309
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_16
+      rect:
+        serializedVersion: 2
+        x: 1810
+        y: 119
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_15
+      rect:
+        serializedVersion: 2
+        x: 1620
+        y: 118
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_icon_14
+      rect:
+        serializedVersion: 2
+        x: 1430
+        y: 119
+        width: 190
+        height: 190
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_notepad_icon
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 1379
+        width: 121
+        height: 121
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_settings_icon
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 1253
+        width: 121
+        height: 121
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: logo_cnz
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 450
+        width: 390
+        height: 95
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: logo_qt
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 388
+        width: 273
+        height: 167
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: logo_storybox
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 7
+        width: 521
+        height: 298
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: logo_bm
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 311
+        width: 305
+        height: 139
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_writeMessage
+      rect:
+        serializedVersion: 2
+        x: 1495
+        y: 1893
+        width: 48
+        height: 47
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_skype_logo
+      rect:
+        serializedVersion: 2
+        x: 975
+        y: 1276
+        width: 488
+        height: 220
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: skype_loadIcon
+      rect:
+        serializedVersion: 2
+        x: 1257
+        y: 1517
+        width: 28
+        height: 44
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: skype_contact_icon
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 934
+        width: 316
+        height: 317
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_arrow_right_white
+      rect:
+        serializedVersion: 2
+        x: 1669
+        y: 1936
+        width: 24
+        height: 38
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_daveadams
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 1071
+        width: 190
+        height: 191
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_user_mike
+      rect:
+        serializedVersion: 2
+        x: 1414
+        y: 1071
+        width: 190
+        height: 191
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_emoticon_smiley
+      rect:
+        serializedVersion: 2
+        x: 1982
+        y: 1997
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_emoticon_grin
+      rect:
+        serializedVersion: 2
+        x: 1982
+        y: 1960
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_emoticon_tongue
+      rect:
+        serializedVersion: 2
+        x: 1982
+        y: 1924
+        width: 29
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_emoticon_wink
+      rect:
+        serializedVersion: 2
+        x: 1982
+        y: 1889
+        width: 29
+        height: 30
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_maps_walker
+      rect:
+        serializedVersion: 2
+        x: 1504
+        y: 1390
+        width: 64
+        height: 80
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_distance_tail
+      rect:
+        serializedVersion: 2
+        x: 1511
+        y: 1306
+        width: 67
+        height: 69
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_distance_body
+      rect:
+        serializedVersion: 2
+        x: 1609
+        y: 1312
+        width: 108
+        height: 76
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 33, y: 34, z: 40, w: 27}
+    - name: ps_nextButton
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 973
+        width: 212
+        height: 244
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_rainy_icon
+      rect:
+        serializedVersion: 2
+        x: 956
+        y: 3
+        width: 189
+        height: 178
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_sunny_icon
+      rect:
+        serializedVersion: 2
+        x: 1166
+        y: 3
+        width: 189
+        height: 179
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_bottombar_right
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 688
+        width: 159
+        height: 192
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ps_bottombar_middle
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 688
+        width: 159
+        height: 192
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

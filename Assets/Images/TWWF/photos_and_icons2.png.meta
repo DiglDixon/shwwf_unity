@@ -1,0 +1,366 @@
+fileFormatVersion: 2
+guid: 27e3721d6930f43628d691073ab90e93
+timeCreated: 1456134424
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: photos_16
+    21300002: photos_21
+    21300004: photos_26
+    21300006: photos_17
+    21300008: photos_22
+    21300010: photos_27
+    21300012: photos_18
+    21300014: photos_23
+    21300016: photos_28
+    21300018: photos_19
+    21300020: photos_24
+    21300022: photos_29
+    21300024: photos_20
+    21300026: photos_25
+    21300028: icon_16
+    21300030: icon_21
+    21300032: icon_27
+    21300034: icon_23
+    21300036: icon_22
+    21300038: icon_19
+    21300040: icon_29
+    21300042: icon_25
+    21300044: icon_26
+    21300046: icon_28
+    21300048: icon_18
+    21300050: icon_17
+    21300052: icon_24
+    21300054: icon_20
+    21300056: hippy_map_large
+    21300058: hippy_map_icon
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: photos_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1708
+        width: 600
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_21
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 1708
+        width: 600
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_26
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 1708
+        width: 600
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1359
+        width: 600
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_22
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 1359
+        width: 600
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_27
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 1359
+        width: 600
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1010
+        width: 600
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_23
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 1010
+        width: 600
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_28
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 1010
+        width: 600
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 661
+        width: 600
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_24
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 661
+        width: 600
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_29
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 661
+        width: 600
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 312
+        width: 600
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: photos_25
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 312
+        width: 600
+        height: 340
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 161
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon_21
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 161
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon_27
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 161
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon_23
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 161
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon_22
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 161
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon_19
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 161
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon_29
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 161
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 27
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon_26
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 27
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon_28
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 27
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon_18
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 27
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon_17
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 27
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon_24
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 27
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: icon_20
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 27
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
