@@ -33,7 +33,6 @@ public class MobileVideoTrack : VideoTrack{
 	}
 
 	public override void Load(){
-		Diglbug.LogMobile ("Loading " + GetTrackName (), "VIDEO_LOAD");
 		Diglbug.Log ("Loading track " + GetTrackName(), PrintStream.VIDEO);
 		mobileControls.Load (videoFileName); // this is where its parameter is set m_str;
 		// unfortunately, now is the only time we can call these.
@@ -43,7 +42,6 @@ public class MobileVideoTrack : VideoTrack{
 
 
 	public override void Unload(){
-		Diglbug.LogMobile ("Unloading " + GetTrackName (), "VIDEO_LOAD");
 		Diglbug.Log ("Unloading track " + GetTrackName(), PrintStream.VIDEO);
 		mobileControls.UnLoad ();
 	}

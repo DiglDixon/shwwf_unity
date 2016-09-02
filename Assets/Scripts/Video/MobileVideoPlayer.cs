@@ -12,13 +12,6 @@ public class MobileVideoPlayer : VideoPlayer {
 		controls = GetComponent<MediaPlayerCtrl> ();
 	}
 
-	protected override void Update(){
-		base.Update ();
-		if (controls) {
-			Diglbug.LogMobile(controls.GetCurrentState ().ToString(), "STATE");
-		}
-	}
-
 	public void InitialiseMobileVideoTracksInList(Tracklist list){
 		foreach (TracklistEntry entry in list.entries) {
 			if (entry is VideoTracklistEntry) {
@@ -31,7 +24,6 @@ public class MobileVideoPlayer : VideoPlayer {
 		base.SetTrack (t);
 		MobileVideoTrack mobileVideoTrack = (MobileVideoTrack)t;
 		Diglbug.Log ("Set Track "+name+", "+mobileVideoTrack.GetTrackName(), PrintStream.VIDEO);
-		Diglbug.LogMobile("Set Track", "STAGE");
 //		mobileVideoTrack.InitialiseToControls (controls);
 
 	}
@@ -49,7 +41,6 @@ public class MobileVideoPlayer : VideoPlayer {
 
 	public override void Play (){
 		videoPlane.SetActive (true);
-		Diglbug.LogMobile("Play", "STAGE");
 		Diglbug.Log ("Play "+name, PrintStream.AUDIO_PLAYBACK);
 		SetSourceTime(0f); // these aren't ideal
 //		timeAtPause = 0f;
@@ -89,7 +80,6 @@ public class MobileVideoPlayer : VideoPlayer {
 	}
 
 	public override float GetTimeElapsed(){
-		Diglbug.LogMobile(((int)(controls.GetSeekPosition () * 0.001f)).ToString(), "TIME_ELAPSED");
 		return controls.GetSeekPosition() * 0.001f;
 	}
 
