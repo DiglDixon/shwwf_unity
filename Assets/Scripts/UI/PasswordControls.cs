@@ -1,14 +1,23 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuControls : MonoBehaviour{
+public class PasswordControls : MonoBehaviour{
 
 	public void PasswordAttempted(string password){
-		Diglbug.Log ("Password Attempted", PrintStream.SCENES);
-		if(password.Equals(Passwords.ActorPassword)) {
-			Diglbug.Log("Entering Actor Mode", PrintStream.SCENES);
-			EnterActorMode ();
+		if (ShowMode.Instance.PasswordIsValid (password)) {
+			ShowMode.Instance.SetModeByPassword (password);
+			PasswordAttemptSuccessful ();
+		} else {
+			PasswordAttemptFailed (password);
 		}
+	}
+
+	private void PasswordAttemptFailed(string password){
+		Diglbug.Log ("Password attempt failed: "+password);
+	}
+
+	private void PasswordAttemptSuccessful(){
+
 	}
 
 	public void EnterDirectorMode(){

@@ -8,6 +8,9 @@ public enum PrintStream {
 	AUDIO_LOAD,
 	VIDEO,
 	SCENES,
+	MODES,
+	SETUP,
 	UI,
 	PRINT_STREAMS,
-	MISC};
+	MISC
+};
