@@ -1,36 +1,53 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class BluetoothManager : MonoBehaviour {
 
-	private bool blePluginReady = false;
-	private WaitForSeconds blePluginReadyPollTime = new WaitForSeconds(0.5f);
-	
-	private void Start(){
-		#if UNITY_IOS
-		BluetoothState.BluetoothStateChangedEvent += StateChange;
-		InitialiseBluetoothPlugin();
-		StartCoroutine(SendWhenReady());
-		#endif
+	private string regionName = "com.storybox.shwwf";
 
-//		#if UNITY_ANDROID
-//		iBeaconReceiver.Scan();
-//		iBeaconReceiver.BeaconRangeChangedEvent += BeaconEvent;
-//		Diglbug.LogMobile("RECEIVING", "BLE_STATE");
-//		#endif
+	public delegate void SignalReceivedDelegate(Signal[] s);
+	public event SignalReceivedDelegate SignalReceivedEvent;
+
+	void Start(){
+		SetServerRegionData (SignalUtils.NullSignal);
+		SetReceiverSignature (Signature.NONE);
+
+		iBeaconReceiver.BeaconRangeChangedEvent += BeaconFoundEvent;
+		BluetoothState.BluetoothStateChangedEvent += StateChangeEvent;
+
+		// this is untested for Android, but leaving it open to be able to work.
+		bool sendingSupported = iBeaconServer.checkTransmissionSupported ();
+		if (sendingSupported) {
+			InitialiseBluetoothPlugin ();
+		}
 	}
 
-	private IEnumerator SendMultipleMinors(){
-		int minorCount = 1;
-		while (true) {
-//			iBeaconServer.
-			minorCount++;
+	public void StopSending(){
+		iBeaconServer.StopTransmit ();
+	}
 
-			Diglbug.LogMobile ("RESTARTING...", "BLE_PROC");
-			iBeaconServer.region = new iBeaconRegion("com.storybox.shwwf", new Beacon(iBeaconServer.region.beacon.UUID, 12345, minorCount));
-			iBeaconServer.Restart ();
-			yield return new WaitForSeconds (5f);
-		}
+	public void StopReceiving(){
+		iBeaconReceiver.Stop ();
+	}
+
+	public void SendSignal(Signal s){
+		SetServerRegionData (s);
+		Diglbug.LogMobile ("RESTARTING "+s.GetSignature()+", "+s.GetPayload() , "BLE_PROC");
+		iBeaconServer.Restart ();
+	}
+
+	public void SetReceiverSignature(Signature s){
+		Beacon b = new Beacon(SignalUtils.GetSignaureUUID(s), 0, 0);
+		iBeaconReceiver.regions = new iBeaconRegion[]{ new iBeaconRegion (regionName, b) };
+		iBeaconReceiver.Restart ();
+		Diglbug.LogMobile("RECEIVING "+s+":0,0", "BLE_REC_PROC");
+	}
+
+	private void SetServerRegionData(Signal s){
+		Diglbug.LogMobile (s.GetSignature()+" : "+s.GetPayload() , "BLE_DATA");
+		iBeaconRegion newRegion = new iBeaconRegion(regionName, s.ToBeacon ());
+		iBeaconServer.region = newRegion;
 	}
 
 	// This is our magic dance to get the bluetooth to initialise properly.
@@ -40,38 +57,19 @@ public class BluetoothManager : MonoBehaviour {
 		Diglbug.LogMobile ("startState: "+BluetoothState.GetBluetoothLEStatus().ToString(), "STATECHANGE_INIT");
 	}
 
-	private IEnumerator SendWhenReady(){
-		Diglbug.LogMobile ("WAITING...", "BLE_PROC");
-		while (!blePluginReady) {
-			yield return blePluginReadyPollTime;
-		}
-		Diglbug.LogMobile ("SENDING", "BLE_PROC");
-		iBeaconServer.Transmit ();
-		yield return new WaitForSeconds (1f);
-		StartCoroutine (SendMultipleMinors ());
-	}
-
-	int stateChangeCount = 0;
-	public void StateChange(BluetoothLowEnergyState state){
+	public void StateChangeEvent(BluetoothLowEnergyState state){
 		Diglbug.LogMobile ("s:"+state.ToString(), "BLE_STATE");
-		if (state == BluetoothLowEnergyState.POWERED_ON) {
-			blePluginReady = true;
-		} else {
-			blePluginReady = false;
-		}
-		stateChangeCount++;
 	}
 
-	public void BeaconEvent(Beacon[] beacons){
+	public void BeaconFoundEvent(Beacon[] beacons){
 		for (int k = 0; k < beacons.Length; k++) {
-			Diglbug.LogMobile (beacons [k].minor.ToString(), beacons [k].major.ToString ());
+			int second = System.DateTime.Now.Second;
+			Diglbug.LogMobile ((beacons [k].minor-1).ToString()+"@"+second, "REC:"+(beacons [k].major-1).ToString ());
 		}
+
+		Signal[] signals = Array.ConvertAll(beacons, item => new Signal(item));
+		if (SignalReceivedEvent != null)
+			SignalReceivedEvent (signals);
 	}
-
-//	public void SendSignal(){
-//	}
-
-//	iBeaconReceiver.regions = new iBeaconRegion[]{new iBeaconRegion(s_Region, new Beacon(s_UUID, Convert.ToInt32(s_Major), Convert.ToInt32(s_Minor)))};
-
 
 }
