@@ -3,6 +3,8 @@
 public enum Payload{
 	NONE,
 	SECOND,
+	HAMBURGER,
+	ELEVATOR,
 	CUE_BUS_STOP,
 	CUE_CROSS_ROAD
 }

@@ -48,8 +48,9 @@ public class AudioTrack : EventTrack {
 	}
 
 	public override void Load(){
-		if (IsLoaded ()) {
-			Diglbug.Log ("Skipping load call due to already being loaded "+GetTrackName(), PrintStream.AUDIO_LOAD);
+		AudioDataLoadState loadState = audioClip.loadState;
+		if (loadState == AudioDataLoadState.Loaded || loadState == AudioDataLoadState.Loading) {
+			Diglbug.Log ("Skipping load call due to already being loaded/loading "+GetTrackName(), PrintStream.AUDIO_LOAD);
 		} else {
 			Diglbug.Log ("Loading track " + audioClip.name, PrintStream.AUDIO_LOAD);
 			audioClip.LoadAudioData ();

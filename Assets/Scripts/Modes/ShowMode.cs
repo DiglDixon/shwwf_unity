@@ -7,9 +7,10 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 
 	public Signature Signature{ get; set; }
 
-	public Mode[] possibleModes;
+	private Mode[] possibleModes;
 
 	protected void Start(){
+		possibleModes = GetComponentsInChildren<Mode> ();
 		SceneManager.sceneLoaded += NewSceneLoaded;
 	}
 

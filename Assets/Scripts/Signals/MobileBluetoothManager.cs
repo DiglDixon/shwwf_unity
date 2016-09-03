@@ -34,6 +34,11 @@ public class MobileBluetoothManager : BluetoothManager{
 		SetServerRegionData (s);
 		Diglbug.LogMobile ("RESTARTING "+s.GetSignature()+", "+s.GetPayload() , "BLE_PROC");
 		iBeaconServer.Restart ();
+		AutoAcceptOwnSignal (s);
+	}
+
+	private void AutoAcceptOwnSignal(Signal s){
+		FireBeaconFoundEvent (s);
 	}
 
 	public override void SetReceiverSignature(Signature s){

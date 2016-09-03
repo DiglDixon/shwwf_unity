@@ -1,5 +1,5 @@
-﻿
-
+﻿using System;
+using UnityEngine;
 
 public static class SignalUtils{
 	
@@ -24,6 +24,32 @@ public static class SignalUtils{
 
 	public static string GetSignaureUUID(Signature signature){
 		return uuids[ ( (int)signature % uuids.Length) ];
+	}
+
+	public static int GetSignalTimeOffset(SignalTime s){
+
+		DateTime now = System.DateTime.Now;
+
+		int nowMinute = now.Minute;
+		int prevMinute = s.minute;
+
+		// If the current minute is smaller than the previous one, we must have ticked an hour
+		if (nowMinute < prevMinute) {
+			nowMinute += 60;
+		}
+		int minuteDifference = nowMinute - prevMinute;
+		if (minuteDifference == 0) {
+			return now.Second - s.second;
+		} else {
+			return (60 - s.second) + now.Second + 60 * (Mathf.Max (minuteDifference - 1, 0));
+		}
+	}
+
+	public static SignalTime GetSignalTime(){
+		return new SignalTime (
+			System.DateTime.Now.Minute,
+			System.DateTime.Now.Second
+		);
 	}
 
 }

@@ -7,7 +7,8 @@ public class TracklistControls : MonoBehaviour{
 	public TracklistPlayer player;
 
 	public void TracklistItemChosen(int i){
-		player.PlayTracklistFromIndex (tracklist, i);
+		TracklistEntry toPlay = GetEntryAtIndex (i);
+		player.PlayTrackEntry (toPlay);
 	}
 
 	public TracklistEntry GetEntryAtIndex(int i){

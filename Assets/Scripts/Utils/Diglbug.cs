@@ -5,6 +5,15 @@ public static class Diglbug{
 
 	private static bool[] streamPrintEnabled = Utils.booleanArray(Enum.GetValues(typeof(PrintStream)).Length, true);
 
+	public static void SetAllPrintStream(bool active){
+		if (active) {
+			Diglbug.Log ("Enabled all PrintStreams", PrintStream.PRINT_STREAMS);
+		} else {
+			Diglbug.Log ("Disabled all PrintStreams", PrintStream.PRINT_STREAMS);
+		}
+		streamPrintEnabled = Utils.booleanArray(Enum.GetValues(typeof(PrintStream)).Length, active);
+	}
+
 	public static void EnablePrintStream(PrintStream stream){
 		streamPrintEnabled [(int)stream] = true;
 		Diglbug.Log ("Enabled print stream " + stream, PrintStream.PRINT_STREAMS);

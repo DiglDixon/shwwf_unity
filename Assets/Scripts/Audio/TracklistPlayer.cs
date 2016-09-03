@@ -15,7 +15,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 
 	public TrackUIControls display;
 
-	public Tracklist trackList;
+	public Tracklist tracklist;
 	private int trackIndex = 0;
 
 	private void Awake(){
@@ -29,9 +29,16 @@ public class TracklistPlayer : WrappedTrackOutput{
 	}
 
 	protected void Start(){
-		
+		SetTracklist (tracklist);
 
-		TracklistEntry[] entries = trackList.entries;
+		// This is a poor way to make sure some variables get initialised so we can use our controls logically off the bat.
+		PlayTrackEntry (tracklist.entries[0]);
+		display.Pause ();
+	}
+
+	private void SetTracklist(Tracklist t){
+		this.tracklist = t;
+		TracklistEntry[] entries = tracklist.entries;
 		TracklistEntry entry;
 		TracklistEntry nextEntry;
 		EventTrack eventTrack;
@@ -48,60 +55,54 @@ public class TracklistPlayer : WrappedTrackOutput{
 			eventTrack.AddStateEventAtTime (LoadNextTrack, 6f); // and LoadNext at 6. Should be fine. For now.
 		}
 		#if !UNITY_EDITOR
-		((MobileVideoPlayer) videoPlayer.GetPlayer()).InitialiseMobileVideoTracksInList(trackList);
+		((MobileVideoPlayer) videoPlayer.GetPlayer()).InitialiseMobileVideoTracksInList(tracklist);
 		#endif
-
-		// This is a poor way to make sure some variables get initialised so we can use our controls logically off the bat.
-		PlayTrackAtIndex (0);
-		display.Pause ();
 	}
 
 	public void LoadNextTrack(){
-		if (trackIndex < trackList.entries.Length - 1) {
-			trackList.entries [trackIndex + 1].GetTrack ().Load ();
+		if (trackIndex < tracklist.entries.Length - 1) {
+			tracklist.entries [trackIndex + 1].GetTrack ().Load ();
 		}
 	}
 
 	public void UnloadPreviousTrack(){
 		if (trackIndex > 0) {
-			trackList.entries [trackIndex + 1].GetTrack ().Unload ();
+			tracklist.entries [trackIndex - 1].GetTrack ().Unload ();
+		}
+	}
+
+	public void PlayTrackEntry(TracklistEntry entry){
+		int requestedIndex = IndexOfEntryInTracklist (entry);
+		if (requestedIndex != -1) {
+			PlayTrackEntryAtIndex (requestedIndex);
+		} else {
+			Diglbug.LogError ("Requested play of TrackEntry failed - entry not initialised in the Tracklist player's Tracklist");
 		}
 	}
 
 	public void PlayNextTrack(){
-		trackIndex++;
-		PlayTrackAtIndex (trackIndex);
-		DisplayNextTrack ();
+		PlayTrackEntryAtIndex (trackIndex+1);
 	}
 
-	public void LoopCurrentTrack(){
-//		LoopingTrack 
-		((LoopingTracklistEntry) trackList.GetTrackEntryAtIndex (trackIndex)).SwitchTracks();
-		PlayTrackAtIndex (trackIndex);
-		DisplayNextTrack ();
+	public void PlayTrackEntryAtIndex(int index){
+		trackIndex = index;
+		TracklistEntry entry = tracklist.GetTrackEntryAtIndex (index);
+		display.SetLoopingNote (entry.Looping());
+		SetNextTrackDisplay (trackIndex+1);
+		HandlePlayRequest (entry);
 	}
 
-	public void PlayTracklistFromIndex(Tracklist list, int index){
-		trackList = list;
-		PlayTrackAtIndex (index);
+	private int IndexOfEntryInTracklist(TracklistEntry entry){
+		for (int k = 0; k < tracklist.entries.Length; k++) {
+			if (entry == tracklist.entries [k]) {
+				return k;
+			}
+		}
+		return -1;
 	}
 
-	public void PlayTrackAtIndex(int i){
-		trackIndex = i;
-		PlayTrackEntry(trackList.GetTrackEntryAtIndex (trackIndex));
-	}
-
-	public void PlayTrackEntry(TracklistEntry trackEntry){
-		display.SetLoopingNote (trackEntry.Looping());
-		HandlePlayRequest (trackEntry);
-	}
-
-	public void DisplayNextTrack(){
-		SetNextTrackDisplay (trackIndex + 1);
-	}
-
-	public void SetNextTrackDisplay(int nextIndex){
-		TracklistEntry upcomingTracklistEntry = trackList.GetTrackEntryAtIndex (nextIndex);
+	public void SetNextTrackDisplay(int index){
+		TracklistEntry upcomingTracklistEntry = tracklist.GetTrackEntryAtIndex (index);
 		display.SetUpcomingTrackDisplay(upcomingTracklistEntry);
 	}
 
@@ -121,6 +122,12 @@ public class TracklistPlayer : WrappedTrackOutput{
 		currentOutput.FadeIn(fadeTime);
 
 		display.ChangeTrackData (multiPlayer);
+	}
+
+	private void LoopCurrentTrack(){
+		LoopingTracklistEntry looingEntry = (LoopingTracklistEntry) tracklist.GetTrackEntryAtIndex (trackIndex);
+		looingEntry.SwitchTracks();
+		PlayTrackEntry (looingEntry);
 	}
 
 }

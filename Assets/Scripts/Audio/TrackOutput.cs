@@ -8,6 +8,7 @@ public abstract class TrackOutput : MonoBehaviour{
 	protected ITrack track = new EmptyTrack ();
 
 	public abstract void SetTrackProgress (float p);
+	public abstract void SetTrackTime (float seconds);
 
 	// This should not be public. We should extract this and keep it protected to relevant subsclasses.
 	// I can't bring myself to add another subclass yet, though.

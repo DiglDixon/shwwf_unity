@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 public class BLE : ConstantSingleton<BLE>{
 
 	public BluetoothManager Manager{ get; private set; }
 
-	public delegate void NewSignalFoundDelegate(Signal s);
+	public delegate void NewSignalFoundDelegate(Signal signal);
 	public NewSignalFoundDelegate NewSignalFoundEvent;
 
-	private Signal lastSignalReceived;
+//	private Signal lastSignalReceived;
+
+	private Signal[] lastSignals;
 
 	private PayloadEventSystem[] eventSystems;
 
@@ -24,9 +27,10 @@ public class BLE : ConstantSingleton<BLE>{
 		managerObject.transform.SetParent(transform);
 		Manager = managerObject.GetComponent<BluetoothManager> ();
 
-		lastSignalReceived = SignalUtils.NullSignal;
+//		lastSignalReceived = SignalUtils.NullSignal;
+		lastSignals = new Signal[0];
 
-		Manager.SignalReceivedEvent += ManagerReceivedSignal;
+		Manager.SignalsReceivedEvent += ManagerReceivedSignals;
 
 
 		ReplaceEventSystems ();
@@ -42,18 +46,36 @@ public class BLE : ConstantSingleton<BLE>{
 		Diglbug.Log ("BLE Loaded scene with eventSystems: " + eventSystems.Length, PrintStream.SIGNALS);
 	}
 
-	private void ManagerReceivedSignal(Signal s){
-		if (s.GetSignature() != lastSignalReceived.GetSignature () || s.GetPayload () != lastSignalReceived.GetPayload ()) {
-			Diglbug.Log ("New signal received: " + s.GetPrint (), PrintStream.SIGNALS);
-			if (NewSignalFoundEvent != null) {
-				NewSignalFoundEvent (s);
+	private void ManagerReceivedSignals(Signal[] signals){
+		Signal s;
+		for (int k = 0; k < signals.Length; k++) {
+			s = signals [k];
+			if(SignalIsNew(s)){
+				NewSignalFound (s);
 			}
-			SendSignalEventToEventSystems (s);
-			lastSignalReceived = s;
 		}
+		lastSignals = signals;
+	}
+
+	private bool SignalIsNew(Signal s){
+		for (int k = 0; k < lastSignals.Length; k++) {
+			if (s.Equals (lastSignals [k]))
+				return false;
+		}
+		return true;
+	}
+
+	private void NewSignalFound(Signal s){
+		Diglbug.Log ("New signal received: " + s.GetPrint (), PrintStream.SIGNALS);
+		Diglbug.LogMobile("UNIQUE: "+s.GetPrint(), "FIRE");
+		if (NewSignalFoundEvent != null) {
+			NewSignalFoundEvent (s);
+		}
+		SendSignalEventToEventSystems (s);
 	}
 
 	private void SendSignalEventToEventSystems(Signal s){
+		Diglbug.Log ("Sending signal " + s.GetPrint () + " to " + eventSystems.Length + " systems");
 		for (int k = 0; k < eventSystems.Length; k++) {
 			eventSystems [k].HandleNewSignal (s);
 		}

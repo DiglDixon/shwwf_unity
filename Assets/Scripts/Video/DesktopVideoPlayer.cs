@@ -21,9 +21,14 @@ public class DesktopVideoPlayer : VideoPlayer {
 		placeholderImage.material.mainTexture = desktopVideoTrack.GetPlaceholderImage ();
 	}
 
+	// These functions are duplicates.
 	public override void SetTrackProgress (float p){
-		Diglbug.Log ("SetTrackProgress "+name+", " + p, PrintStream.AUDIO_PLAYBACK);
-		SetSourceTime(Mathf.Clamp(p * GetTrack().GetTrackLength(), 0f, GetTrack().GetTrackLength()-0.01f));
+		SetTrackTime(Mathf.Clamp(p * GetTrack().GetTrackLength(), 0f, GetTrack().GetTrackLength()-0.01f));
+	}
+
+	public override void SetTrackTime(float seconds){
+		Diglbug.Log ("SetTrackTime "+name+", " + seconds, PrintStream.AUDIO_PLAYBACK);
+		SetSourceTime (seconds);
 	}
 
 	public override void SetSourceTime(float time){

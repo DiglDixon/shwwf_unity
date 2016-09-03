@@ -6,8 +6,8 @@ public abstract class BluetoothManager : MonoBehaviour {
 	
 	protected string regionName = "com.storybox.shwwf";
 
-	public delegate void SignalReceivedDelegate(Signal s);
-	public event SignalReceivedDelegate SignalReceivedEvent;
+	public delegate void SignalsReceivedDelegate(Signal[] s);
+	public event SignalsReceivedDelegate SignalsReceivedEvent;
 
 	public abstract void StopSending ();
 
@@ -19,16 +19,13 @@ public abstract class BluetoothManager : MonoBehaviour {
 
 	public abstract void SetReceiverSignature(Signature s);
 
-	protected void FireBeaconFoundEvent(Signal signal){
-//		Diglbug.Log ("FireBeaconFoundEvent "+signal.GetSignature()+":"+signal.GetPayload(), PrintStream.SIGNALS);
-		if (SignalReceivedEvent != null) {
-			SignalReceivedEvent (signal);
+	protected void FireBeaconsFoundEvent(Signal[] signals){
+		if (SignalsReceivedEvent != null) {
+			SignalsReceivedEvent (signals);
 		}
 	}
 
-	protected void FireBeaconsFoundEvent(Signal[] signals){
-		for (int k = 0; k < signals.Length; k++) {
-			FireBeaconFoundEvent (signals [k]);
-		}
+	protected void FireBeaconFoundEvent(Signal signal){
+		FireBeaconsFoundEvent (new Signal[]{ signal });
 	}
 }

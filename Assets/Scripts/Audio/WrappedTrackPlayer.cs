@@ -15,6 +15,10 @@ public abstract class WrappedTrackOutput : TrackOutput{
 		WrappedOutput.SetTrackProgress (p);
 	}
 
+	public override void SetTrackTime (float seconds){
+		WrappedOutput.SetTrackTime (seconds);
+	}
+
 	public override void SetSourceTime(float time){
 		WrappedOutput.SetSourceTime (time);
 	}
