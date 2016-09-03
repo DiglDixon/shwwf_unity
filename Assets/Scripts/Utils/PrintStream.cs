@@ -10,6 +10,7 @@ public enum PrintStream {
 	SCENES,
 	MODES,
 	SETUP,
+	SIGNALS,
 	UI,
 	PRINT_STREAMS,
 	MISC

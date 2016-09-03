@@ -9,8 +9,7 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 
 	public Mode[] possibleModes;
 
-	protected override void Start(){
-		base.Start ();
+	protected void Start(){
 		SceneManager.sceneLoaded += NewSceneLoaded;
 	}
 

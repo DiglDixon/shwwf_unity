@@ -16,9 +16,7 @@ public class SignalDebugger : MonoBehaviour{
 
 	public Text recDataText;
 
-	public BluetoothManager blueMan;
-
-	void Awake(){
+	private void Start(){
 		List<string> options = new List<string>();
 		options.AddRange (Enum.GetNames (typeof(Signature)));
 		signatureDropdown.AddOptions(options);
@@ -31,35 +29,33 @@ public class SignalDebugger : MonoBehaviour{
 		sendButton.interactable = sendSupported;
 		stopSendButton.interactable = sendSupported;
 
-		blueMan.SignalReceivedEvent += SignalsReceivedEvent;
+		BLE.Instance.NewSignalFoundEvent += SignalReceivedEvent;
 	}
 
-	public void SignalsReceivedEvent(Signal[] signals){
+	public void SignalReceivedEvent(Signal signal){
 		int minute = System.DateTime.Now.Minute;
 		int second = System.DateTime.Now.Second;
 		string debugText = "SigRec@ "+minute+":"+second;
-		for(int k = 0; k<signals.Length; k++){
-			debugText += ", s:"+signals[k].GetSignature()+"p:"+signals[k].GetPayload();
-		}
+		debugText += ", s:"+signal.GetSignature()+"p:"+signal.GetPayload();
 		receivedSignalsText.text = debugText;
 	}
 
 	public void SetReceiveDataPressed(){
 		Signal s = GetSignalFromDropdowns ();
 		recDataText.text = "REC DATA: " + s.GetSignature ();
-		blueMan.SetReceiverSignature (s.GetSignature());
+		BLE.Instance.Manager.SetReceiverSignature (s.GetSignature());
 	}
 
 	public void SendPressed(){
-		blueMan.SendSignal (GetSignalFromDropdowns());
+		BLE.Instance.Manager.SendSignal (GetSignalFromDropdowns());
 	}
 
 	public void StopSendingPressed(){
-		blueMan.StopSending();
+		BLE.Instance.Manager.StopSending();
 	}
 
 	public void StopReceivingPressed(){
-		blueMan.StopReceiving();
+		BLE.Instance.Manager.StopReceiving();
 	}
 
 	private Signal GetSignalFromDropdowns(){

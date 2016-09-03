@@ -16,7 +16,7 @@ using UnityEngine.SceneManagement;
 public class ConstantSingleton<T> : MonoBehaviour where T : MonoBehaviour{
 	private static T _instance;
 
-	protected virtual void Start(){
+	protected virtual void Awake(){
 		if (_instance == null) {
 			SetInstance (gameObject);
 		} else {
@@ -34,12 +34,12 @@ public class ConstantSingleton<T> : MonoBehaviour where T : MonoBehaviour{
 	{
 		get
 		{
-			if (applicationIsQuitting) {
-				Debug.LogWarning("[Singleton] Instance '"+ typeof(T) +
-					"' already destroyed on application quit." +
-					" Won't create again - returning null.");
-				return null;
-			}
+//			if (applicationIsQuitting) {
+//				Debug.LogWarning("[Singleton] Instance '"+ typeof(T) +
+//					"' already destroyed on application quit." +
+//					" Won't create again - returning null.");
+//				return null;
+//			}
 			if (_instance == null)
 			{
 				_instance = (T) FindObjectOfType(typeof(T));

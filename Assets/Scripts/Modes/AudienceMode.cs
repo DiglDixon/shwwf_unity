@@ -31,6 +31,8 @@ public class AudienceMode : Mode{
 	private IEnumerator RunBeginShowRoutine(){
 		yield return new WaitForSeconds (1f);
 		BeginShow ();
+		yield return new WaitForSeconds (1f);
+		welcomeLightbox.Close ();
 	}
 
 	public void SetSignature(Signature s){
