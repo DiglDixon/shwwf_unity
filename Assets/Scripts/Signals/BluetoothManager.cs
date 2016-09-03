@@ -20,7 +20,7 @@ public abstract class BluetoothManager : MonoBehaviour {
 	public abstract void SetReceiverSignature(Signature s);
 
 	protected void FireBeaconFoundEvent(Signal signal){
-		Diglbug.Log ("FireBeaconFoundEvent "+signal.GetSignature()+":"+signal.GetPayload(), PrintStream.SIGNALS);
+//		Diglbug.Log ("FireBeaconFoundEvent "+signal.GetSignature()+":"+signal.GetPayload(), PrintStream.SIGNALS);
 		if (SignalReceivedEvent != null) {
 			SignalReceivedEvent (signal);
 		}

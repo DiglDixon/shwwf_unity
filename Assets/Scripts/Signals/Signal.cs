@@ -42,5 +42,9 @@ public class Signal{
 	public Payload GetPayload(){
 		return payload;
 	}
+
+	public string GetPrint(){
+		return GetSignature () + ":" + GetPayload ();
+	}
 }
 

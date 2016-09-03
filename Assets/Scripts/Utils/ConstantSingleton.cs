@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 
 /// <summary>
 /// A modification of the Singleton.cs class found at http://wiki.unity3d.com/index.php/Singleton

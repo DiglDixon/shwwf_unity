@@ -24,10 +24,11 @@ public class SignalDebugger : MonoBehaviour{
 		options = new List<string>();
 		options.AddRange (Enum.GetNames (typeof(Payload)));
 		payloadDropdown.AddOptions(options);
-
+		#if !UNITY_EDITOR
 		bool sendSupported = iBeaconServer.checkTransmissionSupported ();
 		sendButton.interactable = sendSupported;
 		stopSendButton.interactable = sendSupported;
+		#endif
 
 		BLE.Instance.NewSignalFoundEvent += SignalReceivedEvent;
 	}
