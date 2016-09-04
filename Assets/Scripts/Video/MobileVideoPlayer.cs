@@ -24,7 +24,6 @@ public class MobileVideoPlayer : VideoPlayer {
 		base.SetTrack (t);
 		MobileVideoTrack mobileVideoTrack = (MobileVideoTrack)t;
 		Diglbug.Log ("Set Track "+name+", "+mobileVideoTrack.GetTrackName(), PrintStream.VIDEO);
-//		mobileVideoTrack.InitialiseToControls (controls);
 
 	}
 
@@ -39,17 +38,15 @@ public class MobileVideoPlayer : VideoPlayer {
 
 	public override void SetSourceTime(float time){
 		base.SetSourceTime (time);
-		// scrub code
 		controls.SeekTo((int)(time * 1000));
 	}
 
 	public override void Play (){
 		videoPlane.SetActive (true);
 		Diglbug.Log ("Play "+name, PrintStream.AUDIO_PLAYBACK);
-		SetSourceTime(0f); // these aren't ideal
-//		timeAtPause = 0f;
 		Unpause ();
 		controls.Play ();
+		SetSourceTime(0f);
 	}
 
 	public override void Stop(){
@@ -84,6 +81,9 @@ public class MobileVideoPlayer : VideoPlayer {
 	}
 
 	public override float GetTimeElapsed(){
+		Diglbug.LogMobile(controls.GetCurrentState(), "VIDSTATE");
+		Diglbug.LogMobile(controls.GetSeekPosition(), "RAWSEEK");
+		Diglbug.LogMobile((controls.GetSeekPosition() * 0.001f)+"s", "VIDSEEK");
 		return controls.GetSeekPosition() * 0.001f;
 	}
 
