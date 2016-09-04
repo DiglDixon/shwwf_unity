@@ -5,7 +5,8 @@ public abstract class CustomTrackTimeEvent : MonoBehaviour{
 	/// Means this will occur even if skipped over.
 	/// </summary>
 	public bool isStateEvent = false;
-	public float occurAtTime = 0f;
+	private float minimumOccurAtTime = 0.1f;
+	public float occurAtTime = 0.1f;
 
 	#if UNITY_EDITOR
 	public bool updateName = false;
@@ -16,7 +17,12 @@ public abstract class CustomTrackTimeEvent : MonoBehaviour{
 	#if UNITY_EDITOR
 	private void OnValidate(){
 		updateName = false;
-		gameObject.name = this.GetType ().Name;
+		gameObject.name = GetObjectName();
+		occurAtTime = Mathf.Max (minimumOccurAtTime, occurAtTime);
+	}
+
+	protected virtual string GetObjectName(){
+		return this.GetType ().Name;
 	}
 	#endif
 

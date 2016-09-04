@@ -5,12 +5,14 @@ using UnityEngine.UI;
 public class UnexpectedSignalConfirmation : UILightbox{
 
 	private Signal pendingSignal;
-	public Text warningText;
+	public Text warningTextExpected;
+	public Text warningTextAttempted;
 
 	public void OpenWithAttemptedSignal(Signal s){
 		pendingSignal = s;
 		if (BLE.Instance.Manager.IsExpectingSpecificPayload ()) {
-			warningText.text = "Warning! The app is not expecting the payload " + s.GetPayload() + ". Are you sure you want to send it?";
+			warningTextExpected.text = BLE.Instance.Manager.GetExpectedPayload ().ToString ();
+			warningTextAttempted.text = s.GetPayload ().ToString ();
 		}
 		// TODO: (else if it's not expecting anything...)
 		Open();

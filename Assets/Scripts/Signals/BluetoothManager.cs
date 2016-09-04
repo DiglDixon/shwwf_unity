@@ -31,6 +31,7 @@ public abstract class BluetoothManager : MonoBehaviour {
 	}
 
 	public void SetExpectedPayload(Payload p){
+		Diglbug.Log ("Set expected payload: " + p, PrintStream.SIGNALS);
 		expectingSpecificPayload = true;
 		expectedPayload = p;
 	}
@@ -44,13 +45,14 @@ public abstract class BluetoothManager : MonoBehaviour {
 	}
 
 	public void ClearExpectedPayload(){
+		Diglbug.Log ("Cleared expected payload", PrintStream.SIGNALS);
 		expectingSpecificPayload = false;
 	}
 
 	public void RequestSignalSend(Signal s){
 		if (expectingSpecificPayload) {
 			if (s.GetPayload () == expectedPayload) {
-				SendSignal (s);
+				ClearExpectedAndSendSignal (s);
 			} else {
 				confirmationScreen.OpenWithAttemptedSignal (s);
 			}
@@ -60,6 +62,11 @@ public abstract class BluetoothManager : MonoBehaviour {
 	}
 
 	public void ForceSignalSend(Signal s){
+		ClearExpectedAndSendSignal (s);
+	}
+
+	protected void ClearExpectedAndSendSignal(Signal s){
+		ClearExpectedPayload ();
 		SendSignal (s);
 	}
 

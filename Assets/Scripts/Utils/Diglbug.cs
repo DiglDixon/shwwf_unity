@@ -20,7 +20,7 @@ public static class Diglbug{
 	}
 
 	public static void DisablePrintStream(PrintStream stream){
-		Diglbug.Log ("Disabled print stream " + stream, PrintStream.PRINT_STREAMS);
+//		Diglbug.Log ("Disabled print stream " + stream, PrintStream.PRINT_STREAMS);
 		streamPrintEnabled [(int)stream] = false;
 	}
 
