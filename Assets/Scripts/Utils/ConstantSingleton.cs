@@ -71,7 +71,7 @@ public class ConstantSingleton<T> : MonoBehaviour where T : MonoBehaviour{
 		SetInstance (singleton);
 	}
 
-	private static bool applicationIsQuitting = false;
+//	private static bool applicationIsQuitting = false;
 	/// <summary>
 	/// When Unity quits, it destroys objects in a random order.
 	/// In principle, a Singleton is only destroyed when application quits.
@@ -80,7 +80,7 @@ public class ConstantSingleton<T> : MonoBehaviour where T : MonoBehaviour{
 	///   even after stopping playing the Application. Really bad!
 	/// So, this was made to be sure we're not creating that buggy ghost object.
 	/// </summary>
-	public void OnDestroy () {
-		applicationIsQuitting = true;
-	}
+//	public void OnDestroy () {
+//		applicationIsQuitting = true;
+//	}
 }

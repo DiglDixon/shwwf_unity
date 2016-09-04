@@ -24,14 +24,22 @@ public class TrackUIControls : MonoBehaviour{
 	public Text loopingNote;
 	public GameObject loadingNote;
 
+	private bool scrubbing = false;
 	private bool playingBeforeScrub = false;
 
 	private void Update(){
 		if (currentOutput != null) {
 			trackSlider.UpdateDisplayValue(currentOutput.GetProgress ());
-			trackElapsedText.text =  Utils.AudioTimeFormat (currentOutput.GetTimeElapsed ());
+			UpdateTimeElapsedValue (currentOutput.GetTimeElapsed ());
 			loadingNote.SetActive (!currentOutput.GetTrack ().IsLoaded ()); // this is a nasty poll, will remove in the new events system.
 		}
+		if (scrubbing) {
+			UpdateTimeElapsedValue (trackSlider.GetValue() * currentOutput.GetTrack().GetTrackLength());
+		}
+	}
+
+	private void UpdateTimeElapsedValue(float timeElapsed){
+		trackElapsedText.text = Utils.AudioTimeFormat (timeElapsed);
 	}
 
 	public void ChangeTrackData(TrackOutput newOutput){
@@ -110,11 +118,13 @@ public class TrackUIControls : MonoBehaviour{
 	}
 
 	public void ScrubPositionBegins(){
+		scrubbing = true;
 		playingBeforeScrub = output.IsPlaying ();
 		output.Pause ();
 	}
 
 	public void ScrubPositionEnds(float scrubPosition){
+		scrubbing = false;
 		output.SetTrackProgress (scrubPosition);
 		if (playingBeforeScrub)
 			output.Unpause ();

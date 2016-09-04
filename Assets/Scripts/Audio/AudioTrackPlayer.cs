@@ -96,9 +96,7 @@ public class AudioTrackPlayer : EventTrackPlayer {
 	}
 
 	protected void FaderLerpEnds(float value){
-		Diglbug.Log ("Audio Fader ends with vaue " + value, PrintStream.AUDIO_PLAYBACK);
 		if (value == 0f) {
-			Diglbug.Log ("Stopping due to FadeLerpEnds... " + name);
 			Stop ();
 		}
 	}

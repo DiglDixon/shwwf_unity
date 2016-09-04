@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class TrackSlider : MonoBehaviour{
 
 	public TrackUIControls display;
-	public TrackOutput track;
+//	public TrackOutput trackOutput;
 	private Slider slider;
 	private bool heldDown = false;
 
@@ -17,6 +17,10 @@ public class TrackSlider : MonoBehaviour{
 		if (!heldDown) {
 			slider.value = v;
 		}
+	}
+
+	public float GetValue(){
+		return slider.value;
 	}
 
 	public void SliderPressed(){

@@ -10,12 +10,9 @@ public class BLE : ConstantSingleton<BLE>{
 	public delegate void NewSignalFoundDelegate(Signal signal);
 	public NewSignalFoundDelegate NewSignalFoundEvent;
 
-//	private Signal lastSignalReceived;
-
 	private Signal[] lastSignals;
 
 	private PayloadEventSystem[] eventSystems;
-
 
 	protected void Start (){
 		GameObject managerObject;
@@ -27,7 +24,6 @@ public class BLE : ConstantSingleton<BLE>{
 		managerObject.transform.SetParent(transform);
 		Manager = managerObject.GetComponent<BluetoothManager> ();
 
-//		lastSignalReceived = SignalUtils.NullSignal;
 		lastSignals = new Signal[0];
 
 		Manager.SignalsReceivedEvent += ManagerReceivedSignals;

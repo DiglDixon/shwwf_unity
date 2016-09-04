@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MobileBluetoothManager : BluetoothManager{
 
-	private void Start(){
+	protected override void Start(){
+		base.Start ();
 		SetServerRegionData (SignalUtils.NullSignal);
 		SetReceiverSignature (Signature.NONE);
 
@@ -30,7 +31,7 @@ public class MobileBluetoothManager : BluetoothManager{
 		iBeaconReceiver.Stop ();
 	}
 
-	public override void SendSignal(Signal s){
+	protected override void SendSignal(Signal s){
 		SetServerRegionData (s);
 		Diglbug.LogMobile ("RESTARTING "+s.GetSignature()+", "+s.GetPayload() , "BLE_PROC");
 		iBeaconServer.Restart ();

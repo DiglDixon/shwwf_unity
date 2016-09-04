@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Audio;
 
 /// <summary>
@@ -14,6 +15,8 @@ public class TracklistPlayer : WrappedTrackOutput{
 	private TrackOutput currentOutput;
 
 	public TrackUIControls display;
+
+	private List<ITrack> loadedTracks = new List<ITrack> ();
 
 	public Tracklist tracklist;
 	private int trackIndex = 0;
@@ -32,7 +35,9 @@ public class TracklistPlayer : WrappedTrackOutput{
 		SetTracklist (tracklist);
 
 		// This is a poor way to make sure some variables get initialised so we can use our controls logically off the bat.
+		LoadTrack(tracklist.entries[0].GetTrack());
 		PlayTrackEntry (tracklist.entries[0]);
+
 		display.Pause ();
 	}
 
@@ -41,18 +46,16 @@ public class TracklistPlayer : WrappedTrackOutput{
 		TracklistEntry[] entries = tracklist.entries;
 		EventTracklistEntry entry;
 		TracklistEntry nextEntry;
-		EventTrack eventTrack;
-		for(int k = 0; k<entries.Length-1; k++){ // so, we don't assign an event to the last track.
+		for(int k = 0; k<entries.Length; k++){
 			entry = (EventTracklistEntry) entries [k];
-			nextEntry = entries [k + 1];
-//			eventTrack = (EventTrack)entry.GetTrack ();
 			if (entry is LoopingTracklistEntry) {
 				entry.AddStateEventAtTimeRemaining (LoopCurrentTrack, entry.GetTrack ().FadeTime ());
-			} else {
+			} else if (k < entries.Length-1){
+				nextEntry = entries [k + 1];
 				entry.AddStateEventAtTimeRemaining (PlayNextTrack, nextEntry.GetTrack ().FadeTime ());
 			}
-			entry.AddStateEventAtTime (UnloadPreviousTrack, 3f); // Let's Unload at 3...
-			entry.AddStateEventAtTime (LoadNextTrack, 6f); // and LoadNext at 6. Should be fine. For now.
+			entry.AddStateEventAtTime (UnloadPreviousTrack, 2f); // Let's Unload at 3...
+			entry.AddStateEventAtTime (LoadNextTrack, 4f); // and LoadNext at 6. Should be fine. For now.
 		}
 		#if !UNITY_EDITOR
 		((MobileVideoPlayer) videoPlayer.GetPlayer()).InitialiseMobileVideoTracksInList(tracklist);
@@ -61,23 +64,54 @@ public class TracklistPlayer : WrappedTrackOutput{
 
 	public void LoadNextTrack(){
 		if (trackIndex < tracklist.entries.Length - 1) {
-			tracklist.entries [trackIndex + 1].GetTrack ().Load ();
+			LoadTrack(tracklist.entries [trackIndex + 1].GetTrack ());
 		}
+	}
+
+	private void LoadTrack(ITrack toLoad){
+		toLoad.Load ();
+		loadedTracks.Add (toLoad);
+		Diglbug.Log ("Added track to loadedTracks "+toLoad.GetTrackName(), PrintStream.AUDIO_LOAD);
 	}
 
 	public void UnloadPreviousTrack(){
 		if (trackIndex > 0) {
-			tracklist.entries [trackIndex - 1].GetTrack ().Unload ();
+			UnloadTrack(tracklist.entries [trackIndex - 1].GetTrack ());
+		}
+	}
+
+	private void UnloadTrack(ITrack toUnload){
+		toUnload.Unload ();
+		if (loadedTracks.Contains (toUnload)) {
+			loadedTracks.Remove (toUnload);
+		} else {
+			Diglbug.Log ("Request to Unload was not contained in loadedTracks list "+toUnload.GetTrackName(), PrintStream.AUDIO_LOAD);
+		}
+	}
+
+	public void UnloadAllTracks(){
+		for (int i = loadedTracks.Count-1; i >= 0; i--) {
+			UnloadTrack (loadedTracks [i]);
 		}
 	}
 
 	public void PlayTrackEntry(TracklistEntry entry){
 		int requestedIndex = IndexOfEntryInTracklist (entry);
 		if (requestedIndex != -1) {
-			PlayTrackEntryAtIndex (requestedIndex);
+			if (IsExpectedIndex (requestedIndex)) {
+				PlayTrackEntryAtIndex (requestedIndex);
+			} else {
+				Diglbug.Log ("Detected unorthodox track request - unloading previously loaded tracks", PrintStream.AUDIO_LOAD);
+				UnloadAllTracks ();
+				PlayTrackEntryAtIndex (requestedIndex);
+			}
 		} else {
 			Diglbug.LogError ("Requested play of TrackEntry failed - entry not initialised in the Tracklist player's Tracklist");
 		}
+	}
+
+	private bool IsExpectedIndex(int index){
+		return (index == trackIndex || index == trackIndex + 1);
 	}
 
 	public void PlayNextTrack(){
@@ -85,11 +119,15 @@ public class TracklistPlayer : WrappedTrackOutput{
 	}
 
 	public void PlayTrackEntryAtIndex(int index){
-		trackIndex = index;
-		TracklistEntry entry = tracklist.GetTrackEntryAtIndex (index);
-		display.SetLoopingNote (entry);
-		SetNextTrackDisplay (trackIndex+1);
-		HandlePlayRequest (entry);
+		if (index < tracklist.entries.Length) {
+			trackIndex = index;
+			TracklistEntry entry = tracklist.GetTrackEntryAtIndex (index);
+			display.SetLoopingNote (entry);
+			SetNextTrackDisplay (trackIndex + 1);
+			HandlePlayRequest (entry);
+		} else {
+			Diglbug.Log ("Refused to play track at invalid index: " + index);
+		}
 	}
 
 	private int IndexOfEntryInTracklist(TracklistEntry entry){

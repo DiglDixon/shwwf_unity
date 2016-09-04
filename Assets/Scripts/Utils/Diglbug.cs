@@ -16,7 +16,7 @@ public static class Diglbug{
 
 	public static void EnablePrintStream(PrintStream stream){
 		streamPrintEnabled [(int)stream] = true;
-		Diglbug.Log ("Enabled print stream " + stream, PrintStream.PRINT_STREAMS);
+		Diglbug.Log ("Enabled print stream " + stream, stream);
 	}
 
 	public static void DisablePrintStream(PrintStream stream){

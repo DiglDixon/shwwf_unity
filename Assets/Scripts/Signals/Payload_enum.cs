@@ -1,7 +1,7 @@
 ﻿
 
 public enum Payload{
-	NONE,
+	NONE, // this has significance as a "null".
 	HAMBURGER,
 	CROSS_ROAD,
 	WAITING_ELEVATOR,
