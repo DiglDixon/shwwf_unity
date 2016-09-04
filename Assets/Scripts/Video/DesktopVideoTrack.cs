@@ -44,17 +44,29 @@ public class DesktopVideoTrack : VideoTrack{
 		return trackLength;
 	}
 
-	public override void Load(){
+	protected override bool ShouldLoad (){
+		return true;
+	}
+
+	protected override bool ShouldUnload (){
+		return true;
+	}
+
+	protected override void RunLoad(){
 		Diglbug.Log ("Loading track (Placeholder) " + GetTrackName(), PrintStream.VIDEO);
 	}
 
 
-	public override void Unload(){
+	protected override void RunUnload(){
 		Diglbug.Log ("Unloading track( Placeholder) " + GetTrackName(), PrintStream.VIDEO);
 	}
 
 	public override bool IsLoaded(){
 		return true;
+	}
+
+	public override bool IsLoading(){
+		return false;
 	}
 
 	public override float FadeTime(){

@@ -27,14 +27,14 @@ public class MobileVideoPlayer : VideoPlayer {
 
 	}
 
-	public override void SetTrackProgress (float p){
-		SetTrackTime(Mathf.Clamp(p * GetTrack().GetTrackLength(), 0f, GetTrack().GetTrackLength()-0.01f));
-	}
-
-	public override void SetTrackTime(float seconds){
-		Diglbug.Log ("SetTrackProgress "+name+", " + seconds, PrintStream.AUDIO_PLAYBACK);
-		SetSourceTime(seconds);
-	}
+//	public override void SetTrackProgress (float p){
+//		SetTrackTime(Mathf.Clamp(p * GetTrack().GetTrackLength(), 0f, GetTrack().GetTrackLength()-0.01f));
+//	}
+//
+//	public override void SetTrackTime(float seconds){
+//		Diglbug.Log ("SetTrackProgress "+name+", " + seconds, PrintStream.AUDIO_PLAYBACK);
+//		SetSourceTime(seconds);
+//	}
 
 	public override void SetSourceTime(float time){
 		base.SetSourceTime (time);
@@ -81,8 +81,8 @@ public class MobileVideoPlayer : VideoPlayer {
 	}
 
 	public override float GetTimeElapsed(){
-		Diglbug.LogMobile(controls.GetCurrentState(), "VIDSTATE");
-		Diglbug.LogMobile(controls.GetSeekPosition(), "RAWSEEK");
+		Diglbug.LogMobile(controls.GetCurrentState().ToString(), "VIDSTATE");
+		Diglbug.LogMobile(controls.GetSeekPosition().ToString(), "RAWSEEK");
 		Diglbug.LogMobile((controls.GetSeekPosition() * 0.001f)+"s", "VIDSEEK");
 		return controls.GetSeekPosition() * 0.001f;
 	}

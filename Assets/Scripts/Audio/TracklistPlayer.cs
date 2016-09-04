@@ -71,7 +71,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 	private void LoadTrack(ITrack toLoad){
 		toLoad.Load ();
 		loadedTracks.Add (toLoad);
-		Diglbug.Log ("Added track to loadedTracks "+toLoad.GetTrackName(), PrintStream.AUDIO_LOAD);
+		Diglbug.Log ("Added track to loadedTracks "+toLoad.GetTrackName(), PrintStream.MEDIA_LOAD);
 	}
 
 	public void UnloadPreviousTrack(){
@@ -85,7 +85,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 		if (loadedTracks.Contains (toUnload)) {
 			loadedTracks.Remove (toUnload);
 		} else {
-			Diglbug.Log ("Request to Unload was not contained in loadedTracks list "+toUnload.GetTrackName(), PrintStream.AUDIO_LOAD);
+			Diglbug.Log ("Request to Unload was not contained in loadedTracks list "+toUnload.GetTrackName(), PrintStream.MEDIA_LOAD);
 		}
 	}
 
@@ -101,7 +101,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 			if (IsExpectedIndex (requestedIndex)) {
 				PlayTrackEntryAtIndex (requestedIndex);
 			} else {
-				Diglbug.Log ("Detected unorthodox track request - unloading previously loaded tracks", PrintStream.AUDIO_LOAD);
+				Diglbug.Log ("Detected unorthodox track request - unloading previously loaded tracks", PrintStream.MEDIA_LOAD);
 				UnloadAllTracks ();
 				PlayTrackEntryAtIndex (requestedIndex);
 			}

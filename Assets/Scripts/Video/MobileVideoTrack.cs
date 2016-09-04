@@ -32,22 +32,36 @@ public class MobileVideoTrack : VideoTrack{
 		}
 	}
 
-	public override void Load(){
-		Diglbug.Log ("Loading track " + GetTrackName(), PrintStream.VIDEO);
+	protected override bool ShouldLoad(){
+		return !IsLoaded () && !IsLoading ();
+	}
+
+	protected override bool ShouldUnload(){
+		MediaPlayerCtrl.MEDIAPLAYER_STATE state = mobileControls.GetCurrentState ();
+		return state == MediaPlayerCtrl.MEDIAPLAYER_STATE.STOPPED
+			|| state == MediaPlayerCtrl.MEDIAPLAYER_STATE.READY
+			|| state == MediaPlayerCtrl.MEDIAPLAYER_STATE.END;
+	}
+
+	protected override void RunLoad(){
 		mobileControls.Load (videoFileName); // this is where its parameter is set m_str;
 		// unfortunately, now is the only time we can call these.
 		trackLength = mobileControls.GetDuration ();
 		inverse_trackLength = 1f / trackLength;
 	}
 
-
-	public override void Unload(){
-		Diglbug.Log ("Unloading track " + GetTrackName(), PrintStream.VIDEO);
+	protected override void RunUnload(){
 		mobileControls.UnLoad ();
 	}
 
 	public override bool IsLoaded(){
-		return mobileControls.GetCurrentState () == MediaPlayerCtrl.MEDIAPLAYER_STATE.READY;
+		MediaPlayerCtrl.MEDIAPLAYER_STATE state = mobileControls.GetCurrentState ();
+		return state != MediaPlayerCtrl.MEDIAPLAYER_STATE.NOT_READY
+			&& state != MediaPlayerCtrl.MEDIAPLAYER_STATE.ERROR;
+	}
+
+	public override bool IsLoading (){
+		return false; // don't know where to find this
 	}
 
 	public override float FadeTime(){

@@ -46,27 +46,28 @@ public class AudioTrack : EventTrack {
 		return trackLength;
 	}
 
-	public override void Load(){
-		AudioDataLoadState loadState = audioClip.loadState;
-		if (loadState == AudioDataLoadState.Loaded || loadState == AudioDataLoadState.Loading) {
-			Diglbug.Log ("Skipping load call due to already being loaded/loading "+GetTrackName(), PrintStream.AUDIO_LOAD);
-		} else {
-			Diglbug.Log ("Loading track " + audioClip.name, PrintStream.AUDIO_LOAD);
-			audioClip.LoadAudioData ();
-		}
+	protected override bool ShouldLoad(){
+		return (!IsLoaded () && !IsLoading ());
 	}
 
-	public override void Unload(){
-		if (IsLoaded ()) {
-			Diglbug.Log ("Unloading track " + audioClip.name, PrintStream.AUDIO_LOAD);
-			audioClip.UnloadAudioData ();
-		} else {
-			Diglbug.Log ("Skipping unload call due to already being not-loaded ("+audioClip.loadState+"), "+GetTrackName(), PrintStream.AUDIO_LOAD);
-		}
+	protected override void RunLoad(){
+		audioClip.LoadAudioData ();
+	}
+
+	protected override bool ShouldUnload(){
+		return IsLoaded () || IsLoading ();
+	}
+
+	protected override void RunUnload(){
+		audioClip.UnloadAudioData ();
 	}
 
 	public override bool IsLoaded(){
-		return audioClip.loadState.Equals (AudioDataLoadState.Loaded);
+		return audioClip.loadState == AudioDataLoadState.Loaded;
+	}
+
+	public override bool IsLoading(){
+		return audioClip.loadState == AudioDataLoadState.Loading;
 	}
 
 	public override float FadeTime(){

@@ -26,14 +26,14 @@ public class AudioTrackPlayer : EventTrackPlayer {
 		source.clip = audioTrack.GetAudioClip();
 	}
 
-	public override void SetTrackProgress (float p){
-		SetTrackTime(Mathf.Clamp(p * GetTrack().GetTrackLength(), 0f, GetTrack().GetTrackLength()-0.01f));
-	}
+//	public override void SetTrackProgress (float p){
+//		SetTrackTime(Mathf.Clamp(p * GetTrack().GetTrackLength(), 0f, GetTrack().GetTrackLength()-0.01f));
+//	}
 
-	public override void SetTrackTime (float seconds){
-		Diglbug.Log ("SetTrackTime "+name+", " + seconds, PrintStream.AUDIO_PLAYBACK);
-		SetSourceTime(seconds);
-	}
+//	public override void SetTrackTime (float seconds){
+//		Diglbug.Log ("SetTrackTime "+name+", " + seconds, PrintStream.AUDIO_PLAYBACK);
+//		SetSourceTime(seconds);
+//	}
 
 	public override void SetSourceTime(float time){
 		base.SetSourceTime (time);

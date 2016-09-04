@@ -1,6 +1,6 @@
 ﻿
 
-public abstract class EventTrackPlayer : TrackOutput{
+public abstract class EventTrackPlayer : AbstractTrackPlayer{
 	
 	private EventTrack eventTrack;
 

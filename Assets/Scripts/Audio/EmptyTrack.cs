@@ -25,6 +25,10 @@ public class EmptyTrack : ITrack{
 		return true;
 	}
 
+	public bool IsLoading(){
+		return false;
+	}
+
 	public void Load(){
 		//
 	}
