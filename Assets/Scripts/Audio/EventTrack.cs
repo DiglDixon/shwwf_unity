@@ -10,6 +10,21 @@ public abstract class EventTrack : AbstractTrack{
 
 	private bool eventsEnabled = false;
 
+	#if UNITY_EDITOR
+	public bool updateName = false;
+	#endif
+
+	public void GatherEventsFromChildren(){
+		CustomTrackTimeEvent[] childEvents = GetComponentsInChildren<CustomTrackTimeEvent> ();
+		for (int k = 0; k < childEvents.Length; k++) {
+			if (childEvents [k].isStateEvent) {
+				AddStateEventAtTime (childEvents [k].CustomEvent, childEvents [k].occurAtTime);
+			} else {
+				AddEventAtTime (childEvents [k].CustomEvent, childEvents [k].occurAtTime);
+			}
+		}
+	}
+
 	public void EnableEvents(){
 		eventsEnabled = true;
 	}
@@ -85,5 +100,18 @@ public abstract class EventTrack : AbstractTrack{
 			return false;
 		return (e.time > previousSourceTime) && (e.time <= currentTime);
 	}
+
+	#if UNITY_EDITOR
+	public void UpdateName(){
+		OnValidate ();
+	}
+
+	private void OnValidate()
+	{
+		updateName = false;
+		CustomTrackTimeEvent[] customEvents = GetComponentsInChildren<CustomTrackTimeEvent> ();
+		gameObject.name = "("+customEvents.Length+") "+GetTrackName ();
+	}
+	#endif
 
 }

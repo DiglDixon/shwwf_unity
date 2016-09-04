@@ -21,7 +21,7 @@ public class TrackUIControls : MonoBehaviour{
 
 	public TracklistControls tracklistControls;
 
-	public GameObject loopingNote;
+	public Text loopingNote;
 	public GameObject loadingNote;
 
 	private bool playingBeforeScrub = false;
@@ -40,8 +40,13 @@ public class TrackUIControls : MonoBehaviour{
 		trackNameText.text = currentOutput.GetTrack ().GetTrackName ();
 	}
 
-	public void SetLoopingNote(bool looping){
-		loopingNote.SetActive (looping);
+	public void SetLoopingNote(TracklistEntry entry){
+		if (entry is LoopingTracklistEntry) {
+			LoopingTracklistEntry loopingEntry = (LoopingTracklistEntry)entry;
+			loopingNote.text = "Looping, waiting for " + loopingEntry.requiredPayloadToContinue.ToString ()+" cue";
+		} else {
+			loopingNote.text = "";
+		}
 	}
 
 	public void TrackSliderReleased(float v){

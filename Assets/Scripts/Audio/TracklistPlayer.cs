@@ -39,20 +39,20 @@ public class TracklistPlayer : WrappedTrackOutput{
 	private void SetTracklist(Tracklist t){
 		this.tracklist = t;
 		TracklistEntry[] entries = tracklist.entries;
-		TracklistEntry entry;
+		EventTracklistEntry entry;
 		TracklistEntry nextEntry;
 		EventTrack eventTrack;
 		for(int k = 0; k<entries.Length-1; k++){ // so, we don't assign an event to the last track.
-			entry = entries [k];
+			entry = (EventTracklistEntry) entries [k];
 			nextEntry = entries [k + 1];
-			eventTrack = (EventTrack)entry.GetTrack ();
-			if (entry.Looping()) {
-				eventTrack.AddStateEventAtTimeRemaining (LoopCurrentTrack, entry.GetTrack ().FadeTime ());
+//			eventTrack = (EventTrack)entry.GetTrack ();
+			if (entry is LoopingTracklistEntry) {
+				entry.AddStateEventAtTimeRemaining (LoopCurrentTrack, entry.GetTrack ().FadeTime ());
 			} else {
-				eventTrack.AddStateEventAtTimeRemaining (PlayNextTrack, nextEntry.GetTrack ().FadeTime ());
+				entry.AddStateEventAtTimeRemaining (PlayNextTrack, nextEntry.GetTrack ().FadeTime ());
 			}
-			eventTrack.AddStateEventAtTime (UnloadPreviousTrack, 3f); // Let's Unload at 3...
-			eventTrack.AddStateEventAtTime (LoadNextTrack, 6f); // and LoadNext at 6. Should be fine. For now.
+			entry.AddStateEventAtTime (UnloadPreviousTrack, 3f); // Let's Unload at 3...
+			entry.AddStateEventAtTime (LoadNextTrack, 6f); // and LoadNext at 6. Should be fine. For now.
 		}
 		#if !UNITY_EDITOR
 		((MobileVideoPlayer) videoPlayer.GetPlayer()).InitialiseMobileVideoTracksInList(tracklist);
@@ -87,7 +87,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 	public void PlayTrackEntryAtIndex(int index){
 		trackIndex = index;
 		TracklistEntry entry = tracklist.GetTrackEntryAtIndex (index);
-		display.SetLoopingNote (entry.Looping());
+		display.SetLoopingNote (entry);
 		SetNextTrackDisplay (trackIndex+1);
 		HandlePlayRequest (entry);
 	}

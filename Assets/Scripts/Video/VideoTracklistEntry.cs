@@ -5,9 +5,9 @@ using UnityEngine.UI;
 [RequireComponent (typeof(DesktopVideoTrack))]
 #endif
 [RequireComponent (typeof(MobileVideoTrack))]
-public class VideoTracklistEntry : TracklistEntry{
+public class VideoTracklistEntry : EventTracklistEntry{
 
-	public override void AssignTrack(){
+	public override void FetchTrack(){
 		#if UNITY_EDITOR
 		track = GetComponent<DesktopVideoTrack>();
 		#else
@@ -19,10 +19,6 @@ public class VideoTracklistEntry : TracklistEntry{
 		GameObject ret = GameObject.Instantiate (Resources.Load("Tracklist_Entry_List_Item")) as GameObject;
 		ret.GetComponent<TracklistEntryListDisplayItem> ().SetDisplayFromTrack (track);
 		return ret;
-	}
-
-	public override bool Looping (){
-		return false;
 	}
 
 }

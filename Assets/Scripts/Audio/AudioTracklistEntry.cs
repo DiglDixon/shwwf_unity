@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
 [RequireComponent (typeof(AudioTrack))]
-public class AudioTracklistEntry : TracklistEntry{
-	
-	public override void AssignTrack(){
+public class AudioTracklistEntry : EventTracklistEntry{
+
+	public override void FetchTrack(){
 		track = GetComponent<AudioTrack> ();
 	}
 

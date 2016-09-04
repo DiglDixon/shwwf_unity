@@ -29,7 +29,7 @@ public class DesktopVideoTrack : VideoTrack{
 	}
 
 	public override string GetTrackName(){
-		return "d_video_"+placeholderName;
+		return "d_"+GetComponent<MobileVideoTrack>().GetTrackName();
 	}
 
 	public override float GetInverseTrackLength(){

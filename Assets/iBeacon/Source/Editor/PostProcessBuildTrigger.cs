@@ -1,4 +1,5 @@
-﻿#if UNITY_IOS
+﻿#if !UNITY_EDITOR
+#if UNITY_IOS
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
@@ -25,4 +26,5 @@ public static class PostProcessBuildTrigger {
 		plist.WriteToFile(plistPath);
 	}
 }
+#endif
 #endif

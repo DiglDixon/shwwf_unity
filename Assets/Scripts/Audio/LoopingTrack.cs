@@ -6,19 +6,21 @@ public class LoopingTrack : AudioTrack{
 	private bool shouldClone = true;
 	private LoopingTrack clone;
 
-	public override void AddEventAtTime (TrackEventDelegate newEvent, float eventTime)
-	{
-		base.AddEventAtTime (newEvent, eventTime);
-		if (clone)
-			clone.AddEventAtTime (newEvent, eventTime);
-	}
-
-	public override void AddStateEventAtTime (TrackEventDelegate newEvent, float eventTime)
-	{
-		base.AddStateEventAtTime (newEvent, eventTime);
-		if (clone)
-			clone.AddStateEventAtTime (newEvent, eventTime);
-	}
+//	public override void AddEventAtTime (TrackEventDelegate newEvent, float eventTime)
+//	{
+//		Debug.Log ("Added Event to Looper "+name);
+//		base.AddEventAtTime (newEvent, eventTime);
+//		if (clone)
+//			clone.AddEventAtTime (newEvent, eventTime);
+//	}
+//
+//	public override void AddStateEventAtTime (TrackEventDelegate newEvent, float eventTime)
+//	{
+//		Debug.Log ("Added State Event to Looper "+name);
+//		base.AddStateEventAtTime (newEvent, eventTime);
+//		if (clone)
+//			clone.AddStateEventAtTime (newEvent, eventTime);
+//	}
 
 	public void Clone(){
 		if (shouldClone) {

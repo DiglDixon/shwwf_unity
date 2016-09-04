@@ -54,10 +54,5 @@ public class MobileVideoTrack : VideoTrack{
 		return 0f;
 	}
 
-	private void OnValidate()
-	{
-		gameObject.name = GetTrackName ();
-	}
-
 
 }
