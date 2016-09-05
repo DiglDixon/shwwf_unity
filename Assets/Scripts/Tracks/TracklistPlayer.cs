@@ -10,7 +10,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 	
 	public MultiTrackOutput multiPlayer;
 
-	public VideoPlaybackSystem videoPlayer;
+	public VideoPlaybackSystem videoSystem;
 
 	private TrackOutput currentOutput;
 
@@ -49,16 +49,17 @@ public class TracklistPlayer : WrappedTrackOutput{
 		for(int k = 0; k<entries.Length; k++){
 			entry = (EventTracklistEntry) entries [k];
 			if (entry is LoopingTracklistEntry) {
-				entry.AddStateEventAtTimeRemaining (LoopCurrentTrack, entry.GetTrack ().FadeTime ());
+				LoopingTrack loopingTrack = (LoopingTrack)entry.GetTrack ();
+				entry.AddStateEventAtTimeRemaining (LoopCurrentTrack, loopingTrack.crossoverTime);
 			} else if (k < entries.Length-1){
 				nextEntry = entries [k + 1];
-				entry.AddStateEventAtTimeRemaining (PlayNextTrack, nextEntry.GetTrack ().FadeTime ());
+				entry.AddStateEventAtTimeRemaining (PlayNextTrack, nextEntry.GetTrack ().EntranceFadeTime ());
 			}
 			entry.AddStateEventAtTime (UnloadPreviousTrack, 4f); // Let's Unload at 3...
 			entry.AddStateEventAtTime (LoadNextTrack, 5f); // and LoadNext at 6. Should be fine. For now.
 		}
 		#if !UNITY_EDITOR
-		((MobileVideoPlayer) videoPlayer.GetPlayer()).InitialiseMobileVideoTracksInList(tracklist);
+		((MobileVideoPlayer) videoSystem.GetPlayer()).InitialiseMobileVideoTracksInList(tracklist);
 		#endif
 	}
 
@@ -150,7 +151,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 		currentOutput.FadeOut (fadeTime);
 		TrackOutput nextOutput = null;
 		if (entry is VideoTracklistEntry) {
-			nextOutput = videoPlayer;
+			nextOutput = videoSystem;
 		} else {
 			nextOutput = multiPlayer;
 			multiPlayer.SwitchTracks ();
@@ -159,7 +160,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 		currentOutput.SetTrack (entry.GetTrack());
 		currentOutput.FadeIn(fadeTime);
 
-		display.ChangeTrackData (multiPlayer);
+		display.ChangeTrackData (currentOutput);
 	}
 
 	private void LoopCurrentTrack(){

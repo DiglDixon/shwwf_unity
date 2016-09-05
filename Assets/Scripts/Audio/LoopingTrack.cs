@@ -5,6 +5,7 @@ public class LoopingTrack : AudioTrack{
 
 	private bool shouldClone = true;
 	private LoopingTrack clone;
+	public float crossoverTime = 1f;
 
 //	public override void AddEventAtTime (TrackEventDelegate newEvent, float eventTime)
 //	{

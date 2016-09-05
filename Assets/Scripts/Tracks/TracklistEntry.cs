@@ -19,7 +19,7 @@ public abstract class TracklistEntry : ListEntry{
 	}
 
 	public float GetEntranceFadeTime(){
-		return track.FadeTime ();
+		return track.EntranceFadeTime ();
 	}
 
 }

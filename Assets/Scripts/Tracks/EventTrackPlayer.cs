@@ -4,6 +4,14 @@ public abstract class EventTrackPlayer : AbstractTrackPlayer{
 	
 	private EventTrack eventTrack;
 
+	public override void Play(){
+		EnableEvents ();
+	}
+
+	public override void Stop(){
+		DisableEvents ();
+	}
+
 	public override void SetTrack (ITrack newTrack){
 		base.SetTrack (newTrack);
 		if (newTrack is EventTrack) {
@@ -19,12 +27,19 @@ public abstract class EventTrackPlayer : AbstractTrackPlayer{
 		}
 	}
 
-	protected virtual void Update (){
+	protected override void Update (){
+		base.Update();
 		if (IsPlaying ()) {
 			if (eventTrack != null) {
 				eventTrack.UpdateTimeElapsed (GetTimeElapsed ());
 			}
 		}
+	}
+
+	protected override void TrackReachedEnd (){
+		Diglbug.Log ("Firing remaining delegates "+name, PrintStream.DELEGATES);
+		eventTrack.UpdateTimeElapsed (GetTrack ().GetTrackLength());
+		base.TrackReachedEnd ();
 	}
 
 	protected void EnableEvents(){

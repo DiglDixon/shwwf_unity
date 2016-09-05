@@ -11,6 +11,9 @@ public abstract class AbstractTrack : MonoBehaviour, ITrack{
 	public abstract float GetTrackLength();
 	public abstract bool IsLoaded();
 	public abstract bool IsLoading();
+
+	public float entranceFadeTime = 1f;
+
 	public void Load(){
 		if (ShouldLoad ()) {
 			RunLoad ();
@@ -31,6 +34,8 @@ public abstract class AbstractTrack : MonoBehaviour, ITrack{
 	protected abstract bool ShouldUnload();
 	protected abstract void RunUnload();
 	protected abstract void RunLoad();
-	public abstract float FadeTime();
+	public virtual float EntranceFadeTime(){
+		return entranceFadeTime;
+	}
 
 }

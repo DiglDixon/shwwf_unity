@@ -87,12 +87,14 @@ public abstract class EventTrack : AbstractTrack{
 	}
 
 	private void CheckEvents(List<TimingEvent> events, float previousTime, float currentTime){
+		
 		for (int i = events.Count - 1; i >= 0; i--) {
 			if (EventShouldOccur(events[i], previousSourceTime, currentTime)) {
 				Diglbug.Log ("Event fired for " + name + " at time " + currentTime, PrintStream.DELEGATES);
 				events [i].function ();
 			}
 		}
+
 	}
 
 	private bool EventShouldOccur(TimingEvent e, float previousTime, float currentTime){

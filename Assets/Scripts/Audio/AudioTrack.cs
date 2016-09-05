@@ -6,7 +6,6 @@ public class AudioTrack : EventTrack {
 	private float inverse_trackLength;
 	private float inverse_trackFrequency;
 	private float trackLength;
-	public float selfFadeTime = 1f;
 
 	[SerializeField]
 	private AudioClip audioClip;
@@ -70,7 +69,7 @@ public class AudioTrack : EventTrack {
 		return audioClip.loadState == AudioDataLoadState.Loading;
 	}
 
-	public override float FadeTime(){
-		return selfFadeTime;
+	public override float EntranceFadeTime(){
+		return entranceFadeTime;
 	}
 }

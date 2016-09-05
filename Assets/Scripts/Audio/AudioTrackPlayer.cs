@@ -41,19 +41,19 @@ public class AudioTrackPlayer : EventTrackPlayer {
 	}
 
 	public override void Play (){
+		base.Play ();
 		Diglbug.Log ("Play "+name, PrintStream.AUDIO_PLAYBACK);
 		SetSourceTime(0f); // these aren't ideal
 		Unpause ();
 		source.Play ();
-		EnableEvents ();
 	}
 
 	public override void Stop(){
+		base.Stop ();
 		Diglbug.Log ("Stop "+name, PrintStream.AUDIO_PLAYBACK);
 		fader.CancelFades ();
 		source.Stop ();
 		SetSourceTime(0f);
-		DisableEvents ();
 	}
 
 	public override void Pause(){

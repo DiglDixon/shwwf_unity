@@ -13,6 +13,16 @@ public class DesktopVideoPlayer : VideoPlayer {
 		audioPlayer = GetComponent<AudioTrackPlayer> ();
 	}
 
+	private float trackTime = 0f;
+	private bool trackRunning = false;
+
+	protected override void Update(){
+		if (trackRunning) {
+			trackTime += Time.deltaTime;
+		}
+		base.Update ();
+	}
+
 	public override void SetTrack(ITrack t){
 		DesktopVideoTrack desktopVideoTrack = (DesktopVideoTrack)t;
 		Diglbug.Log ("Set Track "+name+", "+desktopVideoTrack.GetTrackName(), PrintStream.AUDIO_PLAYBACK);
@@ -33,39 +43,45 @@ public class DesktopVideoPlayer : VideoPlayer {
 
 	public override void SetSourceTime(float time){
 		base.SetSourceTime (time);
+		trackTime = time;
 	}
 
 	public override void Play (){
+		base.Play ();
 		placeholderScreen.SetActive (true);
 		Diglbug.Log ("Play "+name, PrintStream.VIDEO);
 		SetSourceTime(0f); 
 		Unpause ();
-
 		audioPlayer.Play ();
+		trackRunning = true;
 	}
 
 	public override void Stop(){
+		base.Stop ();
 		placeholderScreen.SetActive (false);
 		Diglbug.Log ("Stop "+name, PrintStream.VIDEO);
 		SetSourceTime(0f);
 
 		audioPlayer.Stop ();
+		trackRunning = false;
 	}
 
 	public override void Pause(){
 		Diglbug.Log ("Pause "+name, PrintStream.VIDEO);
 
 		audioPlayer.Pause ();
+		trackRunning = false;
 	}
 
 	public override void Unpause(){
 		Diglbug.Log ("Unpause "+name, PrintStream.VIDEO);
 
 		audioPlayer.Unpause ();
+		trackRunning = true;
 	}
 
 	public override bool IsPlaying (){
-		return false;
+		return trackRunning;
 	}
 
 	public override void FadeIn(float time){
@@ -82,7 +98,7 @@ public class DesktopVideoPlayer : VideoPlayer {
 	// An alternative to this method would be using a parallel coroutine, but this requires a lot of
 	// micro-management.
 	public override float GetTimeElapsed(){
-		return 0f;
+		return trackTime;
 	}
 
 	public override float GetTimeRemaining(){

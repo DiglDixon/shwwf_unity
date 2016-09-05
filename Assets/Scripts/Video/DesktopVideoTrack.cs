@@ -69,10 +69,6 @@ public class DesktopVideoTrack : VideoTrack{
 		return false;
 	}
 
-	public override float FadeTime(){
-		return 0;
-	}
-
 	private void OnValidate()
 	{
 		gameObject.name = GetTrackName ();

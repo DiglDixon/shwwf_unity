@@ -7,9 +7,13 @@ public class MobileVideoPlayer : VideoPlayer {
 
 	public GameObject videoPlane;
 	private MediaPlayerCtrl controls;
+	private MobileVideoVolumeFader fader;
+	private float maxVolume = 1f;
 
 	private void Awake(){
 		controls = GetComponent<MediaPlayerCtrl> ();
+		fader = new MobileVideoVolumeFader (controls, gameObject);
+		fader.AddLerpEndsCallback (FaderLerpEnds);
 	}
 
 	public void InitialiseMobileVideoTracksInList(Tracklist list){
@@ -22,19 +26,7 @@ public class MobileVideoPlayer : VideoPlayer {
 
 	public override void SetTrack(ITrack t){
 		base.SetTrack (t);
-		MobileVideoTrack mobileVideoTrack = (MobileVideoTrack)t;
-		Diglbug.Log ("Set Track "+name+", "+mobileVideoTrack.GetTrackName(), PrintStream.VIDEO);
-
 	}
-
-//	public override void SetTrackProgress (float p){
-//		SetTrackTime(Mathf.Clamp(p * GetTrack().GetTrackLength(), 0f, GetTrack().GetTrackLength()-0.01f));
-//	}
-//
-//	public override void SetTrackTime(float seconds){
-//		Diglbug.Log ("SetTrackProgress "+name+", " + seconds, PrintStream.AUDIO_PLAYBACK);
-//		SetSourceTime(seconds);
-//	}
 
 	public override void SetSourceTime(float time){
 		base.SetSourceTime (time);
@@ -43,6 +35,7 @@ public class MobileVideoPlayer : VideoPlayer {
 	}
 
 	public override void Play (){
+		base.Play ();
 		videoPlane.SetActive (true);
 		Diglbug.Log ("Play "+name, PrintStream.AUDIO_PLAYBACK);
 		Unpause ();
@@ -51,20 +44,24 @@ public class MobileVideoPlayer : VideoPlayer {
 	}
 
 	public override void Stop(){
+		base.Stop ();
 		videoPlane.SetActive (false);
 		Diglbug.Log ("Stop "+name, PrintStream.AUDIO_PLAYBACK);
 		controls.Stop ();
 		SetSourceTime(0f);
+		fader.CancelFades ();
 	}
 
 	public override void Pause(){
 		Diglbug.Log ("Pause "+name, PrintStream.AUDIO_PLAYBACK);
 		controls.Pause ();
+		fader.PauseFades ();
 	}
 
 	public override void Unpause(){
 		Diglbug.Log ("Unpause "+name, PrintStream.AUDIO_PLAYBACK);
 		controls.Play ();
+		fader.UnpauseFades ();
 	}
 
 	public override bool IsPlaying (){
@@ -74,19 +71,24 @@ public class MobileVideoPlayer : VideoPlayer {
 	public override void FadeIn(float time){
 		Diglbug.Log ("Fade in " + name + ", " + time, PrintStream.AUDIO_PLAYBACK);
 		Play ();
+		fader.FadeVolumeTo (maxVolume, time);
 	}
 
 	public override void FadeOut(float time){
 		Diglbug.Log ("Fade out " + name + ", " + time, PrintStream.AUDIO_PLAYBACK);
 		Stop ();
+		fader.FadeVolumeTo (0f, time);
 	}
 
 	public override float GetTimeElapsed(){
-		Diglbug.LogMobile(controls.GetCurrentState().ToString(), "VIDSTATE");
-		Diglbug.LogMobile(GetTrack().GetTrackLength().ToString(), "VIDLEN");
-		Diglbug.LogMobile(GetProgress().ToString(), "VIDPROG");
-		Diglbug.LogMobile((controls.GetSeekPosition() * 0.001f)+"s", "VIDELAPSE");
-		return controls.GetSeekPosition() * 0.001f;
+		if (GetTrack().IsLoaded ()) {
+			Diglbug.LogMobile(controls.GetCurrentState().ToString(), "VIDSTATE");
+			Diglbug.LogMobile(GetTrack().GetTrackLength().ToString(), "VIDLEN");
+			Diglbug.LogMobile((controls.GetSeekPosition() * 0.001f)+"s", "VIDELAPSE");
+			return controls.GetSeekPosition () * 0.001f;
+		}else{
+			return 0f;
+		}
 	}
 
 	public override float GetTimeRemaining(){
@@ -99,6 +101,12 @@ public class MobileVideoPlayer : VideoPlayer {
 
 	public override void SetMixerGroup(AudioMixerGroup mg){
 		// no implementation
+	}
+
+	protected void FaderLerpEnds(float value){
+		if (value == 0f) {
+			Stop ();
+		}
 	}
 
 }

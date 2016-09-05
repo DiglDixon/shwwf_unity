@@ -3,10 +3,16 @@
 public class MobileVideoTrack : VideoTrack{
 	
 	private MediaPlayerCtrl mobileControls;
-
+	public float manualVideoLength;
 	public string videoFileName = "";
 	private float inverse_trackLength;
 	private float trackLength;
+
+	private void Awake(){
+		// We set this manually, as it can't be found until the track is loaded.
+		trackLength = manualVideoLength;
+		inverse_trackLength = 1f / trackLength;
+	}
 
 	public void SetControls(MediaPlayerCtrl controls){
 		mobileControls = controls;
@@ -25,11 +31,7 @@ public class MobileVideoTrack : VideoTrack{
 	}
 
 	public override float GetTrackLength(){
-		if (mobileControls) {
-			return trackLength;
-		} else {
-			return 1f;
-		}
+		return trackLength;
 	}
 
 	protected override bool ShouldLoad(){
@@ -44,13 +46,12 @@ public class MobileVideoTrack : VideoTrack{
 	}
 
 	protected override void RunLoad(){
+		Diglbug.Log ("Loading MobileTrackVideo " + videoFileName, PrintStream.MEDIA_LOAD);
 		mobileControls.Load (videoFileName); // this is where its parameter is set m_str;
-		// unfortunately, now is the only time we can call these.
-		trackLength = mobileControls.GetDuration ();
-		inverse_trackLength = 1f / trackLength;
 	}
 
 	protected override void RunUnload(){
+		Diglbug.Log ("Unloading MobileTrackVideo " + videoFileName, PrintStream.MEDIA_LOAD);
 		mobileControls.UnLoad ();
 	}
 
@@ -62,10 +63,6 @@ public class MobileVideoTrack : VideoTrack{
 
 	public override bool IsLoading (){
 		return false; // don't know where to find this
-	}
-
-	public override float FadeTime(){
-		return 0f;
 	}
 
 

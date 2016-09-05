@@ -9,6 +9,6 @@ public interface ITrack{
 	bool IsLoading();
 	void Load();
 	void Unload();
-	float FadeTime(); // TODO: This is a little awkward - we may need different fade times for difference situations.
+	float EntranceFadeTime(); // TODO: This is a little awkward - we may need different fade times for difference situations.
 //	AudioClip GetAudioClip();
 }

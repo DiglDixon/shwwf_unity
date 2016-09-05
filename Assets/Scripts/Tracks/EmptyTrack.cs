@@ -10,7 +10,7 @@ public class EmptyTrack : ITrack{
 	}
 
 	public float GetInverseTrackLength(){
-		return 1f;
+		return .033333333f;
 	}
 
 	public float GetInverseTrackFrequency(){
@@ -18,11 +18,11 @@ public class EmptyTrack : ITrack{
 	}
 
 	public float GetTrackLength(){
-		return 0f;
+		return 30f;
 	}
 
 	public bool IsLoaded(){
-		return true;
+		return false;
 	}
 
 	public bool IsLoading(){
@@ -41,7 +41,7 @@ public class EmptyTrack : ITrack{
 
 	}
 
-	public float FadeTime(){
+	public float EntranceFadeTime(){
 		return 0;
 	}
 
