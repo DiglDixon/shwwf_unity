@@ -34,6 +34,8 @@ public abstract class TrackOutput : MonoBehaviour{
 
 	public abstract bool IsPlaying ();
 
+	public abstract bool IsPaused ();
+
 	public virtual void CutIn(){
 		FadeIn (0f);
 	}

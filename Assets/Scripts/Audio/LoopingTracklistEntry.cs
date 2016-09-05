@@ -6,8 +6,6 @@ public class LoopingTracklistEntry : AudioTracklistEntry{
 	private LoopingTrack cloneTrack;
 	private bool usingClone = false;
 
-	public Payload requiredPayloadToContinue;
-
 	public void SetCloneTrack(LoopingTrack clone){
 		cloneTrack = clone;
 	}

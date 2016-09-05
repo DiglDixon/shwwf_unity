@@ -35,6 +35,10 @@ public abstract class WrappedTrackOutput : TrackOutput{
 		return WrappedOutput.IsPlaying();
 	}
 
+	public override bool IsPaused (){
+		return WrappedOutput.IsPaused();
+	}
+
 	public override void FadeIn(float time){
 		WrappedOutput.FadeIn (time);
 	}

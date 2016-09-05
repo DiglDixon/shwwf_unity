@@ -67,6 +67,7 @@ public class DesktopVideoPlayer : VideoPlayer {
 	}
 
 	public override void Pause(){
+		base.Pause ();
 		Diglbug.Log ("Pause "+name, PrintStream.VIDEO);
 
 		audioPlayer.Pause ();
@@ -74,6 +75,7 @@ public class DesktopVideoPlayer : VideoPlayer {
 	}
 
 	public override void Unpause(){
+		base.Unpause ();
 		Diglbug.Log ("Unpause "+name, PrintStream.VIDEO);
 
 		audioPlayer.Unpause ();

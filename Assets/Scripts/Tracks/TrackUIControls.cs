@@ -4,22 +4,19 @@ using UnityEngine.UI;
 
 public class TrackUIControls : MonoBehaviour{
 
-	public TrackOutput output;
+	public TracklistPlayer currentOutput;
+	private ITrack currentTrack;
 
 	public TrackSlider trackSlider; 
 	public Text trackElapsedText;
 	public Text trackLengthText;
 	public Text trackNameText;
 
-	private TrackOutput currentOutput;
-
 	public Button playButton;
 	public Button pauseButton;
 	public Button unpauseButton;
 	public Button nextTrackButton;
 	public Text nextTrackText;
-
-	public TracklistControls tracklistControls;
 
 	public Text loopingNote;
 	public GameObject loadingNote;
@@ -29,12 +26,26 @@ public class TrackUIControls : MonoBehaviour{
 
 	private void Update(){
 		if (currentOutput != null) {
+			if(currentTrack != currentOutput.GetTrack ()){
+				ChangeTrackData (currentOutput.GetTrack ());
+			}
+
 			trackSlider.UpdateDisplayValue(currentOutput.GetProgress ());
 			UpdateTimeElapsedValue (currentOutput.GetTimeElapsed ());
+
 			loadingNote.SetActive (!currentOutput.GetTrack ().IsLoaded ()); // this is a nasty poll, will remove in the new events system.
-		}
-		if (scrubbing) {
-			UpdateTimeElapsedValue (trackSlider.GetValue() * currentOutput.GetTrack().GetTrackLength());
+
+			if (currentOutput.IsPlaying ()) {
+				SetPlaying ();
+			} else if (currentOutput.IsPaused ()) {
+				SetPaused ();
+			}else{
+				SetStopped ();
+			}
+
+			if (scrubbing) {
+				UpdateTimeElapsedValue (trackSlider.GetValue() * currentOutput.GetTrack().GetTrackLength());
+			}
 		}
 	}
 
@@ -42,19 +53,16 @@ public class TrackUIControls : MonoBehaviour{
 		trackElapsedText.text = Utils.AudioTimeFormat (timeElapsed);
 	}
 
-	public void ChangeTrackData(TrackOutput newOutput){
-		currentOutput = newOutput; 
+	private void ChangeTrackData(ITrack newTrack){
+		currentTrack = newTrack;
 		trackLengthText.text = Utils.AudioTimeFormat (currentOutput.GetTrack ().GetTrackLength ());
 		trackNameText.text = currentOutput.GetTrack ().GetTrackName ();
-	}
-
-	public void SetLoopingNote(TracklistEntry entry){
-		if (entry is LoopingTracklistEntry) {
-			LoopingTracklistEntry loopingEntry = (LoopingTracklistEntry)entry;
-			loopingNote.text = "Looping, waiting for " + loopingEntry.requiredPayloadToContinue.ToString ()+" cue";
+		if (newTrack is LoopingTrack) {
+			loopingNote.text = "(Looping)";
 		} else {
 			loopingNote.text = "";
 		}
+		SetUpcomingTrackDisplay (currentOutput.GetNextTrack ());
 	}
 
 	public void TrackSliderReleased(float v){
@@ -65,9 +73,9 @@ public class TrackUIControls : MonoBehaviour{
 		nextTrackButton.interactable = v;
 	}
 
-	public void SetUpcomingTrackDisplay(TracklistEntry entry){
-		if (entry != null) {
-			nextTrackText.text = "Upcoming track: " + entry.GetTrack().GetTrackName ();
+	public void SetUpcomingTrackDisplay(ITrack track){
+		if (track != null) {
+			nextTrackText.text = "Upcoming track: " + track.GetTrackName ();
 			SetNextTrackAvailable (true);
 		} else {
 			nextTrackText.text = "This is the last track.";
@@ -75,24 +83,24 @@ public class TrackUIControls : MonoBehaviour{
 		}
 	}
 
-	public void Unpause(){
-		SetPlaying();
-		output.Unpause ();
+	public void PauseCurrentOutput(){
+		currentOutput.Pause ();
 	}
 
-	public void Play(){
-		SetPlaying();
-		output.Play ();
+	public void PlayCurrentOutput(){
+		currentOutput.Play ();
 	}
 
-	public void Pause(){
-		SetPaused();
-		output.Pause ();
+	public void StopCurrentOutput(){
+		currentOutput.Stop ();
 	}
 
-	public void Stop(){
-		SetStopped();
-		output.Stop ();
+	public void UnpauseCurrentOutput(){
+		currentOutput.Unpause ();
+	}
+
+	public void SkipTrackCurrentOutput(){
+		currentOutput.PlayNextTrack ();
 	}
 
 	private void SetPlaying(){
@@ -115,15 +123,15 @@ public class TrackUIControls : MonoBehaviour{
 
 	public void ScrubPositionBegins(){
 		scrubbing = true;
-		playingBeforeScrub = output.IsPlaying ();
-		output.Pause ();
+		playingBeforeScrub = currentOutput.IsPlaying ();
+		currentOutput.Pause ();
 	}
 
 	public void ScrubPositionEnds(float scrubPosition){
 		scrubbing = false;
-		output.SetTrackProgress (scrubPosition);
+		currentOutput.SetTrackProgress (scrubPosition);
 		if (playingBeforeScrub)
-			output.Unpause ();
+			currentOutput.Unpause ();
 	}
 
 }

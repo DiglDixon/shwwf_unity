@@ -10,6 +10,16 @@ using UnityEngine.UI;
 
 
 public class MediaPlayerCtrl : MonoBehaviour {
+	/* DIGL */
+	public GameObject planeToActivate;
+
+	public void ActivatePlane(){
+		planeToActivate.SetActive(true);
+	}
+
+	public void DeactivatePlane(){
+		planeToActivate.SetActive(false);
+	}
 	
 	public string m_strFileName;
 	public GameObject [] m_TargetMaterial = null; 

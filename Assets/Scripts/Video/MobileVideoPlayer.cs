@@ -2,90 +2,98 @@
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-[RequireComponent (typeof(MediaPlayerCtrl))]
 public class MobileVideoPlayer : VideoPlayer {
 
-	public GameObject videoPlane;
-	private MediaPlayerCtrl controls;
-	private MobileVideoVolumeFader fader;
-	private float maxVolume = 1f;
+	private int controlsIndex;
+	private MediaPlayerCtrl[] controls;
+
+	private MobileVideoTrack mobileVideoTrack;
 
 	private void Awake(){
-		controls = GetComponent<MediaPlayerCtrl> ();
-		fader = new MobileVideoVolumeFader (controls, gameObject);
-		fader.AddLerpEndsCallback (FaderLerpEnds);
+		controls = GetComponentsInChildren<MediaPlayerCtrl> ();
+		Diglbug.LogMobile ("ControlCount:" + controls.Length, "ODD");
 	}
 
 	public void InitialiseMobileVideoTracksInList(Tracklist list){
-		foreach (TracklistEntry entry in list.entries) {
+		TracklistEntry entry;
+		for(int k = 0; k< list.entries.Length; k++) {
+			entry = list.entries[k];
 			if (entry is VideoTracklistEntry) {
-				((MobileVideoTrack)entry.GetTrack ()).SetControls (controls);
+				if (controlsIndex < controls.Length) {
+					((MobileVideoTrack)entry.GetTrack ()).SetControls (controls [controlsIndex]);
+					Diglbug.LogMobile ("AssignControl:" + controlsIndex, "ODD_2");
+					controlsIndex++;
+				} else {
+					Diglbug.LogError ("Tried to assign a video track with insufficient slots. Please add more Controllers");
+				}
 			}
 		}
 	}
 
 	public override void SetTrack(ITrack t){
 		base.SetTrack (t);
+		mobileVideoTrack = (MobileVideoTrack)t;
 	}
 
 	public override void SetSourceTime(float time){
 		base.SetSourceTime (time);
 		Diglbug.LogMobile(((int)(time * 1000)).ToString(), "SETVIDSEEK");
-		controls.SeekTo((int)(time * 1000));
+		mobileVideoTrack.controls.SeekTo((int)(time * 1000));
 	}
 
 	public override void Play (){ // need a routine to play if not loaded.
 		base.Play ();
-		videoPlane.SetActive (true);
+		mobileVideoTrack.controls.ActivatePlane ();
 		Diglbug.Log ("Play "+name, PrintStream.AUDIO_PLAYBACK);
 		Unpause ();
-		controls.Play ();
+		mobileVideoTrack.controls.Play ();
 		SetSourceTime(0f);
 	}
 
 	public override void Stop(){
 		base.Stop ();
-		videoPlane.SetActive (false);
+		mobileVideoTrack.controls.DeactivatePlane ();
 		Diglbug.Log ("Stop "+name, PrintStream.AUDIO_PLAYBACK);
-		controls.Stop ();
+		mobileVideoTrack.controls.Stop ();
 		SetSourceTime(0f);
-		fader.CancelFades ();
 	}
 
 	public override void Pause(){
+		base.Pause ();
 		Diglbug.Log ("Pause "+name, PrintStream.AUDIO_PLAYBACK);
-		controls.Pause ();
-		fader.PauseFades ();
+		mobileVideoTrack.controls.Pause ();
 	}
 
 	public override void Unpause(){
+		base.Unpause ();
 		Diglbug.Log ("Unpause "+name, PrintStream.AUDIO_PLAYBACK);
-		controls.Play ();
-		fader.UnpauseFades ();
+		mobileVideoTrack.controls.Play ();
 	}
 
 	public override bool IsPlaying (){
-		return controls.GetCurrentState() == MediaPlayerCtrl.MEDIAPLAYER_STATE.PLAYING;
+		if (mobileVideoTrack == null) {
+			return false;
+		} else {
+			return mobileVideoTrack.controls.GetCurrentState () == MediaPlayerCtrl.MEDIAPLAYER_STATE.PLAYING;
+		}
 	}
 
 	public override void FadeIn(float time){
 		Diglbug.Log ("Fade in " + name + ", " + time, PrintStream.AUDIO_PLAYBACK);
 		Play ();
-		fader.FadeVolumeTo (maxVolume, time);
 	}
 
 	public override void FadeOut(float time){
 		Diglbug.Log ("Fade out " + name + ", " + time, PrintStream.AUDIO_PLAYBACK);
-//		Stop ();
-		fader.FadeVolumeTo (0f, time); // this will call Stop() for us
+		Stop ();
 	}
 
 	public override float GetTimeElapsed(){
 		if (GetTrack().IsLoaded ()) {
-			Diglbug.LogMobile(controls.GetCurrentState().ToString(), "VIDSTATE");
+			Diglbug.LogMobile(mobileVideoTrack.controls.GetCurrentState().ToString(), "VIDSTATE");
 			Diglbug.LogMobile(GetTrack().GetTrackLength().ToString(), "VIDLEN");
-			Diglbug.LogMobile((controls.GetSeekPosition() * 0.001f)+"s", "VIDELAPSE");
-			return controls.GetSeekPosition () * 0.001f;
+			Diglbug.LogMobile((mobileVideoTrack.controls.GetSeekPosition() * 0.001f)+"s", "VIDELAPSE");
+			return mobileVideoTrack.controls.GetSeekPosition () * 0.001f;
 		}else{
 			return 0f;
 		}
@@ -103,11 +111,11 @@ public class MobileVideoPlayer : VideoPlayer {
 		// no implementation
 	}
 
-	protected void FaderLerpEnds(float value){
-		if (value == 0f) {
-			Stop ();
-		}
-	}
+//	protected void FaderLerpEnds(float value){
+//		if (value == 0f) {
+//			Stop ();
+//		}
+//	}
 
 }
 	

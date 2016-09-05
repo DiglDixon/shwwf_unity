@@ -2,7 +2,7 @@
 
 public class MobileVideoTrack : VideoTrack{
 	
-	private MediaPlayerCtrl mobileControls;
+	public MediaPlayerCtrl controls;
 	public float manualVideoLength;
 	public string videoFileName = "";
 	private float inverse_trackLength;
@@ -15,7 +15,7 @@ public class MobileVideoTrack : VideoTrack{
 	}
 
 	public void SetControls(MediaPlayerCtrl controls){
-		mobileControls = controls;
+		this.controls = controls;
 	}
 
 	public override string GetTrackName(){
@@ -39,25 +39,25 @@ public class MobileVideoTrack : VideoTrack{
 	}
 
 	protected override bool ShouldUnload(){
-		MediaPlayerCtrl.MEDIAPLAYER_STATE state = mobileControls.GetCurrentState ();
-		return state == MediaPlayerCtrl.MEDIAPLAYER_STATE.STOPPED
+//		MediaPlayerCtrl.MEDIAPLAYER_STATE state = controls.GetCurrentState ();
+		return true;/*state == MediaPlayerCtrl.MEDIAPLAYER_STATE.STOPPED
 			|| state == MediaPlayerCtrl.MEDIAPLAYER_STATE.READY
 			|| state == MediaPlayerCtrl.MEDIAPLAYER_STATE.PAUSED
-			|| state == MediaPlayerCtrl.MEDIAPLAYER_STATE.END;
+			|| state == MediaPlayerCtrl.MEDIAPLAYER_STATE.END;*/
 	}
 
 	protected override void RunLoad(){
 		Diglbug.Log ("Loading MobileTrackVideo " + videoFileName, PrintStream.MEDIA_LOAD);
-		mobileControls.Load (videoFileName); // this is where its parameter is set m_str;
+		controls.Load (videoFileName); // this is where its parameter is set m_str;
 	}
 
 	protected override void RunUnload(){
 		Diglbug.Log ("Unloading MobileTrackVideo " + videoFileName, PrintStream.MEDIA_LOAD);
-		mobileControls.UnLoad ();
+		controls.UnLoad ();
 	}
 
 	public override bool IsLoaded(){
-		MediaPlayerCtrl.MEDIAPLAYER_STATE state = mobileControls.GetCurrentState ();
+		MediaPlayerCtrl.MEDIAPLAYER_STATE state = controls.GetCurrentState ();
 		return state != MediaPlayerCtrl.MEDIAPLAYER_STATE.NOT_READY
 			&& state != MediaPlayerCtrl.MEDIAPLAYER_STATE.ERROR;
 	}

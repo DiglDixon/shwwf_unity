@@ -37,8 +37,8 @@ public class TracklistPlayer : WrappedTrackOutput{
 		// This is a poor way to make sure some variables get initialised so we can use our controls logically off the bat.
 		LoadTrack(tracklist.entries[0].GetTrack());
 		PlayTrackEntry (tracklist.entries[0]);
-
-		display.Pause ();
+		Pause ();
+//		display.Pause ();
 	}
 
 	private void SetTracklist(Tracklist t){
@@ -65,7 +65,15 @@ public class TracklistPlayer : WrappedTrackOutput{
 
 	public void LoadNextTrack(){
 		if (trackIndex < tracklist.entries.Length - 1) {
-			LoadTrack(tracklist.entries [trackIndex + 1].GetTrack ());
+			LoadTrack(GetNextTrack());
+		}
+	}
+
+	public ITrack GetNextTrack(){
+		if (trackIndex >= tracklist.entries.Length-1) {
+			return null;
+		} else {
+			return tracklist.entries [trackIndex + 1].GetTrack ();
 		}
 	}
 
@@ -123,8 +131,8 @@ public class TracklistPlayer : WrappedTrackOutput{
 		if (index < tracklist.entries.Length) {
 			trackIndex = index;
 			TracklistEntry entry = tracklist.GetTrackEntryAtIndex (index);
-			display.SetLoopingNote (entry);
-			SetNextTrackDisplay (trackIndex + 1);
+//			display.SetLoopingNote (entry);
+//			SetNextTrackDisplay (trackIndex + 1);
 			HandlePlayRequest (entry);
 		} else {
 			Diglbug.Log ("Refused to play track at invalid index: " + index);
@@ -140,10 +148,10 @@ public class TracklistPlayer : WrappedTrackOutput{
 		return -1;
 	}
 
-	public void SetNextTrackDisplay(int index){
-		TracklistEntry upcomingTracklistEntry = tracklist.GetTrackEntryAtIndex (index);
-		display.SetUpcomingTrackDisplay(upcomingTracklistEntry);
-	}
+//	public void SetNextTrackDisplay(int index){
+//		TracklistEntry upcomingTracklistEntry = tracklist.GetTrackEntryAtIndex (index);
+////		display.SetUpcomingTrackDisplay(upcomingTracklistEntry);
+//	}
 
 	private void HandlePlayRequest(TracklistEntry entry){
 		float fadeTime = entry.GetEntranceFadeTime ();
@@ -160,7 +168,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 		currentOutput.SetTrack (entry.GetTrack());
 		currentOutput.FadeIn(fadeTime);
 
-		display.ChangeTrackData (currentOutput);
+//		display.ChangeTrackData (currentOutput);
 	}
 
 	private void LoopCurrentTrack(){

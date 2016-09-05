@@ -57,12 +57,14 @@ public class AudioTrackPlayer : EventTrackPlayer {
 	}
 
 	public override void Pause(){
+		base.Pause ();
 		Diglbug.Log ("Pause "+name, PrintStream.AUDIO_PLAYBACK);
 		fader.PauseFades ();
 		source.Pause ();
 	}
 
 	public override void Unpause(){
+		base.Unpause ();
 		Diglbug.Log ("Unpause "+name, PrintStream.AUDIO_PLAYBACK);
 		fader.UnpauseFades ();
 		source.UnPause ();

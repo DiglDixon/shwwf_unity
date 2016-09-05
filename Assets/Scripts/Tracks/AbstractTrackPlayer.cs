@@ -6,6 +6,28 @@ public abstract class AbstractTrackPlayer : TrackOutput{
 	private float stopMonitorTime = 1f;
 	private bool aboutToStop = false;
 
+	private bool paused = false;
+
+	public override void Play(){
+		paused = false;
+	}
+
+	public override void Stop(){
+		paused = false;
+	}
+
+	public override void Unpause(){
+		paused = false;
+	}
+
+	public override void Pause(){
+		paused = true;
+	}
+
+	public override bool IsPaused(){
+		return paused;
+	}
+
 
 	protected virtual void Update(){
 		// we assume it's
@@ -14,8 +36,9 @@ public abstract class AbstractTrackPlayer : TrackOutput{
 			aboutToStop = false;
 			TrackReachedEnd ();
 		}
-
-		aboutToStop = GetTimeRemaining () < stopMonitorTime;
+		if (IsPlaying ()) {
+			aboutToStop = GetTimeRemaining () < stopMonitorTime;
+		}
 	}
 
 	protected virtual void TrackReachedEnd(){
