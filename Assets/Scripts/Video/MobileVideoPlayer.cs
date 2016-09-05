@@ -38,6 +38,7 @@ public class MobileVideoPlayer : VideoPlayer {
 
 	public override void SetSourceTime(float time){
 		base.SetSourceTime (time);
+		Diglbug.LogMobile(((int)(time * 1000)).ToString(), "SETVIDSEEK");
 		controls.SeekTo((int)(time * 1000));
 	}
 
@@ -82,8 +83,9 @@ public class MobileVideoPlayer : VideoPlayer {
 
 	public override float GetTimeElapsed(){
 		Diglbug.LogMobile(controls.GetCurrentState().ToString(), "VIDSTATE");
-		Diglbug.LogMobile(controls.GetSeekPosition().ToString(), "RAWSEEK");
-		Diglbug.LogMobile((controls.GetSeekPosition() * 0.001f)+"s", "VIDSEEK");
+		Diglbug.LogMobile(GetTrack().GetTrackLength().ToString(), "VIDLEN");
+		Diglbug.LogMobile(GetProgress().ToString(), "VIDPROG");
+		Diglbug.LogMobile((controls.GetSeekPosition() * 0.001f)+"s", "VIDELAPSE");
 		return controls.GetSeekPosition() * 0.001f;
 	}
 
