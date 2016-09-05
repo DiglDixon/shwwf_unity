@@ -42,6 +42,7 @@ public class MobileVideoTrack : VideoTrack{
 		MediaPlayerCtrl.MEDIAPLAYER_STATE state = mobileControls.GetCurrentState ();
 		return state == MediaPlayerCtrl.MEDIAPLAYER_STATE.STOPPED
 			|| state == MediaPlayerCtrl.MEDIAPLAYER_STATE.READY
+			|| state == MediaPlayerCtrl.MEDIAPLAYER_STATE.PAUSED
 			|| state == MediaPlayerCtrl.MEDIAPLAYER_STATE.END;
 	}
 

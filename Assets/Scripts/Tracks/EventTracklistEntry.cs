@@ -3,7 +3,7 @@
 public abstract class EventTracklistEntry : TracklistEntry{
 
 	public override void Initialise(){
-		GetComponent<EventTrack> ().GatherEventsFromChildren ();
+		((EventTrack)GetTrack()).GatherEventsFromChildren ();
 	}
 
 	// These is a bit crude. Meant as a way to allow changing all nested tracks

@@ -739,7 +739,7 @@ public class MediaPlayerCtrl : MonoBehaviour {
 	
 	public void Stop()
 	{
-		SeekTo (0); // DIGL - at export this isn't working as it looks like it should.
+		//SeekTo (0); // DIGL - at export this isn't working as it looks like it should.
 		if(m_CurrentState == MEDIAPLAYER_STATE.PLAYING)
 			Call_Pause();
 		

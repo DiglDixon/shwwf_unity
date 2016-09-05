@@ -98,6 +98,7 @@ public class DesktopVideoPlayer : VideoPlayer {
 	// An alternative to this method would be using a parallel coroutine, but this requires a lot of
 	// micro-management.
 	public override float GetTimeElapsed(){
+		Debug.Log ("GTE stakc me");
 		return trackTime;
 	}
 

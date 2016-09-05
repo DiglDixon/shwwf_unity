@@ -34,7 +34,7 @@ public class MobileVideoPlayer : VideoPlayer {
 		controls.SeekTo((int)(time * 1000));
 	}
 
-	public override void Play (){
+	public override void Play (){ // need a routine to play if not loaded.
 		base.Play ();
 		videoPlane.SetActive (true);
 		Diglbug.Log ("Play "+name, PrintStream.AUDIO_PLAYBACK);
@@ -76,8 +76,8 @@ public class MobileVideoPlayer : VideoPlayer {
 
 	public override void FadeOut(float time){
 		Diglbug.Log ("Fade out " + name + ", " + time, PrintStream.AUDIO_PLAYBACK);
-		Stop ();
-		fader.FadeVolumeTo (0f, time);
+//		Stop ();
+		fader.FadeVolumeTo (0f, time); // this will call Stop() for us
 	}
 
 	public override float GetTimeElapsed(){
@@ -110,41 +110,4 @@ public class MobileVideoPlayer : VideoPlayer {
 	}
 
 }
-
-
-
-
-//// #UNCONFIRMED whether this works or not.
-//public bool CallLoaded(){
-//	return mediaControls.GetCurrentState () == MediaPlayerCtrl.MEDIAPLAYER_STATE.READY;
-//}
-//
-//// This works. Was developed for the double video, but works for singles too.
-//public void LoadCall(string path){
-//	mediaControls.Stop ();
-//	mediaControls.UnLoad ();
-//	mediaControls.Load (path);
-//}
-//
-//public void PlayVideo(){
-//	mediaControls.Play ();
-//}
-//
-//// #UNCONFIRMED whether this works at all. Used to incorperate a one-off boolean flip for UNITY_EDITOR.
-//public void SeekTo(){
-//	mediaControls.SeekTo ((int)((4 * 60) + 16.2f) * 1000);
-//}
-//
-//// this seems dodgey
-//public bool CallPlaying(){
-//	MediaPlayerCtrl.MEDIAPLAYER_STATE v = mediaControls.GetCurrentState ();
-//	return (v != MediaPlayerCtrl.MEDIAPLAYER_STATE.END);
-//}
-//
-//public float GetCallProgress(){
-//	return (float) mediaControls.GetCurrentSeekPercent ();
-//}
-//
-//public float GetCallTimeElapsed(){
-//	return mediaControls.GetSeekPosition () * 0.001f;
-//}
+	

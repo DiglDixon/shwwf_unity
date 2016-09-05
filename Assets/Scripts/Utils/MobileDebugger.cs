@@ -25,7 +25,7 @@ public class MobileDebugger : MonoBehaviour{
 		bool encountered = false;
 		for (int k = 0; k < debugTexts.Length; k++) {
 			if (debugTexts [k].text.Contains (channel)) {
-				debugTexts [k].text = channel + ": " + message;
+				debugTexts [k].text = channel + ": " + message+"/"+Random.Range(1, 9);
 				encountered = true;
 				break;
 			}
