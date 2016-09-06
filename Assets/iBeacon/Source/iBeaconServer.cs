@@ -148,15 +148,11 @@ public class iBeaconServer : MonoBehaviour {
 		if (BluetoothState.GetBluetoothLEStatus() != BluetoothLowEnergyState.POWERED_ON) {
 			BluetoothState.EnableBluetooth();
 			if (BluetoothState.GetBluetoothLEStatus() != BluetoothLowEnergyState.POWERED_ON) {
-				Diglbug.LogMobile ("BLE!on "+BluetoothState.GetBluetoothLEStatus().ToString(), "BLE_ERROR");
-				return;
-//				throw new iBeaconException("Bluetooth is off and could not be enabled.");
+				throw new iBeaconException("Bluetooth is off and could not be enabled.");
 			}
 		}
 		if (!checkTransmissionSupported(shouldLog)) {
-			Diglbug.LogMobile ("BLE send unsupported", "BLE_ERROR");
-			return;
-//			throw new iBeaconException("This device does not support transmitting as a beacon.");
+			throw new iBeaconException("This device does not support transmitting as a beacon.");
 		}
 #if !UNITY_EDITOR
 		var sb = new StringBuilder(JsonUtility.ToJson(m_instance._region));
@@ -164,15 +160,11 @@ public class iBeaconServer : MonoBehaviour {
 		sb.Insert(sb.Length - 1, m_instance._txPower);
 	#if UNITY_IOS
 		if (!InitBeaconServer(sb.ToString(), shouldLog)) {
-			Diglbug.LogMobile ("Init failed", "BLE_ERROR");
-			return;
-//			throw new iBeaconException("Server initialization failed.");
+			throw new iBeaconException("Server initialization failed.");
 		}
 	#elif UNITY_ANDROID
 		if (!GetPlugin().Call<bool>("Init", sb.ToString(), shouldLog)) {
-			Diglbug.LogMobile ("Init failed", "BLE_ERROR");
-			return;
-//			throw new iBeaconException("Server initialization failed.");
+			throw new iBeaconException("Server initialization failed.");
 		}
 	#endif
 #endif

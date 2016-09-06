@@ -7,7 +7,7 @@ public class DesktopBluetoothManager : BluetoothManager{
 	public float latencyMax = 4f;
 	public bool holdingLatency = false;
 
-	protected override void SendSignal (Signal s){
+	public override void SendSignal (Signal s){
 		Beacon b = s.ToBeacon ();
 		currentSendingSignal = new Signal(b);
 		StartCoroutine (RunFakeReceiving ());

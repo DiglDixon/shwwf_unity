@@ -4,39 +4,54 @@ using UnityEngine;
 
 public class MobileBluetoothManager : BluetoothManager{
 
+	private Signature signature;
+
+	public PipeExample pipe;
+
 	protected override void Start(){
-		base.Start ();
-		SetServerRegionData (SignalUtils.NullSignal);
-		SetReceiverSignature (Signature.NONE);
-
 		iBeaconReceiver.BeaconRangeChangedEvent += BeaconFoundEvent;
-		BluetoothState.BluetoothStateChangedEvent += StateChangeEvent;
+//		BluetoothState.BluetoothStateChangedEvent += StateChangeEvent;
+	}
 
-		// this is untested for Android, but leaving it open to be able to work.
-		bool sendingSupported = iBeaconServer.checkTransmissionSupported ();
-		if (sendingSupported) {
-			InitialiseBluetoothPlugin ();
-		} else {
-			StartReceiving ();
-		}
+	public void EnableBluetooth(){
+		BluetoothState.EnableBluetooth();
 	}
 
 	public override void StartReceiving(){
-		iBeaconReceiver.Scan ();
+		Diglbug.LogMobile("Start rec", "PIPE");
+		pipe.Digl_Stop();
+		pipe.Digl_SetSwitch (BroadcastMode.receive);
+//		pipe.btn_changeUUID (
+//			"com.storybox.twwf16",
+//			SignalUtils.GetSignaureUUID (signature),
+//			"0",
+//			"0");
+//		pipe.Digl_SetBeacon(
+		pipe.Digl_Start ();
 	}
 
 	public override void StopSending(){
-		iBeaconServer.StopTransmit ();
+		Diglbug.LogMobile("Stop send", "PIPE");
+		pipe.Digl_Stop();
 	}
 
 	public override void StopReceiving(){
-		iBeaconReceiver.Stop ();
+		Diglbug.LogMobile("Stop rec", "PIPE");
+		pipe.Digl_Stop();
 	}
 
-	protected override void SendSignal(Signal s){
-		SetServerRegionData (s);
-		Diglbug.LogMobile ("RESTARTING "+s.GetSignature()+", "+s.GetPayload() , "BLE_PROC");
-		iBeaconServer.Restart ();
+	public override void SendSignal(Signal s){
+		Diglbug.LogMobile("Start send", "PIPE");
+		pipe.Digl_Stop ();
+//		pipe.btn_changeUUID (
+//			"com.storybox.twwf16",
+//			SignalUtils.GetSignaureUUID (signature),
+//			"13378",
+//			"13378");
+
+		pipe.Digl_SetBeacon (s.ToBeacon ());
+		pipe.Digl_SetSwitch (BroadcastMode.send);
+		pipe.Digl_Start ();
 		AutoAcceptOwnSignal (s);
 	}
 
@@ -44,32 +59,8 @@ public class MobileBluetoothManager : BluetoothManager{
 		FireBeaconFoundEvent (s);
 	}
 
-	public override void SetReceiverSignature(Signature s){
-		base.SetReceiverSignature (s);
-		Beacon b = new Beacon(SignalUtils.GetSignaureUUID(s), 0, 0);
-		iBeaconReceiver.regions = new iBeaconRegion[]{ new iBeaconRegion (regionName, b) };
-		iBeaconReceiver.Restart ();
-		Diglbug.LogMobile("RECEIVING "+s+":0,0", "BLE_REC_PROC");
-	}
-
-	private void SetServerRegionData(Signal s){
-		Diglbug.LogMobile (s.GetSignature()+" : "+s.GetPayload() , "BLE_DATA");
-		iBeaconRegion newRegion = new iBeaconRegion(regionName, s.ToBeacon ());
-		iBeaconServer.region = newRegion;
-	}
-
-	// This is our magic dance to get the bluetooth to initialise properly.
-	// Maybe a lazy-loading issue?
-	private void InitialiseBluetoothPlugin(){
-		Diglbug.LogMobile ("Supported: "+iBeaconServer.checkTransmissionSupported(), "BLE_SUPPORTED");
-		Diglbug.LogMobile ("startState: "+BluetoothState.GetBluetoothLEStatus().ToString(), "STATECHANGE_INIT");
-	}
-
-	public void StateChangeEvent(BluetoothLowEnergyState state){
-		Diglbug.LogMobile ("s:"+state.ToString(), "BLE_STATE");
-	}
-
 	public void BeaconFoundEvent(Beacon[] beacons){
+		Diglbug.LogMobile ("BeaconFoundEvent", "BFE");
 		for (int k = 0; k < beacons.Length; k++) {
 			int second = System.DateTime.Now.Second;
 			Diglbug.LogMobile ((beacons [k].minor-1).ToString()+"@"+second, "REC:"+(beacons [k].major-1).ToString ());
@@ -78,5 +69,6 @@ public class MobileBluetoothManager : BluetoothManager{
 		Signal[] signals = Array.ConvertAll(beacons, item => new Signal(item));
 		FireBeaconsFoundEvent (signals);
 	}
+
 
 }

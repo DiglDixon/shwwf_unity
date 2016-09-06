@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class BLE : ConstantSingleton<BLE>{
 
-	public BluetoothManager Manager{ get; private set; }
+
+	public BluetoothManager Manager;
 
 	public delegate void NewSignalFoundDelegate(Signal signal);
 	public NewSignalFoundDelegate NewSignalFoundEvent;
@@ -19,11 +20,12 @@ public class BLE : ConstantSingleton<BLE>{
 		GameObject managerObject;
 		#if UNITY_EDITOR
 		managerObject = GameObject.Instantiate(Resources.Load("Desktop_Bluetooth_Manager")) as GameObject;
-		#else
-		managerObject = GameObject.Instantiate(Resources.Load("Mobile_Bluetooth_Manager")) as GameObject;
-		#endif
 		managerObject.transform.SetParent(transform);
 		Manager = managerObject.GetComponent<BluetoothManager> ();
+		#endif
+//		#else
+//		managerObject = GameObject.Instantiate(Resources.Load("Mobile_Bluetooth_Manager")) as GameObject;
+//		#endif
 
 		lastSignals = new Signal[0];
 

@@ -24,11 +24,11 @@ public class SignalDebugger : MonoBehaviour{
 		options = new List<string>();
 		options.AddRange (Enum.GetNames (typeof(Payload)));
 		payloadDropdown.AddOptions(options);
-		#if !UNITY_EDITOR
-		bool sendSupported = iBeaconServer.checkTransmissionSupported ();
-		sendButton.interactable = sendSupported;
-		stopSendButton.interactable = sendSupported;
-		#endif
+//		#if !UNITY_EDITOR
+//		bool sendSupported = iBeaconServer.checkTransmissionSupported ();
+//		sendButton.interactable = sendSupported;
+//		stopSendButton.interactable = sendSupported;
+//		#endif
 
 		BLE.Instance.NewSignalFoundEvent += SignalReceivedEvent;
 	}
@@ -48,7 +48,8 @@ public class SignalDebugger : MonoBehaviour{
 	}
 
 	public void SendPressed(){
-		BLE.Instance.Manager.RequestSignalSend (GetSignalFromDropdowns());
+//		BLE.Instance.Manager.RequestSignalSend (GetSignalFromDropdowns());
+		BLE.Instance.Manager.SendSignal(GetSignalFromDropdowns());
 	}
 
 	public void StopSendingPressed(){
@@ -57,6 +58,10 @@ public class SignalDebugger : MonoBehaviour{
 
 	public void StopReceivingPressed(){
 		BLE.Instance.Manager.StopReceiving();
+	}
+
+	public void StartReceivingPressed(){
+		BLE.Instance.Manager.StartReceiving();
 	}
 
 	private Signal GetSignalFromDropdowns(){

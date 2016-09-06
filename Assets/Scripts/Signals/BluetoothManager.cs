@@ -108,7 +108,7 @@ public abstract class BluetoothManager : MonoBehaviour {
 		SendSignal (s);
 	}
 
-	protected abstract void SendSignal (Signal s);
+	public abstract void SendSignal (Signal s);
 
 	public virtual void SetReceiverSignature(Signature s){
 		currentSignature = s;
