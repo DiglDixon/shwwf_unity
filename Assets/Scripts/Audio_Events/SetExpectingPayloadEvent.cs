@@ -1,10 +1,10 @@
 ﻿
-public class SetExpectedPayloadEvent : CustomTrackTimeEvent{
+public class SetExpectingPayloadEvent : CustomTrackTimeEvent{
 
 	public Payload expectedPayload;
 
 	public override void CustomEvent (){
-		BLE.Instance.Manager.SetExpectedPayload (expectedPayload);
+		BLE.Instance.Manager.PayloadExpected (expectedPayload);
 	}
 
 	#if UNITY_EDITOR

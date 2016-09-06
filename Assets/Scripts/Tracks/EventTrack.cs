@@ -18,9 +18,17 @@ public abstract class EventTrack : AbstractTrack{
 		CustomTrackTimeEvent[] childEvents = GetComponentsInChildren<CustomTrackTimeEvent> ();
 		for (int k = 0; k < childEvents.Length; k++) {
 			if (childEvents [k].isStateEvent) {
-				AddStateEventAtTime (childEvents [k].CustomEvent, childEvents [k].occurAtTime);
+				if (childEvents [k].occurAtTimeFromEnd) {
+					AddStateEventAtTimeRemaining (childEvents [k].CustomEvent, childEvents [k].occurAtTime);
+				} else {
+					AddStateEventAtTime (childEvents [k].CustomEvent, childEvents [k].occurAtTime);
+				}
 			} else {
-				AddEventAtTime (childEvents [k].CustomEvent, childEvents [k].occurAtTime);
+				if (childEvents [k].occurAtTimeFromEnd) {
+					AddEventAtTime (childEvents [k].CustomEvent, childEvents [k].occurAtTime);
+				} else {
+					AddEventAtTimeRemaining (childEvents [k].CustomEvent, childEvents [k].occurAtTime);
+				}
 			}
 		}
 	}

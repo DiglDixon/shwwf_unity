@@ -62,17 +62,25 @@ public class TracklistPlayer : WrappedTrackOutput{
 		#endif
 	}
 
-	public void LoadNextTrack(){
+	public void LoadNextTrack(int ahead){
 		if (trackIndex < tracklist.entries.Length - 1) {
-			LoadTrack(GetNextTrack());
+			LoadTrack(GetNextTrack(ahead));
 		}
 	}
 
+	public void LoadNextTrack(){
+		LoadNextTrack (1);
+	}
+
 	public ITrack GetNextTrack(){
-		if (trackIndex >= tracklist.entries.Length-1) {
+		return GetNextTrack (1);
+	}
+
+	public ITrack GetNextTrack(int increment){
+		if (trackIndex >= tracklist.entries.Length-increment) {
 			return null;
 		} else {
-			return tracklist.entries [trackIndex + 1].GetTrack ();
+			return tracklist.entries [trackIndex + increment].GetTrack ();
 		}
 	}
 

@@ -7,6 +7,7 @@ public abstract class CustomTrackTimeEvent : MonoBehaviour{
 	public bool isStateEvent = false;
 	private float minimumOccurAtTime = 0.1f;
 	public float occurAtTime = 0.1f;
+	public bool occurAtTimeFromEnd = false;
 
 	#if UNITY_EDITOR
 	public bool updateName = false;

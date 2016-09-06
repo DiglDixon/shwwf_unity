@@ -6,8 +6,8 @@ public abstract class BluetoothManager : MonoBehaviour {
 	
 	protected string regionName = "com.storybox.shwwf";
 
-	private bool expectingSpecificPayload = false;
-	private Payload expectedPayload;
+	private bool expectingPayload = false;
+	private Payload upcomingPayload;
 
 	private Signature currentSignature;
 
@@ -15,6 +15,18 @@ public abstract class BluetoothManager : MonoBehaviour {
 
 	public delegate void SignalsReceivedDelegate(Signal[] s);
 	public event SignalsReceivedDelegate SignalsReceivedEvent;
+
+	public delegate void NewSignatureDelegate(Signature s);
+	public event NewSignatureDelegate NewSignatureEvent;
+
+	public delegate void NewUpcomingPayloadDelegate(Payload p);
+	public event NewUpcomingPayloadDelegate NewUpcomingPayloadEvent;
+
+	public delegate void ExpectedPayloadReadyDelegate(Payload p);
+	public event ExpectedPayloadReadyDelegate ExpectedPayloadReadyEvent;
+
+	public delegate void ExpectedPlayloadClearedDelegate();
+	public event ExpectedPlayloadClearedDelegate ExpectedPayloadClearedEvent;
 
 	public abstract void StopSending ();
 
@@ -31,23 +43,36 @@ public abstract class BluetoothManager : MonoBehaviour {
 		confirmationScreen = tools.unexpectedSignalConfirmationScreen;
 	}
 
-	public void SetExpectedPayload(Payload p){
+	public void SetUpcomingPayload(Payload p){
 		Diglbug.Log ("Set expected payload: " + p, PrintStream.SIGNALS);
-		expectingSpecificPayload = true;
-		expectedPayload = p;
+		upcomingPayload = p;
+		NewUpcomingPayloadEvent (p);
+	}
+
+	public void PayloadExpected(Payload p){
+//		if (p != upcomingPayload) {
+//			Diglbug.Log ("Warning: Demanded PayloadExpected with a payload that doesn't match upcomingPayload", PrintStream.SIGNALS);
+//			SetUpcomingPayload (p);
+//		}
+		expectingPayload = true;
+		if (ExpectedPayloadReadyEvent != null)
+			ExpectedPayloadReadyEvent (p);
 	}
 
 	public bool IsExpectingSpecificPayload(){
-		return expectingSpecificPayload;
+		return expectingPayload;
 	}
 	// This isn't entirely reliable - make sure to check IsExpectingSpecificPayload first.
 	public Payload GetExpectedPayload(){
-		return expectedPayload;
+		return upcomingPayload;
 	}
 
 	public void ClearExpectedPayload(){
 		Diglbug.Log ("Cleared expected payload", PrintStream.SIGNALS);
-		expectingSpecificPayload = false;
+		expectingPayload = false;
+		upcomingPayload = Payload.NONE;
+		if(ExpectedPayloadClearedEvent != null)
+			ExpectedPayloadClearedEvent ();
 	}
 
 	public void RequestPayloadSend(Payload p){
@@ -55,16 +80,16 @@ public abstract class BluetoothManager : MonoBehaviour {
 	}
 
 	public void SendExpectedPayload(){
-		if (expectingSpecificPayload) {
-			RequestSignalSend (new Signal (currentSignature, expectedPayload));
+		if (expectingPayload) {
+			RequestSignalSend (new Signal (currentSignature, upcomingPayload));
 		} else {
 			Diglbug.Log ("Requested SendExpectedPayload when not expecting!");
 		}
 	}
 
 	public void RequestSignalSend(Signal s){
-		if (expectingSpecificPayload) {
-			if (s.GetPayload () == expectedPayload) {
+		if (expectingPayload) {
+			if (s.GetPayload () == upcomingPayload) {
 				ClearExpectedAndSendSignal (s);
 			} else {
 				confirmationScreen.OpenWithAttemptedSignal (s);
@@ -87,6 +112,8 @@ public abstract class BluetoothManager : MonoBehaviour {
 
 	public virtual void SetReceiverSignature(Signature s){
 		currentSignature = s;
+		if (NewSignatureEvent != null)
+			NewSignatureEvent (currentSignature);
 	}
 
 	protected void FireBeaconsFoundEvent(Signal[] signals){
