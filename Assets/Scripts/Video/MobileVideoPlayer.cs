@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
@@ -41,7 +42,11 @@ public class MobileVideoPlayer : VideoPlayer {
 		mobileVideoTrack.controls.SeekTo((int)(time * 1000));
 	}
 
-	public override void Play (){ // need a routine to play if not loaded.
+	public override void Play (){
+		if(!mobileVideoTrack.IsLoaded()){ // This is firing every call.
+			mobileVideoTrack.Load ();
+			StartCoroutine ("RunWhenLoaded");
+		}
 		base.Play ();
 		mobileVideoTrack.controls.ActivatePlane ();
 		Diglbug.Log ("Play "+name, PrintStream.AUDIO_PLAYBACK);
@@ -50,8 +55,16 @@ public class MobileVideoPlayer : VideoPlayer {
 		SetSourceTime(0f);
 	}
 
+	private IEnumerator RunWhenLoaded(){ // This needs cancelling if no longer asked to play.
+		while (!mobileVideoTrack.IsLoaded ()) {
+			yield return null;
+		}
+		Play ();
+	}
+
 	public override void Stop(){
 		base.Stop ();
+		StopCoroutine ("RunWhenLoaded");
 		mobileVideoTrack.controls.DeactivatePlane ();
 		Diglbug.Log ("Stop "+name, PrintStream.AUDIO_PLAYBACK);
 		mobileVideoTrack.controls.Stop ();

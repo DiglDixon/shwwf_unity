@@ -14,7 +14,8 @@ public class BLE : ConstantSingleton<BLE>{
 
 	private PayloadEventSystem[] eventSystems;
 
-	protected void Start (){
+	protected override void Awake (){
+		base.Awake ();
 		GameObject managerObject;
 		#if UNITY_EDITOR
 		managerObject = GameObject.Instantiate(Resources.Load("Desktop_Bluetooth_Manager")) as GameObject;

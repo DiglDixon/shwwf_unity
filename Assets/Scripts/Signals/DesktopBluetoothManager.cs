@@ -45,10 +45,6 @@ public class DesktopBluetoothManager : BluetoothManager{
 		//
 	}
 
-	public override void SetReceiverSignature (Signature s){
-		//
-	}
-
 	public override void StopReceiving (){
 		//
 	}

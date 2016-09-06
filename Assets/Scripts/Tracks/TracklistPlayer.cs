@@ -38,7 +38,6 @@ public class TracklistPlayer : WrappedTrackOutput{
 		LoadTrack(tracklist.entries[0].GetTrack());
 		PlayTrackEntry (tracklist.entries[0]);
 		Pause ();
-//		display.Pause ();
 	}
 
 	private void SetTracklist(Tracklist t){
@@ -131,8 +130,6 @@ public class TracklistPlayer : WrappedTrackOutput{
 		if (index < tracklist.entries.Length) {
 			trackIndex = index;
 			TracklistEntry entry = tracklist.GetTrackEntryAtIndex (index);
-//			display.SetLoopingNote (entry);
-//			SetNextTrackDisplay (trackIndex + 1);
 			HandlePlayRequest (entry);
 		} else {
 			Diglbug.Log ("Refused to play track at invalid index: " + index);
@@ -148,11 +145,6 @@ public class TracklistPlayer : WrappedTrackOutput{
 		return -1;
 	}
 
-//	public void SetNextTrackDisplay(int index){
-//		TracklistEntry upcomingTracklistEntry = tracklist.GetTrackEntryAtIndex (index);
-////		display.SetUpcomingTrackDisplay(upcomingTracklistEntry);
-//	}
-
 	private void HandlePlayRequest(TracklistEntry entry){
 		float fadeTime = entry.GetEntranceFadeTime ();
 
@@ -164,11 +156,14 @@ public class TracklistPlayer : WrappedTrackOutput{
 			nextOutput = multiPlayer;
 			multiPlayer.SwitchTracks ();
 		}
+		if (entry is LoopingTracklistEntry) {
+			// don't clear the expected payload
+		} else {
+			BLE.Instance.Manager.ClearExpectedPayload ();
+		}
 		currentOutput = nextOutput;
 		currentOutput.SetTrack (entry.GetTrack());
 		currentOutput.FadeIn(fadeTime);
-
-//		display.ChangeTrackData (currentOutput);
 	}
 
 	private void LoopCurrentTrack(){

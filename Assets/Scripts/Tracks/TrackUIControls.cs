@@ -18,7 +18,7 @@ public class TrackUIControls : MonoBehaviour{
 	public Button nextTrackButton;
 	public Text nextTrackText;
 
-	public Text loopingNote;
+	public Text otherNotes;
 	public GameObject loadingNote;
 
 	private bool scrubbing = false;
@@ -28,6 +28,12 @@ public class TrackUIControls : MonoBehaviour{
 		if (currentOutput != null) {
 			if(currentTrack != currentOutput.GetTrack ()){
 				ChangeTrackData (currentOutput.GetTrack ());
+			}
+
+			if (BLE.Instance.Manager.IsExpectingSpecificPayload ()) {
+				otherNotes.text = "Expecting Bluetooth Cue: " + BLE.Instance.Manager.GetExpectedPayload ();
+			} else {
+				otherNotes.text = "";
 			}
 
 			trackSlider.UpdateDisplayValue(currentOutput.GetProgress ());
@@ -57,11 +63,11 @@ public class TrackUIControls : MonoBehaviour{
 		currentTrack = newTrack;
 		trackLengthText.text = Utils.AudioTimeFormat (currentOutput.GetTrack ().GetTrackLength ());
 		trackNameText.text = currentOutput.GetTrack ().GetTrackName ();
-		if (newTrack is LoopingTrack) {
-			loopingNote.text = "(Looping)";
-		} else {
-			loopingNote.text = "";
-		}
+//		if (newTrack is LoopingTrack) {
+//			loopingNote.text = "(Looping)";
+//		} else {
+//			loopingNote.text = "";
+//		}
 		SetUpcomingTrackDisplay (currentOutput.GetNextTrack ());
 	}
 

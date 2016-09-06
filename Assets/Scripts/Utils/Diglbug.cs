@@ -48,6 +48,9 @@ public static class Diglbug{
 	private static MobileDebugger mobileDebugger;
 
 	public static void LogMobile(string message, string channel){
+		if (!Variables.debugBuild) {
+			return;
+		}
 		if (mobileDebugger == null) {
 			GameObject obj = GameObject.Instantiate (Resources.Load ("Mobile_Debugger")) as GameObject;
 			obj.transform.SetAsLastSibling ();

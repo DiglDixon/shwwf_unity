@@ -16,6 +16,8 @@ public class MobileBluetoothManager : BluetoothManager{
 		bool sendingSupported = iBeaconServer.checkTransmissionSupported ();
 		if (sendingSupported) {
 			InitialiseBluetoothPlugin ();
+		} else {
+			StartReceiving ();
 		}
 	}
 
@@ -43,6 +45,7 @@ public class MobileBluetoothManager : BluetoothManager{
 	}
 
 	public override void SetReceiverSignature(Signature s){
+		base.SetReceiverSignature (s);
 		Beacon b = new Beacon(SignalUtils.GetSignaureUUID(s), 0, 0);
 		iBeaconReceiver.regions = new iBeaconRegion[]{ new iBeaconRegion (regionName, b) };
 		iBeaconReceiver.Restart ();

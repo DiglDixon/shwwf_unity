@@ -9,6 +9,7 @@ public abstract class BluetoothManager : MonoBehaviour {
 	private bool expectingSpecificPayload = false;
 	private Payload expectedPayload;
 
+	private Signature currentSignature;
 
 	private UnexpectedSignalConfirmation confirmationScreen;
 
@@ -49,6 +50,18 @@ public abstract class BluetoothManager : MonoBehaviour {
 		expectingSpecificPayload = false;
 	}
 
+	public void RequestPayloadSend(Payload p){
+		RequestSignalSend (new Signal (currentSignature, p));
+	}
+
+	public void SendExpectedPayload(){
+		if (expectingSpecificPayload) {
+			RequestSignalSend (new Signal (currentSignature, expectedPayload));
+		} else {
+			Diglbug.Log ("Requested SendExpectedPayload when not expecting!");
+		}
+	}
+
 	public void RequestSignalSend(Signal s){
 		if (expectingSpecificPayload) {
 			if (s.GetPayload () == expectedPayload) {
@@ -72,7 +85,9 @@ public abstract class BluetoothManager : MonoBehaviour {
 
 	protected abstract void SendSignal (Signal s);
 
-	public abstract void SetReceiverSignature(Signature s);
+	public virtual void SetReceiverSignature(Signature s){
+		currentSignature = s;
+	}
 
 	protected void FireBeaconsFoundEvent(Signal[] signals){
 		if (SignalsReceivedEvent != null) {

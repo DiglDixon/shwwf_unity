@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class ShowMode : ConstantSingleton<ShowMode>{
 
+	public Mode startingMode;
 	private Mode mode;
 
 	public Signature Signature{ get; set; }
@@ -10,6 +11,7 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 	private Mode[] possibleModes;
 
 	protected void Start(){
+		mode = startingMode;
 		possibleModes = GetComponentsInChildren<Mode> ();
 		SceneManager.sceneLoaded += NewSceneLoaded;
 	}
