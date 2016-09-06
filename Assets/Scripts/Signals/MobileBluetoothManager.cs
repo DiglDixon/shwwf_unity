@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 
@@ -8,9 +9,38 @@ public class MobileBluetoothManager : BluetoothManager{
 
 	public PipeExample pipe;
 
+	private bool validateReady = false;
+
 	protected override void Start(){
 		iBeaconReceiver.BeaconRangeChangedEvent += BeaconFoundEvent;
-//		BluetoothState.BluetoothStateChangedEvent += StateChangeEvent;
+		BluetoothState.BluetoothStateChangedEvent += StateChangeEvent;
+		#if !UNITY_EDITOR
+		StartCoroutine(ValidateBluetooth());
+		#endif
+	}
+
+	private void StateChangeEvent(BluetoothLowEnergyState state){
+		Debug.Log ("State changed: " + state);
+		validateReady = state == BluetoothLowEnergyState.POWERED_ON;
+	}
+
+	private IEnumerator ValidateBluetooth(){
+		// this triggers the permission dialog
+		float validateTimeoutMax = 10f;
+		float time = 0f;
+		while (time < validateTimeoutMax) {
+			time += Time.deltaTime;
+			if (validateReady) {
+				Debug.Log ("Running validation...");
+				StartReceiving();
+//				StopReceiving (); // commenting this out for now, so we don't have to init for DM
+				break;
+			}
+			yield return null;
+		}
+		if (time >= validateTimeoutMax) {
+			Debug.Log ("Validation timed out.");
+		}
 	}
 
 	public void EnableBluetooth(){
@@ -21,12 +51,7 @@ public class MobileBluetoothManager : BluetoothManager{
 		Diglbug.LogMobile("Start rec", "PIPE");
 		pipe.Digl_Stop();
 		pipe.Digl_SetSwitch (BroadcastMode.receive);
-//		pipe.btn_changeUUID (
-//			"com.storybox.twwf16",
-//			SignalUtils.GetSignaureUUID (signature),
-//			"0",
-//			"0");
-//		pipe.Digl_SetBeacon(
+		// The null beacon is set 
 		pipe.Digl_Start ();
 	}
 
@@ -43,12 +68,6 @@ public class MobileBluetoothManager : BluetoothManager{
 	public override void SendSignal(Signal s){
 		Diglbug.LogMobile("Start send", "PIPE");
 		pipe.Digl_Stop ();
-//		pipe.btn_changeUUID (
-//			"com.storybox.twwf16",
-//			SignalUtils.GetSignaureUUID (signature),
-//			"13378",
-//			"13378");
-
 		pipe.Digl_SetBeacon (s.ToBeacon ());
 		pipe.Digl_SetSwitch (BroadcastMode.send);
 		pipe.Digl_Start ();

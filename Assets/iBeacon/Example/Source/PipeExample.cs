@@ -18,10 +18,6 @@ public class PipeExample : MonoBehaviour {
 
 	private BroadcastMode bm_Mode;
 
-	private BroadcastState bs_State;
-
-	private int i_BeaconCounter = 0;
-
 	// Receive
 	private List<Beacon> mybeacons = new List<Beacon>();
 
@@ -126,7 +122,6 @@ public class PipeExample : MonoBehaviour {
 				iBeaconServer.Transmit();
 				Debug.Log ("It is on, go sending");
 			}
-			bs_State = BroadcastState.active;
 		} else {
 			if (bm_Mode == BroadcastMode.receive) {// Stop for receive
 				iBeaconReceiver.Stop();
@@ -134,7 +129,6 @@ public class PipeExample : MonoBehaviour {
 			} else { // Stop for send
 				iBeaconServer.StopTransmit();
 			}
-			bs_State = BroadcastState.inactive;
 		}
 	}
 
