@@ -6,6 +6,7 @@ public class AudienceMode : Mode{
 
 	private Signature signature;
 
+	public Canvas canvas;
 	public UILightbox welcomeLightbox;
 
 	public override string ModeName {
@@ -19,13 +20,17 @@ public class AudienceMode : Mode{
 	}
 
 	public override void ModeDeselected (){
+		canvas.gameObject.SetActive (false);
 		StopCoroutine ("RunBeginShowRoutine");
+		BLE.Instance.Manager.StopReceiving ();
 	}
 
 	public override void ModeSelected (){
+		canvas.gameObject.SetActive (true);
 		Diglbug.Log ("Welcome to the show, Audience Member");
 		welcomeLightbox.Open ();
 		StartCoroutine ("RunBeginShowRoutine");
+		BLE.Instance.Manager.StartReceiving ();
 	}
 
 	private IEnumerator RunBeginShowRoutine(){

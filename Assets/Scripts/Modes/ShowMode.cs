@@ -4,21 +4,21 @@ using UnityEngine.SceneManagement;
 public class ShowMode : ConstantSingleton<ShowMode>{
 
 	public Mode startingMode;
-	private Mode mode;
+	public Mode Mode{ get; private set; }
 
 	public Signature Signature{ get; set; }
 
 	private Mode[] possibleModes;
 
 	protected void Start(){
-		mode = startingMode;
+		Mode = startingMode;
 		possibleModes = GetComponentsInChildren<Mode> ();
 		SceneManager.sceneLoaded += NewSceneLoaded;
 	}
 
 	private void NewSceneLoaded(Scene scene, LoadSceneMode loadMode){
 		Diglbug.Log ("New scene begins: " + scene.name, PrintStream.SCENES);
-		mode.NewSceneLoaded (scene);
+		Mode.NewSceneLoaded (scene);
 	}
 
 	private void Update(){
@@ -72,11 +72,11 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 	}
 
 	private void SetCurrentMode(Mode m){
-		if (mode != null) {
-			mode.ModeDeselected ();
+		if (Mode != null) {
+			Mode.ModeDeselected ();
 		}
-		mode = m;
-		mode.ModeSelected ();
+		Mode = m;
+		Mode.ModeSelected ();
 	}
 
 }

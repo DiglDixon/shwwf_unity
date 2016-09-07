@@ -4,11 +4,8 @@ public class WaitForStartSetupStep : SetupStep{
 
 	private bool startSignalFound = false;
 
-	protected override void Update (){
-		base.Update ();
-		if (Input.GetKeyDown (KeyCode.G)) {
-			startSignalFound = true;
-		}
+	public void FinishSetupReceived(){
+		startSignalFound = true;
 	}
 
 	protected override bool SetupCompleteCondition (){

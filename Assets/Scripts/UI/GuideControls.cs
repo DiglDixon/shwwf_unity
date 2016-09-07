@@ -8,6 +8,12 @@ public class GuideControls : MonoBehaviour{
 	public Text cueStatusText;
 	public Button sendExpectedButton;
 
+	public ActSet actSet;
+	private Act act;
+
+	public Slider actProgressSlider;
+	public Slider markerSlider;
+
 	private Payload previousPayload;
 
 	private void OnEnable(){
@@ -15,6 +21,8 @@ public class GuideControls : MonoBehaviour{
 		BLE.Instance.Manager.ExpectedPayloadReadyEvent += ExpectedPayloadBeings;
 		BLE.Instance.Manager.NewSignatureEvent += SignatureUpdated;
 		BLE.Instance.Manager.NewUpcomingPayloadEvent += UpcomingPayloadChanged;
+
+		actSet.ActChangedEvent += ActChanged;
 	}
 
 	private void OnDisable(){
@@ -22,6 +30,20 @@ public class GuideControls : MonoBehaviour{
 		BLE.Instance.Manager.ExpectedPayloadReadyEvent -= ExpectedPayloadBeings;
 		BLE.Instance.Manager.NewSignatureEvent -= SignatureUpdated;
 		BLE.Instance.Manager.NewUpcomingPayloadEvent -= UpcomingPayloadChanged;
+
+		actSet.ActChangedEvent -= ActChanged;
+	}
+
+	private void ActChanged(Act a){
+		act = a;
+		markerSlider.value = act.GetProgressForLastTrack ();
+		// modify the positions.
+	}
+
+	private void Update(){
+		if (act != null) {
+			actProgressSlider.value = act.GetProgress();
+		}
 	}
 
 	private void UpcomingPayloadChanged(Payload p){
@@ -45,25 +67,5 @@ public class GuideControls : MonoBehaviour{
 	private void SignatureUpdated(Signature s){
 		// nothing yet.
 	}
-
-//	private void Update(){
-//		if (BLE.Instance.Manager.IsExpectingSpecificPayload ()) {
-//			previousPayload = BLE.Instance.Manager.GetExpectedPayload ();
-//			upcomingCueText.text = previousPayload.ToString ();
-//
-//			sendExpectedButton.interactable = true;
-//		} else {
-//			string[] names = Enum.GetNames(typeof(Payload));
-//			if(((int)previousPayload) < names.Length-1){
-//				upcomingCueText.text = names[((int)previousPayload)+1];
-//				cueStatusText.text = "Not ready to send cue.";
-//			}else{
-//				upcomingCueText.text = "";
-//				cueStatusText.text = "No more cues remaining";
-//			}
-////			upcomingCueText.text = "(not expecting any cues yet";
-//			sendExpectedButton.interactable = false;
-//		}
-//	}
 
 }

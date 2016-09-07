@@ -5,7 +5,7 @@ public abstract class PayloadEventAction : MonoBehaviour{
 	public abstract void FireEvent(Signal s);
 
 	protected virtual string GetGameObjectName(){
-		return "unnamed event";
+		return this.GetType().ToString()+" event";
 	}
 
 	private void UpdateName(){

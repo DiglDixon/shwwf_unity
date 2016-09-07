@@ -11,6 +11,9 @@ public class ActSet : EnsurePayloadsInChildren<Act>{
 
 	public TracklistPlayer player;
 
+	public delegate void ActChangedDelegate(Act newAct);
+	public event ActChangedDelegate ActChangedEvent;
+
 	private void Awake(){
 		acts = GetComponentsInChildren<Act> ();
 	}
@@ -21,12 +24,6 @@ public class ActSet : EnsurePayloadsInChildren<Act>{
 
 	private void OnDisable(){
 		player.NewTrackBeginsEvent -= TrackBegins;
-	}
-
-	private void Update(){
-		if (currentAct != null) {
-			Diglbug.Log ("Act progress: " + currentAct.GetProgress ());
-		}
 	}
 
 	public void TrackBegins(ITrack track){
@@ -46,6 +43,10 @@ public class ActSet : EnsurePayloadsInChildren<Act>{
 
 	private void ChangeAct(Act act){
 		currentAct = act;
+		currentAct.Begin ();
+		if (ActChangedEvent != null) {
+			ActChangedEvent (currentAct);
+		}
 	}
 
 }

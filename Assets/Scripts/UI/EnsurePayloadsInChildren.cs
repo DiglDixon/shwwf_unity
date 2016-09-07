@@ -20,6 +20,7 @@ public class EnsurePayloadsInChildren<T> : MonoBehaviour where T : EnsurePayload
 		for (int k = 0; k < payloadCount; k++) {
 			e = GetExistingPayloadInArray ((Payload)k, existing);
 			if(e != null){
+				e.UpdateName ();
 			}else{
 				GameObject newChild = new GameObject ();
 				newChild.transform.SetParent (transform);

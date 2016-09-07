@@ -76,18 +76,26 @@ public abstract class BluetoothManager : MonoBehaviour {
 	}
 
 	public void RequestPayloadSend(Payload p){
-		RequestSignalSend (new Signal (currentSignature, p));
+		RequestSendSignal (new Signal (currentSignature, p));
+	}
+
+	public void ForceSendPayload(Payload p){
+		SendSignal (new Signal (currentSignature, p));
 	}
 
 	public void SendExpectedPayload(){
 		if (expectingPayload) {
-			RequestSignalSend (new Signal (currentSignature, upcomingPayload));
+			RequestSendSignal (new Signal (currentSignature, upcomingPayload));
 		} else {
 			Diglbug.Log ("Requested SendExpectedPayload when not expecting!");
 		}
 	}
 
-	public void RequestSignalSend(Signal s){
+	public void RequestSendPayload(Payload p){
+		RequestSendSignal(new Signal(currentSignature, p));
+	}
+
+	public void RequestSendSignal(Signal s){
 		if (expectingPayload) {
 			if (s.GetPayload () == upcomingPayload) {
 				ClearExpectedAndSendSignal (s);
