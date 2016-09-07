@@ -14,6 +14,10 @@ public abstract class TracklistEntry : ListEntry{
 		return track;
 	}
 
+	public virtual float GetTrackLength(){
+		return GetTrack ().GetTrackLength ();
+	}
+
 	public string GetDisplayName(){
 		return track.GetTrackName ();
 	}

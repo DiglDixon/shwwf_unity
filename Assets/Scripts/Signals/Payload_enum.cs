@@ -2,6 +2,7 @@
 
 public enum Payload{
 	NONE, // this has significance as a "null".
+	BEGIN_SHOW,
 	HAMBURGER,
 	CROSS_ROAD,
 	DUANJUN,
@@ -13,5 +14,6 @@ public enum Payload{
 	BAI_ROOM,
 	FIND_YU_PINGFAN,
 	GUANXINTAI,
-	FIND_LETTER
+	FIND_LETTER,
+	BLUETOOTH_TEST
 }

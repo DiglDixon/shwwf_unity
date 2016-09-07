@@ -13,10 +13,6 @@ public class Tracklist : MonoBehaviour{
 		InitialiseEntries ();
 	}
 
-//	public void AddTimeRemainingEventToEntries<T>(EventTrack.TrackEventDelegate function, float time){
-////		for(int k = 0;
-//	}
-
 	private void InitialiseEntries(){
 		for (int k = 0; k < entries.Length; k++) {
 			entries [k].FetchTrack ();

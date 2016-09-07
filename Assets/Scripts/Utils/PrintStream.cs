@@ -13,5 +13,6 @@ public enum PrintStream {
 	SIGNALS,
 	UI,
 	PRINT_STREAMS,
+	ACTS,
 	MISC
 };

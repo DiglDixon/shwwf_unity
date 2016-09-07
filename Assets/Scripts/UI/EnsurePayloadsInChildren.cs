@@ -13,7 +13,6 @@ public class EnsurePayloadsInChildren<T> : MonoBehaviour where T : EnsurePayload
 		update = false;
 
 		T[] existing = GetComponentsInChildren<T> ();
-		Debug.Log("Found "+existing.Length+" existing children");
 		T e = default(T);
 
 		int payloadCount = Enum.GetNames (typeof(Payload)).Length;
@@ -21,20 +20,16 @@ public class EnsurePayloadsInChildren<T> : MonoBehaviour where T : EnsurePayload
 		for (int k = 0; k < payloadCount; k++) {
 			e = GetExistingPayloadInArray ((Payload)k, existing);
 			if(e != null){
-				Debug.Log ("Found existing "+((Payload)k)+", all good: " + e.name);
-				// all good, we'll trigger their rename
-				e.SetPayload(e.GetPayload());
-				e.UpdateName();
-				e.transform.SetSiblingIndex (k);
 			}else{
 				GameObject newChild = new GameObject ();
 				newChild.transform.SetParent (transform);
 				T newChildComponent = newChild.AddComponent<T> ();
 				newChildComponent.SetPayload((Payload)k);
-				newChildComponent.UpdateName ();
-				Debug.Log ("Adding new: " + newChild.name);
+				newChildComponent.UpdateName();
+				newChild.transform.SetSiblingIndex (k);
 			}
 		}
+
 
 		for (int k = payloadCount; k < existing.Length; k++) {
 			existing[k].gameObject.name = "__UNUSED";

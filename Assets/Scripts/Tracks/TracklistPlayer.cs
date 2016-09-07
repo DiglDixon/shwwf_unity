@@ -14,12 +14,13 @@ public class TracklistPlayer : WrappedTrackOutput{
 
 	private TrackOutput currentOutput;
 
-	public TrackUIControls display;
-
 	private List<ITrack> loadedTracks = new List<ITrack> ();
 
 	public Tracklist tracklist;
 	private int trackIndex = 0;
+
+	public delegate void NewTrackBeginsDelegate (ITrack track);
+	public event NewTrackBeginsDelegate NewTrackBeginsEvent;
 
 	private void Awake(){
 		currentOutput = multiPlayer;
@@ -35,10 +36,19 @@ public class TracklistPlayer : WrappedTrackOutput{
 		SetTracklist (tracklist);
 
 		// This is a poor way to make sure some variables get initialised so we can use our controls logically off the bat.
+		StartCoroutine(RunStartupRoutine());
+	}
+
+	private IEnumerator RunStartupRoutine(){
+		yield return new WaitForSeconds (0.5f);
 		LoadTrack(tracklist.entries[0].GetTrack());
 		PlayTrackEntry (tracklist.entries[0]);
 		Pause ();
 	}
+
+//	private IEnumerator RunSetupRountine(){
+//		yield return new WaitForSeconds (0.5f);
+//	}
 
 	private void SetTracklist(Tracklist t){
 		this.tracklist = t;
@@ -172,7 +182,14 @@ public class TracklistPlayer : WrappedTrackOutput{
 		currentOutput = nextOutput;
 		currentOutput.SetTrack (entry.GetTrack());
 		currentOutput.FadeIn(fadeTime);
+		if (NewTrackBeginsEvent != null) {
+			NewTrackBeginsEvent (entry.GetTrack ());
+		}
 	}
+
+//	public ITrack GetCurrentTrack(){
+//		return currentOutput.GetTrack ();
+//	}
 
 	private void LoopCurrentTrack(){
 		LoopingTracklistEntry looingEntry = (LoopingTracklistEntry) tracklist.GetTrackEntryAtIndex (trackIndex);
