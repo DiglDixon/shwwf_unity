@@ -1,22 +1,33 @@
 ﻿using UnityEngine;
 
-[RequireComponent (typeof(Tracklist))]
-public class Act : MonoBehaviour{
+public class Act : EnsurePayloadChild{
 
 	public string ActName;
-	public Tracklist tracklist;
+	private EventTracklistEntry[] actEntries;
 
-	public void Begin(){
+	public TracklistPlayer player;
 
+	public Payload entryPayload;
+
+	private void Start(){
+		actEntries = GetComponentsInChildren<EventTracklistEntry> ();
 	}
 
+	public void BeginAct(){
+		player.PlayTrackEntry (actEntries [0]);
+	}
 
-	/* Need:
-	 * - Some sort of GetLength() and Skip()
-	 * - Need to be careful of state events when skipping.
-	 * 
-	 * An ActPlayer.
-	 * 
-	 * */
+	public override void SetPayload(Payload p){
+		entryPayload = p;
+	}
+
+	public override Payload GetPayload(){
+		return entryPayload;
+	}
+
+	protected override string GetNameString (){
+		return "Act_" + entryPayload.ToString ();
+	}
+
 
 }

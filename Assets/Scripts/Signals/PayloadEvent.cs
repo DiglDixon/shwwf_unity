@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PayloadEvent : ListEntry {
+public class PayloadEvent : EnsurePayloadChild {
 
 	public Payload payload;
 	private PayloadEventAction[] actions;
@@ -10,19 +10,24 @@ public class PayloadEvent : ListEntry {
 		actions = GetComponentsInChildren<PayloadEventAction> ();
 	}
 
-	public void SetPayload(Payload p){
+	public override void SetPayload(Payload p){
 		payload = p;
 		transform.SetSiblingIndex ((int)payload);
 		UpdateName ();
 	}
 
-	private void UpdateName(){
-		int eventCount = GetComponentsInChildren<PayloadEventAction> ().Length;
-		gameObject.name = "("+eventCount+") "+payload.ToString ()+" event";
+	public override Payload GetPayload(){
+		return payload;
 	}
 
-	private void OnValidate(){
-		SetPayload (payload);
+	public void AddComponentToObject(GameObject go){
+		go.AddComponent(this.GetType());
+
+	}
+
+	protected override string GetNameString(){
+		int eventCount = GetComponentsInChildren<PayloadEventAction> ().Length;
+		return "("+eventCount+") "+payload.ToString ()+" event";
 	}
 
 	public void FireEvents(Signal s){
@@ -31,11 +36,11 @@ public class PayloadEvent : ListEntry {
 		}
 	}
 
-	public override GameObject ConstructListObject (){
-		GameObject ret = GameObject.Instantiate(Resources.Load("Payload_Entry_List_Item")) as GameObject;
-		PayloadEntryListDisplayItem display = ret.GetComponent<PayloadEntryListDisplayItem> ();
-		display.SetPayload (payload);
-		return ret;
-	}
+//	public override GameObject ConstructListObject (){
+//		GameObject ret = GameObject.Instantiate(Resources.Load("Payload_Entry_List_Item")) as GameObject;
+//		PayloadEntryListDisplayItem display = ret.GetComponent<PayloadEntryListDisplayItem> ();
+//		display.SetPayload (payload);
+//		return ret;
+//	}
 
 }
