@@ -18,13 +18,13 @@
 		}
 	}
 
-	public static string DirectorMode{
+	public static string Director{
 		get{
 			return "director";
 		}
 	}
 
-	public static string ActorMode{
+	public static string Actor{
 		get{
 			return "actor";
 		}

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ActSet : EnsurePayloadsInChildren<Act>{
+public class ActSet : EnsureDefinedActsInChildren<ShowAct>{
 
 	private Act[] acts = new Act[0];
 
@@ -14,9 +14,13 @@ public class ActSet : EnsurePayloadsInChildren<Act>{
 	public delegate void ActChangedDelegate(Act newAct);
 	public event ActChangedDelegate ActChangedEvent;
 
+	public delegate void ActEndsDelegate(Act actEnded);
+	public event ActEndsDelegate ActEndsEvent;
+
 	private void Awake(){
 		acts = GetComponentsInChildren<Act> ();
 	}
+
 
 	private void OnEnable(){
 		player.NewTrackBeginsEvent += TrackBegins;
@@ -43,7 +47,7 @@ public class ActSet : EnsurePayloadsInChildren<Act>{
 
 	private void ChangeAct(Act act){
 		currentAct = act;
-		currentAct.Begin ();
+		currentAct.ActChangedTo ();
 		if (ActChangedEvent != null) {
 			ActChangedEvent (currentAct);
 		}

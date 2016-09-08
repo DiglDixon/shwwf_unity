@@ -6,6 +6,8 @@ using System.Collections.Generic;
 public class PayloadEventSystem : EnsurePayloadsInChildren<PayloadEvent> {
 
 	private PayloadEvent[] payloadEvents;
+	public delegate void ExternallyDefinedDelegate(Signal s);
+	public event ExternallyDefinedDelegate ExternallyDefinedEvent;
 
 	private void Start(){
 		payloadEvents = GetComponentsInChildren<PayloadEvent> ();
@@ -17,6 +19,11 @@ public class PayloadEventSystem : EnsurePayloadsInChildren<PayloadEvent> {
 	
 	public void HandleNewSignal(Signal s){
 		payloadEvents [(int)s.GetPayload ()].FireEvents (s);
+		if (ExternallyDefinedEvent != null) {
+			ExternallyDefinedEvent (s);
+		}
 	}
+
+
 
 }

@@ -36,7 +36,7 @@ public class GuideControls : MonoBehaviour{
 
 	private void ActChanged(Act a){
 		act = a;
-		markerSlider.value = act.GetProgressForLastTrack ();
+		markerSlider.value = act.GetLastTrackStartProgress ();
 		// modify the positions.
 	}
 

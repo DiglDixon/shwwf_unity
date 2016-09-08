@@ -58,6 +58,7 @@ public static class Diglbug{
 		}
 		mobileDebugger.LogMessage (message, channel);
 	}
-
+		
+	// A polling-reminder would be cool. For things like temp keydowns. Pings every interval if available.
 
 }

@@ -113,14 +113,13 @@ public abstract class EventTrack : AbstractTrack{
 
 	#if UNITY_EDITOR
 	public void UpdateName(){
-		OnValidate ();
-	}
-
-	private void OnValidate()
-	{
 		updateName = false;
 		CustomTrackTimeEvent[] customEvents = GetComponentsInChildren<CustomTrackTimeEvent> ();
 		gameObject.name = "("+customEvents.Length+") "+GetTrackName ();
+	}
+
+	private void OnValidate(){
+		UpdateName ();
 	}
 	#endif
 

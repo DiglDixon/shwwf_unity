@@ -3,15 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class DirectorMode : Mode{
 
+	private string modeName = "director";
 
 	public override string ModeName {
 		get{
-			return "director";
+			return modeName;
 		}
 	}
 
 	public override void ModeSelected (){
-		SceneManager.LoadScene (Scenes.DirectorMode);
+		BeginShow ();
 	}
 
 	public override void ModeDeselected (){
@@ -19,7 +20,7 @@ public class DirectorMode : Mode{
 	}
 
 	public override void BeginShow (){
-
+		SceneManager.LoadScene (Scenes.Director);
 	}
 
 	public override void NewSceneLoaded (Scene scene){

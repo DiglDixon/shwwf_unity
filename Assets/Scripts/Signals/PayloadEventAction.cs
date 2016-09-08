@@ -2,6 +2,7 @@
 
 public abstract class PayloadEventAction : MonoBehaviour{
 
+	public bool updateName;
 	public abstract void FireEvent(Signal s);
 
 	protected virtual string GetGameObjectName(){
@@ -13,6 +14,7 @@ public abstract class PayloadEventAction : MonoBehaviour{
 	}
 
 	private void OnValidate(){
+		updateName = false;
 		UpdateName ();
 	}
 

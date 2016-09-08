@@ -22,6 +22,9 @@ public class TracklistPlayer : WrappedTrackOutput{
 	public delegate void NewTrackBeginsDelegate (ITrack track);
 	public event NewTrackBeginsDelegate NewTrackBeginsEvent;
 
+	public delegate void TrackEndsDelegate (ITrack track);
+	public event TrackEndsDelegate TrackEndsEvent;
+
 	private void Awake(){
 		currentOutput = multiPlayer;
 	}
@@ -34,21 +37,14 @@ public class TracklistPlayer : WrappedTrackOutput{
 
 	protected void Start(){
 		SetTracklist (tracklist);
-
-		// This is a poor way to make sure some variables get initialised so we can use our controls logically off the bat.
-		StartCoroutine(RunStartupRoutine());
+//		PrepareTrack(tracklist.entries[0]);
 	}
 
-	private IEnumerator RunStartupRoutine(){
-		yield return new WaitForSeconds (0.5f);
-		LoadTrack(tracklist.entries[0].GetTrack());
-		PlayTrackEntry (tracklist.entries[0]);
+	public void PrepareTrack(TracklistEntry entry){
+		LoadTrack(entry.GetTrack());
+		PlayTrackEntry (entry);
 		Pause ();
 	}
-
-//	private IEnumerator RunSetupRountine(){
-//		yield return new WaitForSeconds (0.5f);
-//	}
 
 	private void SetTracklist(Tracklist t){
 		this.tracklist = t;
@@ -115,9 +111,13 @@ public class TracklistPlayer : WrappedTrackOutput{
 		}
 	}
 
-	public void UnloadAllTracks(){
+	public void UnloadAllTracksExcept(ITrack protectedTrack){
 		for (int i = loadedTracks.Count-1; i >= 0; i--) {
-			UnloadTrack (loadedTracks [i]);
+			if (loadedTracks[i] != protectedTrack) {
+				UnloadTrack (loadedTracks [i]);
+			} else {
+				Diglbug.Log ("Protected track " + protectedTrack.GetTrackName() + " from UnloadAllTracks");
+			}
 		}
 	}
 
@@ -127,8 +127,8 @@ public class TracklistPlayer : WrappedTrackOutput{
 			if (IsExpectedIndex (requestedIndex)) {
 				PlayTrackEntryAtIndex (requestedIndex);
 			} else {
-				Diglbug.Log ("Detected unorthodox track request - unloading previously loaded tracks", PrintStream.MEDIA_LOAD);
-				UnloadAllTracks ();
+				Diglbug.Log ("Detected unorthodox track request ("+requestedIndex+") - unloading previously loaded tracks", PrintStream.MEDIA_LOAD);
+				UnloadAllTracksExcept (entry.GetTrack());
 				PlayTrackEntryAtIndex (requestedIndex);
 			}
 		} else {
@@ -179,6 +179,10 @@ public class TracklistPlayer : WrappedTrackOutput{
 		} else {
 			BLE.Instance.Manager.ClearExpectedPayload ();
 		}
+		// This even fires as the track is fading out, not strictly as it ends. Good enough for our purposes.
+		if (TrackEndsEvent != null) {
+			TrackEndsEvent (currentOutput.GetTrack ());
+		}
 		currentOutput = nextOutput;
 		currentOutput.SetTrack (entry.GetTrack());
 		currentOutput.FadeIn(fadeTime);
@@ -186,10 +190,6 @@ public class TracklistPlayer : WrappedTrackOutput{
 			NewTrackBeginsEvent (entry.GetTrack ());
 		}
 	}
-
-//	public ITrack GetCurrentTrack(){
-//		return currentOutput.GetTrack ();
-//	}
 
 	private void LoopCurrentTrack(){
 		LoopingTracklistEntry looingEntry = (LoopingTracklistEntry) tracklist.GetTrackEntryAtIndex (trackIndex);

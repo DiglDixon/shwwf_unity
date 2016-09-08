@@ -4,8 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class AudienceMode : Mode{
 
-	private Signature signature;
-
 	public Canvas canvas;
 	public UILightbox welcomeLightbox;
 
@@ -38,14 +36,6 @@ public class AudienceMode : Mode{
 		BeginShow ();
 		yield return new WaitForSeconds (1f);
 		welcomeLightbox.Close ();
-	}
-
-	public void SetSignature(Signature s){
-		signature = s;
-	}
-
-	public bool AcceptsSignal(Signal s){
-		return s.GetSignature() == signature;
 	}
 
 	public override void NewSceneLoaded (UnityEngine.SceneManagement.Scene scene){

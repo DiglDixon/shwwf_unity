@@ -14,5 +14,6 @@ public enum PrintStream {
 	UI,
 	PRINT_STREAMS,
 	ACTS,
+	ACTORS,
 	MISC
 };
