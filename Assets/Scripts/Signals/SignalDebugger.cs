@@ -44,11 +44,10 @@ public class SignalDebugger : MonoBehaviour{
 	public void SetReceiveDataPressed(){
 		Signal s = GetSignalFromDropdowns ();
 		recDataText.text = "REC DATA: " + s.GetSignature ();
-		BLE.Instance.Manager.SetReceiverSignature (s.GetSignature());
+		BLE.Instance.Manager.SetReceivedSignature (s.GetSignature());
 	}
 
 	public void SendPressed(){
-//		BLE.Instance.Manager.RequestSignalSend (GetSignalFromDropdowns());
 		BLE.Instance.Manager.SendSignal(GetSignalFromDropdowns());
 	}
 
@@ -61,6 +60,7 @@ public class SignalDebugger : MonoBehaviour{
 	}
 
 	public void StartReceivingPressed(){
+		BLE.Instance.Manager.SetReceivedSignature ((Signature)signatureDropdown.value);
 		BLE.Instance.Manager.StartReceiving();
 	}
 

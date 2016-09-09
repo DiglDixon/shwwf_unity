@@ -9,6 +9,14 @@ public static class SignalUtils{
 		}
 	}
 
+	public static Signature[] GetAllSignatures (){
+		Signature[] ret = new Signature[Enum.GetValues(typeof(Signature)).Length];
+		for(int k = 0; k<ret.Length; k++){
+			ret[k] = (Signature)k;
+		}
+		return ret;
+	}
+
 	private static readonly string[] uuids = {
 		"5ff99f07-d609-4553-9dfb-37028ebd49bc",
 		"ea742c3c-3497-4cd6-a6c6-a276408cb4cf",

@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class MobileBluetoothManager : BluetoothManager{
 
-	private Signature signature;
-
 	public PipeExample pipe;
 
 	private bool validateReady = false;
@@ -68,7 +66,7 @@ public class MobileBluetoothManager : BluetoothManager{
 	public override void SendSignal(Signal s){
 		Diglbug.LogMobile("Start send", "PIPE");
 		pipe.Digl_Stop ();
-		pipe.Digl_SetBeacon (s.ToBeacon ());
+		pipe.Digl_SetSendBeacon (s.ToBeacon ());
 		pipe.Digl_SetSwitch (BroadcastMode.send);
 		pipe.Digl_Start ();
 		AutoAcceptOwnSignal (s);
@@ -87,6 +85,11 @@ public class MobileBluetoothManager : BluetoothManager{
 
 		Signal[] signals = Array.ConvertAll(beacons, item => new Signal(item));
 		FireBeaconsFoundEvent (signals);
+	}
+
+	public override void SetReceivedSignatures (Signature[] ss){
+		base.SetReceivedSignatures (ss);
+
 	}
 
 

@@ -7,10 +7,11 @@ using System.Collections.Generic;
 
 public class PipeExample : MonoBehaviour {
 	
-	private string s_Region = "com.storybox.twwf16";
+	private string digl_region = "com.storybox.twwf16";
 
-	private Beacon digl_beacon = new Beacon(SignalUtils.GetSignaureUUID (Signature.NONE), 0, 0);
-	private Beacon digl_receiveBeacon = new Beacon (SignalUtils.GetSignaureUUID (Signature.NONE), 0, 0);
+	private Beacon digl_sendBeacon = new Beacon(SignalUtils.GetSignaureUUID (Signature.NONE), 0, 0);
+
+	private iBeaconRegion[] digl_receiveRegionArray = new iBeaconRegion[0];
 
 
 //	private BeaconType bt_PendingType;
@@ -65,10 +66,19 @@ public class PipeExample : MonoBehaviour {
 		BluetoothState.Init();
 	}
 
-	public void Digl_SetBeacon(Beacon b){
-		digl_beacon = b;
-		digl_receiveBeacon = new Beacon (b.UUID, 0, 0);;
-		// region stays the same.
+	public void Digl_SetSendBeacon(Beacon b){
+		digl_sendBeacon = b;
+	}
+
+	public void Digl_SetReceiveSignature(Signature s){
+		Digl_SetReceiveSignatures (new Signature[]{ s });
+	}
+
+	public void Digl_SetReceiveSignatures(Signature[] ss){
+		digl_receiveRegionArray = new iBeaconRegion[ss.Length];
+		for (int k = 0; k < digl_receiveRegionArray.Length; k++) {
+			digl_receiveRegionArray[k] = new iBeaconRegion(digl_region, new Beacon(SignalUtils.GetSignaureUUID(ss[k]), 0, 0));
+		}
 	}
 
 	public void Digl_SetSwitch(BroadcastMode m){
@@ -85,18 +95,18 @@ public class PipeExample : MonoBehaviour {
 
 	// BroadcastState
 	public void btn_StartStop(bool shouldStart) {
-		Debug.Log ("Button StartStop with DiglBeacon " + digl_beacon.UUID + ", " + digl_beacon.minor + ", " + digl_beacon.minor + ", " + s_Region);
+		Debug.Log ("Button StartStop with DiglBeacon " + digl_sendBeacon.UUID + ", " + digl_sendBeacon.minor + ", " + digl_sendBeacon.minor + ", " + digl_region);
 		/*** Beacon will start ***/
 		if (shouldStart) {
 			// ReceiveMode
 			if (bm_Mode == BroadcastMode.receive) {
 				iBeaconReceiver.BeaconRangeChangedEvent += OnBeaconRangeChanged;
 				// check if all mandatory propertis are filled
-				if (s_Region == null || s_Region == "") {
+				if (digl_region == null || digl_region == "") {
 					Diglbug.Log ("Null region", PrintStream.SIGNALS);
 					return;
 				}
-				iBeaconReceiver.regions = new iBeaconRegion[]{new iBeaconRegion(s_Region, digl_receiveBeacon)};
+				iBeaconReceiver.regions = digl_receiveRegionArray;
 				// !!! Bluetooth has to be turned on !!! TODO
 				iBeaconReceiver.Scan();
 				Debug.Log ("Listening for beacons");
@@ -104,7 +114,7 @@ public class PipeExample : MonoBehaviour {
 			// SendMode
 			else {
 				// check if all mandatory propertis are filled
-				if (s_Region == null || s_Region == "") {
+				if (digl_region == null || digl_region == "") {
 					Diglbug.Log ("Null region", PrintStream.SIGNALS);
 					return;
 				}
@@ -117,7 +127,7 @@ public class PipeExample : MonoBehaviour {
 //					Diglbug.Log ("Null minor", PrintStream.SIGNALS);
 //					return;
 //				}
-				iBeaconServer.region = new iBeaconRegion(s_Region, digl_beacon);
+				iBeaconServer.region = new iBeaconRegion(digl_region, digl_sendBeacon);
 				// !!! Bluetooth has to be turned on !!! TODO
 				iBeaconServer.Transmit();
 				Debug.Log ("It is on, go sending");

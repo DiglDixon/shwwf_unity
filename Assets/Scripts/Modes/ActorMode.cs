@@ -1,4 +1,5 @@
-﻿using UnityEngine.SceneManagement;
+﻿using System;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class ActorMode : Mode{
@@ -11,7 +12,6 @@ public class ActorMode : Mode{
 	}
 
 	private void ActBegins(Act a){
-
 	}
 
 	public void ActEnds(Act a){
@@ -26,6 +26,8 @@ public class ActorMode : Mode{
 	}
 
 	public override void ModeSelected (){
+		Signature[] sigs = SignalUtils.GetAllSignatures ();
+		BLE.Instance.Manager.SetReceivedSignatures (sigs);
 		BeginShow ();
 	}
 

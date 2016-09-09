@@ -19,7 +19,7 @@ public class GuideControls : MonoBehaviour{
 	private void OnEnable(){
 		BLE.Instance.Manager.ExpectedPayloadClearedEvent += ExpectedPayloadCleared;
 		BLE.Instance.Manager.ExpectedPayloadReadyEvent += ExpectedPayloadBeings;
-		BLE.Instance.Manager.NewSignatureEvent += SignatureUpdated;
+//		BLE.Instance.Manager.NewSignatureEvent += SignatureUpdated;
 		BLE.Instance.Manager.NewUpcomingPayloadEvent += UpcomingPayloadChanged;
 
 		actSet.ActChangedEvent += ActChanged;
@@ -28,7 +28,7 @@ public class GuideControls : MonoBehaviour{
 	private void OnDisable(){
 		BLE.Instance.Manager.ExpectedPayloadClearedEvent -= ExpectedPayloadCleared;
 		BLE.Instance.Manager.ExpectedPayloadReadyEvent -= ExpectedPayloadBeings;
-		BLE.Instance.Manager.NewSignatureEvent -= SignatureUpdated;
+//		BLE.Instance.Manager.NewSignatureEvent -= SignatureUpdated;
 		BLE.Instance.Manager.NewUpcomingPayloadEvent -= UpcomingPayloadChanged;
 
 		actSet.ActChangedEvent -= ActChanged;
@@ -62,10 +62,6 @@ public class GuideControls : MonoBehaviour{
 	private void ExpectedPayloadCleared(){
 		cueStatusText.text = "Not expecting any cues.";
 		sendExpectedButton.interactable = false;
-	}
-
-	private void SignatureUpdated(Signature s){
-		// nothing yet.
 	}
 
 }

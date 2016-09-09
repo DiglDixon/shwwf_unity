@@ -9,15 +9,19 @@ public abstract class BluetoothManager : MonoBehaviour {
 	private bool expectingPayload = false;
 	private Payload upcomingPayload;
 
-	private Signature currentSignature;
+	private Signature sendingSignature;
+	private Signature[] receivingSignatures;
 
 	private UnexpectedSignalConfirmation confirmationScreen;
 
 	public delegate void SignalsReceivedDelegate(Signal[] s);
 	public event SignalsReceivedDelegate SignalsReceivedEvent;
 
-	public delegate void NewSignatureDelegate(Signature s);
-	public event NewSignatureDelegate NewSignatureEvent;
+	public delegate void NewReceivingSignaturesDelegate(Signature[] s);
+	public event NewReceivingSignaturesDelegate NewReceivingSignaturesEvent;
+
+	public delegate void NewSendingSignatureDelegate(Signature s);
+	public event NewSendingSignatureDelegate NewSendingSignatureEvent;
 
 	public delegate void NewUpcomingPayloadDelegate(Payload p);
 	public event NewUpcomingPayloadDelegate NewUpcomingPayloadEvent;
@@ -75,27 +79,31 @@ public abstract class BluetoothManager : MonoBehaviour {
 			ExpectedPayloadClearedEvent ();
 	}
 
+	private Signal GetSendingSignalWithPayload(Payload p){
+		return new Signal (sendingSignature, p);
+	}
+
 	public void RequestPayloadSend(Payload p){
-		RequestSendSignal (new Signal (currentSignature, p));
+		RequestSendSignal (GetSendingSignalWithPayload(p));
 	}
 
 	public void ForceSendPayload(Payload p){
-		SendSignal (new Signal (currentSignature, p));
+		SendSignal (GetSendingSignalWithPayload(p));
 	}
 
 	public void SendExpectedPayload(){
 		if (expectingPayload) {
-			RequestSendSignal (new Signal (currentSignature, upcomingPayload));
+			RequestSendSignal (new Signal (sendingSignature, upcomingPayload));
 		} else {
 			Diglbug.Log ("Requested SendExpectedPayload when not expecting!");
 		}
 	}
 
 	public void RequestSendPayload(Payload p){
-		RequestSendSignal(new Signal(currentSignature, p));
+		RequestSendSignal(GetSendingSignalWithPayload(p));
 	}
 
-	public void RequestSendSignal(Signal s){
+	private void RequestSendSignal(Signal s){
 		if (expectingPayload) {
 			if (s.GetPayload () == upcomingPayload) {
 				ClearExpectedAndSendSignal (s);
@@ -118,10 +126,20 @@ public abstract class BluetoothManager : MonoBehaviour {
 
 	public abstract void SendSignal (Signal s);
 
-	public virtual void SetReceiverSignature(Signature s){
-		currentSignature = s;
-		if (NewSignatureEvent != null)
-			NewSignatureEvent (currentSignature);
+	public virtual void SetReceivedSignature(Signature s){
+		SetReceivedSignatures(new Signature[]{s});
+	}
+
+	public virtual void SetReceivedSignatures(Signature[] ss){
+		receivingSignatures = ss;
+		if (NewReceivingSignaturesEvent != null)
+			NewReceivingSignaturesEvent (receivingSignatures);
+	}
+
+	public virtual void SetSendingSignature(Signature s){
+		sendingSignature = s;
+		if (NewSendingSignatureEvent != null)
+			NewSendingSignatureEvent (sendingSignature);
 	}
 
 	protected void FireBeaconsFoundEvent(Signal[] signals){

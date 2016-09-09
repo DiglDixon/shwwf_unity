@@ -1,0 +1,223 @@
+fileFormatVersion: 2
+guid: fe68d2585259b426180369d72d89cbf8
+timeCreated: 1473391059
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: InfoPanel
+    21300002: Instructionbub
+    21300004: Button_Red
+    21300006: Menu_Start
+    21300008: Button_purp
+    21300010: Menu_Info
+    21300012: Step_2
+    21300014: Step_3
+    21300016: Button_Yes
+    21300018: Step_1
+    21300020: Button_no
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings:
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -3
+    compressionQuality: 50
+    allowsAlphaSplitting: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -3
+    compressionQuality: 50
+    allowsAlphaSplitting: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: InfoPanel
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 3924
+        width: 2088
+        height: 2409
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 279, y: 556, z: 442, w: 269}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Instructionbub
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 2836
+        width: 2532
+        height: 958
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 494, y: 341, z: 499, w: 238}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Button_Red
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 2300
+        width: 1125
+        height: 290
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 265, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Menu_Start
+      rect:
+        serializedVersion: 2
+        x: 1318
+        y: 2305
+        width: 1292
+        height: 390
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Button_purp
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 1930
+        width: 1105
+        height: 289
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 282, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Menu_Info
+      rect:
+        serializedVersion: 2
+        x: 1314
+        y: 1840
+        width: 1296
+        height: 390
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Step_2
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 1154
+        width: 1073
+        height: 578
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Step_3
+      rect:
+        serializedVersion: 2
+        x: 1552
+        y: 1158
+        width: 796
+        height: 578
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Button_Yes
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 571
+        width: 1340
+        height: 386
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Step_1
+      rect:
+        serializedVersion: 2
+        x: 1619
+        y: 329
+        width: 774
+        height: 578
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Button_no
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 105
+        width: 1301
+        height: 384
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
