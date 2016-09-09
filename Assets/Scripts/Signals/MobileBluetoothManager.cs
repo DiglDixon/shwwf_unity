@@ -10,6 +10,7 @@ public class MobileBluetoothManager : BluetoothManager{
 	private bool validateReady = false;
 
 	protected override void Start(){
+//		base.Start ();
 		iBeaconReceiver.BeaconRangeChangedEvent += BeaconFoundEvent;
 		BluetoothState.BluetoothStateChangedEvent += StateChangeEvent;
 		#if !UNITY_EDITOR
@@ -26,6 +27,7 @@ public class MobileBluetoothManager : BluetoothManager{
 		// this triggers the permission dialog
 		float validateTimeoutMax = 10f;
 		float time = 0f;
+		yield return new WaitForSeconds (1f);
 		while (time < validateTimeoutMax) {
 			time += Time.deltaTime;
 			if (validateReady) {
@@ -89,7 +91,7 @@ public class MobileBluetoothManager : BluetoothManager{
 
 	public override void SetReceivedSignatures (Signature[] ss){
 		base.SetReceivedSignatures (ss);
-
+		pipe.Digl_SetReceiveSignatures (ss);
 	}
 
 

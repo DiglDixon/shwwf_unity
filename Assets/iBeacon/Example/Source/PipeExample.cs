@@ -13,6 +13,8 @@ public class PipeExample : MonoBehaviour {
 
 	private iBeaconRegion[] digl_receiveRegionArray = new iBeaconRegion[0];
 
+//	private Beacon digl_beacon = new Beacon(SignalUtils.GetSignaureUUID (Signature.NONE), 0, 0);
+//	private Beacon digl_receiveBeacon = new Beacon (SignalUtils.GetSignaureUUID (Signature.NONE), 0, 0);
 
 //	private BeaconType bt_PendingType;
 //	private BeaconType bt_Type;
@@ -26,8 +28,13 @@ public class PipeExample : MonoBehaviour {
 		BluetoothState.EnableBluetooth();
 	}
 
-	private void Start() {
+	private void Awake(){
+		digl_receiveRegionArray = new iBeaconRegion[]{
+			new iBeaconRegion (digl_region, new Beacon(SignalUtils.GetSignaureUUID(Signature.NONE), 0, 0))
+		};
+	}
 
+	private void Start() {
 		BluetoothState.BluetoothStateChangedEvent += delegate(BluetoothLowEnergyState state) {
 			switch (state) {
 			case BluetoothLowEnergyState.TURNING_OFF:
@@ -75,6 +82,7 @@ public class PipeExample : MonoBehaviour {
 	}
 
 	public void Digl_SetReceiveSignatures(Signature[] ss){
+		Diglbug.Log ("Pipe_SetReceiveSignatures :" + ss.Length);
 		digl_receiveRegionArray = new iBeaconRegion[ss.Length];
 		for (int k = 0; k < digl_receiveRegionArray.Length; k++) {
 			digl_receiveRegionArray[k] = new iBeaconRegion(digl_region, new Beacon(SignalUtils.GetSignaureUUID(ss[k]), 0, 0));
@@ -95,10 +103,10 @@ public class PipeExample : MonoBehaviour {
 
 	// BroadcastState
 	public void btn_StartStop(bool shouldStart) {
-		Debug.Log ("Button StartStop with DiglBeacon " + digl_sendBeacon.UUID + ", " + digl_sendBeacon.minor + ", " + digl_sendBeacon.minor + ", " + digl_region);
 		/*** Beacon will start ***/
 		if (shouldStart) {
 			// ReceiveMode
+			Debug.Log ("Pipe Sending with array length " + digl_receiveRegionArray.Length);
 			if (bm_Mode == BroadcastMode.receive) {
 				iBeaconReceiver.BeaconRangeChangedEvent += OnBeaconRangeChanged;
 				// check if all mandatory propertis are filled
@@ -113,20 +121,13 @@ public class PipeExample : MonoBehaviour {
 			}
 			// SendMode
 			else {
+				Debug.Log ("Pipe Sending with DiglBeacon " + digl_sendBeacon.UUID + ", " + digl_sendBeacon.minor + ", " + digl_sendBeacon.minor + ", " + digl_region);
 				// check if all mandatory propertis are filled
 				if (digl_region == null || digl_region == "") {
 					Diglbug.Log ("Null region", PrintStream.SIGNALS);
 					return;
 				}
-//				if (s_UUID == null || s_UUID == "") {
-//					Diglbug.Log ("Null uuid", PrintStream.SIGNALS);
-//					return;
-//				}
-//
-//				if (s_Minor == null || s_Minor == "") {
-//					Diglbug.Log ("Null minor", PrintStream.SIGNALS);
-//					return;
-//				}
+
 				iBeaconServer.region = new iBeaconRegion(digl_region, digl_sendBeacon);
 				// !!! Bluetooth has to be turned on !!! TODO
 				iBeaconServer.Transmit();

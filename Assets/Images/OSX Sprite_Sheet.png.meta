@@ -1,0 +1,758 @@
+fileFormatVersion: 2
+guid: d19cff514602e494d8208ffd87b43eb8
+timeCreated: 1473312691
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Sent message
+    21300002: Battery
+    21300004: Search Icon
+    21300006: Receved Message
+    21300008: Answer
+    21300010: Decline
+    21300012: Slidebar
+    21300014: Alert
+    21300016: Contact_Send_message
+    21300018: Contact_Call_Voice
+    21300020: Contact_send_Email
+    21300022: Contact_Call_Facetime
+    21300024: OSX Sprite_Sheet_12
+    21300026: Dot
+    21300028: OSX Sprite_Sheet_14
+    21300030: Settings
+    21300032: Itunes
+    21300034: Tencent News
+    21300036: Search
+    21300038: OSX Sprite_Sheet_19
+    21300040: Add_To_Call
+    21300042: OSX Sprite_Sheet_21
+    21300044: OSX Sprite_Sheet_22
+    21300046: OSX Sprite_Sheet_23
+    21300048: OSX Sprite_Sheet_24
+    21300050: Mute
+    21300052: OSX Sprite_Sheet_26
+    21300054: Webo
+    21300056: Safari
+    21300058: Reminders
+    21300060: Contact
+    21300062: OSX Sprite_Sheet_31
+    21300064: OSX Sprite_Sheet_32
+    21300066: OSX Sprite_Sheet_33
+    21300068: OSX Sprite_Sheet_34
+    21300070: Keypad
+    21300072: OSX Sprite_Sheet_36
+    21300074: OSX Sprite_Sheet_37
+    21300076: Camera
+    21300078: Weather
+    21300080: Messages
+    21300082: OSX Sprite_Sheet_41
+    21300084: OSX Sprite_Sheet_42
+    21300086: OSX Sprite_Sheet_43
+    21300088: OSX Sprite_Sheet_44
+    21300090: FaceTime
+    21300092: Notofication drop down
+    21300094: OSX Sprite_Sheet_47
+    21300096: OSX Sprite_Sheet_48
+    21300098: OSX Sprite_Sheet_49
+    21300100: Calander
+    21300102: Photos
+    21300104: Clock
+    21300106: Sina News
+    21300108: OSX Sprite_Sheet_54
+    21300110: OSX Sprite_Sheet_55
+    21300112: OSX Sprite_Sheet_56
+    21300114: Speeker
+    21300116: OSX Sprite_Sheet_58
+    21300118: OSX Sprite_Sheet_59
+    21300120: OSX Sprite_Sheet_60
+    21300122: AppStore
+    21300124: Didi
+    21300126: WeChat
+    21300128: Notes
+    21300130: OSX Sprite_Sheet_65
+    21300132: OSX Sprite_Sheet_66
+    21300134: On_Call_Contacts
+    21300136: Contacts
+    21300138: Phone
+    21300140: Music
+    21300142: Health
+    21300144: Live App
+    21300146: STOP
+    21300148: Mask
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 2
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sent message
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 7776
+        width: 2248
+        height: 519
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Battery
+      rect:
+        serializedVersion: 2
+        x: 2437
+        y: 8065
+        width: 561
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Search Icon
+      rect:
+        serializedVersion: 2
+        x: 3089
+        y: 8077
+        width: 206
+        height: 206
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Receved Message
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 7128
+        width: 2247
+        height: 517
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Answer
+      rect:
+        serializedVersion: 2
+        x: 2582
+        y: 7148
+        width: 709
+        height: 714
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Decline
+      rect:
+        serializedVersion: 2
+        x: 3382
+        y: 7144
+        width: 714
+        height: 714
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slidebar
+      rect:
+        serializedVersion: 2
+        x: 4633
+        y: 6480
+        width: 660
+        height: 1165
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Alert
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 5581
+        width: 2641
+        height: 1415
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Contact_Send_message
+      rect:
+        serializedVersion: 2
+        x: 2821
+        y: 6327
+        width: 735
+        height: 664
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Contact_Call_Voice
+      rect:
+        serializedVersion: 2
+        x: 3684
+        y: 6278
+        width: 718
+        height: 718
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Contact_send_Email
+      rect:
+        serializedVersion: 2
+        x: 2842
+        y: 5688
+        width: 697
+        height: 458
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Contact_Call_Facetime
+      rect:
+        serializedVersion: 2
+        x: 3638
+        y: 5679
+        width: 813
+        height: 491
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Dot
+      rect:
+        serializedVersion: 2
+        x: 4633
+        y: 5609
+        width: 713
+        height: 710
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OSX Sprite_Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 4603
+        width: 809
+        height: 808
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Settings
+      rect:
+        serializedVersion: 2
+        x: 1005
+        y: 4594
+        width: 825
+        height: 825
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Itunes
+      rect:
+        serializedVersion: 2
+        x: 1909
+        y: 4607
+        width: 800
+        height: 800
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Tencent News
+      rect:
+        serializedVersion: 2
+        x: 2866
+        y: 4607
+        width: 801
+        height: 800
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Search
+      rect:
+        serializedVersion: 2
+        x: 3811
+        y: 992
+        width: 525
+        height: 4448
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Add_To_Call
+      rect:
+        serializedVersion: 2
+        x: 4637
+        y: 4834
+        width: 714
+        height: 713
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mute
+      rect:
+        serializedVersion: 2
+        x: 4637
+        y: 4070
+        width: 714
+        height: 714
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Webo
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 3688
+        width: 805
+        height: 804
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Safari
+      rect:
+        serializedVersion: 2
+        x: 1013
+        y: 3699
+        width: 805
+        height: 804
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Reminders
+      rect:
+        serializedVersion: 2
+        x: 1913
+        y: 3707
+        width: 790
+        height: 792
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Contact
+      rect:
+        serializedVersion: 2
+        x: 2863
+        y: 3699
+        width: 804
+        height: 804
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Keypad
+      rect:
+        serializedVersion: 2
+        x: 4637
+        y: 3299
+        width: 714
+        height: 713
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Camera
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 2787
+        width: 805
+        height: 804
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Weather
+      rect:
+        serializedVersion: 2
+        x: 1013
+        y: 2787
+        width: 805
+        height: 804
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Messages
+      rect:
+        serializedVersion: 2
+        x: 1905
+        y: 2787
+        width: 804
+        height: 804
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OSX Sprite_Sheet_41
+      rect:
+        serializedVersion: 2
+        x: 2863
+        y: 2798
+        width: 804
+        height: 804
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FaceTime
+      rect:
+        serializedVersion: 2
+        x: 4637
+        y: 2539
+        width: 714
+        height: 714
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Notofication drop down
+      rect:
+        serializedVersion: 2
+        x: 5598
+        y: 114
+        width: 599
+        height: 3252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Calander
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 1913
+        width: 805
+        height: 804
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Photos
+      rect:
+        serializedVersion: 2
+        x: 1013
+        y: 1900
+        width: 805
+        height: 804
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Clock
+      rect:
+        serializedVersion: 2
+        x: 1905
+        y: 1900
+        width: 804
+        height: 804
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Sina News
+      rect:
+        serializedVersion: 2
+        x: 2875
+        y: 1908
+        width: 784
+        height: 788
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Speeker
+      rect:
+        serializedVersion: 2
+        x: 4637
+        y: 1764
+        width: 714
+        height: 714
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AppStore
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 1029
+        width: 796
+        height: 797
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Didi
+      rect:
+        serializedVersion: 2
+        x: 1022
+        y: 1034
+        width: 788
+        height: 787
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: WeChat
+      rect:
+        serializedVersion: 2
+        x: 1905
+        y: 1025
+        width: 804
+        height: 805
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Notes
+      rect:
+        serializedVersion: 2
+        x: 2855
+        y: 1015
+        width: 801
+        height: 800
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: On_Call_Contacts
+      rect:
+        serializedVersion: 2
+        x: 4637
+        y: 976
+        width: 714
+        height: 714
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Contacts
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 1420
+        width: 106
+        height: 4018
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Phone
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 81
+        width: 805
+        height: 804
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Music
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 89
+        width: 796
+        height: 792
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Health
+      rect:
+        serializedVersion: 2
+        x: 1905
+        y: 81
+        width: 804
+        height: 804
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Live App
+      rect:
+        serializedVersion: 2
+        x: 2864
+        y: 82
+        width: 784
+        height: 784
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: STOP
+      rect:
+        serializedVersion: 2
+        x: 3762
+        y: 60
+        width: 817
+        height: 821
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mask
+      rect:
+        serializedVersion: 2
+        x: 4637
+        y: 52
+        width: 821
+        height: 821
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

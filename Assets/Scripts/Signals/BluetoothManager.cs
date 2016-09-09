@@ -45,6 +45,9 @@ public abstract class BluetoothManager : MonoBehaviour {
 		BLETools tools = toolsObject.GetComponent<BLETools> ();
 
 		confirmationScreen = tools.unexpectedSignalConfirmationScreen;
+
+		SetReceivedSignature (Signature.NONE);
+		SetSendingSignature (Signature.NONE);
 	}
 
 	public void SetUpcomingPayload(Payload p){
