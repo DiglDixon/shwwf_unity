@@ -17,7 +17,9 @@ public abstract class Act : EnsureDefinedActChild{
 	public Payload exitPayload;
 	public bool autoAssignExit = true;
 
+
 	protected virtual void Start(){
+		
 		trackEntries = new EventTracklistEntry[transform.childCount];
 		for (int k = 0; k < transform.childCount; k++) {
 			trackEntries [k] = transform.GetChild (k).GetComponent<EventTracklistEntry> ();
@@ -41,7 +43,21 @@ public abstract class Act : EnsureDefinedActChild{
 	}
 
 	public virtual void ActChangedTo(){
+		//
+	}
 
+	public float GetActTimeElapsed(){
+		ITrack currentTrack = player.GetTrack ();
+		float ret = 0f;
+		for (int k = 0; k < trackEntries.Length; k++) {
+			if (currentTrack == trackEntries [k].GetTrack ()) {
+				ret += player.GetTimeElapsed ();
+				break;
+			} else {
+				ret += trackEntries [k].GetTrackLength ();
+			}
+		}
+		return ret;
 	}
 
 	public float GetProgress(){

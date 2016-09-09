@@ -21,7 +21,6 @@ public class ActSet : EnsureDefinedActsInChildren<ShowAct>{
 		acts = GetComponentsInChildren<Act> ();
 	}
 
-
 	private void OnEnable(){
 		player.NewTrackBeginsEvent += TrackBegins;
 	}
@@ -42,7 +41,6 @@ public class ActSet : EnsureDefinedActsInChildren<ShowAct>{
 		if (act != currentAct) {
 			ChangeAct(act);
 		}
-
 	}
 
 	private void ChangeAct(Act act){

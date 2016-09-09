@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class EnsureActorSetChild : MonoBehaviour{
+public abstract class EnsureActSetChild : MonoBehaviour{
 
 	public Actor actor;
 	public virtual void SetEnum(Actor a){

@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class EnsureActorSetsInChildren<T> : MonoBehaviour where T : EnsureActorSetChild {
+public class EnsureActorSetsInChildren<T> : MonoBehaviour where T : EnsureActSetChild {
 
 	public bool update = false;
 

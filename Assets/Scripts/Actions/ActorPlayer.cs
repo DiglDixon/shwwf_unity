@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
-
-public class ActorPlayer : EnsureActorSetsInChildren<ActorActSet>{
+[RequireComponent (typeof(EnsureActorSets))]
+public class ActorPlayer : MonoBehaviour{
 
 	public ActorActSet currentActorSet;
 	private ActorActSet[] actorSets;
@@ -13,18 +14,35 @@ public class ActorPlayer : EnsureActorSetsInChildren<ActorActSet>{
 
 	public PayloadEventSystem eventSystem;
 
+	public delegate void ActorChangedDelegate(ActorActSet aas);
+	public event ActorChangedDelegate ActorChangedEvent;
+
+	public delegate void ActorBeginsActDelegate(Act act);
+	public event ActorBeginsActDelegate ActorBeginsActEvent;
+
+	public delegate void ActorEndsDelegate(ActorActSet aas);
+	public event ActorEndsDelegate ActorEndsEvent;
 
 	private void Awake(){
 		actorSets = GetComponentsInChildren<ActorActSet>();
+		eventSystem.ExternallyDefinedEvent += SignalReceived;
 	}
 
-	private void Start(){
-		eventSystem.ExternallyDefinedEvent += SignalReceived;
+	private IEnumerator Start(){
+		yield return new WaitForSeconds (1f);
 		SetActor (currentActorSet.actor);
-	}
+	}	
 
 	public void SetActor(Actor actor){
 		currentActorSet = actorSets [(int)actor];
+		currentActorSet.InitialiseSet ();
+		ResetCurrentActor ();
+		if (ActorChangedEvent != null) {
+			ActorChangedEvent (currentActorSet);
+		}
+	}
+
+	private void ResetCurrentActor(){
 		player.PrepareTrack (currentActorSet.GetFirstTrackEntry ());
 	}
 
@@ -54,6 +72,9 @@ public class ActorPlayer : EnsureActorSetsInChildren<ActorActSet>{
 				if (actToBegin != null) {
 
 					actToBegin.Begin ();
+					if (ActorBeginsActEvent != null) {
+						ActorBeginsActEvent (actToBegin);
+					}
 					ignoredSignals.Add (s); // cache this here so we don't re-trigger if a foreign signal jockeys us.
 					Diglbug.Log ("Accepted new sign");
 
@@ -89,6 +110,10 @@ public class ActorPlayer : EnsureActorSetsInChildren<ActorActSet>{
 
 	public void ActorSetFinished(ActorActSet set){
 		Diglbug.Log ("Actor Set Finished, should reinitialise now. " + set.name);
+		ResetCurrentActor ();
+		if (ActorEndsEvent != null) {
+			ActorEndsEvent (set);
+		}
 	}
 
 }
