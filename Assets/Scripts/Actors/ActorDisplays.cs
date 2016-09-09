@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 [RequireComponent (typeof(AudioSource))]
-public class ActorControls : MonoBehaviour{
+public class ActorDisplays : MonoBehaviour{
 
 	public Slider progressSlider;
 	public Slider[] markerSliders;
@@ -12,6 +12,7 @@ public class ActorControls : MonoBehaviour{
 	public ActorPlayer actorPlayer;
 
 	public Text actorName;
+	public Text actName;
 
 	private AudioSource assistantSoundSource;
 
@@ -41,7 +42,14 @@ public class ActorControls : MonoBehaviour{
 		currentActorSet.ActContentCompleteEvent += MarkerComplete;
 		actorName.text = currentActorSet.actor.ToString ();
 
-		float[] markerPositions = currentActorSet.GetActMarkerPositions ();
+		SetMarkersFromActorActSet (currentActorSet);
+
+		assistantSoundSource.Play ();
+	}
+
+	private void SetMarkersFromActorActSet(ActorActSet aas){
+
+		float[] markerPositions = aas.GetActMarkerPositions ();
 
 		float accum = 0f;
 		for (int k = 0; k < markerSliders.Length; k++) {
@@ -49,15 +57,15 @@ public class ActorControls : MonoBehaviour{
 				Diglbug.Log ("Marker set: " + markerPositions [k], PrintStream.DEBUGGING);
 				accum += markerPositions [k];
 				markerSliders [k].value = accum;
+				markerSliders [k].gameObject.SetActive (true);
 			} else {
 				markerSliders [k].gameObject.SetActive (false);
 			}
 		}
-
-		assistantSoundSource.Play ();
 	}
 
 	private void ActorBeganAct(Act a){
+		actName.text = a.name; // TODO some sort of display name.
 		assistantSoundSource.Stop ();
 	}
 

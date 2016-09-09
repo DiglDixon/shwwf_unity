@@ -31,7 +31,7 @@ public class ActorPlayer : MonoBehaviour{
 	private IEnumerator Start(){
 		yield return new WaitForSeconds (1f);
 		SetActor (currentActorSet.actor);
-	}	
+	}
 
 	public void SetActor(Actor actor){
 		currentActorSet = actorSets [(int)actor];
@@ -67,21 +67,22 @@ public class ActorPlayer : MonoBehaviour{
 			if (SignalIsIgnored (s)) {
 				Diglbug.Log ("Rejected signal "+s.GetPrint()+" as it it's ignored", PrintStream.ACTORS);
 			} else {
-				
 				Act actToBegin = GetActSignalStarts (s);
 				if (actToBegin != null) {
-
-					actToBegin.Begin ();
-					if (ActorBeginsActEvent != null) {
-						ActorBeginsActEvent (actToBegin);
-					}
+					BeginAct (actToBegin);
 					ignoredSignals.Add (s); // cache this here so we don't re-trigger if a foreign signal jockeys us.
-					Diglbug.Log ("Accepted new sign");
-
+					Diglbug.Log ("Accepted new signal "+s.GetPrint());
 				} else {
 					Diglbug.Log ("Rejected signal "+s.GetPrint()+" and it's not relevant for this actor", PrintStream.ACTORS);
 				}
 			}
+		}
+	}
+
+	private void BeginAct(Act actToBegin){
+		actToBegin.Begin ();
+		if (ActorBeginsActEvent != null) {
+			ActorBeginsActEvent (actToBegin);
 		}
 	}
 
@@ -103,9 +104,8 @@ public class ActorPlayer : MonoBehaviour{
 		ignoredSignals.Clear ();
 	}
 
-	public void ChangeActor(Actor a){
-		player.Stop();
-		currentActorSet = actorSets[(int)a];
+	public int PreviousSignalsCount(){
+		return ignoredSignals.Count;
 	}
 
 	public void ActorSetFinished(ActorActSet set){
