@@ -77,6 +77,7 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 		}
 		Mode = m;
 		Mode.ModeSelected ();
+		Diglbug.Log ("Set Mode to " + Mode.ModeName, PrintStream.MODES);
 	}
 
 }

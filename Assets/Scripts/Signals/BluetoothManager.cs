@@ -14,8 +14,11 @@ public abstract class BluetoothManager : MonoBehaviour {
 
 	private UnexpectedSignalConfirmation confirmationScreen;
 
-	public delegate void SignalsReceivedDelegate(Signal[] s);
-	public event SignalsReceivedDelegate SignalsReceivedEvent;
+//	public delegate void SignalsReceivedDelegate(Signal[] s);
+//	public event SignalsReceivedDelegate SignalsReceivedEvent;
+
+	public delegate void SignalReceivedDelegate(Signal s);
+	public event SignalReceivedDelegate SignalReceivedEvent;
 
 	public delegate void NewReceivingSignaturesDelegate(Signature[] s);
 	public event NewReceivingSignaturesDelegate NewReceivingSignaturesEvent;
@@ -146,12 +149,19 @@ public abstract class BluetoothManager : MonoBehaviour {
 	}
 
 	protected void FireBeaconsFoundEvent(Signal[] signals){
-		if (SignalsReceivedEvent != null) {
-			SignalsReceivedEvent (signals);
+		for (int k = 0; k < signals.Length; k++) {
+			FireBeaconFoundEvent (signals [k]);
 		}
 	}
 
 	protected void FireBeaconFoundEvent(Signal signal){
-		FireBeaconsFoundEvent (new Signal[]{ signal });
+		for (int k = 0; k < receivingSignatures.Length; k++) {
+			if(receivingSignatures[k] == signal.GetSignature()){
+				if (SignalReceivedEvent != null) {
+					SignalReceivedEvent (signal);
+				}
+				continue;
+			}
+		}
 	}
 }

@@ -7,10 +7,12 @@ public class DesktopBluetoothManager : BluetoothManager{
 	public float latencyMax = 4f;
 	public bool holdingLatency = false;
 
+	private bool sending = false;
+
 	public override void SendSignal (Signal s){
 		Beacon b = s.ToBeacon ();
 		currentSendingSignal = new Signal(b);
-		StartCoroutine (RunFakeReceiving ());
+		StartCoroutine ("RunFakeReceiving");
 	}
 
 	private IEnumerator RunFakeReceiving(){
@@ -42,11 +44,11 @@ public class DesktopBluetoothManager : BluetoothManager{
 
 	/* These are redundant due to our sending sim */
 	public override void StopSending (){
-		//
+		StopCoroutine ("RunFakeReceiving");
 	}
 
 	public override void StopReceiving (){
-		//
+		StopCoroutine ("RunFakeReceiving");
 	}
 
 	public override void StartReceiving (){

@@ -28,6 +28,7 @@ public class ActorMode : Mode{
 	public override void ModeSelected (){
 		Signature[] sigs = SignalUtils.GetAllSignatures ();
 		BLE.Instance.Manager.SetReceivedSignatures (sigs);
+		BLE.Instance.Manager.StartReceiving ();
 		BeginShow ();
 	}
 
