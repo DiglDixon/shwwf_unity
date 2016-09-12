@@ -20,10 +20,10 @@ public class DirectorMode : Mode{
 	}
 
 	public override void BeginShow (){
-		SceneManager.LoadScene (Scenes.Director);
+		SceneManager.LoadScene (Scenes.MonoScene);
 	}
 
 	public override void NewSceneLoaded (Scene scene){
-
+		EnableObjectsWithTag ("Director");
 	}
 }

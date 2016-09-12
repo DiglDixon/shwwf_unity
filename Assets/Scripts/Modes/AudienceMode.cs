@@ -14,7 +14,7 @@ public class AudienceMode : Mode{
 	}
 
 	public override void BeginShow (){
-		SceneManager.LoadScene (Scenes.Setup);
+		SceneManager.LoadScene (Scenes.MonoScene);
 	}
 
 	public override void ModeDeselected (){
@@ -39,7 +39,7 @@ public class AudienceMode : Mode{
 	}
 
 	public override void NewSceneLoaded (UnityEngine.SceneManagement.Scene scene){
-		Diglbug.Log ("Scene "+scene.name+" begins for " + ModeName, PrintStream.SCENES);
+		EnableObjectsWithTag ("Audience");
 	}
 
 

@@ -30,4 +30,10 @@
 		}
 	}
 
+	public static string MonoScene{
+		get{
+			return "monoscene";
+		}
+	}
+
 }

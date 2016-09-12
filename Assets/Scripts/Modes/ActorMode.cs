@@ -33,7 +33,6 @@ public class ActorMode : Mode{
 	}
 
 	public override void NewSceneLoaded (UnityEngine.SceneManagement.Scene scene){
-		Diglbug.Log ("Scene "+scene.name+" begins for " + ModeName, PrintStream.SCENES);
 	}
 
 

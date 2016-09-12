@@ -1,4 +1,5 @@
-﻿using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class GuideMode : Mode{
@@ -24,7 +25,8 @@ public class GuideMode : Mode{
 	}
 
 	public override void NewSceneLoaded (Scene scene){
-
+		EnableObjectsWithTag ("Audience");
+		EnableObjectsWithTag ("Guide");
 	}
 
 }

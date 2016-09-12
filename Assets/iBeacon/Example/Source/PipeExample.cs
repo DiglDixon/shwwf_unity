@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 public class PipeExample : MonoBehaviour {
 	
-	private string digl_region = "com.storybox.twwf16";
+	private string digl_region = "com.storybox.shwwf16";
 
 	private Beacon digl_sendBeacon = new Beacon(SignalUtils.GetSignaureUUID (Signature.NONE), 0, 0);
 

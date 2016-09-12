@@ -28,4 +28,11 @@ public abstract class Mode : MonoBehaviour{
 
 	public abstract void NewSceneLoaded (Scene scene);
 
+	protected void EnableObjectsWithTag(string tag){
+		GameObject[] gs =  GameObject.FindGameObjectsWithTag (tag);
+		for (int k = 0; k < gs.Length; k++) {
+			gs [k].SetActive (true);
+		}
+	}
+
 }
