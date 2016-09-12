@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 67c8c8a10ae564bd5aa15b3015a9d1b1
-timeCreated: 1473647924
+timeCreated: 1473655423
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -46,6 +46,7 @@ TextureImporter:
     21300078: if_tri_button_right_small
     21300080: if_tri_button_middle_small
     21300082: if_tri_button_left_small
+    21300084: if_banner_small
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -364,7 +365,7 @@ TextureImporter:
         height: 408
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 51, z: 0, w: 0}
+      border: {x: 41, y: 51, z: 43, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
@@ -482,6 +483,19 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_banner_small
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 910
+        width: 90
+        height: 238
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 27, y: 26, z: 23, w: 0}
       outline: []
       tessellationDetail: 0
     outline: []

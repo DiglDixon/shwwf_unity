@@ -2,13 +2,17 @@
 using UnityEngine.UI;
 
 [RequireComponent (typeof(Text))]
-public class LanguageToggleText : MonoBehaviour{
+public class LanguageToggleText : LanguageElement{
 
+	[TextArea]
 	public string mandarinText;
+	public bool updateMandarinToCurrent = false;
+
+	[TextArea]
 	public string englishText; // this is the default entry
+	public bool updateEnglishToCurrent = false;
 
 	private Text textToChange;
-	public bool updateEnglishToCurrent = false;
 
 	private void Awake(){
 		FindText ();
@@ -16,7 +20,7 @@ public class LanguageToggleText : MonoBehaviour{
 		SwitchToLanguage (Variables.language);
 	}
 
-	public void SwitchToLanguage(Language l){
+	public override void SwitchToLanguage(Language l){
 		FindText ();
 		if (l == Language.MANDARIN) {
 			textToChange.text = mandarinText;
@@ -36,6 +40,10 @@ public class LanguageToggleText : MonoBehaviour{
 		if (updateEnglishToCurrent) {
 			englishText = GetComponent<Text> ().text;
 			updateEnglishToCurrent = false;
+		}
+		if (updateMandarinToCurrent) {
+			mandarinText = GetComponent<Text> ().text;
+			updateMandarinToCurrent = false;
 		}
 	}
 
