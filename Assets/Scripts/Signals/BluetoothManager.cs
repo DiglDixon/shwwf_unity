@@ -6,6 +6,8 @@ public abstract class BluetoothManager : MonoBehaviour {
 	
 	protected string regionName = "com.storybox.shwwf";
 
+	public BLETools bleTools;
+
 	private bool expectingPayload = false;
 	private Payload upcomingPayload;
 
@@ -13,9 +15,6 @@ public abstract class BluetoothManager : MonoBehaviour {
 	private Signature[] receivingSignatures;
 
 	private UnexpectedSignalConfirmation confirmationScreen;
-
-//	public delegate void SignalsReceivedDelegate(Signal[] s);
-//	public event SignalsReceivedDelegate SignalsReceivedEvent;
 
 	public delegate void SignalReceivedDelegate(Signal s);
 	public event SignalReceivedDelegate SignalReceivedEvent;
@@ -42,12 +41,8 @@ public abstract class BluetoothManager : MonoBehaviour {
 	public abstract void StopReceiving ();
 
 	protected virtual void Start(){
-		GameObject toolsObject = GameObject.Instantiate (Resources.Load ("BLE_Tools_Canvas")) as GameObject;
-		toolsObject.transform.SetParent (transform, false);
 
-		BLETools tools = toolsObject.GetComponent<BLETools> ();
-
-		confirmationScreen = tools.unexpectedSignalConfirmationScreen;
+		confirmationScreen = bleTools.unexpectedSignalConfirmationScreen;
 
 		SetReceivedSignature (Signature.NONE);
 		SetSendingSignature (Signature.NONE);
@@ -89,6 +84,10 @@ public abstract class BluetoothManager : MonoBehaviour {
 			ExpectedPayloadClearedEvent ();
 	}
 
+	public void ClearUpcomingPayload(){
+		upcomingPayload = Payload.NONE;
+	}
+
 	private Signal GetSendingSignalWithPayload(Payload p){
 		return new Signal (sendingSignature, p);
 	}
@@ -111,10 +110,11 @@ public abstract class BluetoothManager : MonoBehaviour {
 	}
 
 	private void RequestSendSignal(Signal s){
-		if (expectingPayload) {
+		if (upcomingPayload != Payload.NONE){//expectingPayload) {
 			if (s.GetPayload () == upcomingPayload) {
-				ClearExpectedAndSendSignal (s);
+				ClearAndSendSignal (s);
 			} else {
+				Diglbug.LogWarning ("Trying to send unexpected Signal " + s.GetPrint()+", expected: "+upcomingPayload);
 				confirmationScreen.OpenWithAttemptedSignal (s);
 			}
 		} else {
@@ -123,11 +123,12 @@ public abstract class BluetoothManager : MonoBehaviour {
 	}
 
 	public void ForceSignalSend(Signal s){
-		ClearExpectedAndSendSignal (s);
+		ClearAndSendSignal (s);
 	}
 
-	protected void ClearExpectedAndSendSignal(Signal s){
+	protected void ClearAndSendSignal(Signal s){
 		ClearExpectedPayload ();
+		ClearUpcomingPayload ();
 		SendSignal (s);
 	}
 

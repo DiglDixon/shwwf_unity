@@ -20,7 +20,7 @@ public class MobileBluetoothManager : BluetoothManager{
 	}
 
 	protected override void Start(){
-//		base.Start ();
+		base.Start ();
 		iBeaconReceiver.BeaconRangeChangedEvent += BeaconFoundEvent;
 		BluetoothState.BluetoothStateChangedEvent += StateChangeEvent;
 		#if !UNITY_EDITOR

@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent (typeof(Text))]
-public class TextToSignatureString : LanguageElement {
 
-	public Signature signature;
+public class DefinedActText : LanguageElement{
+
+
+	public DefinedAct act;
 
 	public bool useSizeOverrides = false;
 	public int overrideMandarinSize = 0;
@@ -27,9 +27,9 @@ public class TextToSignatureString : LanguageElement {
 		}
 	}
 
-	public void UpdateValue(Signature s){
-		signature = s;
-		Diglbug.Log ("Switching display signature to: " + s);
+	public void UpdateValue(DefinedAct a){
+		act = a;
+		Diglbug.Log ("Switching display signature to: " + act);
 		SwitchToLanguage (Variables.Instance.language);
 	}
 
@@ -39,20 +39,12 @@ public class TextToSignatureString : LanguageElement {
 			if (useSizeOverrides) {
 				t.fontSize = overrideEnglishSize;
 			}
-			if (signature == Signature.NONE) {
-				t.text = englishNoneValue;
-			} else {
-				t.text = EnumDisplayNamesEnglish.SignatureName (signature);
-			}
+			t.text = EnumDisplayNamesEnglish.DefinedActName (act);
 		} else {
 			if (useSizeOverrides) {
 				t.fontSize = overrideMandarinSize;
 			}
-			if (signature == Signature.NONE) {
-				t.text = mandarinNoneValue;
-			} else {
-				t.text = EnumDisplayNamesMandarin.SignatureName (signature);
-			}
+			t.text = EnumDisplayNamesMandarin.DefinedActName (act);
 		}
 	}
 

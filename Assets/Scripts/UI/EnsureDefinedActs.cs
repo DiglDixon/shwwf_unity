@@ -1,5 +1,5 @@
 ﻿
 
-public class EnsureDefinedActs : EnsureDefinedActsInChildren<Act>{
+public class EnsureDefinedActs : EnsureDefinedActsInChildren<ShowAct>{
 	// concrete
 }

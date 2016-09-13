@@ -8,24 +8,31 @@ public class ShowAct : Act{
 	public bool isTimeFromEnd = true;
 
 	private float expectedPayoadProgress;
-	private float inverse_expectedPayloadProgress;
 
 	private float totalTimeUntilExpected = 0f;
+
+	private bool delegatesAdded = false;
 
 	// TODO: Shift these delegates somewhere much better...
 	public override void ActChangedTo(){
 		BLE.Instance.Manager.ClearExpectedPayload ();
+		BLE.Instance.Manager.ClearUpcomingPayload ();
 		BLE.Instance.Manager.SetUpcomingPayload (exitPayload);
 		SetExpectedPayloadProgress ();
+		if (!delegatesAdded) {
+			AddDelegates ();
+			delegatesAdded = true;
+		}
+
+		RecalculateTotalTimeUntilExpected ();
+	}
+
+	private void AddDelegates(){
 		if (isTimeFromEnd) {
 			expectingPayloadFrom.AddStateEventAtTimeRemaining (ExpectedTimeReached, expectedTime);
 		} else {
 			expectingPayloadFrom.AddStateEventAtTime (ExpectedTimeReached, expectedTime);
 		}
-
-		RecalculateTotalTimeUntilExpected ();
-
-
 	}
 
 	private void RecalculateTotalTimeUntilExpected(){
@@ -65,7 +72,6 @@ public class ShowAct : Act{
 				c += expectedTime * t.GetInverseTrackLength ();
 			}
 			expectedPayoadProgress = c;
-			inverse_expectedPayloadProgress = 1f / expectedPayoadProgress;
 		}
 	}
 

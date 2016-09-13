@@ -6,8 +6,9 @@ using System.Collections.Generic;
 public class EnsureDefinedActsInChildren<T> : MonoBehaviour where T : EnsureDefinedActChild {
 
 	public bool update = false;
+	public GameObject customInstantiatedObject;
 
-	private void OnValidate(){
+	protected virtual void OnValidate(){
 		update = false;
 
 		T[] existing = GetComponentsInChildren<T> ();
@@ -20,14 +21,25 @@ public class EnsureDefinedActsInChildren<T> : MonoBehaviour where T : EnsureDefi
 			if(e != null){
 				e.UpdateName ();
 			}else{
-				GameObject newChild = new GameObject ();
-				newChild.transform.SetParent (transform);
-				T newChildComponent = newChild.AddComponent<T> ();
+				GameObject newChild;
+				if (customInstantiatedObject != null) {
+					newChild = GameObject.Instantiate (customInstantiatedObject) as GameObject;
+				} else {
+					newChild = new GameObject ();
+				}
+				newChild.transform.SetParent (transform, false);
+				T newChildComponent = newChild.GetComponent<T> ();
+				if(newChildComponent == null){
+					newChildComponent = newChild.AddComponent<T> ();
+				}
 				newChildComponent.SetDefinedAct((DefinedAct)k);
 				newChildComponent.UpdateName();
 				newChild.transform.SetSiblingIndex (k);
+				RunExtraInitsToObject (newChild);
 			}
 		}
+
+
 
 
 		for (int k = enumCount; k < existing.Length; k++) {
@@ -42,6 +54,10 @@ public class EnsureDefinedActsInChildren<T> : MonoBehaviour where T : EnsureDefi
 			}
 		}
 		return null;
+	}
+
+	protected virtual void RunExtraInitsToObject(GameObject newObject){
+		//
 	}
 
 }

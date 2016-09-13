@@ -4,7 +4,7 @@ public abstract class EnsureDefinedActChild : MonoBehaviour{
 	public abstract void SetDefinedAct(DefinedAct a);
 	public abstract DefinedAct GetDefinedAct();
 
-	public void UpdateName(){
+	public virtual void UpdateName(){
 		gameObject.name = GetNameString ();
 	}
 
