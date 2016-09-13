@@ -10,11 +10,13 @@ public class MobileBluetoothManager : BluetoothManager{
 	private bool validating = false;
 	private bool validateReady = false;
 
+	// These are used for iOS plugin reinit timeout
 	private float timePassedSinceLastReception = 0f;
 	private float pluginReinitialiseTimeout = 4f;
 	private bool isReceiving = false;
 
 	private bool canSend = false;
+	private bool hasAsked = false;
 
 	private void Awake(){
 	}
@@ -33,8 +35,11 @@ public class MobileBluetoothManager : BluetoothManager{
 		canSend = iBeaconServer.checkTransmissionSupported();
 		validateReady = state == BluetoothLowEnergyState.POWERED_ON;
 		if (state == BluetoothLowEnergyState.POWERED_OFF) {
-			Diglbug.Log ("BLE OFF. Asking the user to switch it back on.", PrintStream.SIGNALS);
-			BluetoothState.EnableBluetooth ();
+			if (!hasAsked) {
+				Diglbug.Log ("BLE OFF. Asking the user to switch it back on.", PrintStream.SIGNALS);
+				BluetoothState.EnableBluetooth ();
+				hasAsked = true;
+			}
 		}
 		if (state != BluetoothLowEnergyState.POWERED_ON && state!= BluetoothLowEnergyState.TURNING_ON) {
 			Diglbug.Log ("BLE OFF. Asking the user to switch it back on.", PrintStream.SIGNALS);

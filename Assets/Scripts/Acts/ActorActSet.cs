@@ -34,17 +34,17 @@ public class ActorActSet : EnsureActSetChild{
 	}
 
 	private void Start(){
-		if (trackEntries.Length > 0) {
-			EventTracklistEntry lastEntry = trackEntries [trackEntries.Length - 1];
-			Diglbug.Log ("Assigning lastEntry event "+name+": "+lastEntry.name, PrintStream.ACTORS);
-			if (isTimeRemaining) {
-				lastEntry.AddStateEventAtTimeRemaining (SetComplete, actorContentEndTime);
-			} else {
-				lastEntry.AddStateEventAtTime (SetComplete, actorContentEndTime);
-			}
-		} else {
-			Diglbug.Log ("Warning! ActorActSet " + name + " is empty - this should only be the case for testing", PrintStream.ACTORS);
-		}
+//		if (trackEntries.Length > 0) {
+//			EventTracklistEntry lastEntry = trackEntries [trackEntries.Length - 1];
+//			Diglbug.Log ("Assigning lastEntry event "+name+": "+lastEntry.name, PrintStream.ACTORS);
+//			if (isTimeRemaining) {
+//				lastEntry.AddStateEventAtTimeRemaining (SetComplete, actorContentEndTime);
+//			} else {
+//				lastEntry.AddStateEventAtTime (SetComplete, actorContentEndTime);
+//			}
+//		} else {
+//			Diglbug.Log ("Warning! ActorActSet " + name + " is empty - this should only be the case for testing", PrintStream.ACTORS);
+//		}
 	}
 
 	public void InitialiseSet(){
@@ -162,6 +162,9 @@ public class ActorActSet : EnsureActSetChild{
 	private void ActingContentInActFinished(ActorAct act){
 		int index = IndexOfAct (act);
 		if (index != -1) {
+			if (index == acts.Length - 1) {
+				SetComplete ();
+			}
 			if (ActContentCompleteEvent != null) {
 				ActContentCompleteEvent (index);
 			}

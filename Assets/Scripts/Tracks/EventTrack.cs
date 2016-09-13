@@ -25,9 +25,9 @@ public abstract class EventTrack : AbstractTrack{
 				}
 			} else {
 				if (childEvents [k].occurAtTimeFromEnd) {
-					AddEventAtTime (childEvents [k].CustomEvent, childEvents [k].occurAtTime);
-				} else {
 					AddEventAtTimeRemaining (childEvents [k].CustomEvent, childEvents [k].occurAtTime);
+				} else {
+					AddEventAtTime (childEvents [k].CustomEvent, childEvents [k].occurAtTime);
 				}
 			}
 		}

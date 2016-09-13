@@ -36,7 +36,7 @@ public class ActorAct : Act{
 				break;
 			}
 		}
-		Diglbug.Log ("Set acting length: " + ret + " for " + name);
+//		Diglbug.Log ("Set acting length: " + ret + " for " + name);
 		actingLength = ret;
 	}
 

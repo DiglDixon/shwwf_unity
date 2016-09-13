@@ -33,6 +33,11 @@ public class SequenceObject : SequenceElement{
 		BeginEntrance ();
 	}
 
+	public override void CancelSequence (){
+		objectToEnable.SetActive (false);
+		fader.SetLerpFloatValue(0f);
+	}
+
 	private void BeginEntrance(){
 		objectToEnable.SetActive (true);
 		fader.SetLerpFloatValue(0f);

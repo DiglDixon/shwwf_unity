@@ -32,6 +32,14 @@ public static class EnumDisplayNames{
 			return EnumDisplayNamesMandarin.SignatureName (s);
 		}
 	}
+
+	public static string ActorName(Actor a){
+		if (Variables.Instance.language == Language.ENGLISH) {
+			return EnumDisplayNamesEnglish.ActorName (a);
+		} else {
+			return EnumDisplayNamesMandarin.ActorName (a);
+		}
+	}
 }
 
 public static class EnumDisplayNamesEnglish{
@@ -107,7 +115,29 @@ public static class EnumDisplayNamesEnglish{
 		case DefinedAct.ACT_YU_PINGFAN:
 			return "Stairwell";
 		default:
-			Diglbug.LogError ("Failed to return a pre-defined SignatureName for " + da + " - please define one!");
+			Diglbug.LogError ("Failed to return a pre-defined DefinedActName for " + da + " - please define one!");
+			return "undefined_signature_string";
+		}
+	}
+
+	public static string ActorName(Actor a){
+		switch (a) {
+		case Actor.COUNSELLOR:
+			return "Counsellor";
+		case Actor.COUNSELLOR_ROOF:
+			return "Counsellor (end)";
+		case Actor.DORM_PERSON:
+			return "Doorman";
+		case Actor.PRODUCER:
+			return "Producer";
+		case Actor.STUDENT:
+			return "Student";
+		case Actor.VOLUNTEER:
+			return "Volunteer";
+		case Actor.YU_PINGFAN:
+			return "Yu Pingfan";
+		default:
+			Diglbug.LogError ("Failed to return a pre-defined ActorName for " + a + " - please define one!");
 			return "undefined_signature_string";
 		}
 	}
@@ -188,7 +218,29 @@ public static class EnumDisplayNamesMandarin{
 		case DefinedAct.ACT_YU_PINGFAN:
 			return "<Stairwell>";
 		default:
-			Diglbug.LogError ("Failed to return a pre-defined SignatureName for " + da + " - please define one!");
+			Diglbug.LogError ("Failed to return a pre-defined DefinedActName for " + da + " - please define one!");
+			return "undefined_signature_string";
+		}
+	}
+
+	public static string ActorName(Actor a){
+		switch (a) {
+		case Actor.COUNSELLOR:
+			return "<Counsellor>";
+		case Actor.COUNSELLOR_ROOF:
+			return "<Counsellor (end)>";
+		case Actor.DORM_PERSON:
+			return "<Doorman>";
+		case Actor.PRODUCER:
+			return "<Producer>";
+		case Actor.STUDENT:
+			return "<Student>";
+		case Actor.VOLUNTEER:
+			return "<Volunteer>";
+		case Actor.YU_PINGFAN:
+			return "<Yu Pingfan>";
+		default:
+			Diglbug.LogError ("Failed to return a pre-defined ActorName for " + a + " - please define one!");
 			return "undefined_signature_string";
 		}
 	}

@@ -18,7 +18,10 @@ public class ActorDisplays : MonoBehaviour{
 
 	private ActorActSet currentActorSet;
 
-	public IgnoredSignatureDisplay[] ignoredDisplays;
+	public SignatureColourDisplay[] ignoredDisplays;
+
+	public SignatureColourDisplay[] currentGroupDisplays;
+	public TextToSignatureString currentGroupSignatureText;
 
 	private void Awake(){
 		assistantSoundSource = GetComponent<AudioSource> ();
@@ -31,26 +34,39 @@ public class ActorDisplays : MonoBehaviour{
 		actorPlayer.ActorEndsEvent += ActorComplete;
 		actorPlayer.SignalIgnoreAddedEvent += IgnoredSignal;
 		actorPlayer.IgnoredClearedEvent += ClearedIgnored;
+		actorPlayer.ActingToNewGroupEvent += NewGroup;
 	}
 	private void OnDisable(){
 		actorPlayer.ActorChangedEvent -= ActorChanged;
 		actorPlayer.ActorBeginsActEvent -= ActorBeganAct;
 		actorPlayer.ActorEndsEvent -= ActorComplete;
 		actorPlayer.IgnoredClearedEvent -= ClearedIgnored;
+		actorPlayer.ActingToNewGroupEvent -= NewGroup;
 	}
 
 	private void IgnoredSignal(Signal s){
 		for (int k = 0; k < ignoredDisplays.Length; k++) {
 			if (ignoredDisplays [k].signature == s.GetSignature ()) {
-				ignoredDisplays [k].SetIgnored (true);
+				ignoredDisplays [k].SetColourVisible (true);
 			}
 		}
 	}
 
 	private void ClearedIgnored(){
 		for (int k = 0; k < ignoredDisplays.Length; k++) {
-			ignoredDisplays [k].SetIgnored (false);
+			ignoredDisplays [k].SetColourVisible (false);
 		}
+	}
+
+	private void NewGroup(Signature s){
+		for (int k = 0; k < currentGroupDisplays.Length; k++) {
+			if (currentGroupDisplays [k].signature == s) {
+				currentGroupDisplays [k].SetColourVisible (true);
+			} else {
+				currentGroupDisplays [k].SetColourVisible (false);
+			}
+		}
+		currentGroupSignatureText.UpdateValue (s);
 	}
 
 	private void ActorChanged(ActorActSet aas){

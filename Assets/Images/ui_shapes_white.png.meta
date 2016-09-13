@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 67c8c8a10ae564bd5aa15b3015a9d1b1
-timeCreated: 1473719495
+timeCreated: 1473794481
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -59,6 +59,7 @@ TextureImporter:
     21300104: if_audio_off_icon
     21300106: if_uk_flag
     21300108: if_china_flag
+    21300110: duality_app_icon
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -661,6 +662,19 @@ TextureImporter:
         y: 26
         width: 369
         height: 234
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: duality_app_icon
+      rect:
+        serializedVersion: 2
+        x: 1715
+        y: 293
+        width: 278
+        height: 278
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

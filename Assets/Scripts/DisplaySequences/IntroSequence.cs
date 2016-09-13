@@ -7,7 +7,7 @@ public class IntroSequence : MonoBehaviour{
 	public GameObject[] showWhenStarted;
 	public SequenceObject background;
 	private SequenceElement[] sequences;
-	int sequenceIndex;
+	private int sequenceIndex;
 
 	public GameObject[] hideOnceEntered;
 

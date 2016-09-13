@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class GuideControls : MonoBehaviour{
 
-	public Text upcomingCueText;
+	public DefinedActText upcomingActText;
 	public Text cueStatusText;
 	public Button sendExpectedButton;
 
@@ -67,9 +67,10 @@ public class GuideControls : MonoBehaviour{
 
 	private void UpcomingPayloadChanged(Payload p){
 		if (p == Payload.NONE) {
-			upcomingCueText.text = "(this is the last scene)";
+			upcomingActText.gameObject.SetActive (false);
 		} else {
-			upcomingCueText.text = p.ToString ();
+			upcomingActText.gameObject.SetActive (true);
+			upcomingActText.UpdateValue(actSet.GetDefinedActForPayload(p));
 		}
 	}
 

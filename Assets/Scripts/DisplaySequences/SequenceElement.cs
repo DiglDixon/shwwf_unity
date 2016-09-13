@@ -10,6 +10,8 @@ public abstract class SequenceElement : MonoBehaviour{
 
 	public abstract void BeginSequence();
 
+	public abstract void CancelSequence();
+
 	protected virtual void EntranceComplete(){
 		if (SequenceEnteredEvent != null) {
 			SequenceEnteredEvent ();

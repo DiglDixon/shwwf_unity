@@ -32,6 +32,9 @@ public class ActorPlayer : MonoBehaviour{
 	public delegate void SignalIgnoredDelegate(Signal s);
 	public event SignalIgnoredDelegate SignalIgnoreAddedEvent;
 
+	public delegate void ActingToNewGroupDelegate(Signature s);
+	public event ActingToNewGroupDelegate ActingToNewGroupEvent;
+
 	private Signature currentGroupActingTo;
 
 	private void Awake(){
@@ -146,6 +149,9 @@ public class ActorPlayer : MonoBehaviour{
 
 	private void SetCurrentGroup(Signature s){
 		currentGroupActingTo = s;
+		if (ActingToNewGroupEvent != null) {
+			ActingToNewGroupEvent (s);
+		}
 	}
 
 }

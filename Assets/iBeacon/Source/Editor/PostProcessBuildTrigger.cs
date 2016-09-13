@@ -17,7 +17,7 @@ public static class PostProcessBuildTrigger {
 		PlistElementDict rootDict = plist.root;
 
 		// Set location usage description
-		var usageDescription = PlayerPrefs.GetString("NSLocationUsageDescription", "DUMMY, bitte in Scene ändern");
+		var usageDescription = PlayerPrefs.GetString("NSLocationUsageDescription", "“双重”需要访问您的位置");
 		rootDict.SetString("NSLocationUsageDescription", usageDescription);
 		rootDict.SetString("NSLocationAlwaysUsageDescription", usageDescription);
 		rootDict.values.Remove("NSLocationWhenInUseUsageDescription");

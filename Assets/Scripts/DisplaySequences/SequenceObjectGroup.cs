@@ -30,8 +30,15 @@ public class SequenceObjectGroup : SequenceElement{
 		}
 	}
 
+	public override void CancelSequence(){
+		for (int k = 0; k < objects.Length; k++) {
+			objects [k].CancelSequence ();
+		}
+		StopCoroutine ("RunSequence");
+	}
+
 	public override void BeginSequence (){
-		StartCoroutine (RunSequence ());
+		StartCoroutine ("RunSequence");
 	}
 
 	private void ObjectEntranceComplete(){

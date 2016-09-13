@@ -21,9 +21,12 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 
 	private Mode[] possibleModes;
 
+	private DebugCommand[] commands;
+
 	protected void Start(){
 		Mode = startingMode;
 		possibleModes = GetComponentsInChildren<Mode> ();
+		commands = GetComponentsInChildren<DebugCommand> ();
 		SceneManager.sceneLoaded += NewSceneLoaded;
 	}
 
@@ -39,17 +42,30 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 		}
 	}
 
-	public bool PasswordIsValid(string password){
-		return (GetModeByPassword (password) != null);
+	public void PasswordEntered(string p){
+		SetModeByPassword (p);
+		RunCommandsFromPassword (p);
 	}
 
-	public void SetModeByPassword(string password){
+	public bool PasswordIsValid(string password){
+		return GetModeByPassword (password) != null;
+	}
+
+	private void SetModeByPassword(string password){
 		Mode newMode = GetModeByPassword (password);
 		if (newMode != null) {
 			Diglbug.Log ("Successfully set mode to " + newMode.ModeName + " with password " + password, PrintStream.MODES);
 			SetCurrentMode (newMode);
 		} else {
 			Diglbug.Log ("Mode with password " + password + " not found!", PrintStream.MODES);
+		}
+	}
+
+	private void RunCommandsFromPassword(string p){
+		for (int k = 0; k < commands.Length; k++) {
+			if (commands [k].isValidCommand (p)) {
+				commands [k].RunCommand (p);
+			}
 		}
 	}
 

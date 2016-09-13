@@ -1,23 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PasswordControls : MonoBehaviour{
 
+	public Text invalidPasswordText;
+
 	public void PasswordAttempted(string password){
+		ShowMode.Instance.PasswordEntered (password);
 		if (ShowMode.Instance.PasswordIsValid (password)) {
-			ShowMode.Instance.SetModeByPassword (password);
-			PasswordAttemptSuccessful ();
+			//
 		} else {
 			PasswordAttemptFailed (password);
 		}
 	}
 
 	private void PasswordAttemptFailed(string password){
+		// do things
 		Diglbug.Log ("Password attempt failed: "+password);
-	}
-
-	private void PasswordAttemptSuccessful(){
-
 	}
 
 	public void EnterDirectorMode(){

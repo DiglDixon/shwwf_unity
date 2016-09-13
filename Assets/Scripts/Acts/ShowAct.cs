@@ -28,10 +28,19 @@ public class ShowAct : Act{
 	}
 
 	private void AddDelegates(){
-		if (isTimeFromEnd) {
-			expectingPayloadFrom.AddStateEventAtTimeRemaining (ExpectedTimeReached, expectedTime);
-		} else {
-			expectingPayloadFrom.AddStateEventAtTime (ExpectedTimeReached, expectedTime);
+		bool addToRest = false;
+		for (int k = 0; k < trackEntries.Length; k++) {
+			if (addToRest) { // this ensures if we skip to a track beyond the defined one, we still proc.
+				trackEntries[k].AddStateEventAtTime (ExpectedTimeReached, 0.1f);
+			}
+			if (trackEntries [k] == expectingPayloadFrom) {
+				if (isTimeFromEnd) {
+					expectingPayloadFrom.AddStateEventAtTimeRemaining (ExpectedTimeReached, expectedTime);
+				} else {
+					expectingPayloadFrom.AddStateEventAtTime (ExpectedTimeReached, expectedTime);
+				}
+				addToRest = true;
+			}
 		}
 	}
 
