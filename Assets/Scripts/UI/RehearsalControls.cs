@@ -16,6 +16,10 @@ public class RehearsalControls : MonoBehaviour {
 
 	public void StopPressed(){
 		player.Stop ();
+		HideControls ();
+	}
+
+	public void HideControls(){
 		gameObject.SetActive (false);
 	}
 

@@ -7,25 +7,36 @@ public class ShowSetup : MonoBehaviour {
 	private SetupStep currentStep;
 	private SetupStep[] steps;
 	public Text stepInstructionText;
+	public TracklistPlayer player;
 
-	public SetupStepDisplay[] displays;
+	public AudioSourceFadeControls ensureFadedOutOnStart;
+
+	public IntroSequence introSequence;
+
+	public GameObject setupDisplay;
 
 	private int stepIndex = 0;
 
 	private void Awake(){
 		steps = GetComponentsInChildren<SetupStep> ();
+		setupDisplay.SetActive (true);
 	}
 
 	private void Start(){
 		for (int k = 0; k < steps.Length; k++) {
-			if (k >= displays.Length) {
-				Diglbug.LogWarning ("Not enough SetupStepDisplays found to accommodate all steps " + k); 
-			} else {
-				steps [k].SetDisplay (displays [k]);
-			}
 			steps [k].Deactivate ();
 		}
 		ActivateStepAtIndex (0);
+	}
+
+
+	private void Update(){
+		if (Input.GetKeyDown (KeyCode.K)) {
+			for (int k = 0; k < steps.Length; k++) {
+				steps [k].SkipStep ();
+			}
+			StepsComplete ();
+		}
 	}
 
 	public void SetupStepComplete(){
@@ -57,8 +68,11 @@ public class ShowSetup : MonoBehaviour {
 	}
 
 	private void StepsComplete(){
-		Diglbug.Log ("All Setup steps complete.", PrintStream.SETUP);
-		SceneManager.LoadScene (Scenes.Show);
+		Diglbug.Log ("All Setup steps complete. Beginning show!", PrintStream.SETUP);
+		introSequence.Begin ();
+		ensureFadedOutOnStart.FadeTo (0f);
+		BLE.Instance.EnableJockeyProtection ();
+		player.Play ();
 	}
 
 }

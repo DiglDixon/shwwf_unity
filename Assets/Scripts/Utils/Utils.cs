@@ -15,10 +15,9 @@ public static class Utils{
 
 	public static string AudioTimeFormat(float v){
 		TimeSpan t = TimeSpan.FromSeconds(v);
-		return string.Format("{0:D2}:{1:D2}:{2:D2}",
+		return string.Format("{0:D1}:{1:D2}",
 			t.Minutes, 
-			t.Seconds, 
-			t.Milliseconds);
+			t.Seconds);
 	}
 
 	public static T GetCopyOf<T>(this Component comp, T other) where T : Component

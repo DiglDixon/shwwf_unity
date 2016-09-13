@@ -22,8 +22,8 @@ public class SignatureGridItem : MonoBehaviour {
 		return signature;
 	}
 
-	public Sprite SignatureSprite(){
-		return (Sprite)signatureImage.sprite;
+	public Color SignatureSpriteColour(){
+		return signatureImage.color;
 	}
 
 	private void OnValidate(){

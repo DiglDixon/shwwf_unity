@@ -36,6 +36,8 @@ public abstract class TrackOutput : MonoBehaviour{
 
 	public abstract bool IsPaused ();
 
+	public abstract void Skipped ();
+
 	public virtual void CutIn(){
 		FadeIn (0f);
 	}

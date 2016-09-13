@@ -9,12 +9,20 @@ public class GuideControls : MonoBehaviour{
 	public Button sendExpectedButton;
 
 	public ActSet actSet;
-	private Act act;
+	private ShowAct act;
 
 	public Slider actProgressSlider;
 	public Slider markerSlider;
 
+	public Text[] timeUntilExpectedTexts;
+	public Text[] englishTimeUntilExpectedTexts;
+	public Text[] mandarinTimeUntilExpectedTexts;
+
+	public Text nextSceneReadyText;
+
 	private Payload previousPayload;
+
+	public GameObject largeControls;
 
 	private void OnEnable(){
 		BLE.Instance.Manager.ExpectedPayloadClearedEvent += ExpectedPayloadCleared;
@@ -23,6 +31,14 @@ public class GuideControls : MonoBehaviour{
 		BLE.Instance.Manager.NewUpcomingPayloadEvent += UpcomingPayloadChanged;
 
 		actSet.ActChangedEvent += ActChanged;
+	}
+
+	public void OpenLargeControls(){
+		largeControls.SetActive (true);
+	}
+
+	public void CloseLargeControls(){
+		largeControls.SetActive (false);
 	}
 
 	private void OnDisable(){
@@ -35,7 +51,7 @@ public class GuideControls : MonoBehaviour{
 	}
 
 	private void ActChanged(Act a){
-		act = a;
+		act = (ShowAct)a;
 		markerSlider.value = act.GetLastTrackStartProgress ();
 		// modify the positions.
 	}
@@ -43,24 +59,45 @@ public class GuideControls : MonoBehaviour{
 	private void Update(){
 		if (act != null) {
 			actProgressSlider.value = act.GetProgress();
+			for (int k = 0; k < timeUntilExpectedTexts.Length; k++) {
+				timeUntilExpectedTexts[k].text = Utils.AudioTimeFormat(act.GetTimeUntilExpected ());
+			}
 		}
 	}
 
 	private void UpcomingPayloadChanged(Payload p){
 		if (p == Payload.NONE) {
-			upcomingCueText.text = "(no more cues)";
+			upcomingCueText.text = "(this is the last scene)";
 		} else {
 			upcomingCueText.text = p.ToString ();
 		}
 	}
 
 	private void ExpectedPayloadBeings(Payload p){
-		cueStatusText.text = "Cue ready to send.";
+		cueStatusText.text = "Ready to begin next scene.";
+		nextSceneReadyText.gameObject.SetActive (true);
+		for (int k = 0; k < englishTimeUntilExpectedTexts.Length; k++) {
+			englishTimeUntilExpectedTexts [k].gameObject.SetActive (false);
+		}
+		for (int k = 0; k < mandarinTimeUntilExpectedTexts.Length; k++) {
+			mandarinTimeUntilExpectedTexts [k].gameObject.SetActive (false);
+		}
+		OpenLargeControls ();
 		sendExpectedButton.interactable = true;
 	}
 
 	private void ExpectedPayloadCleared(){
-		cueStatusText.text = "Not expecting any cues.";
+		if (Variables.Instance.language == Language.ENGLISH) {
+			for (int k = 0; k < englishTimeUntilExpectedTexts.Length; k++) {
+				englishTimeUntilExpectedTexts [k].gameObject.SetActive (true);
+			}
+		} else {
+			for (int k = 0; k < mandarinTimeUntilExpectedTexts.Length; k++) {
+				mandarinTimeUntilExpectedTexts [k].gameObject.SetActive (true);
+			}
+		}
+		nextSceneReadyText.gameObject.SetActive (false);
+		cueStatusText.text = "";
 		sendExpectedButton.interactable = false;
 	}
 

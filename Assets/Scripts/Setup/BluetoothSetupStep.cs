@@ -1,24 +1,40 @@
 ﻿using UnityEngine;
 
-[RequireComponent (typeof(AudioSource))]
 public class BluetoothSetupStep : SetupStep{
 
 	private bool bluetoothSignalFound = false;
-	private AudioSource source;
 
-	private void Start(){
-		source = GetComponent<AudioSource> ();
-		source.clip.LoadAudioData ();
+	public GameObject[] enableWhilePlaying;
+	public GameObject[] enableWhileStopped;
+
+	public AudioSourceFadeControls audioControls;
+
+	public override void Activate (ShowSetup callback){
+		base.Activate (callback);
+		BLE.Instance.DisableJockeyProtection ();
 	}
 
 	public void BluetoothFound(bool isStartSignal){
 		if (isStartSignal) {
-			source.Play ();
+			audioControls.FadeTo (1f);
+
+			SetArrayActive (enableWhilePlaying, true);
+			SetArrayActive (enableWhileStopped, false);
 		} else {
-			source.Stop ();
+			audioControls.FadeTo (0f);
+			SetArrayActive (enableWhilePlaying, false);
+			SetArrayActive (enableWhileStopped, true);
 		}
 		if (isStartSignal) {
 			bluetoothSignalFound = true;
+		}
+	}
+
+	private void SetArrayActive(GameObject[] objects, bool value){
+		for (int k = 0; k < objects.Length; k++) {
+			if (objects [k] != null) {
+				objects [k].SetActive (value);
+			}
 		}
 	}
 
@@ -28,7 +44,9 @@ public class BluetoothSetupStep : SetupStep{
 
 	protected override void ResetConditions (){
 		bluetoothSignalFound = false;
-		source.Stop ();
+		//		audioControls.FadeTo (0f);
+		SetArrayActive (enableWhilePlaying, true);
+		SetArrayActive (enableWhileStopped, false);
 	}
 
 }

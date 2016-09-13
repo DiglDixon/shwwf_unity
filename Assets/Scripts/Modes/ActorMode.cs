@@ -3,11 +3,10 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class ActorMode : Mode{
-
-	private string modeName = "actor";
-	public override string ModeName {
+	
+	public override ModeName ModeName {
 		get {
-			return modeName;
+			return ModeName.ACTOR;
 		}
 	}
 

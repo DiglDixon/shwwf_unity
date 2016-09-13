@@ -7,18 +7,13 @@ public class LanguageToggleText : LanguageElement{
 	[TextArea]
 	public string mandarinText;
 	public bool updateMandarinToCurrent = false;
+	public bool mandarinIsUndefined = false;
 
 	[TextArea]
 	public string englishText; // this is the default entry
 	public bool updateEnglishToCurrent = false;
 
 	private Text textToChange;
-
-	private void Awake(){
-		FindText ();
-
-		SwitchToLanguage (Variables.language);
-	}
 
 	public override void SwitchToLanguage(Language l){
 		FindText ();
@@ -37,12 +32,16 @@ public class LanguageToggleText : LanguageElement{
 
 	private void OnValidate(){
 		FindText ();
+		if (mandarinIsUndefined && textToChange.text.Length < 1) {
+			Diglbug.LogWarning (name + " found with undefined language text");
+			mandarinText = "<UNDEFINED>";
+		}
 		if (updateEnglishToCurrent) {
-			englishText = GetComponent<Text> ().text;
+			englishText = textToChange.text;
 			updateEnglishToCurrent = false;
 		}
 		if (updateMandarinToCurrent) {
-			mandarinText = GetComponent<Text> ().text;
+			mandarinText = textToChange.text;
 			updateMandarinToCurrent = false;
 		}
 	}

@@ -7,9 +7,9 @@ public class AudienceMode : Mode{
 	public Canvas canvas;
 	public UILightbox welcomeLightbox;
 
-	public override string ModeName {
+	public override ModeName ModeName {
 		get {
-			return "audience";
+			return ModeName.AUDIENCE;
 		}
 	}
 
@@ -24,11 +24,12 @@ public class AudienceMode : Mode{
 	}
 
 	public override void ModeSelected (){
-		canvas.gameObject.SetActive (true);
+//		canvas.gameObject.SetActive (true);
 		Diglbug.Log ("Welcome to the show, Audience Member");
-		welcomeLightbox.Open ();
-		StartCoroutine ("RunBeginShowRoutine");
+//		welcomeLightbox.Open ();
+//		StartCoroutine ("RunBeginShowRoutine");
 		BLE.Instance.Manager.StartReceiving ();
+		BeginShow ();
 	}
 
 	private IEnumerator RunBeginShowRoutine(){

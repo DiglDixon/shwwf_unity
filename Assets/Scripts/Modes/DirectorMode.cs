@@ -3,11 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class DirectorMode : Mode{
 
-	private string modeName = "director";
-
-	public override string ModeName {
+	public override ModeName ModeName {
 		get{
-			return modeName;
+			return ModeName.DIRECTOR;
 		}
 	}
 

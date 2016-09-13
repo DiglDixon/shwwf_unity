@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 
-public class WaitForStartSetupStep : SetupStep{
+public class WaitForStartSetupStep : WaitForPayloadSetupStep{
 
-	private bool startSignalFound = false;
+	public GameObject beginButton;
 
-	public void FinishSetupReceived(){
-		startSignalFound = true;
+	public override void Activate (ShowSetup callback){
+		base.Activate (callback);
+		if (ShowMode.Instance.Mode.ModeName != ModeName.AUDIENCE) {
+			beginButton.SetActive (true);
+		}
 	}
 
-	protected override bool SetupCompleteCondition (){
-		return startSignalFound;
-	}
-
-	protected override void ResetConditions (){
-		startSignalFound = false;
+	public override void Deactivate (){
+		base.Deactivate ();
+		beginButton.SetActive (false);
 	}
 
 }

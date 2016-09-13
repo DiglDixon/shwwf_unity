@@ -21,6 +21,12 @@ public class ActSet : EnsureDefinedActsInChildren<ShowAct>{
 		acts = GetComponentsInChildren<Act> ();
 	}
 
+	public void InitialiseActs(){
+		for (int k = 0; k < acts.Length; k++) {
+			acts [k].Initialise ();
+		}
+	}
+
 	private void OnEnable(){
 		player.NewTrackBeginsEvent += TrackBegins;
 	}

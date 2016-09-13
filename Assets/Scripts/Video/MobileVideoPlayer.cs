@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MobileVideoPlayer : VideoPlayer {
 
 	private int controlsIndex;
-	private MediaPlayerCtrl[] controls;
+	public MediaPlayerCtrl[] controls;
 
 	private MobileVideoTrack mobileVideoTrack;
 

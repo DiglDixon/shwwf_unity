@@ -1,8 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
-public static class Variables {
+public class Variables : ConstantSingleton<Variables>{
+	public LanguageViewer languageViewer;
+	public bool debugBuild = false;
 
-	public readonly static bool debugBuild = true;
-	public readonly static Language language = Language.ENGLISH;
+	public Language language;
+
+	public void SetLanguage(Language l){
+		language = l;
+		languageViewer.SetLanguage (l);
+	}
 }

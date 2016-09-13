@@ -16,7 +16,7 @@ public abstract class Mode : MonoBehaviour{
 		return false;
 	}
 
-	public abstract string ModeName {
+	public abstract ModeName ModeName {
 		get;
 	}
 

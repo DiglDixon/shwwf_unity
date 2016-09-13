@@ -36,9 +36,23 @@ public abstract class EventTrackPlayer : AbstractTrackPlayer{
 		}
 	}
 
-	protected override void TrackReachedEnd (){
+	public override void Skipped (){
+		FireRemainingStateEvents ();
+		base.TrackReachedEnd ();
+	}
+
+	public void FireRemainingStateEvents(){
+		Diglbug.Log ("Firing remaining state delegates "+name, PrintStream.DELEGATES);
+		eventTrack.SetTimeElapsed (GetTrack ().GetTrackLength());
+	}
+
+	public void FireRemainingEvents(){
 		Diglbug.Log ("Firing remaining delegates "+name, PrintStream.DELEGATES);
 		eventTrack.UpdateTimeElapsed (GetTrack ().GetTrackLength());
+	}
+
+	protected override void TrackReachedEnd (){
+		FireRemainingEvents();
 		base.TrackReachedEnd ();
 	}
 

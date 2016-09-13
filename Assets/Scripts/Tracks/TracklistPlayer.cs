@@ -140,6 +140,16 @@ public class TracklistPlayer : WrappedTrackOutput{
 		return (index == trackIndex || index == trackIndex + 1);
 	}
 
+	public void SkipToNextTrack(){
+		Diglbug.Log ("Skipping track... ", PrintStream.AUDIO_PLAYBACK);
+		bool shouldSkip = (currentOutput.GetTrack () is LoopingTrack);
+		currentOutput.Skipped (); // just used for FireRemainingEvents.
+		if (shouldSkip) {
+			PlayNextTrack();
+		}
+		// this is firing the event to begin the next track. Looping don't, though.
+	}
+
 	public void PlayNextTrack(){
 		PlayTrackEntryAtIndex (trackIndex+1);
 	}
@@ -165,6 +175,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 
 	private void HandlePlayRequest(TracklistEntry entry){
 		float fadeTime = entry.GetEntranceFadeTime ();
+		ITrack nextTrack = entry.GetTrack ();
 
 		currentOutput.FadeOut (fadeTime);
 		TrackOutput nextOutput = null;
@@ -174,20 +185,24 @@ public class TracklistPlayer : WrappedTrackOutput{
 			nextOutput = multiPlayer;
 			multiPlayer.SwitchTracks ();
 		}
-		if (entry is LoopingTracklistEntry) {
-			// don't clear the expected payload
-		} else {
-			BLE.Instance.Manager.ClearExpectedPayload ();
-		}
+//		if (entry is LoopingTracklistEntry) {
+//			// don't clear the expected payload
+//		} else {
+//			BLE.Instance.Manager.ClearExpectedPayload ();
+//		}
 		// This even fires as the track is fading out, not strictly as it ends. Good enough for our purposes.
 		if (TrackEndsEvent != null) {
 			TrackEndsEvent (currentOutput.GetTrack ());
 		}
 		currentOutput = nextOutput;
-		currentOutput.SetTrack (entry.GetTrack());
+		currentOutput.SetTrack (nextTrack);
+
+		if (nextTrack.IsLoaded() == false) {
+			LoadTrack (nextTrack);
+		}
 		currentOutput.FadeIn(fadeTime);
 		if (NewTrackBeginsEvent != null) {
-			NewTrackBeginsEvent (entry.GetTrack ());
+			NewTrackBeginsEvent (nextTrack);
 		}
 	}
 

@@ -12,12 +12,14 @@ public class LanguageViewer : MonoBehaviour{
 	}
 
 	private void ReFindObjects(){
-		GameObject[] allRoots = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
-		languageObjects.Clear ();
-		for (int k = 0; k < allRoots.Length; k++) {
-			LanguageElement[] els = allRoots [k].GetComponentsInChildren<LanguageElement> (true);
-			for (int j = 0; j < els.Length; j++) {
-				languageObjects.Add (els [j]);
+		if (SceneManager.GetActiveScene ().isLoaded) {
+			GameObject[] allRoots = UnityEngine.SceneManagement.SceneManager.GetActiveScene ().GetRootGameObjects ();
+			languageObjects.Clear ();
+			for (int k = 0; k < allRoots.Length; k++) {
+				LanguageElement[] els = allRoots [k].GetComponentsInChildren<LanguageElement> (true);
+				for (int j = 0; j < els.Length; j++) {
+					languageObjects.Add (els [j]);
+				}
 			}
 		}
 
@@ -32,9 +34,20 @@ public class LanguageViewer : MonoBehaviour{
 
 	private void OnValidate(){
 		ReFindObjects();
+		SwitchFoundObjects ();
+	}
+
+	private void SwitchFoundObjects(){
 		for (int k = 0; k < languageObjects.Count; k++) {
 			languageObjects [k].SwitchToLanguage (language);
 		}
+	}
+
+	public void SetLanguage(Language l){
+		Diglbug.Log ("Setting language: " + l);
+		language = l;
+		ReFindObjects ();
+		SwitchFoundObjects ();
 	}
 
 }

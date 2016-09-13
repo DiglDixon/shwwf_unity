@@ -11,8 +11,14 @@ public class BLE : ConstantSingleton<BLE>{
 	public delegate void NewSignalFoundDelegate(Signal signal);
 	public NewSignalFoundDelegate NewSignalFoundEvent;
 
-	private float[] payloadDisableTimes;
-	private float payloadDisableTime = 1.5f;
+	private bool ignoreJockeyProtection = false;
+
+	// parallel arrays - bit nasty, but work for now.
+	private Signal currentSignal = SignalUtils.NullSignal;
+	private List<float> signalDisableTimes = new List<float>();
+	private List<Signal> signalsDisabled = new List<Signal>();
+
+	private float signalDisableTime = 1.5f;
 
 	private PayloadEventSystem[] eventSystems;
 
@@ -37,13 +43,31 @@ public class BLE : ConstantSingleton<BLE>{
 		SceneManager.sceneLoaded += FindSceneEventSystems;
 
 
-		payloadDisableTimes = new float[Enum.GetNames(typeof(Payload)).Length];
+//		payloadDisableTimes = new float[Enum.GetNames(typeof(Payload)).Length];
+	}
+
+	public void EnableJockeyProtection(){
+		ignoreJockeyProtection = false;
+	}
+
+	public void DisableJockeyProtection(){
+		ignoreJockeyProtection = true;
 	}
 
 	private void Update(){
 		float t = Time.deltaTime;
-		for (int k = 0; k < payloadDisableTimes.Length; k++) {
-			payloadDisableTimes [k] = Mathf.Max (payloadDisableTimes [k] - t, 0f);
+//		Diglbug.Log ("SIZE: " + signalDisableTimes.Count);
+		for (int i = signalDisableTimes.Count-1; i >= 0; i--) {
+			signalDisableTimes [i] -= t;
+//			Diglbug.Log ("Iterating: " + signalsDisabled [i].GetPrint () + " : " + signalDisableTimes [i], PrintStream.DEBUGGING);
+			if (signalDisableTimes [i] <= 0f) {
+//				if (signalsDisabled [i].Equals (currentSignal)) {
+//					Diglbug.Log ("Removing currenSignal " + currentSignal.GetPrint (), PrintStream.SIGNALS);
+//					currentSignal = nullSignal;
+//				}
+				signalDisableTimes.RemoveAt (i);
+				signalsDisabled.RemoveAt (i);
+			}
 		}
 	}
 
@@ -58,36 +82,43 @@ public class BLE : ConstantSingleton<BLE>{
 
 	private void ManagerReceivedSignal(Signal signal){
 
-		if(SignalIsNew(signal)){
+		if (SignalIsNew (signal)) {
 			NewSignalFound (signal);
 		}
 
-		ResetDisableTime (signal.GetPayload ());
+		ResetDisableTime (signal);
 	}
 
-	private void ResetDisableTime(Payload p){
-		payloadDisableTimes [(int)p] = payloadDisableTime;
+	private void ResetDisableTime(Signal s){
+		for (int k = 0; k < signalsDisabled.Count; k++) {
+			if (s.Equals (signalsDisabled [k])) {
+				signalDisableTimes [k] = signalDisableTime;
+				break;
+			}
+		}
 	}
 
 	private bool SignalIsNew(Signal s){
-//		for (int k = 0; k < lastSignals.Length; k++) {
-//			if (s.Equals (lastSignals [k]))
-//				return false;
-//		}
-//		return true;
-		return payloadDisableTimes [(int)s.GetPayload ()] == 0f;
-
-//		}
-//		if (lastSignal == null) {
-//			return true;
-//		} else {
-//			return s.Equals (lastSignal);
-//		}
+		if (s.Equals (currentSignal)) {
+			return false;
+		}
+		if (ignoreJockeyProtection) {
+			return true;
+		}
+		for (int k = 0; k < signalsDisabled.Count; k++) {
+			if (s.Equals (signalsDisabled [k]))
+				return false;
+		}
+		return true;
 	}
 
 	private void NewSignalFound(Signal s){
 		Diglbug.Log ("New signal received: " + s.GetPrint (), PrintStream.SIGNALS);
 		Diglbug.LogMobile("UNIQUE: "+s.GetPrint(), "FIRE");
+		signalsDisabled.Add (s);
+		signalDisableTimes.Add (signalDisableTime);
+		currentSignal = s;
+//		currentSignal = s;
 		if (NewSignalFoundEvent != null) {
 			NewSignalFoundEvent (s);
 		}

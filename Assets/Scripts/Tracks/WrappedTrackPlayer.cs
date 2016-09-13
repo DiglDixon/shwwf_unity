@@ -86,4 +86,8 @@ public abstract class WrappedTrackOutput : TrackOutput{
 		WrappedOutput.CutOut ();
 	}
 
+	public override void Skipped(){
+		WrappedOutput.Skipped ();
+	}
+
 }

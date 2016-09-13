@@ -6,7 +6,18 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 	public Mode startingMode;
 	public Mode Mode{ get; private set; }
 
-	public Signature Signature{ get; set; }
+	private Signature _Signature;
+	public Signature Signature {
+		get {
+			return _Signature;
+		}
+		set {
+			Diglbug.Log("Setting signature to: "+value);
+			_Signature = value;
+			BLE.Instance.Manager.SetSendingSignature (Signature);
+			BLE.Instance.Manager.SetReceivedSignature (Signature);
+		}
+	}
 
 	private Mode[] possibleModes;
 

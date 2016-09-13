@@ -98,7 +98,7 @@ public abstract class EventTrack : AbstractTrack{
 		
 		for (int i = events.Count - 1; i >= 0; i--) {
 			if (EventShouldOccur(events[i], previousSourceTime, currentTime)) {
-				Diglbug.Log ("Event fired for " + name + " at time " + currentTime, PrintStream.DELEGATES);
+				Diglbug.Log ("Event fired for " + name + " at time " + currentTime+" (def:"+events[i].time+")", PrintStream.DELEGATES);
 				events [i].function ();
 			}
 		}

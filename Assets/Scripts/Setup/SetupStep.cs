@@ -4,14 +4,42 @@ using System.Collections;
 public abstract class SetupStep : MonoBehaviour {
 
 	private ShowSetup callback;
-	private SetupStepDisplay display;
+	public SetupStepDisplay display;
+
+	public bool updateAudienceInstructions = true;
+	public bool updateGuideInstructions = true;
 
 	[TextArea]
-	public string description;
+	public string descriptionEnglish;
+	[TextArea]
+	public string descriptionMandarin;
+
+	[TextArea]
+	public string descriptionEnglishGuide;
+	[TextArea]
+	public string descriptionMandarinGuide;
+
+	public string description{ get; private set; }
+
+	void Awake(){
+		
+	}
 
 	public virtual void Activate(ShowSetup callback){
+		if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
+			if (updateGuideInstructions) {
+				description = Variables.Instance.language == Language.ENGLISH ? descriptionEnglishGuide : descriptionMandarinGuide;
+			}
+		} else {
+			if (updateAudienceInstructions) {
+				description = Variables.Instance.language == Language.ENGLISH ? descriptionEnglish : descriptionMandarin;
+			}
+		}
 		gameObject.SetActive (true);
 		ResetConditions ();
+		if (display != null) {	
+			display.SetIncomplete ();
+		}
 		this.callback = callback;
 	}
 
@@ -21,10 +49,21 @@ public abstract class SetupStep : MonoBehaviour {
 
 	protected virtual void Update(){
 		if (SetupCompleteCondition ()) {
+			ConditionCompleted ();
 			callback.SetupStepComplete ();
-			SetDisplayValue (true);
+			if (display != null) {
+				display.SetComplete ();
+			}
 			Deactivate ();
 		}
+	}
+
+	protected virtual void ConditionCompleted(){
+		//
+	}
+
+	public virtual void SkipStep(){
+		//
 	}
 
 	// This may have been unnecessary - if we're using scene loads these should reset themselves.
@@ -32,17 +71,7 @@ public abstract class SetupStep : MonoBehaviour {
 
 	public void SetDisplay(SetupStepDisplay display){
 		this.display = display;
-		SetDisplayValue (false); // this should be elsewhere.
-	}
-
-	protected void SetDisplayValue(bool completed){
-		if (display) {
-			if (completed) {
-				display.SetComplete ();
-			} else {
-				display.SetIncomplete ();
-			}
-		}
+		display.SetIdle ();
 	}
 
 	protected abstract bool SetupCompleteCondition ();

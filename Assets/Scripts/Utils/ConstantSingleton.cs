@@ -21,7 +21,7 @@ public class ConstantSingleton<T> : MonoBehaviour where T : MonoBehaviour{
 			SetInstance (gameObject);
 		} else {
 			if (_instance.gameObject == gameObject) {
-				Debug.Log ("Found self as existing singleton.");
+				Debug.Log ("Found self as existing singleton: "+name);
 			} else {
 				Debug.Log ("Found foreign existing singleton. Removed.");
 				Destroy (gameObject);
@@ -34,6 +34,7 @@ public class ConstantSingleton<T> : MonoBehaviour where T : MonoBehaviour{
 	{
 		get
 		{
+
 //			if (applicationIsQuitting) {
 //				Debug.LogWarning("[Singleton] Instance '"+ typeof(T) +
 //					"' already destroyed on application quit." +
@@ -46,7 +47,8 @@ public class ConstantSingleton<T> : MonoBehaviour where T : MonoBehaviour{
 
 				if (_instance == null)
 				{
-					CreateInstance ();
+					Diglbug.LogError ("ConstantSingleton not previously instantiated - these should be spawns and DDOLed. ");
+					//CreateInstance ();
 				} else {
 					Debug.Log("[Singleton] Using instance already created: " +
 						_instance.gameObject.name);

@@ -2,15 +2,16 @@
 
 public class LoadingSetupStep : SetupStep{
 
-	public AudioClip clipToLoad;
+	public TracklistPlayer player;
+//	public TracklistEntry entryTrack;
 
 	public override void Activate (ShowSetup callback){
 		base.Activate (callback);
-		clipToLoad.LoadAudioData ();
+		// loaded in the quiet step now
 	}
 
 	protected override bool SetupCompleteCondition (){
-		return (clipToLoad.loadState == AudioDataLoadState.Loaded);
+		return (player.GetTrack().IsLoaded());
 	}
 
 	protected override void ResetConditions (){

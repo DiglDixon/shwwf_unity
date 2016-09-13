@@ -10,6 +10,9 @@ public class LerpFloat : Lerpable {
 	public delegate void LerpEndsValueCallback(float endValue);
 	public event LerpEndsValueCallback LerpEndsValueEvents;
 
+	public delegate void LerpStepValueDelegate(float value);
+	public event LerpStepValueDelegate LerpStepValueEvent;
+
 	private float currentValue;
 
 	public void SetLerpFloatValue(float value){
@@ -23,6 +26,9 @@ public class LerpFloat : Lerpable {
 	}
 
 	protected virtual void LerpStepValue(float value){
+		if (LerpStepValueEvent != null) {
+			LerpStepValueEvent (value);
+		}
 	}
 
 	public void AddLerpEndsCallback(LerpEndsValueCallback callback){

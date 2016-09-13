@@ -4,16 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class GuideMode : Mode{
 
-	private string modeName = "guide";
-
-	public override string ModeName {
+	public override ModeName ModeName {
 		get {
-			return modeName;
+			return ModeName.GUIDE;
 		}
 	}
 
 	public override void BeginShow (){
-		SceneManager.LoadScene (Scenes.Setup);
+		SceneManager.LoadScene (Scenes.MonoScene);
 	}
 
 	public override void ModeSelected (){

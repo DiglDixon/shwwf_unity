@@ -5,9 +5,8 @@ public class DesktopBluetoothManager : BluetoothManager{
 	Signal currentSendingSignal = null;
 	public float latencyMin = 0.05f;
 	public float latencyMax = 4f;
+	public bool useLatencySimulation = false;
 	public bool holdingLatency = false;
-
-	private bool sending = false;
 
 	public override void SendSignal (Signal s){
 		Beacon b = s.ToBeacon ();
@@ -16,16 +15,18 @@ public class DesktopBluetoothManager : BluetoothManager{
 	}
 
 	private IEnumerator RunFakeReceiving(){
-		if (holdingLatency) {
-			Diglbug.Log ("Holding simulation latency...", PrintStream.SIGNALS);
-			while (holdingLatency) {
-				yield return null;
+		if (useLatencySimulation) {
+			if (holdingLatency) {
+				Diglbug.Log ("Holding simulation latency...", PrintStream.SIGNALS);
+				while (holdingLatency) {
+					yield return null;
+				}
+				Diglbug.Log ("Released simulation latency.", PrintStream.SIGNALS);
+			} else {
+				float latencySim = GetSimulatedLatency ();
+				Diglbug.Log ("Simulating signal latency: " + latencySim, PrintStream.SIGNALS);
+				yield return new WaitForSeconds (latencySim);
 			}
-			Diglbug.Log ("Released simulation latency.", PrintStream.SIGNALS);
-		} else {
-			float latencySim = GetSimulatedLatency();
-			Diglbug.Log ("Simulating signal latency: " + latencySim, PrintStream.SIGNALS);
-			yield return new WaitForSeconds (latencySim);
 		}
 
 		while (true) {

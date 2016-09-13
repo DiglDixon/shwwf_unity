@@ -5,8 +5,11 @@ using System.Collections.Generic;
 [RequireComponent (typeof(EnsureActorSets))]
 public class ActorPlayer : MonoBehaviour{
 
-	public ActorActSet currentActorSet;
+	private ActorActSet currentActorSet;
 	private ActorActSet[] actorSets;
+
+	public AudioSource sfxSource;
+	public AudioClip sceneBeginsSound;
 
 	public TracklistPlayer player;
 
@@ -23,15 +26,23 @@ public class ActorPlayer : MonoBehaviour{
 	public delegate void ActorEndsDelegate(ActorActSet aas);
 	public event ActorEndsDelegate ActorEndsEvent;
 
+	public delegate void IgnoredClearedDelegate();
+	public event IgnoredClearedDelegate IgnoredClearedEvent;
+
+	public delegate void SignalIgnoredDelegate(Signal s);
+	public event SignalIgnoredDelegate SignalIgnoreAddedEvent;
+
+	private Signature currentGroupActingTo;
+
 	private void Awake(){
 		actorSets = GetComponentsInChildren<ActorActSet>();
 		eventSystem.ExternallyDefinedEvent += SignalReceived;
 	}
 
-	private IEnumerator Start(){
-		yield return new WaitForSeconds (1f);
-		SetActor (currentActorSet.actor);
-	}
+//	private IEnumerator Start(){
+//		yield return new WaitForSeconds (1f);
+////		SetActor (currentActorSet.actor);
+//	}
 
 	public void SetActor(Actor actor){
 		currentActorSet = actorSets [(int)actor];
@@ -43,6 +54,7 @@ public class ActorPlayer : MonoBehaviour{
 	}
 
 	private void ResetCurrentActor(){
+		SetCurrentGroup(Signature.NONE);
 		player.PrepareTrack (currentActorSet.GetFirstTrackEntry ());
 	}
 
@@ -63,18 +75,23 @@ public class ActorPlayer : MonoBehaviour{
 
 	public void SignalReceived(Signal s){
 		if (currentActorSet != null) {
-			
-			if (SignalIsIgnored (s)) {
-				Diglbug.Log ("Rejected signal "+s.GetPrint()+" as it it's ignored", PrintStream.ACTORS);
-			} else {
-				Act actToBegin = GetActSignalStarts (s);
-				if (actToBegin != null) {
-					BeginAct (actToBegin);
-					ignoredSignals.Add (s); // cache this here so we don't re-trigger if a foreign signal jockeys us.
-					Diglbug.Log ("Accepted new signal "+s.GetPrint());
+			if (currentGroupActingTo == Signature.NONE || currentGroupActingTo == s.GetSignature ()) {
+				if (SignalIsIgnored (s)) {
+					Diglbug.Log ("Rejected signal " + s.GetPrint () + " as it it's ignored", PrintStream.ACTORS);
 				} else {
-					Diglbug.Log ("Rejected signal "+s.GetPrint()+" and it's not relevant for this actor", PrintStream.ACTORS);
+					Act actToBegin = GetActSignalStarts (s);
+					if (actToBegin != null) {
+						BeginAct (actToBegin);
+						SetCurrentGroup (s.GetSignature ());
+						AddIgnoredSignal (s); // cache this here so we don't re-trigger if a foreign signal jockeys us.
+						sfxSource.PlayOneShot(sceneBeginsSound);
+						Diglbug.Log ("Accepted new signal " + s.GetPrint ());
+					} else {
+						Diglbug.Log ("Rejected signal " + s.GetPrint () + " and it's not relevant for this actor", PrintStream.ACTORS);
+					}
 				}
+			} else {
+				Diglbug.Log ("Bounced a foreign group signal");
 			}
 		}
 	}
@@ -102,6 +119,9 @@ public class ActorPlayer : MonoBehaviour{
 	public void ClearPreviousSignals(){
 		Diglbug.Log ("Clearing " + ignoredSignals.Count+" previous signals...", PrintStream.ACTORS);
 		ignoredSignals.Clear ();
+		if (IgnoredClearedEvent != null) {
+			IgnoredClearedEvent ();
+		}
 	}
 
 	public int PreviousSignalsCount(){
@@ -114,6 +134,18 @@ public class ActorPlayer : MonoBehaviour{
 		if (ActorEndsEvent != null) {
 			ActorEndsEvent (set);
 		}
+	}
+
+	private void AddIgnoredSignal(Signal s){
+		ignoredSignals.Add (s);
+		if (SignalIgnoreAddedEvent != null) {
+			SignalIgnoreAddedEvent (s);
+		}
+
+	}
+
+	private void SetCurrentGroup(Signature s){
+		currentGroupActingTo = s;
 	}
 
 }

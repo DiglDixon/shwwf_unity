@@ -4,8 +4,8 @@ using System.Collections;
 
 public class SignatureSelector : MonoBehaviour {
 
-	public Image selectedSignatureImage;
-	public Text selectedSignatureText;
+	public Image[] selectedSignatureImages;
+	public TextToSignatureString signatureText;
 
 	void Awake(){
 		SignatureGridItem[] items = GetComponentsInChildren<SignatureGridItem> ();
@@ -19,8 +19,10 @@ public class SignatureSelector : MonoBehaviour {
 
 		Diglbug.Log ("Selected Signature " + sig);
 
-		selectedSignatureImage.overrideSprite = selected.SignatureSprite ();
-		selectedSignatureText.text = sig.ToString();
+		for (int k = 0; k < selectedSignatureImages.Length; k++) {
+			selectedSignatureImages[k].color = selected.SignatureSpriteColour ();
+		}
+		signatureText.UpdateValue (sig);
 
 		ShowMode.Instance.Signature = sig;
 

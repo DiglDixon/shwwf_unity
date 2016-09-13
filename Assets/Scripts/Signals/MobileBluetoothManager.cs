@@ -14,6 +14,8 @@ public class MobileBluetoothManager : BluetoothManager{
 	private float pluginReinitialiseTimeout = 4f;
 	private bool isReceiving = false;
 
+	private bool canSend = false;
+
 	private void Awake(){
 	}
 
@@ -28,6 +30,7 @@ public class MobileBluetoothManager : BluetoothManager{
 
 	private void StateChangeEvent(BluetoothLowEnergyState state){
 		Debug.Log ("State changed: " + state);
+		canSend = iBeaconServer.checkTransmissionSupported();
 		validateReady = state == BluetoothLowEnergyState.POWERED_ON;
 		if (state == BluetoothLowEnergyState.POWERED_OFF) {
 			Diglbug.Log ("BLE OFF. Asking the user to switch it back on.", PrintStream.SIGNALS);
@@ -127,11 +130,13 @@ public class MobileBluetoothManager : BluetoothManager{
 	}
 
 	public override void SendSignal(Signal s){
-		Diglbug.LogMobile("Start send", "PIPE");
-		pipe.Digl_Stop ();
-		pipe.Digl_SetSendBeacon (s.ToBeacon ());
-		pipe.Digl_SetSwitch (BroadcastMode.send);
-		pipe.Digl_Start ();
+		Diglbug.LogMobile ("Start send", "PIPE");
+		if (canSend) {
+			pipe.Digl_Stop ();
+			pipe.Digl_SetSendBeacon (s.ToBeacon ());
+			pipe.Digl_SetSwitch (BroadcastMode.send);
+			pipe.Digl_Start ();
+		}
 		AutoAcceptOwnSignal (s);
 		DisableReinitialiseCountdown ();
 	}

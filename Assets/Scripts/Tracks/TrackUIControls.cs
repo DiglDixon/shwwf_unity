@@ -106,7 +106,7 @@ public class TrackUIControls : MonoBehaviour{
 	}
 
 	public void SkipTrackCurrentOutput(){
-		currentOutput.PlayNextTrack ();
+		currentOutput.SkipToNextTrack ();
 	}
 
 	private void SetPlaying(){

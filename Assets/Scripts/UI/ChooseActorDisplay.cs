@@ -5,8 +5,15 @@ using System.Collections;
 
 public class ChooseActorDisplay : MonoBehaviour {
 
+	public UILightbox actorSelectionLightbox;
 	public ActorPlayer actorPlayer;
 	private ChooseActorDisplayItem currentItem;
+
+	private Actor pendingActor;
+
+	public void Awake(){
+		Open ();
+	}
 
 	public void OptionSelected(ChooseActorDisplayItem item){
 		if (currentItem != null && item != currentItem) {
@@ -14,14 +21,20 @@ public class ChooseActorDisplay : MonoBehaviour {
 		}
 		currentItem = item;
 		currentItem.Chosen ();
-		actorPlayer.SetActor (currentItem.actor);
+		pendingActor = currentItem.actor;
+//		actorPlayer.SetActor ();
+	}
+
+	public void SelectionConfirmed(){
+		actorPlayer.SetActor (pendingActor);
+		Close ();
 	}
 
 	public void Open(){
-		gameObject.SetActive (true);
+		actorSelectionLightbox.Open ();
 	}
 
 	public void Close(){
-		gameObject.SetActive (false);
+		actorSelectionLightbox.Close ();
 	}
 }

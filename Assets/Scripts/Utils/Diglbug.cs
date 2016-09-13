@@ -48,7 +48,7 @@ public static class Diglbug{
 	private static MobileDebugger mobileDebugger;
 
 	public static void LogMobile(string message, string channel){
-		if (!Variables.debugBuild) {
+		if (!Variables.Instance.debugBuild) {
 			return;
 		}
 		if (mobileDebugger == null) {

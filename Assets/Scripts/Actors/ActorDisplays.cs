@@ -18,19 +18,39 @@ public class ActorDisplays : MonoBehaviour{
 
 	private ActorActSet currentActorSet;
 
+	public IgnoredSignatureDisplay[] ignoredDisplays;
+
 	private void Awake(){
 		assistantSoundSource = GetComponent<AudioSource> ();
+		ClearedIgnored ();
 	}
 
 	private void OnEnable(){
 		actorPlayer.ActorChangedEvent += ActorChanged;
 		actorPlayer.ActorBeginsActEvent += ActorBeganAct;
 		actorPlayer.ActorEndsEvent += ActorComplete;
+		actorPlayer.SignalIgnoreAddedEvent += IgnoredSignal;
+		actorPlayer.IgnoredClearedEvent += ClearedIgnored;
 	}
 	private void OnDisable(){
 		actorPlayer.ActorChangedEvent -= ActorChanged;
 		actorPlayer.ActorBeginsActEvent -= ActorBeganAct;
 		actorPlayer.ActorEndsEvent -= ActorComplete;
+		actorPlayer.IgnoredClearedEvent -= ClearedIgnored;
+	}
+
+	private void IgnoredSignal(Signal s){
+		for (int k = 0; k < ignoredDisplays.Length; k++) {
+			if (ignoredDisplays [k].signature == s.GetSignature ()) {
+				ignoredDisplays [k].SetIgnored (true);
+			}
+		}
+	}
+
+	private void ClearedIgnored(){
+		for (int k = 0; k < ignoredDisplays.Length; k++) {
+			ignoredDisplays [k].SetIgnored (false);
+		}
 	}
 
 	private void ActorChanged(ActorActSet aas){

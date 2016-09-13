@@ -4,7 +4,7 @@ public abstract class AbstractTrackPlayer : TrackOutput{
 
 
 	private float stopMonitorTime = 1f;
-	private bool aboutToStop = false;
+	private bool expectedToStopSoon = false;
 
 	private bool paused = false;
 
@@ -31,13 +31,13 @@ public abstract class AbstractTrackPlayer : TrackOutput{
 
 	protected virtual void Update(){
 		// we assume it's
-		if (!IsPlaying () && aboutToStop) {
+		if (!IsPlaying () && expectedToStopSoon) {
 			Diglbug.Log ("Found rough Stop occurance "+name, PrintStream.AUDIO_PLAYBACK);
-			aboutToStop = false;
+			expectedToStopSoon = false;
 			TrackReachedEnd ();
 		}
 		if (IsPlaying ()) {
-			aboutToStop = GetTimeRemaining () < stopMonitorTime;
+			expectedToStopSoon = GetTimeRemaining () < stopMonitorTime;
 		}
 	}
 

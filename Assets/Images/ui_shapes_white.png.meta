@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 67c8c8a10ae564bd5aa15b3015a9d1b1
-timeCreated: 1473655423
+timeCreated: 1473719495
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -47,6 +47,18 @@ TextureImporter:
     21300080: if_tri_button_middle_small
     21300082: if_tri_button_left_small
     21300084: if_banner_small
+    21300086: if_col_red
+    21300088: if_col_orange
+    21300090: if_col_yellow
+    21300092: if_col_blue
+    21300094: if_col_green
+    21300096: if_col_purple
+    21300098: if_audio_icon_stopped
+    21300100: if_input_small_rim
+    21300102: if_group_icon_large
+    21300104: if_audio_off_icon
+    21300106: if_uk_flag
+    21300108: if_china_flag
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -496,6 +508,162 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 27, y: 26, z: 23, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_col_red
+      rect:
+        serializedVersion: 2
+        x: 1295
+        y: 1184
+        width: 64
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_col_orange
+      rect:
+        serializedVersion: 2
+        x: 1393
+        y: 1183
+        width: 64
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_col_yellow
+      rect:
+        serializedVersion: 2
+        x: 1491
+        y: 1183
+        width: 64
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_col_blue
+      rect:
+        serializedVersion: 2
+        x: 1293
+        y: 1085
+        width: 64
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_col_green
+      rect:
+        serializedVersion: 2
+        x: 1392
+        y: 1085
+        width: 64
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_col_purple
+      rect:
+        serializedVersion: 2
+        x: 1492
+        y: 1087
+        width: 64
+        height: 67
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_audio_icon_stopped
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 457
+        width: 43
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_input_small_rim
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 1290
+        width: 271
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 27, y: 26, z: 28, w: 24}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_group_icon_large
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 147
+        width: 428
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_audio_off_icon
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 567
+        width: 101
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_uk_flag
+      rect:
+        serializedVersion: 2
+        x: 1229
+        y: 26
+        width: 369
+        height: 234
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_china_flag
+      rect:
+        serializedVersion: 2
+        x: 1628
+        y: 26
+        width: 369
+        height: 234
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     outline: []

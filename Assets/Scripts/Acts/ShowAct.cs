@@ -1,28 +1,53 @@
 ﻿using System;
+using UnityEngine;
 
 public class ShowAct : Act{
 
-	private float expectedPayoadProgress;
-	private float inverse_expectedPayloadProgress;
 	public EventTracklistEntry expectingPayloadFrom;
 	public float expectedTime = 5f;
 	public bool isTimeFromEnd = true;
 
+	private float expectedPayoadProgress;
+	private float inverse_expectedPayloadProgress;
 
+	private float totalTimeUntilExpected = 0f;
+
+	// TODO: Shift these delegates somewhere much better...
 	public override void ActChangedTo(){
-
+		BLE.Instance.Manager.ClearExpectedPayload ();
 		BLE.Instance.Manager.SetUpcomingPayload (exitPayload);
-
 		SetExpectedPayloadProgress ();
 		if (isTimeFromEnd) {
 			expectingPayloadFrom.AddStateEventAtTimeRemaining (ExpectedTimeReached, expectedTime);
 		} else {
 			expectingPayloadFrom.AddStateEventAtTime (ExpectedTimeReached, expectedTime);
 		}
+
+		RecalculateTotalTimeUntilExpected ();
+
+
+	}
+
+	private void RecalculateTotalTimeUntilExpected(){
+		TracklistEntry te;
+		totalTimeUntilExpected = 0f;
+		for (int k = 0; k < trackEntries.Length; k++) {
+			te = trackEntries [k];
+			if (te == expectingPayloadFrom) {
+				totalTimeUntilExpected += (isTimeFromEnd ? te.GetTrackLength () - expectedTime : expectedTime);
+				break;
+			} else {
+				totalTimeUntilExpected += te.GetTrackLength ();
+			}
+		}
 	}
 
 	private void ExpectedTimeReached(){
 		BLE.Instance.Manager.PayloadExpected (exitPayload);
+	}
+
+	public float GetTimeUntilExpected(){
+		return Mathf.Max (totalTimeUntilExpected - GetActTimeElapsed (), 0f);
 	}
 
 	private void SetExpectedPayloadProgress(){

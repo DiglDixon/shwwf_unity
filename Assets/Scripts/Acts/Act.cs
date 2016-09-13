@@ -38,6 +38,10 @@ public abstract class Act : EnsureDefinedActChild{
 
 	}
 
+	public virtual void Initialise(){
+		//
+	}
+
 	public virtual void Begin(){
 		player.PlayTrackEntry (trackEntries [0]);
 	}

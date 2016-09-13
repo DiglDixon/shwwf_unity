@@ -2,7 +2,7 @@
 
 public class MobileVideoTrack : VideoTrack{
 	
-	public MediaPlayerCtrl controls;
+	public MediaPlayerCtrl controls{ get; private set;}
 	public float manualVideoLength;
 	public string videoFileName = "";
 	private float inverse_trackLength;
