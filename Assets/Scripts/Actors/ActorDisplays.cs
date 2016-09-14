@@ -21,7 +21,7 @@ public class ActorDisplays : MonoBehaviour{
 	public SignatureColourDisplay[] ignoredDisplays;
 
 	public SignatureColourDisplay[] currentGroupDisplays;
-	public TextToSignatureString currentGroupSignatureText;
+	public TextToSignatureString[] currentGroupSignatureTexts;
 
 	private void Awake(){
 		assistantSoundSource = GetComponent<AudioSource> ();
@@ -66,7 +66,9 @@ public class ActorDisplays : MonoBehaviour{
 				currentGroupDisplays [k].SetColourVisible (false);
 			}
 		}
-		currentGroupSignatureText.UpdateValue (s);
+		for (int k = 0; k < currentGroupSignatureTexts.Length; k++) {
+			currentGroupSignatureTexts[k].UpdateValue (s);
+		}
 	}
 
 	private void ActorChanged(ActorActSet aas){

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 [RequireComponent (typeof(EnsureActorSets))]
 public class ActorPlayer : MonoBehaviour{
 
-	private ActorActSet currentActorSet;
+	public ActorActSet currentActorSet{ get; private set;}
 	private ActorActSet[] actorSets;
 
 	public AudioSource sfxSource;
@@ -57,6 +57,11 @@ public class ActorPlayer : MonoBehaviour{
 	}
 
 	private void ResetCurrentActor(){
+		SetCurrentGroup(Signature.NONE);
+		player.PrepareTrack (currentActorSet.GetFirstTrackEntry ());
+	}
+
+	public void CancelAct(){ // same as reset for now.
 		SetCurrentGroup(Signature.NONE);
 		player.PrepareTrack (currentActorSet.GetFirstTrackEntry ());
 	}

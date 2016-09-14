@@ -26,7 +26,13 @@ public class ChooseActorDisplay : MonoBehaviour {
 	}
 
 	public void SelectionConfirmed(){
-		actorPlayer.SetActor (pendingActor);
+		if (actorPlayer.currentActorSet != null) {
+			if (pendingActor != actorPlayer.currentActorSet.actor) {
+				actorPlayer.SetActor (pendingActor);
+			}
+		} else {
+			actorPlayer.SetActor (pendingActor);
+		}
 		Close ();
 	}
 
