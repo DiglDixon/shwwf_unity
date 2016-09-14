@@ -25,11 +25,11 @@ public static class EnumDisplayNames{
 		}
 	}
 
-	public static string DefinedActName(Signature s){
+	public static string DefinedActName(DefinedAct da){
 		if (Variables.Instance.language == Language.ENGLISH) {
-			return EnumDisplayNamesEnglish.SignatureName (s);
+			return EnumDisplayNamesEnglish.DefinedActName (da);
 		} else {
-			return EnumDisplayNamesMandarin.SignatureName (s);
+			return EnumDisplayNamesMandarin.DefinedActName (da);
 		}
 	}
 

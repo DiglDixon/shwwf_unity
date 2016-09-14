@@ -69,6 +69,10 @@ public class ActorActSet : EnsureActSetChild{
 		}
 	}
 
+	public Act GetFirstAct(){
+		return acts [0];
+	}
+
 	private void SetComplete(){
 		Diglbug.Log ("ActorSet " + name + " complete!", PrintStream.ACTORS);
 		if (SetCompleteEvent != null) {

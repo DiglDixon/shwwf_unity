@@ -25,7 +25,7 @@ public class CancelActButton : MonoBehaviour {
 	}
 
 	private void NewActingBegan(Signature s){
-		button.interactable = (s == Signature.NONE);
+		button.interactable = (s != Signature.NONE);
 		if (s == Signature.NONE) {
 			for(int k = 0; k<toEnableWhenActing.Length; k++){
 				toEnableWhenActing [k].SetActive (false);

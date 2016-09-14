@@ -59,11 +59,11 @@ public class ActorPlayer : MonoBehaviour{
 	private void ResetCurrentActor(){
 		SetCurrentGroup(Signature.NONE);
 		player.PrepareTrack (currentActorSet.GetFirstTrackEntry ());
+		ClearPreviousSignals ();
 	}
 
-	public void CancelAct(){ // same as reset for now.
-		SetCurrentGroup(Signature.NONE);
-		player.PrepareTrack (currentActorSet.GetFirstTrackEntry ());
+	public void CancelAct(){
+		ResetCurrentActor ();
 	}
 
 	private void OnEnable(){

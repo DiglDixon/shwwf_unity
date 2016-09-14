@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 [RequireComponent (typeof(AudioSource))]
 public class ActorDisplays : MonoBehaviour{
@@ -7,7 +8,7 @@ public class ActorDisplays : MonoBehaviour{
 	public Slider progressSlider;
 	public Slider[] markerSliders;
 
-//	public Text waitingForNextSceneText;
+	public Text statusText;
 
 	public ActorPlayer actorPlayer;
 
@@ -22,6 +23,8 @@ public class ActorDisplays : MonoBehaviour{
 
 	public SignatureColourDisplay[] currentGroupDisplays;
 	public TextToSignatureString[] currentGroupSignatureTexts;
+
+	public Button cancelChooseActorButton;
 
 	private void Awake(){
 		assistantSoundSource = GetComponent<AudioSource> ();
@@ -78,11 +81,14 @@ public class ActorDisplays : MonoBehaviour{
 		}
 		currentActorSet = aas;
 		currentActorSet.ActContentCompleteEvent += MarkerComplete;
-		actorName.text = currentActorSet.actor.ToString ();
+
+		actorName.text =  EnumDisplayNames.ActorName(currentActorSet.actor);
 
 		SetMarkersFromActorActSet (currentActorSet);
-
+		actName.text = EnumDisplayNames.DefinedActName(aas.GetFirstAct().definedAct);
+		SetWaiting ();
 		assistantSoundSource.Play ();
+		cancelChooseActorButton.gameObject.SetActive (true);
 	}
 
 	private void SetMarkersFromActorActSet(ActorActSet aas){
@@ -102,18 +108,30 @@ public class ActorDisplays : MonoBehaviour{
 		}
 	}
 
+	private void SetWaiting(){
+		statusText.text = Variables.Instance.language == Language.ENGLISH ? "Waiting for scene to begin…" : "等待下一幕，请稍后";
+	}
+
 	private void ActorBeganAct(Act a){
-		actName.text = a.name; // TODO some sort of display name.
+		actName.text = EnumDisplayNames.DefinedActName(a.definedAct);
 		assistantSoundSource.Stop ();
+
+		statusText.text = Variables.Instance.language == Language.ENGLISH ? "Scene underway." : "正在演出";
 	}
 
 	private void ActorComplete(ActorActSet a){
 		// sweet.
+//		statusText
 	}
 
+//	private IEnumerator RunActorCompleteDisplay(){
+//		statusText.text = (Variables.Instance.language == Language.ENGLISH ? "Scene finished! Preparing for next group…" : "本幕完。 准备重新开始");
+//		yield return new WaitForSeconds
+//	}
+
 	private void MarkerComplete(int index){
-		Diglbug.Log ("MARKER " + index + " COMPLETE!");
 //		waitingForNextSceneText.gameObject.SetActive (true);
+		SetWaiting();
 	}
 
 	private void Update(){

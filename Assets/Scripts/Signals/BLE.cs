@@ -99,6 +99,12 @@ public class BLE : ConstantSingleton<BLE>{
 		}
 	}
 
+	public void ClearPreviousSignalsFound(){
+		Diglbug.Log ("Cleared previous signals found", PrintStream.SIGNALS);
+		signalsDisabled.Clear ();
+		signalDisableTimes.Clear ();
+	}
+
 	private bool SignalIsNew(Signal s){
 		if (s.Equals (currentSignal)) {
 			return false;
