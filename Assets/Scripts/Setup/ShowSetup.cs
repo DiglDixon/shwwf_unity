@@ -64,7 +64,19 @@ public class ShowSetup : MonoBehaviour {
 		Diglbug.Log ("Activating SetupStep " + step.name);
 		currentStep = step;
 		currentStep.Activate (this);
-		stepInstructionText.text = currentStep.description;
+		if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
+			if (Variables.Instance.language == Language.ENGLISH) {
+				stepInstructionText.text = currentStep.descriptionEnglish;
+			} else {
+				stepInstructionText.text = currentStep.descriptionMandarin;
+			}
+		} else {
+			if (Variables.Instance.language == Language.ENGLISH) {
+				stepInstructionText.text = currentStep.descriptionEnglishGuide;
+			} else {
+				stepInstructionText.text = currentStep.descriptionMandarinGuide;
+			}
+		}
 	}
 
 	private void StepsComplete(){

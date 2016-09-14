@@ -174,7 +174,7 @@ public static class EnumDisplayNamesMandarin{
 		case Signature.GREEN:
 			return "绿";
 		case Signature.NONE:
-			return "None";
+			return "无";
 		case Signature.ORANGE:
 			return "橙";
 		case Signature.PURPLE:
@@ -192,31 +192,31 @@ public static class EnumDisplayNamesMandarin{
 	public static string DefinedActName(DefinedAct da){
 		switch (da) {
 		case DefinedAct.ACT_304:
-			return "<Room 304>";
+			return "304房间";
 		case DefinedAct.ACT_ARRIVE_AT_SCHOOL:
-			return "<Arrive At STA>";
+			return "到达上戏";
 		case DefinedAct.ACT_BAI_ROOM:
-			return "<Bai's Room>";
+			return "韩欣白的房间";
 		case DefinedAct.ACT_CROSSING_TO_SCHOOL:
-			return "<Crossing to STA>";
+			return "穿过上戏";
 		case DefinedAct.ACT_DORM:
-			return "<Dorm>";
+			return "宿舍";
 		case DefinedAct.ACT_DUANJUN:
-			return "<Duanjun>";
+			return "端钧剧场";
 		case DefinedAct.ACT_ELEVATOR:
-			return "<Elevator>";
+			return "电梯";
 		case DefinedAct.ACT_GUANXINTAI:
-			return "<Guanxintai>";
+			return "观心台";
 		case DefinedAct.ACT_INSIDE_DOOR:
-			return "<Kidnapping>";
+			return "绑架";
 		case DefinedAct.ACT_RED_BUILDING:
-			return "<Red Building>";
+			return "红楼";
 		case DefinedAct.ACT_ROOFTOP:
-			return "<Rooftop>";
+			return "露台";
 		case DefinedAct.ACT_SHOW_START:
-			return "<Opening Scene>";
+			return "第一幕";
 		case DefinedAct.ACT_YU_PINGFAN:
-			return "<Stairwell>";
+			return "楼梯间";
 		default:
 			Diglbug.LogError ("Failed to return a pre-defined DefinedActName for " + da + " - please define one!");
 			return "undefined_signature_string";
@@ -226,19 +226,19 @@ public static class EnumDisplayNamesMandarin{
 	public static string ActorName(Actor a){
 		switch (a) {
 		case Actor.COUNSELLOR:
-			return "<Counsellor>";
+			return "辅导员";
 		case Actor.COUNSELLOR_ROOF:
-			return "<Counsellor (end)>";
+			return "辅导员 (结尾)";
 		case Actor.DORM_PERSON:
-			return "<Doorman>";
+			return "宿管";
 		case Actor.PRODUCER:
-			return "<Producer>";
-		case Actor.STUDENT:
-			return "<Student>";
+			return "制作人";
+		case Actor.STUDENT:// Boy student name: 男生
+			return "女学生";
 		case Actor.VOLUNTEER:
-			return "<Volunteer>";
+			return "志愿者";
 		case Actor.YU_PINGFAN:
-			return "<Yu Pingfan>";
+			return "余平凡";
 		default:
 			Diglbug.LogError ("Failed to return a pre-defined ActorName for " + a + " - please define one!");
 			return "undefined_signature_string";

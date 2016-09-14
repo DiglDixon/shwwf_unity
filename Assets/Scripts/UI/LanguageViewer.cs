@@ -7,8 +7,10 @@ public class LanguageViewer : MonoBehaviour{
 	public Language language = Language.ENGLISH;
 	private List<LanguageElement> languageObjects = new List<LanguageElement>();
 
+	public bool refresh = false;
+
 	private void Awake(){
-		FindObjects();
+		ReFindObjects();
 	}
 
 	private void ReFindObjects(){
@@ -26,13 +28,14 @@ public class LanguageViewer : MonoBehaviour{
 //		languageObjects = transform.parent.gameObject.GetComponentsInChildren <LanguageElement>(true);
 	}
 
-	private void FindObjects(){
-		if (languageObjects == null) {
-			ReFindObjects ();
-		}
-	}
+//	private void FindObjects(){
+//		if (languageObjects == null) {
+//			ReFindObjects ();
+//		}
+//	}
 
 	private void OnValidate(){
+		refresh = false;
 		ReFindObjects();
 		SwitchFoundObjects ();
 	}
@@ -48,6 +51,7 @@ public class LanguageViewer : MonoBehaviour{
 		language = l;
 		ReFindObjects ();
 		SwitchFoundObjects ();
+		Variables.Instance.SetLanguage (l);
 	}
 
 }
