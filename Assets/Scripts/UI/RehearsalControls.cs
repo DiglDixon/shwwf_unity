@@ -10,16 +10,27 @@ public class RehearsalControls : MonoBehaviour {
 	public GameObject pauseButton;
 	public GameObject unpauseButton;
 
+	public float volumeDuck = 0.5f;
+	public AudioSource sourceToDuck;
+	private float previousSourceVolume = 1f;
+
 	public void PlayPressed(){
 		player.Play ();
 	}
 
 	public void StopPressed(){
-		player.Stop ();
+		actorPlayer.Rehearse_Stop ();
 		HideControls ();
 	}
 
+	public void OpenControls(){
+		previousSourceVolume = sourceToDuck.volume;
+		sourceToDuck.volume = volumeDuck;
+		gameObject.SetActive (true);
+	}
+
 	public void HideControls(){
+		sourceToDuck.volume = previousSourceVolume;
 		gameObject.SetActive (false);
 	}
 
@@ -30,10 +41,13 @@ public class RehearsalControls : MonoBehaviour {
 	public void UnpausePressed(){
 		player.Unpause ();
 	}
-
+	 
 	public void NextPressed(){
-		// if we're not on the last one.
-		player.PlayNextTrack ();
+		actorPlayer.Rehearse_PlayNextAct ();
+	}
+
+	public void ClosePressed(){
+		HideControls ();
 	}
 
 	private void Update(){

@@ -6,7 +6,19 @@ using System.Collections.Generic;
 public class EnsureDefinedActsInChildren<T> : MonoBehaviour where T : EnsureDefinedActChild {
 
 	public bool update = false;
+	public bool updateNames = false;
 	public GameObject customInstantiatedObject;
+
+	private void Awake(){
+		UpdateChildNames ();
+	}
+
+	private void UpdateChildNames(){
+		T[] children = GetComponentsInChildren<T> ();
+		for (int k = 0; k < children.Length; k++) {
+			children[k].UpdateName ();
+		}
+	}
 
 	protected virtual void OnValidate(){
 		update = false;
@@ -18,9 +30,9 @@ public class EnsureDefinedActsInChildren<T> : MonoBehaviour where T : EnsureDefi
 
 		for (int k = 0; k < enumCount; k++) {
 			e = GetExistingDefinedActsInArray ((DefinedAct)k, existing);
-			if(e != null){
+			if (e != null) {
 				e.UpdateName ();
-			}else{
+			} else {
 				GameObject newChild;
 				if (customInstantiatedObject != null) {
 					newChild = GameObject.Instantiate (customInstantiatedObject) as GameObject;
@@ -29,11 +41,11 @@ public class EnsureDefinedActsInChildren<T> : MonoBehaviour where T : EnsureDefi
 				}
 				newChild.transform.SetParent (transform, false);
 				T newChildComponent = newChild.GetComponent<T> ();
-				if(newChildComponent == null){
+				if (newChildComponent == null) {
 					newChildComponent = newChild.AddComponent<T> ();
 				}
-				newChildComponent.SetDefinedAct((DefinedAct)k);
-				newChildComponent.UpdateName();
+				newChildComponent.SetDefinedAct ((DefinedAct)k);
+
 				newChild.transform.SetSiblingIndex (k);
 				RunExtraInitsToObject (newChild);
 			}
@@ -43,8 +55,14 @@ public class EnsureDefinedActsInChildren<T> : MonoBehaviour where T : EnsureDefi
 
 
 		for (int k = enumCount; k < existing.Length; k++) {
-			existing[k].gameObject.name = "__UNUSED";
+			existing [k].gameObject.name = "__UNUSED";
 		}
+
+		if (updateNames) {
+			UpdateChildNames ();
+		}
+
+		updateNames = false;
 	}
 
 	private T GetExistingDefinedActsInArray(DefinedAct definedAct, T[] array){

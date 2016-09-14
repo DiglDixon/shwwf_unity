@@ -51,7 +51,7 @@ public class LanguageViewer : MonoBehaviour{
 		language = l;
 		ReFindObjects ();
 		SwitchFoundObjects ();
-		Variables.Instance.SetLanguage (l);
+//		Variables.Instance.SetLanguage (l);
 	}
 
 }

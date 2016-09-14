@@ -4,6 +4,8 @@ public abstract class EnsureDefinedActChild : MonoBehaviour{
 	public abstract void SetDefinedAct(DefinedAct a);
 	public abstract DefinedAct GetDefinedAct();
 
+	public bool updateName = false;
+
 	public virtual void UpdateName(){
 		gameObject.name = GetNameString ();
 	}
@@ -13,6 +15,8 @@ public abstract class EnsureDefinedActChild : MonoBehaviour{
 	}
 
 	protected virtual void OnValidate(){
-		UpdateName ();
+		if (updateName) {
+			UpdateName ();
+		}
 	}
 }

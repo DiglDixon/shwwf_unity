@@ -1,45 +1,45 @@
 ﻿
 public static class EnumDisplayNames{
-	
-	public static string LanuageName(Language l){
-		if (Variables.Instance.language == Language.ENGLISH) {
-			return EnumDisplayNamesEnglish.LanuageName (l);
-		} else {
-			return EnumDisplayNamesMandarin.LanuageName (l);
-		}
-	}
-
-	public static string PayloadName(Payload p){
-		if (Variables.Instance.language == Language.ENGLISH) {
-			return EnumDisplayNamesEnglish.PayloadName (p);
-		} else {
-			return EnumDisplayNamesMandarin.PayloadName (p);
-		}
-	}
-
-	public static string SignatureName(Signature s){
-		if (Variables.Instance.language == Language.ENGLISH) {
-			return EnumDisplayNamesEnglish.SignatureName (s);
-		} else {
-			return EnumDisplayNamesMandarin.SignatureName (s);
-		}
-	}
-
-	public static string DefinedActName(DefinedAct da){
-		if (Variables.Instance.language == Language.ENGLISH) {
-			return EnumDisplayNamesEnglish.DefinedActName (da);
-		} else {
-			return EnumDisplayNamesMandarin.DefinedActName (da);
-		}
-	}
-
-	public static string ActorName(Actor a){
-		if (Variables.Instance.language == Language.ENGLISH) {
-			return EnumDisplayNamesEnglish.ActorName (a);
-		} else {
-			return EnumDisplayNamesMandarin.ActorName (a);
-		}
-	}
+//	
+//	public static string LanuageName(Language l){
+//		if (Variables.Instance.language == Language.ENGLISH) {
+//			return EnumDisplayNamesEnglish.LanuageName (l);
+//		} else {
+//			return EnumDisplayNamesMandarin.LanuageName (l);
+//		}
+//	}
+//
+//	public static string PayloadName(Payload p){
+//		if (Variables.Instance.language == Language.ENGLISH) {
+//			return EnumDisplayNamesEnglish.PayloadName (p);
+//		} else {
+//			return EnumDisplayNamesMandarin.PayloadName (p);
+//		}
+//	}
+//
+//	public static string SignatureName(Signature s){
+//		if (Variables.Instance.language == Language.ENGLISH) {
+//			return EnumDisplayNamesEnglish.SignatureName (s);
+//		} else {
+//			return EnumDisplayNamesMandarin.SignatureName (s);
+//		}
+//	}
+//
+//	public static string DefinedActName(DefinedAct da){
+//		if (Variables.Instance.language == Language.ENGLISH) {
+//			return EnumDisplayNamesEnglish.DefinedActName (da);
+//		} else {
+//			return EnumDisplayNamesMandarin.DefinedActName (da);
+//		}
+//	}
+//
+//	public static string ActorName(Actor a){
+//		if (Variables.Instance.language == Language.ENGLISH) {
+//			return EnumDisplayNamesEnglish.ActorName (a);
+//		} else {
+//			return EnumDisplayNamesMandarin.ActorName (a);
+//		}
+//	}
 }
 
 public static class EnumDisplayNamesEnglish{

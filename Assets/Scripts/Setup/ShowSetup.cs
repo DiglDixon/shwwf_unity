@@ -65,16 +65,20 @@ public class ShowSetup : MonoBehaviour {
 		currentStep = step;
 		currentStep.Activate (this);
 		if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
-			if (Variables.Instance.language == Language.ENGLISH) {
-				stepInstructionText.text = currentStep.descriptionEnglish;
-			} else {
-				stepInstructionText.text = currentStep.descriptionMandarin;
+			if (currentStep.updateGuideInstructions) {
+				if (Variables.Instance.language == Language.ENGLISH) {
+					stepInstructionText.text = currentStep.descriptionEnglishGuide;
+				} else {
+					stepInstructionText.text = currentStep.descriptionMandarinGuide;
+				}
 			}
 		} else {
-			if (Variables.Instance.language == Language.ENGLISH) {
-				stepInstructionText.text = currentStep.descriptionEnglishGuide;
-			} else {
-				stepInstructionText.text = currentStep.descriptionMandarinGuide;
+			if (currentStep.updateAudienceInstructions) {
+				if (Variables.Instance.language == Language.ENGLISH) {
+					stepInstructionText.text = currentStep.descriptionEnglish;
+				} else {
+					stepInstructionText.text = currentStep.descriptionMandarin;
+				}
 			}
 		}
 	}

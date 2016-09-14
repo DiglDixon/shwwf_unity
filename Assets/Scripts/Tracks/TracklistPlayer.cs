@@ -16,6 +16,8 @@ public class TracklistPlayer : WrappedTrackOutput{
 
 	private List<ITrack> loadedTracks = new List<ITrack> ();
 
+	private List<ITrack> preserveTrackLoads = new List<ITrack> ();
+
 	public Tracklist tracklist;
 	private int trackIndex = 0;
 
@@ -46,6 +48,16 @@ public class TracklistPlayer : WrappedTrackOutput{
 		Pause ();
 	}
 
+	public void AddPreservedTrack(ITrack track){
+		Diglbug.Log("Added Preserved track "+track.GetTrackName(), PrintStream.AUDIO_GENERAL);
+		preserveTrackLoads.Add (track);
+	}
+
+	public void ClearPreservedTracks(){
+		Diglbug.Log("Cleared "+preserveTrackLoads.Count+" Preserved tracks", PrintStream.AUDIO_GENERAL);
+		preserveTrackLoads.Clear ();
+	}
+
 	private void SetTracklist(Tracklist t){
 		this.tracklist = t;
 		TracklistEntry[] entries = tracklist.entries;
@@ -60,8 +72,8 @@ public class TracklistPlayer : WrappedTrackOutput{
 				nextEntry = entries [k + 1];
 				entry.AddStateEventAtTimeRemaining (PlayNextTrack, nextEntry.GetTrack ().EntranceFadeTime ());
 			}
-			entry.AddStateEventAtTime (UnloadPreviousTrack, 4f); // Let's Unload at 3...
-			entry.AddStateEventAtTime (LoadNextTrack, 5f); // and LoadNext at 6. Should be fine. For now.
+			entry.AddStateEventAtTime (UnloadPreviousTrack, 4f);
+			entry.AddStateEventAtTime (LoadNextTrack, 5f);
 		}
 		#if !UNITY_EDITOR
 		((MobileVideoPlayer) videoSystem.GetPlayer()).InitialiseMobileVideoTracksInList(tracklist);
@@ -101,13 +113,17 @@ public class TracklistPlayer : WrappedTrackOutput{
 			UnloadTrack(tracklist.entries [trackIndex - 1].GetTrack ());
 		}
 	}
-
-	private void UnloadTrack(ITrack toUnload){
-		toUnload.Unload ();
-		if (loadedTracks.Contains (toUnload)) {
-			loadedTracks.Remove (toUnload);
+	// this wasn't public until the weird video stuff happened.
+	public void UnloadTrack(ITrack toUnload){
+		if (preserveTrackLoads.Contains (toUnload)) {
+			Diglbug.Log ("Preserved track " + toUnload.GetTrackName () + " not unloaded", PrintStream.AUDIO_GENERAL);
 		} else {
-			Diglbug.Log ("Request to Unload was not contained in loadedTracks list "+toUnload.GetTrackName(), PrintStream.MEDIA_LOAD);
+			toUnload.Unload ();
+			if (loadedTracks.Contains (toUnload)) {
+				loadedTracks.Remove (toUnload);
+			} else {
+				Diglbug.Log ("Request to Unload was not contained in loadedTracks list "+toUnload.GetTrackName(), PrintStream.MEDIA_LOAD);
+			}
 		}
 	}
 

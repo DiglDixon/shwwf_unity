@@ -20,7 +20,11 @@ public class SelectCustomCueItem : EnsureDefinedActChild{
 		if (label == null) {
 			label = GetComponentInChildren<Text> ();
 		}
-		label.text = act.ToString ();
+		if (Variables.Instance.language == Language.ENGLISH) {
+			label.text = EnumDisplayNamesEnglish.DefinedActName (act);
+		} else {
+			label.text = EnumDisplayNamesMandarin.DefinedActName (act);
+		}
 	}
 
 	public void ButtonPressed(){

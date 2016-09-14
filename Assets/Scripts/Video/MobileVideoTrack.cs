@@ -35,7 +35,7 @@ public class MobileVideoTrack : VideoTrack{
 	}
 
 	protected override bool ShouldLoad(){
-		return !IsLoaded () && !IsLoading ();
+		return !IsLoaded ();
 	}
 
 	protected override bool ShouldUnload(){

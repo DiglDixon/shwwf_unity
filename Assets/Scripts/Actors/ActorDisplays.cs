@@ -26,6 +26,10 @@ public class ActorDisplays : MonoBehaviour{
 
 	public Button cancelChooseActorButton;
 
+	public GameObject loadingNote;
+
+	public TracklistPlayer player;
+
 	private void Awake(){
 		assistantSoundSource = GetComponent<AudioSource> ();
 		ClearedIgnored ();
@@ -82,10 +86,16 @@ public class ActorDisplays : MonoBehaviour{
 		currentActorSet = aas;
 		currentActorSet.ActContentCompleteEvent += MarkerComplete;
 
-		actorName.text =  EnumDisplayNames.ActorName(currentActorSet.actor);
+
 
 		SetMarkersFromActorActSet (currentActorSet);
-		actName.text = EnumDisplayNames.DefinedActName(aas.GetFirstAct().definedAct);
+		if (Variables.Instance.language == Language.ENGLISH) {
+			actorName.text = EnumDisplayNamesEnglish.ActorName (currentActorSet.actor);
+			actName.text = EnumDisplayNamesEnglish.DefinedActName (aas.GetFirstAct ().definedAct);
+		} else {
+			actorName.text = EnumDisplayNamesMandarin.ActorName (currentActorSet.actor);
+			actName.text = EnumDisplayNamesMandarin.DefinedActName (aas.GetFirstAct ().definedAct);
+		}
 		SetWaiting ();
 		assistantSoundSource.Play ();
 		cancelChooseActorButton.gameObject.SetActive (true);
@@ -113,7 +123,11 @@ public class ActorDisplays : MonoBehaviour{
 	}
 
 	private void ActorBeganAct(Act a){
-		actName.text = EnumDisplayNames.DefinedActName(a.definedAct);
+		if (Variables.Instance.language == Language.ENGLISH) {
+			actName.text = EnumDisplayNamesEnglish.DefinedActName(a.definedAct);
+		} else {
+			actName.text = EnumDisplayNamesMandarin.DefinedActName(a.definedAct);
+		}
 		assistantSoundSource.Stop ();
 
 		statusText.text = Variables.Instance.language == Language.ENGLISH ? "Scene underway." : "正在演出";
@@ -137,6 +151,7 @@ public class ActorDisplays : MonoBehaviour{
 	private void Update(){
 		if (currentActorSet != null) {
 			progressSlider.value = currentActorSet.GetActingProgress ();
+			loadingNote.SetActive (!player.GetTrack ().IsLoaded ());
 		}
 	}
 

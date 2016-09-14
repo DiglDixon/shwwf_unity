@@ -48,12 +48,14 @@ public class ActorPlayer : MonoBehaviour{
 //	}
 
 	public void SetActor(Actor actor){
+		player.ClearPreservedTracks ();
 		currentActorSet = actorSets [(int)actor];
 		currentActorSet.InitialiseSet ();
 		ResetCurrentActor ();
 		if (ActorChangedEvent != null) {
 			ActorChangedEvent (currentActorSet);
 		}
+		player.AddPreservedTrack (currentActorSet.GetFirstTrackEntry ().GetTrack ());
 	}
 
 	private void ResetCurrentActor(){
@@ -159,4 +161,12 @@ public class ActorPlayer : MonoBehaviour{
 		}
 	}
 
+	public void Rehearse_PlayNextAct(){
+		currentActorSet.Rehearsal_PlayNextAct ();
+	}
+
+
+	public void Rehearse_Stop(){
+		ResetCurrentActor ();
+	}
 }

@@ -9,13 +9,10 @@ public abstract class CustomTrackTimeEvent : MonoBehaviour{
 	public float occurAtTime = 0.1f;
 	public bool occurAtTimeFromEnd = false;
 
-	#if UNITY_EDITOR
 	public bool updateName = false;
-	#endif
 
 	public abstract void CustomEvent();
 
-	#if UNITY_EDITOR
 	private void OnValidate(){
 		updateName = false;
 		gameObject.name = GetObjectName();
@@ -25,6 +22,5 @@ public abstract class CustomTrackTimeEvent : MonoBehaviour{
 	protected virtual string GetObjectName(){
 		return this.GetType ().Name;
 	}
-	#endif
 
 }

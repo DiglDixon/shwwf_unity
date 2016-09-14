@@ -19,22 +19,20 @@ public abstract class SetupStep : MonoBehaviour {
 	[TextArea]
 	public string descriptionMandarinGuide;
 
-	public string description{ get; private set; }
-
 	void Awake(){
 		
 	}
 
 	public virtual void Activate(ShowSetup callback){
-		if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
-			if (updateGuideInstructions) {
-				description = Variables.Instance.language == Language.ENGLISH ? descriptionEnglishGuide : descriptionMandarinGuide;
-			}
-		} else {
-			if (updateAudienceInstructions) {
-				description = Variables.Instance.language == Language.ENGLISH ? descriptionEnglish : descriptionMandarin;
-			}
-		}
+//		if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
+//			if (updateGuideInstructions) {
+//				description = Variables.Instance.language == Language.ENGLISH ? descriptionEnglishGuide : descriptionMandarinGuide;
+//			}
+//		} else {
+//			if (updateAudienceInstructions) {
+//				description = Variables.Instance.language == Language.ENGLISH ? descriptionEnglish : descriptionMandarin;
+//			}
+//		}
 		gameObject.SetActive (true);
 		ResetConditions ();
 		if (display != null) {	
