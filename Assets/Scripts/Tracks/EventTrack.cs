@@ -8,7 +8,7 @@ public abstract class EventTrack : AbstractTrack{
 	private List<TimingEvent> momentaryEvents = new List<TimingEvent>();
 	private float previousSourceTime;
 
-	private bool eventsEnabled = false;
+//	private bool eventsEnabled = false;
 
 	#if UNITY_EDITOR
 	public bool updateName = false;
@@ -33,13 +33,13 @@ public abstract class EventTrack : AbstractTrack{
 		}
 	}
 
-	public void EnableEvents(){
-		eventsEnabled = true;
-	}
-
-	public void DisableEvents(){
-		eventsEnabled = false;
-	}
+//	public void EnableEvents(){
+//		eventsEnabled = true;
+//	}
+//
+//	public void DisableEvents(){
+//		eventsEnabled = false;
+//	}
 
 	public void AddStateEventAtTimeRemaining(TrackEventDelegate newEvent, float eventTimeRemaining){
 		float eventTime = GetTrackLength () - eventTimeRemaining;
@@ -81,6 +81,7 @@ public abstract class EventTrack : AbstractTrack{
 	/// Will avoid calling events under these circumstances.
 	/// </summary>
 	public void SetTimeElapsed(float timeElapsed){
+//		Diglbug.Log ("SetTimeElapsed " + timeElapsed + " against "+ stateEvents.Count + " events " + GetTrackName());
 		CheckEvents (stateEvents, previousSourceTime, timeElapsed);
 		previousSourceTime = timeElapsed;
 	}
@@ -89,7 +90,10 @@ public abstract class EventTrack : AbstractTrack{
 	/// Set per-tick, to calculate whether an event's time has been crossed
 	/// </summary>
 	public void UpdateTimeElapsed (float currentSourceTime){
+//		Diglbug.Log ("Checking " + currentSourceTime + " against " + momentaryEvents.Count + ", " + stateEvents.Count + " events " + GetTrackName());
+//		Diglbug.Log ("Momentary: "+momentaryEvents.Count);
 		CheckEvents (momentaryEvents, previousSourceTime, currentSourceTime);
+//		Diglbug.Log ("State: " + stateEvents.Count);
 		CheckEvents (stateEvents, previousSourceTime, currentSourceTime);
 		previousSourceTime = currentSourceTime;
 	}
@@ -97,6 +101,7 @@ public abstract class EventTrack : AbstractTrack{
 	private void CheckEvents(List<TimingEvent> events, float previousTime, float currentTime){
 		
 		for (int i = events.Count - 1; i >= 0; i--) {
+//			Diglbug.Log ("Iterating " + name + " at time " + currentTime+", prev:"+previousTime+" (def:"+events[i].time+")", PrintStream.DELEGATES);
 			if (EventShouldOccur(events[i], previousSourceTime, currentTime)) {
 				Diglbug.Log ("Event fired for " + name + " at time " + currentTime+" (def:"+events[i].time+")", PrintStream.DELEGATES);
 				events [i].function ();
@@ -106,8 +111,8 @@ public abstract class EventTrack : AbstractTrack{
 	}
 
 	private bool EventShouldOccur(TimingEvent e, float previousTime, float currentTime){
-		if (!eventsEnabled)
-			return false;
+//		if (!eventsEnabled)
+//			return false;
 		return (e.time > previousSourceTime) && (e.time <= currentTime);
 	}
 

@@ -138,7 +138,7 @@ public class ActorDisplays : MonoBehaviour{
 	}
 
 	private void ActorComplete(ActorActSet a){
-		// sweet.
+		assistantSoundSource.Play ();
 	}
 
 	private void MarkerComplete(int index){
@@ -155,6 +155,11 @@ public class ActorDisplays : MonoBehaviour{
 			loadingNote.SetActive (!player.GetTrack ().IsLoaded ());
 		}
 	}
+
+
+//	public void Rehearsel_Begins(){
+//		assistantSoundSource.Stop ();
+//	}
 
 
 }

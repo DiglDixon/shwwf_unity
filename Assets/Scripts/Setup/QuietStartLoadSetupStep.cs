@@ -14,7 +14,7 @@ public class QuietStartLoadSetupStep : WaitForPayloadSetupStep{
 				secretButtons[k].SetActive (true);
 			}
 		}
-		player.PrepareTrack (entryTrack);
+		player.LoadTrackIfNeeded (entryTrack.GetTrack());
 	}
 
 	public override void SignalReceived (){
@@ -24,7 +24,7 @@ public class QuietStartLoadSetupStep : WaitForPayloadSetupStep{
 
 	public override void SkipStep (){
 		base.SkipStep ();
-		player.PrepareTrack (entryTrack);
+		player.LoadTrackIfNeeded (entryTrack.GetTrack());
 	}
 
 }

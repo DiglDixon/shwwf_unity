@@ -60,7 +60,8 @@ public class ActorPlayer : MonoBehaviour{
 
 	private void ResetCurrentActor(){
 		SetCurrentGroup(Signature.NONE);
-		player.PrepareTrack (currentActorSet.GetFirstTrackEntry ());
+		ITrack t = currentActorSet.GetFirstTrackEntry ().GetTrack ();
+		player.SetWaitingTrackEntry (t);
 	}
 
 	public void CancelAct(){
@@ -93,7 +94,7 @@ public class ActorPlayer : MonoBehaviour{
 						BeginAct (actToBegin, s);
 						SetCurrentGroup (s.GetSignature ());
 						AddIgnoredSignal (s); // cache this here so we don't re-trigger if a foreign signal jockeys us.
-						sfxSource.PlayOneShot(sceneBeginsSound);
+						sfxSource.PlayOneShot(sceneBeginsSound, 0.5f);
 						Diglbug.Log ("Accepted new signal " + s.GetPrint ());
 					} else {
 						Diglbug.Log ("Rejected signal " + s.GetPrint () + " and it's not relevant for this actor", PrintStream.ACTORS);
@@ -106,7 +107,7 @@ public class ActorPlayer : MonoBehaviour{
 	}
 
 	private void BeginAct(Act actToBegin, Signal s){
-		actToBegin.Begin ();
+//		actToBegin.Begin ();
 		player.BeginActFromSignal (actToBegin, s);
 		if (ActorBeginsActEvent != null) {
 			ActorBeginsActEvent (actToBegin);
@@ -161,12 +162,22 @@ public class ActorPlayer : MonoBehaviour{
 		}
 	}
 
-	public void Rehearse_PlayNextAct(){
-		currentActorSet.Rehearsal_PlayNextAct ();
+	public void Rehearse_Play(){
+		BeginAct (currentActorSet.GetFirstAct (), SignalUtils.NullSignal);
 	}
 
+	public void Rehearse_PlayNextAct(){
+		ActorAct next = currentActorSet.Rehearsal_GetNextAct ();
+		if (next == null) {
+			// rehearsal is done
+			Rehearse_Stop();
+		} else {
+			BeginAct (next, SignalUtils.NullSignal);
+		}
+
+	}
 
 	public void Rehearse_Stop(){
-		ResetCurrentActor ();
+		ActorSetFinished(currentActorSet);
 	}
 }

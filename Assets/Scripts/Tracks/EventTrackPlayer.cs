@@ -4,6 +4,8 @@ public abstract class EventTrackPlayer : AbstractTrackPlayer{
 	
 	private EventTrack eventTrack;
 
+	private bool eventsEnabled = false;
+
 	public override void Play(){
 		EnableEvents ();
 	}
@@ -36,7 +38,9 @@ public abstract class EventTrackPlayer : AbstractTrackPlayer{
 		base.Update();
 		if (IsPlaying ()) {
 			if (eventTrack != null) {
-				eventTrack.UpdateTimeElapsed (GetTimeElapsed ());
+				if (eventsEnabled){
+					eventTrack.UpdateTimeElapsed (GetTimeElapsed ());
+				}
 			}
 		}
 	}
@@ -62,14 +66,16 @@ public abstract class EventTrackPlayer : AbstractTrackPlayer{
 	}
 
 	protected void EnableEvents(){
-		if (eventTrack != null) {
-			eventTrack.EnableEvents ();
-		}
+//		if (eventTrack != null) {
+//			eventTrack.EnableEvents ();
+//		}
+		eventsEnabled = true;
 	}
 
 	protected void DisableEvents(){
-		if (eventTrack != null) {
-			eventTrack.DisableEvents ();
-		}
+//		if (eventTrack != null) {
+//			eventTrack.DisableEvents ();
+//		}
+		eventsEnabled = false;
 	}
 }

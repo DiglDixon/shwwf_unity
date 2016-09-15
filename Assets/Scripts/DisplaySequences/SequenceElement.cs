@@ -12,6 +12,8 @@ public abstract class SequenceElement : MonoBehaviour{
 
 	public abstract void CancelSequence();
 
+	public bool avoidCollection = false;
+
 	protected virtual void EntranceComplete(){
 		if (SequenceEnteredEvent != null) {
 			SequenceEnteredEvent ();

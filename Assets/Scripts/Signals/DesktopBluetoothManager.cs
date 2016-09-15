@@ -5,7 +5,7 @@ public class DesktopBluetoothManager : BluetoothManager{
 	Signal currentSendingSignal = null;
 	private float latencyMin = 0.1f;
 	private float latencyMax = 1f;
-	private bool useLatencySimulation = true;
+	private bool useLatencySimulation = false;
 	private bool holdingLatency = false;
 
 	protected override void SendSignal (Signal s){

@@ -31,6 +31,8 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 		SceneManager.sceneLoaded += NewSceneLoaded;
 	}
 
+	public bool HasRunOpening = false;
+
 	private void NewSceneLoaded(Scene scene, LoadSceneMode loadMode){
 		Diglbug.Log ("New scene begins: " + scene.name, PrintStream.SCENES);
 		Mode.NewSceneLoaded (scene);

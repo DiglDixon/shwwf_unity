@@ -5,17 +5,18 @@ public class RehearsalControls : MonoBehaviour {
 
 	public TracklistPlayer player;
 	public ActorPlayer actorPlayer;
+	public ActorDisplays display;
 
 	public GameObject playButton;
 	public GameObject pauseButton;
 	public GameObject unpauseButton;
 
-	public float volumeDuck = 0.5f;
-	public AudioSource sourceToDuck;
-	private float previousSourceVolume = 1f;
+	public GameObject rehearsalControlPanel;
 
 	public void PlayPressed(){
-		player.Play ();
+//		player.Play ();
+		actorPlayer.Rehearse_Play();
+//		display.Rehearsel_Begins ();
 	}
 
 	public void StopPressed(){
@@ -24,14 +25,11 @@ public class RehearsalControls : MonoBehaviour {
 	}
 
 	public void OpenControls(){
-		previousSourceVolume = sourceToDuck.volume;
-		sourceToDuck.volume = volumeDuck;
-		gameObject.SetActive (true);
+		rehearsalControlPanel.SetActive (true);
 	}
 
 	public void HideControls(){
-		sourceToDuck.volume = previousSourceVolume;
-		gameObject.SetActive (false);
+		rehearsalControlPanel.SetActive (false);
 	}
 
 	public void PausePressed(){

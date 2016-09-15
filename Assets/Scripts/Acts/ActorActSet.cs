@@ -184,12 +184,12 @@ public class ActorActSet : EnsureActSetChild{
 		}
 	}
 
-	public void Rehearsal_PlayNextAct(){
+	public ActorAct Rehearsal_GetNextAct(){
 		int index = IndexOfAct (currentAct);
-		if (index == acts.Length - 1) {
-			player.SetTrackProgress (1f);
+		if (index >= acts.Length - 1) {
+			return null;
 		} else {
-			player.PlayTrackEntry (acts [index + 1].GetFirstTracklistEntry ());
+			return acts [index + 1];
 		}
 	}
 

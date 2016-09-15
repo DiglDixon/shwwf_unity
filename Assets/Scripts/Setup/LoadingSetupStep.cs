@@ -3,7 +3,7 @@
 public class LoadingSetupStep : SetupStep{
 
 	public TracklistPlayer player;
-//	public TracklistEntry entryTrack;
+	public QuietStartLoadSetupStep quietLoadStep;
 
 	public override void Activate (ShowSetup callback){
 		base.Activate (callback);
@@ -11,7 +11,7 @@ public class LoadingSetupStep : SetupStep{
 	}
 
 	protected override bool SetupCompleteCondition (){
-		return (player.GetTrack().IsLoaded());
+		return quietLoadStep.entryTrack.GetTrack().IsLoaded();
 	}
 
 	protected override void ResetConditions (){

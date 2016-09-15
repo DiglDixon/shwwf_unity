@@ -11,7 +11,7 @@ public class ShowSetup : MonoBehaviour {
 
 	public AudioSourceFadeControls ensureFadedOutOnStart;
 
-	public IntroSequence introSequence;
+	public DisplaySequence introSequence;
 
 	public GameObject setupDisplay;
 

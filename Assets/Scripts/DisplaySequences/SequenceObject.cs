@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+[RequireComponent (typeof(CanvasGroup))]
 [RequireComponent (typeof(LerpableHost))]
 public class SequenceObject : SequenceElement{
 
@@ -12,8 +13,11 @@ public class SequenceObject : SequenceElement{
 
 	private LerpFloat fader = new LerpFloat();
 
-	public GameObject objectToEnable;
-	public CanvasGroup canvasGroup;
+	private CanvasGroup canvasGroup;
+
+	private void Awake(){
+		canvasGroup = GetComponent<CanvasGroup> ();
+	}
 
 	private void Start(){
 		fader.SubscribeProcess (GetComponent<LerpableHost>());
@@ -34,12 +38,12 @@ public class SequenceObject : SequenceElement{
 	}
 
 	public override void CancelSequence (){
-		objectToEnable.SetActive (false);
+		gameObject.SetActive (false);
 		fader.SetLerpFloatValue(0f);
 	}
 
 	private void BeginEntrance(){
-		objectToEnable.SetActive (true);
+		gameObject.SetActive (true);
 		fader.SetLerpFloatValue(0f);
 		fader.LerpTo (1f, entranceTime);
 	}
@@ -74,7 +78,7 @@ public class SequenceObject : SequenceElement{
 
 	protected override void ExitComplete(){
 		base.ExitComplete ();
-		objectToEnable.SetActive (false);
+		gameObject.SetActive (false);
 	}
 
 	private IEnumerator RunDurationCountdown(){

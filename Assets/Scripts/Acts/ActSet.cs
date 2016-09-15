@@ -14,9 +14,6 @@ public class ActSet : EnsureDefinedActsInChildren<ShowAct>{
 	public delegate void ActChangedDelegate(Act newAct);
 	public event ActChangedDelegate ActChangedEvent;
 
-	public delegate void ActEndsDelegate(Act actEnded);
-	public event ActEndsDelegate ActEndsEvent;
-
 	private void Awake(){
 		acts = GetComponentsInChildren<Act> ();
 	}

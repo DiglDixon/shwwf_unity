@@ -26,8 +26,8 @@ public class TracklistPlayer : WrappedTrackOutput{
 	public delegate void NewTrackBeginsDelegate (ITrack track);
 	public event NewTrackBeginsDelegate NewTrackBeginsEvent;
 
-	public delegate void TrackEndsDelegate (ITrack track);
-	public event TrackEndsDelegate TrackEndsEvent;
+//	private delegate void TrackEndsDelegate (ITrack track);
+//	private event TrackEndsDelegate TrackEndsEvent;
 
 	private void Awake(){
 		currentOutput = multiPlayer;
@@ -41,29 +41,26 @@ public class TracklistPlayer : WrappedTrackOutput{
 
 	protected void Start(){
 		SetTracklist (tracklist);
-//		PrepareTrack(tracklist.entries[0]);
-	}
-
-	public void PrepareTrack(TracklistEntry entry){
-		LoadTrack(entry.GetTrack());
-		PlayTrackEntry (entry);
-		Pause ();
 	}
 
 	public void SendExpectedActWhenLoaded(){
 		Payload p = BLE.Instance.Manager.GetExpectedPayload ();
 		Act a = actSet.GetActForPayload (p);
-		StartCoroutine (SendWhenLoaded (a, false));
+		StopCoroutine ("SendWhenLoaded");
+		StartCoroutine ("SendWhenLoaded", new ActBoolBundle(a, false));
 	}
 
 	public void SendCustomActWhenLoaded(Act a){
-		StartCoroutine (SendWhenLoaded (a, true));
+		StopCoroutine ("SendWhenLoaded");
+		StartCoroutine ("SendWhenLoaded", new ActBoolBundle(a, true));
 	}
 
-	private IEnumerator SendWhenLoaded(Act a, bool forced){
+	private IEnumerator SendWhenLoaded(ActBoolBundle abb){
+		Act a = abb.act;
+		bool forced = abb.b;
 		TracklistEntry toPlay = a.GetFirstTracklistEntry ();
 //		SetTrack (toPlay.GetTrack ());
-		LoadTrack (toPlay.GetTrack());
+		LoadTrackIfNeeded (toPlay.GetTrack());
 		while (!toPlay.GetTrack ().IsLoaded ()) {
 			yield return null;
 		}
@@ -78,23 +75,25 @@ public class TracklistPlayer : WrappedTrackOutput{
 	}
 
 	public void BeginActFromSignal(Act a, Signal s){
-		StartCoroutine (PlayActWhenLoaded (a, s));
+		StopCoroutine ("PlayActWhenLoaded");
+		StartCoroutine ("PlayActWhenLoaded", new ActSignalBundle(a, s));
 	}
 
-	private IEnumerator PlayActWhenLoaded(Act a, Signal s){
+	private IEnumerator PlayActWhenLoaded(ActSignalBundle asb){
+		Act a = asb.act;
+		Signal s = asb.signal;
 		int timeToSkip = SignalUtils.GetSignalTimeOffset (s.GetSignalTime());
 		TracklistEntry toPlay = a.GetEntryAtActTime (timeToSkip);
 
-		PrepareTrack (toPlay); // WORKING HERE, WAS LOAD TRACK.
+		LoadTrackIfNeeded (toPlay.GetTrack());
 		while (!toPlay.GetTrack ().IsLoaded ()) {
 			yield return null;
 		}
-//		float newOffset = SignalUtils.GetSignalTimeOffset (s.GetSignalTime());
-//		float timeToPlayFrom = a.GetEntryTimeAtActTime (timeToSkip);
-
 		RecoveryManager.Instance.RecoveryComplete ();// TODO: Move this somewhere nicer. Maybe sub.
+
 		int postLoadTimeToSkip = SignalUtils.GetSignalTimeOffset (s.GetSignalTime());
 		float timeToPlayFrom = a.GetSpecificEntryTimeAtActTime (toPlay, postLoadTimeToSkip);
+
 		PlayTrackEntry (toPlay, timeToPlayFrom);
 	}
 
@@ -132,7 +131,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 
 	public void LoadNextTrack(int ahead){
 		if (trackIndex < tracklist.entries.Length - 1) {
-			LoadTrack(GetNextTrack(ahead));
+			LoadTrackIfNeeded(GetNextTrack(ahead));
 		}
 	}
 
@@ -152,10 +151,15 @@ public class TracklistPlayer : WrappedTrackOutput{
 		}
 	}
 
-	private void LoadTrack(ITrack toLoad){
+	public void LoadTrackIfNeeded(ITrack toLoad){
+		// this call contains its own shouldLoad logic.
 		toLoad.Load ();
-		loadedTracks.Add (toLoad);
-		Diglbug.Log ("Added track to loadedTracks "+toLoad.GetTrackName(), PrintStream.MEDIA_LOAD);
+		if (!loadedTracks.Contains (toLoad)) {
+			loadedTracks.Add (toLoad);
+			Diglbug.Log ("Added track to loadedTracks " + toLoad.GetTrackName (), PrintStream.MEDIA_LOAD);
+		} else {
+			Diglbug.Log ("Avoided adding a duplicate track "+toLoad.GetTrackName()+" to loadedTracks ", PrintStream.MEDIA_LOAD);
+		}
 	}
 
 	public void UnloadPreviousTrack(){
@@ -194,13 +198,11 @@ public class TracklistPlayer : WrappedTrackOutput{
 	private void PlayTrackEntry(TracklistEntry entry, float timeSkip){
 		int requestedIndex = IndexOfEntryInTracklist (entry);
 		if (requestedIndex != -1) {
-			if (IsExpectedIndex (requestedIndex)) {
-				PlayTrackEntryAtIndex (requestedIndex, timeSkip);
-			} else {
+			if (!IsExpectedIndex (requestedIndex)) {
 				Diglbug.Log ("Detected unorthodox track request ("+requestedIndex+") - unloading previously loaded tracks", PrintStream.MEDIA_LOAD);
 				UnloadAllTracksExcept (entry.GetTrack());
-				PlayTrackEntryAtIndex (requestedIndex, timeSkip);
 			}
+			PlayTrackEntryAtIndex (requestedIndex, timeSkip);
 		} else {
 			Diglbug.LogError ("Requested play of TrackEntry failed - entry not initialised in the Tracklist player's Tracklist");
 		}
@@ -238,37 +240,20 @@ public class TracklistPlayer : WrappedTrackOutput{
 		}
 	}
 
-	private int IndexOfEntryInTracklist(TracklistEntry entry){
-		for (int k = 0; k < tracklist.entries.Length; k++) {
-			if (entry == tracklist.entries [k]) {
-				return k;
-			}
-		}
-		return -1;
-	}
-
 	private void HandlePlayRequest(TracklistEntry entry, float timeSkip){
 		float fadeTime = entry.GetEntranceFadeTime ();
 		ITrack nextTrack = entry.GetTrack ();
 
 		currentOutput.FadeOut (fadeTime);
-		TrackOutput nextOutput = null;
-		if (entry is VideoTracklistEntry) {
-			nextOutput = videoSystem;
-		} else {
-			nextOutput = multiPlayer;
-			multiPlayer.SwitchTracks ();
-		}
 		// This even fires as the track is fading out, not strictly as it ends. Good enough for our purposes.
-		if (TrackEndsEvent != null) {
-			TrackEndsEvent (currentOutput.GetTrack ());
-		}
-		currentOutput = nextOutput;
+//		if (TrackEndsEvent != null) {
+//			TrackEndsEvent (currentOutput.GetTrack ());
+//		}
+		currentOutput = GetOutputForNewEntry (entry);
 		currentOutput.SetTrack (nextTrack);
 
-		if (nextTrack.IsLoaded() == false) {
-			LoadTrack (nextTrack);
-		}
+		// safety
+		LoadTrackIfNeeded (nextTrack);
 		currentOutput.FadeIn(fadeTime);
 		if (NewTrackBeginsEvent != null) {
 			NewTrackBeginsEvent (nextTrack);
@@ -281,10 +266,53 @@ public class TracklistPlayer : WrappedTrackOutput{
 		}
 	}
 
+	public void SetWaitingTrackEntry(ITrack track){
+		LoadTrackIfNeeded (track);
+		SetTrack (track);
+		Stop ();
+	}
+
+	private TrackOutput GetOutputForNewEntry(TracklistEntry entry){
+		if (entry is VideoTracklistEntry) {
+			return videoSystem;
+		} else {
+			multiPlayer.SwitchTracks ();
+			return multiPlayer;
+		}
+	}
+
+	private int IndexOfEntryInTracklist(TracklistEntry entry){
+		for (int k = 0; k < tracklist.entries.Length; k++) {
+			if (entry == tracklist.entries [k]) {
+				return k;
+			}
+		}
+		return -1;
+	}
+
 	private void LoopCurrentTrack(){
 		LoopingTracklistEntry looingEntry = (LoopingTracklistEntry) tracklist.GetTrackEntryAtIndex (trackIndex);
 		looingEntry.SwitchTracks();
 		PlayTrackEntry (looingEntry);
 	}
 
+}
+
+
+public struct ActSignalBundle{
+	public Signal signal;
+	public Act act;
+	public ActSignalBundle(Act act, Signal signal){
+		this.act = act;
+		this.signal = signal;
+	}
+}
+
+public struct ActBoolBundle{
+	public Act act;
+	public bool b;
+	public ActBoolBundle(Act act, bool b){
+		this.act = act;
+		this.b = b;
+	}
 }

@@ -3,20 +3,22 @@ using System.Collections;
 
 public class SequenceObjectGroup : SequenceElement{
 
-	public SequenceObject[] objects;
+	private SequenceObject[] objects;
 
 	public float stagger = 0.25f;
 	public float lingerAfterEntranceDuration = 2f;
-	private WaitForSeconds staggerYield;
 
 	private int enteredObjects = 0;
 	private int exitedObjects = 0;
 
-	private void Awake(){
-		staggerYield = new WaitForSeconds (stagger);
+	private void FindObjects(){
+		if (objects == null) {
+			objects = GetComponentsInChildren<SequenceObject> (true);
+		}
 	}
 
 	private void OnEnable(){
+		FindObjects ();
 		for (int k = 0; k < objects.Length; k++) {
 			objects [k].SequenceEnteredEvent += ObjectEntranceComplete;
 			objects [k].SequenceExitedEvent += ObjectExitComplete;
@@ -24,6 +26,7 @@ public class SequenceObjectGroup : SequenceElement{
 	}
 
 	private void OnDisable(){
+		FindObjects ();
 		for (int k = 0; k < objects.Length; k++) {
 			objects [k].SequenceExitedEvent -= ObjectEntranceComplete;
 			objects [k].SequenceExitedEvent -= ObjectExitComplete;
@@ -56,9 +59,10 @@ public class SequenceObjectGroup : SequenceElement{
 	}
 
 	private IEnumerator RunSequence(){
+		FindObjects ();
 		for (int k = 0; k < objects.Length; k++) {
 			objects [k].BeginSequence ();
-			yield return staggerYield;
+			yield return new WaitForSeconds (stagger);
 		}
 	}
 
