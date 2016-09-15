@@ -56,6 +56,12 @@ public abstract class BluetoothManager : MonoBehaviour {
 		if (NewUpcomingPayloadEvent != null) {
 			NewUpcomingPayloadEvent (p);
 		}
+		if (expectingPayload) {
+			if (p != GetExpectedPayload ()) {
+				Diglbug.Log ("New upcoming payload "+p+"!= expected "+GetExpectedPayload()+". Clearing expected");
+				ClearExpectedPayload ();
+			}
+		}
 	}
 
 	public void PayloadExpected(Payload p){

@@ -137,10 +137,13 @@ public class MobileBluetoothManager : BluetoothManager{
 	protected override void SendSignal(Signal s){
 		Diglbug.LogMobile ("Start send", "PIPE");
 		if (canSend) {
-			pipe.Digl_Stop ();
-			pipe.Digl_SetSendBeacon (s.ToBeacon ());
-			pipe.Digl_SetSwitch (BroadcastMode.send);
-			pipe.Digl_Start ();
+			// TODO: This is overkill safety, may cause bugs when sending in not-guide mode.
+			if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
+				pipe.Digl_Stop ();
+				pipe.Digl_SetSendBeacon (s.ToBeacon ());
+				pipe.Digl_SetSwitch (BroadcastMode.send);
+				pipe.Digl_Start ();
+			}
 		}
 		RecoveryManager.Instance.SignalSent (s);
 		AutoAcceptOwnSignal (s);

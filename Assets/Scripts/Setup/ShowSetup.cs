@@ -103,7 +103,9 @@ public class ShowSetup : MonoBehaviour {
 		if (!RecoveryManager.Instance.RunningRecovery()) {
 			introSequence.Begin ();
 			BLE.Instance.Manager.PayloadExpected (Payload.BEGIN_SHOW);
-			player.SendExpectedActWhenLoaded ();
+			if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
+				player.SendExpectedActWhenLoaded ();
+			}
 		}
 		RecoveryManager.Instance.ShowUnderway ();
 		BLE.Instance.EnableJockeyProtection ();
