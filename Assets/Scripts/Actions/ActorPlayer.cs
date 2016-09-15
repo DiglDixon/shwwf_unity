@@ -91,7 +91,7 @@ public class ActorPlayer : MonoBehaviour{
 				} else {
 					Act actToBegin = GetActSignalStarts (s);
 					if (actToBegin != null) {
-						BeginAct (actToBegin);
+						BeginAct (actToBegin, s);
 						SetCurrentGroup (s.GetSignature ());
 						AddIgnoredSignal (s); // cache this here so we don't re-trigger if a foreign signal jockeys us.
 						sfxSource.PlayOneShot(sceneBeginsSound);
@@ -106,8 +106,9 @@ public class ActorPlayer : MonoBehaviour{
 		}
 	}
 
-	private void BeginAct(Act actToBegin){
+	private void BeginAct(Act actToBegin, Signal s){
 		actToBegin.Begin ();
+		player.BeginActFromSignal (actToBegin, s);
 		if (ActorBeginsActEvent != null) {
 			ActorBeginsActEvent (actToBegin);
 		}

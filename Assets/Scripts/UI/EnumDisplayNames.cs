@@ -136,6 +136,8 @@ public static class EnumDisplayNamesEnglish{
 			return "Volunteer";
 		case Actor.YU_PINGFAN:
 			return "Yu Pingfan";
+		case Actor.STUDENT_BOY:
+			return "Student (boy)";
 		default:
 			Diglbug.LogError ("Failed to return a pre-defined ActorName for " + a + " - please define one!");
 			return "undefined_signature_string";
@@ -239,6 +241,8 @@ public static class EnumDisplayNamesMandarin{
 			return "志愿者";
 		case Actor.YU_PINGFAN:
 			return "余平凡";
+		case Actor.STUDENT_BOY:
+			return "男生";
 		default:
 			Diglbug.LogError ("Failed to return a pre-defined ActorName for " + a + " - please define one!");
 			return "undefined_signature_string";
