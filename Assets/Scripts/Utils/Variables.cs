@@ -8,7 +8,9 @@ public class Variables : ConstantSingleton<Variables>{
 
 	public Language language;
 
-	private void Start(){
+	protected override void Awake(){
+		base.Awake ();
+//		Language automaticaLanguage;
 		if (Application.systemLanguage == SystemLanguage.Chinese) {
 			SetLanguage (Language.MANDARIN);
 		} else if (Application.systemLanguage == SystemLanguage.ChineseSimplified) {

@@ -57,12 +57,13 @@ public class TracklistPlayer : WrappedTrackOutput{
 	}
 
 	public void SendCustomActWhenLoaded(Act a){
-		StartCoroutine (SendWhenLoaded (a, false));
+		StartCoroutine (SendWhenLoaded (a, true));
 	}
 
 	private IEnumerator SendWhenLoaded(Act a, bool forced){
 		TracklistEntry toPlay = a.GetFirstTracklistEntry ();
-		LoadTrack (toPlay.GetTrack ());
+//		SetTrack (toPlay.GetTrack ());
+		PrepareTrack (toPlay); // WORKING HERE, WAS LOAD TRACK.
 		while (!toPlay.GetTrack ().IsLoaded ()) {
 			yield return null;
 		}
@@ -84,7 +85,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 		int timeToSkip = SignalUtils.GetSignalTimeOffset (s.GetSignalTime());
 		TracklistEntry toPlay = a.GetEntryAtActTime (timeToSkip);
 
-		LoadTrack (toPlay.GetTrack());
+		PrepareTrack (toPlay); // WORKING HERE, WAS LOAD TRACK.
 		while (!toPlay.GetTrack ().IsLoaded ()) {
 			yield return null;
 		}
@@ -258,11 +259,6 @@ public class TracklistPlayer : WrappedTrackOutput{
 			nextOutput = multiPlayer;
 			multiPlayer.SwitchTracks ();
 		}
-//		if (entry is LoopingTracklistEntry) {
-//			// don't clear the expected payload
-//		} else {
-//			BLE.Instance.Manager.ClearExpectedPayload ();
-//		}
 		// This even fires as the track is fading out, not strictly as it ends. Good enough for our purposes.
 		if (TrackEndsEvent != null) {
 			TrackEndsEvent (currentOutput.GetTrack ());

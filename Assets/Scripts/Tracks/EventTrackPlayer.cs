@@ -21,6 +21,11 @@ public abstract class EventTrackPlayer : AbstractTrackPlayer{
 		}
 	}
 
+	public override void SetTrackTime (float seconds){
+		Diglbug.Log ("SetTrackTime "+name+", " + seconds, PrintStream.AUDIO_PLAYBACK);
+		SetSourceTime(seconds);
+	}
+
 	public override void SetSourceTime(float newTime){
 		if (eventTrack) {
 			eventTrack.SetTimeElapsed (newTime);

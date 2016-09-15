@@ -61,7 +61,6 @@ public class ActorPlayer : MonoBehaviour{
 	private void ResetCurrentActor(){
 		SetCurrentGroup(Signature.NONE);
 		player.PrepareTrack (currentActorSet.GetFirstTrackEntry ());
-		ClearPreviousSignals ();
 	}
 
 	public void CancelAct(){

@@ -49,8 +49,8 @@ public class GuideControls : MonoBehaviour{
 		player.SendExpectedActWhenLoaded ();
 	}
 
-	public void BeginCustomScene(Payload p){
-		// BLE.Instance.Manager.ForceSendPayload(p); // the old way
+	public void BeginCustomAct(Act a){
+		player.SendCustomActWhenLoaded (a);
 	}
 
 

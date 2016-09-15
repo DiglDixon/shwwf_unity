@@ -87,4 +87,14 @@ public class ActSet : EnsureDefinedActsInChildren<ShowAct>{
 		return null;
 	}
 
+	public Act GetActForDefinedAct(DefinedAct a){
+		for(int k = 0; k<acts.Length; k++){
+			if (acts [k].definedAct == a) {
+				return acts [k];
+			}
+		}
+		Diglbug.LogWarning ("GetActForDefinedAct request returned empty! " + a);
+		return null;
+	}
+
 }

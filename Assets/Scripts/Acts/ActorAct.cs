@@ -15,6 +15,7 @@ public class ActorAct : Act{
 	protected override void Start (){
 		base.Start ();
 		SetActingLength ();
+		Diglbug.Log ("ADDING EVENT FOR ACTORACT");
 		if (isTimeFromEnd) {
 			lastTrackWithActingContent.AddEventAtTimeRemaining (ActingContentComplete, timeActingContentEnds);
 		} else {

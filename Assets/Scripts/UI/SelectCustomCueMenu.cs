@@ -28,9 +28,8 @@ public class SelectCustomCueMenu : EnsureDefinedActsInChildren<SelectCustomCueIt
 			Diglbug.LogError ("Confirmed an undefined custom scene start.");
 			return;
 		}
-		Payload toSend = actPayloadPairs.GetPayloadForDefinedAct(pendingItem.act);
-		Diglbug.Log ("Confirmed: Sending custom cue " + toSend + " from item select " + pendingItem.act);
-		guideControls.BeginCustomScene (toSend);
+		guideControls.BeginCustomAct (actPayloadPairs.GetActForDefinedAct(pendingItem.act));
+		Diglbug.Log ("Confirmed: Sending custom act from item select " + pendingItem.act);
 	}
 
 	protected override void RunExtraInitsToObject (GameObject newObject){
