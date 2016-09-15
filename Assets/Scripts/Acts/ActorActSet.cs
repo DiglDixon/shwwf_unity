@@ -24,6 +24,9 @@ public class ActorActSet : EnsureActSetChild{
 	public delegate void ActContentCompleteDelegate(int index);
 	public event ActContentCompleteDelegate ActContentCompleteEvent;
 
+	public delegate void WaitingForNextActDelegate(ActorAct nextAct);
+	public event WaitingForNextActDelegate WaitingForNextActEvent;
+
 	private void Awake(){
 		acts = GetComponentsInChildren<ActorAct> ();
 		trackEntries = GetComponentsInChildren<EventTracklistEntry> ();
@@ -168,6 +171,10 @@ public class ActorActSet : EnsureActSetChild{
 		if (index != -1) {
 			if (index == acts.Length - 1) {
 				SetComplete ();
+			} else if (index < acts.Length - 1) {
+				if (WaitingForNextActEvent != null) {
+					WaitingForNextActEvent (acts [index + 1]);
+				}
 			}
 			if (ActContentCompleteEvent != null) {
 				ActContentCompleteEvent (index);

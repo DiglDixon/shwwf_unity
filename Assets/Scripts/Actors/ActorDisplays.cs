@@ -82,10 +82,11 @@ public class ActorDisplays : MonoBehaviour{
 		Diglbug.Log ("Actor controls changing display values to " + aas.name, PrintStream.ACTORS);
 		if (currentActorSet != null) {
 			currentActorSet.ActContentCompleteEvent -= MarkerComplete;
+			currentActorSet.WaitingForNextActEvent -= WaitingForNextAct;
 		}
 		currentActorSet = aas;
 		currentActorSet.ActContentCompleteEvent += MarkerComplete;
-
+		currentActorSet.WaitingForNextActEvent += WaitingForNextAct;
 
 
 		SetMarkersFromActorActSet (currentActorSet);
@@ -123,29 +124,29 @@ public class ActorDisplays : MonoBehaviour{
 	}
 
 	private void ActorBeganAct(Act a){
+		assistantSoundSource.Stop ();
+		SetActName (a);
+		statusText.text = Variables.Instance.language == Language.ENGLISH ? "Scene underway." : "正在演出";
+	}
+
+	private void SetActName(Act a){
 		if (Variables.Instance.language == Language.ENGLISH) {
 			actName.text = EnumDisplayNamesEnglish.DefinedActName(a.definedAct);
 		} else {
 			actName.text = EnumDisplayNamesMandarin.DefinedActName(a.definedAct);
 		}
-		assistantSoundSource.Stop ();
-
-		statusText.text = Variables.Instance.language == Language.ENGLISH ? "Scene underway." : "正在演出";
 	}
 
 	private void ActorComplete(ActorActSet a){
 		// sweet.
-//		statusText
 	}
 
-//	private IEnumerator RunActorCompleteDisplay(){
-//		statusText.text = (Variables.Instance.language == Language.ENGLISH ? "Scene finished! Preparing for next group…" : "本幕完。 准备重新开始");
-//		yield return new WaitForSeconds
-//	}
-
 	private void MarkerComplete(int index){
-//		waitingForNextSceneText.gameObject.SetActive (true);
 		SetWaiting();
+	}
+
+	private void WaitingForNextAct(ActorAct aa){
+		SetActName (aa);
 	}
 
 	private void Update(){

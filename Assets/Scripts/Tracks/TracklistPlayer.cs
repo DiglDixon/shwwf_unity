@@ -63,7 +63,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 	private IEnumerator SendWhenLoaded(Act a, bool forced){
 		TracklistEntry toPlay = a.GetFirstTracklistEntry ();
 //		SetTrack (toPlay.GetTrack ());
-		PrepareTrack (toPlay); // WORKING HERE, WAS LOAD TRACK.
+		LoadTrack (toPlay.GetTrack());
 		while (!toPlay.GetTrack ().IsLoaded ()) {
 			yield return null;
 		}
