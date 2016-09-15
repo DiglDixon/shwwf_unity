@@ -24,6 +24,8 @@ public class GuideControls : MonoBehaviour{
 
 	public GameObject largeControls;
 
+	public TracklistPlayer player;
+
 	private void OnEnable(){
 		BLE.Instance.Manager.ExpectedPayloadClearedEvent += ExpectedPayloadCleared;
 		BLE.Instance.Manager.ExpectedPayloadReadyEvent += ExpectedPayloadBeings;
@@ -33,21 +35,31 @@ public class GuideControls : MonoBehaviour{
 		actSet.ActChangedEvent += ActChanged;
 	}
 
+	private void OnDisable(){
+		if (BLE.Instance != null) {
+			BLE.Instance.Manager.ExpectedPayloadClearedEvent -= ExpectedPayloadCleared;
+			BLE.Instance.Manager.ExpectedPayloadReadyEvent -= ExpectedPayloadBeings;
+			//		BLE.Instance.Manager.NewSignatureEvent -= SignatureUpdated;
+			BLE.Instance.Manager.NewUpcomingPayloadEvent -= UpcomingPayloadChanged;
+		}
+		actSet.ActChangedEvent -= ActChanged;
+	}
+
+	public void BeginExpectedScene(){
+		player.SendExpectedActWhenLoaded ();
+	}
+
+	public void BeginCustomScene(Payload p){
+		// BLE.Instance.Manager.ForceSendPayload(p); // the old way
+	}
+
+
 	public void OpenLargeControls(){
 		largeControls.SetActive (true);
 	}
 
 	public void CloseLargeControls(){
 		largeControls.SetActive (false);
-	}
-
-	private void OnDisable(){
-		BLE.Instance.Manager.ExpectedPayloadClearedEvent -= ExpectedPayloadCleared;
-		BLE.Instance.Manager.ExpectedPayloadReadyEvent -= ExpectedPayloadBeings;
-//		BLE.Instance.Manager.NewSignatureEvent -= SignatureUpdated;
-		BLE.Instance.Manager.NewUpcomingPayloadEvent -= UpcomingPayloadChanged;
-
-		actSet.ActChangedEvent -= ActChanged;
 	}
 
 	private void ActChanged(Act a){

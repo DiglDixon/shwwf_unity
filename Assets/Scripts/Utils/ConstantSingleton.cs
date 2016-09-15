@@ -23,7 +23,7 @@ public class ConstantSingleton<T> : MonoBehaviour where T : MonoBehaviour{
 			if (_instance.gameObject == gameObject) {
 				Debug.Log ("Found self as existing singleton: "+name);
 			} else {
-				Debug.Log ("Found foreign existing singleton. Removed.");
+				Debug.Log ("Found foreign existing singleton. Removed self "+name);
 				Destroy (gameObject);
 			}
 		}
@@ -66,12 +66,12 @@ public class ConstantSingleton<T> : MonoBehaviour where T : MonoBehaviour{
 		DontDestroyOnLoad(existing);
 	}
 
-	private static void CreateInstance(){
-		Debug.Log ("Dynamically created Singleton");
-		GameObject singleton = new GameObject();
-		singleton.AddComponent<T>();
-		SetInstance (singleton);
-	}
+//	private static void CreateInstance(){
+//		Debug.Log ("Dynamically created Singleton");
+//		GameObject singleton = new GameObject();
+//		singleton.AddComponent<T>();
+//		SetInstance (singleton);
+//	}
 
 //	private static bool applicationIsQuitting = false;
 	/// <summary>

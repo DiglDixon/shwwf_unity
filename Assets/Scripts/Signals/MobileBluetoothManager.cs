@@ -134,7 +134,7 @@ public class MobileBluetoothManager : BluetoothManager{
 		DisableReinitialiseCountdown ();
 	}
 
-	public override void SendSignal(Signal s){
+	protected override void SendSignal(Signal s){
 		Diglbug.LogMobile ("Start send", "PIPE");
 		if (canSend) {
 			pipe.Digl_Stop ();
@@ -142,6 +142,7 @@ public class MobileBluetoothManager : BluetoothManager{
 			pipe.Digl_SetSwitch (BroadcastMode.send);
 			pipe.Digl_Start ();
 		}
+		RecoveryManager.Instance.SignalSent (s);
 		AutoAcceptOwnSignal (s);
 		DisableReinitialiseCountdown ();
 	}

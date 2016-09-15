@@ -12,10 +12,11 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 			return _Signature;
 		}
 		set {
-			Diglbug.Log("Setting signature to: "+value);
+			Diglbug.Log("Setting signature to: "+value, PrintStream.SIGNALS);
 			_Signature = value;
 			BLE.Instance.Manager.SetSendingSignature (Signature);
 			BLE.Instance.Manager.SetReceivedSignature (Signature);
+			RecoveryManager.Instance.SignatureSet (Signature);
 		}
 	}
 
@@ -33,13 +34,6 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 	private void NewSceneLoaded(Scene scene, LoadSceneMode loadMode){
 		Diglbug.Log ("New scene begins: " + scene.name, PrintStream.SCENES);
 		Mode.NewSceneLoaded (scene);
-	}
-
-	private void Update(){
-		if (Input.GetKeyDown (KeyCode.Equals)) {
-			Diglbug.Log ("Equals-returned to main_menu", PrintStream.DEBUGGING);
-			SceneManager.LoadScene (Scenes.MainMenu);
-		}
 	}
 
 	public void PasswordEntered(string p){
@@ -69,7 +63,7 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 		}
 	}
 
-	public void SetMode(string modeName){
+	public void SetMode(ModeName modeName){
 		Mode newMode = GetModeByName (modeName);
 		if (newMode != null) {
 			SetCurrentMode (newMode);
@@ -78,9 +72,9 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 		}
 	}
 
-	private Mode GetModeByName(string modeName){
+	private Mode GetModeByName(ModeName modeName){
 		foreach (Mode m in possibleModes) {
-			if (m.ModeName.Equals (modeName)) {
+			if (m.ModeName == modeName) {
 				return m;
 			}
 		}
@@ -104,6 +98,7 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 		}
 		Mode = m;
 		Mode.ModeSelected ();
+		RecoveryManager.Instance.SetMode (m.ModeName);
 		Diglbug.Log ("Set Mode to " + Mode.ModeName, PrintStream.MODES);
 	}
 

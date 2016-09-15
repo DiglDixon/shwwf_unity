@@ -25,6 +25,13 @@ public class Signal{
 		SetParametersFromBeacon (baseBeacon);
 	}
 
+	// ONLY USE THIS FOR RECOVERY - it has a pre-set time.
+	public Signal (Signature s, Payload p, int minute, int second){
+		SetSignature (s);
+		SetPayload (p);
+		time = new SignalTime(minute, second);
+	}
+
 	private void SetSignature(Signature s){
 		this.signature = s;
 	}
@@ -83,6 +90,10 @@ public class Signal{
 
 	public string GetPrint(){
 		return GetSignature () + ":" + GetPayload ();
+	}
+
+	public string GetFullPrint(){
+		return GetSignature () + ":" + GetPayload ()+"@"+time.minute+":"+time.second;
 	}
 }
 

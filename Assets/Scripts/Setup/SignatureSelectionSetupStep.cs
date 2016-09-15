@@ -12,6 +12,8 @@ public class SignatureSelectionSetupStep : SetupStep{
 
 	public override void SkipStep ()
 	{
-		ShowMode.Instance.Signature = Signature.RED;
+		if (!RecoveryManager.Instance.RunningRecovery()) {
+			ShowMode.Instance.Signature = Signature.RED;
+		}
 	}
 }

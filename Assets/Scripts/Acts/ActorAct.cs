@@ -54,8 +54,4 @@ public class ActorAct : Act{
 		return base.GetNameString() + " @ "+entryPayload;
 	}
 
-	public EventTracklistEntry GetFirstTracklistEntry(){
-		return trackEntries [0];
-	}
-
 }

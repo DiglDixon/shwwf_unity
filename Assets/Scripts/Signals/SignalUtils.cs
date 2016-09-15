@@ -49,7 +49,8 @@ public static class SignalUtils{
 		if (minuteDifference == 0) {
 			return now.Second - s.second;
 		} else {
-			return (60 - s.second) + now.Second + 60 * (Mathf.Max (minuteDifference - 1, 0));
+			int ret = (60 - s.second) + now.Second + 60 * (Mathf.Max (minuteDifference - 1, 0));
+			return ret;
 		}
 	}
 

@@ -132,7 +132,7 @@ public abstract class BluetoothManager : MonoBehaviour {
 		SendSignal (s);
 	}
 
-	public abstract void SendSignal (Signal s);
+	protected abstract void SendSignal (Signal s);
 
 	public virtual void SetReceivedSignature(Signature s){
 		SetReceivedSignatures(new Signature[]{s});
@@ -165,5 +165,10 @@ public abstract class BluetoothManager : MonoBehaviour {
 				continue;
 			}
 		}
+	}
+
+	public void RecoverFromPreviousSignal(Signal s){
+		ForceSignalSend (s); // this will keep the time intact
+		FireBeaconFoundEvent (s);
 	}
 }

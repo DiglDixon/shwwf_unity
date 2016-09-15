@@ -47,6 +47,23 @@ public class BLE : ConstantSingleton<BLE>{
 //		payloadDisableTimes = new float[Enum.GetNames(typeof(Payload)).Length];
 	}
 
+	private bool restrictToSetupSignals = false;
+
+	public void SetupBegins(){
+		restrictToSetupSignals = true;
+	}
+
+	public void SetupEnds(){
+		restrictToSetupSignals = false;
+	}
+
+//	private bool IsSetupSignal(Signal s){ TODO: Finish this.
+//		Payload p = s.GetPayload ();
+//		return (p == Payload.BLUETOOTH_TEST
+//			||	p == Payload.STOP_BLUETOOTH_TEST
+//			||	p == Payload.FINISH_SETUP
+//	}
+
 	public void EnableJockeyProtection(){
 		ignoreJockeyProtection = false;
 	}
@@ -103,6 +120,7 @@ public class BLE : ConstantSingleton<BLE>{
 		Diglbug.Log ("Cleared previous signals found", PrintStream.SIGNALS);
 		signalsDisabled.Clear ();
 		signalDisableTimes.Clear ();
+		currentSignal = SignalUtils.NullSignal;
 	}
 
 	private bool SignalIsNew(Signal s){

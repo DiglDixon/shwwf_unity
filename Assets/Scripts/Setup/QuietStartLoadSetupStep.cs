@@ -2,7 +2,7 @@
 
 public class QuietStartLoadSetupStep : WaitForPayloadSetupStep{
 
-	public GameObject secretButton;
+	public GameObject[] secretButtons;
 	public AudioSourceFadeControls toFadeOnComplete;
 	public TracklistPlayer player;
 	public TracklistEntry entryTrack;
@@ -10,7 +10,9 @@ public class QuietStartLoadSetupStep : WaitForPayloadSetupStep{
 	public override void Activate(ShowSetup callback){
 		base.Activate (callback);
 		if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
-			secretButton.SetActive (true);
+			for (int k = 0; k < secretButtons.Length; k++) {
+				secretButtons[k].SetActive (true);
+			}
 		}
 		player.PrepareTrack (entryTrack);
 	}

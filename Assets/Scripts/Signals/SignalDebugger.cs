@@ -44,7 +44,7 @@ public class SignalDebugger : MonoBehaviour{
 	}
 
 	public void SendPressed(){
-		BLE.Instance.Manager.SendSignal(GetSignalFromDropdowns());
+		BLE.Instance.Manager.ForceSignalSend(GetSignalFromDropdowns());
 	}
 
 	public void StopSendingPressed(){

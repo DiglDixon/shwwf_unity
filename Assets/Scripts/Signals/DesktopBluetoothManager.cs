@@ -3,25 +3,28 @@ using System.Collections;
 public class DesktopBluetoothManager : BluetoothManager{
 
 	Signal currentSendingSignal = null;
-	public float latencyMin = 0.05f;
-	public float latencyMax = 4f;
-	public bool useLatencySimulation = false;
-	public bool holdingLatency = false;
+	private float latencyMin = 0.1f;
+	private float latencyMax = 1f;
+	private bool useLatencySimulation = true;
+	private bool holdingLatency = false;
 
-	public override void SendSignal (Signal s){
-		Beacon b = s.ToBeacon ();
-		currentSendingSignal = new Signal(b);
+	protected override void SendSignal (Signal s){
+		Diglbug.Log ("DT Signal Send");
+//		Beacon b = s.ToBeacon ();
+		currentSendingSignal = s;
+		RecoveryManager.Instance.SignalSent (currentSendingSignal);
+		StopCoroutine ("RunFakeReceiving");
 		StartCoroutine ("RunFakeReceiving");
 	}
 
 	private IEnumerator RunFakeReceiving(){
 		if (useLatencySimulation) {
 			if (holdingLatency) {
-				Diglbug.Log ("Holding simulation latency...", PrintStream.SIGNALS);
-				while (holdingLatency) {
+				Diglbug.Log ("Running Holding simulation latency...", PrintStream.SIGNALS);
+				while (holdingLatency == true) {
 					yield return null;
 				}
-				Diglbug.Log ("Released simulation latency.", PrintStream.SIGNALS);
+				Diglbug.Log ("Stopped running simulation latency.", PrintStream.SIGNALS);
 			} else {
 				float latencySim = GetSimulatedLatency ();
 				Diglbug.Log ("Simulating signal latency: " + latencySim, PrintStream.SIGNALS);
@@ -40,7 +43,23 @@ public class DesktopBluetoothManager : BluetoothManager{
 	}
 
 	private void Update(){
-		holdingLatency = Input.GetKey(KeyCode.L);
+		if (Input.GetKeyDown (KeyCode.L)) {
+			if (useLatencySimulation) {
+				holdingLatency = true;
+				Diglbug.Log ("Holding latency sim...");
+			} else {
+				Diglbug.Log ("Not using latency sim.");
+			}
+		}
+		if (Input.GetKeyUp (KeyCode.L)) {
+			if (useLatencySimulation) {
+				holdingLatency = false;
+				Diglbug.Log ("Releasing latency sim...");
+			} else {
+				Diglbug.Log ("Not using latency sim.");
+			}
+		}
+
 	}
 
 	/* These are redundant due to our sending sim */

@@ -19,7 +19,6 @@ public class ShowSetup : MonoBehaviour {
 
 	private void Awake(){
 		steps = GetComponentsInChildren<SetupStep> ();
-		setupDisplay.SetActive (true);
 	}
 
 	private void Start(){
@@ -27,16 +26,27 @@ public class ShowSetup : MonoBehaviour {
 			steps [k].Deactivate ();
 		}
 		ActivateStepAtIndex (0);
+		BLE.Instance.SetupBegins ();
+		if (RecoveryManager.Instance.RunningRecovery ()) {
+			SkipSetup ();
+			setupDisplay.SetActive (false);
+		} else {
+			setupDisplay.SetActive (true);
+		}
 	}
 
 
 	private void Update(){
 		if (Input.GetKeyDown (KeyCode.K)) {
-			for (int k = 0; k < steps.Length; k++) {
-				steps [k].SkipStep ();
-			}
-			StepsComplete ();
+			SkipSetup ();
 		}
+	}
+
+	public void SkipSetup(){
+		for (int k = 0; k < steps.Length; k++) {
+			steps [k].SkipStep ();
+		}
+		StepsComplete ();
 	}
 
 	public void SetupStepComplete(){
@@ -58,6 +68,10 @@ public class ShowSetup : MonoBehaviour {
 			stepIndex = index;
 			ActivateStep (steps [index]);
 		}
+	}
+
+	public void BeginPressed(){
+		BLE.Instance.Manager.ForceSendPayload (Payload.BEGIN_SHOW);
 	}
 
 	public void ActivateStep(SetupStep step){
@@ -85,10 +99,15 @@ public class ShowSetup : MonoBehaviour {
 
 	private void StepsComplete(){
 		Diglbug.Log ("All Setup steps complete. Beginning show!", PrintStream.SETUP);
-		introSequence.Begin ();
 		ensureFadedOutOnStart.FadeTo (0f);
+		if (!RecoveryManager.Instance.RunningRecovery()) {
+			introSequence.Begin ();
+			BLE.Instance.Manager.PayloadExpected (Payload.BEGIN_SHOW);
+			player.SendExpectedActWhenLoaded ();
+		}
+		RecoveryManager.Instance.ShowUnderway ();
 		BLE.Instance.EnableJockeyProtection ();
-		player.Play ();
+		BLE.Instance.SetupEnds ();
 	}
 
 }

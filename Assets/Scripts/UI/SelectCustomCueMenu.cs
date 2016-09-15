@@ -13,6 +13,8 @@ public class SelectCustomCueMenu : EnsureDefinedActsInChildren<SelectCustomCueIt
 	private SelectCustomCueItem pendingItem;
 	public UILightbox startCustomSceneConfirmationLightbox;
 
+	public GuideControls guideControls;
+
 	public void ItemPressed(SelectCustomCueItem item){
 		// do stuff
 		pendingItem = item;
@@ -28,7 +30,7 @@ public class SelectCustomCueMenu : EnsureDefinedActsInChildren<SelectCustomCueIt
 		}
 		Payload toSend = actPayloadPairs.GetPayloadForDefinedAct(pendingItem.act);
 		Diglbug.Log ("Confirmed: Sending custom cue " + toSend + " from item select " + pendingItem.act);
-		BLE.Instance.Manager.ForceSendPayload(toSend);
+		guideControls.BeginCustomScene (toSend);
 	}
 
 	protected override void RunExtraInitsToObject (GameObject newObject){

@@ -10,6 +10,8 @@ public class TracklistPlayer : WrappedTrackOutput{
 	
 	public MultiTrackOutput multiPlayer;
 
+	public ActSet actSet;
+
 	public VideoPlaybackSystem videoSystem;
 
 	private TrackOutput currentOutput;
@@ -46,6 +48,53 @@ public class TracklistPlayer : WrappedTrackOutput{
 		LoadTrack(entry.GetTrack());
 		PlayTrackEntry (entry);
 		Pause ();
+	}
+
+	public void SendExpectedActWhenLoaded(){
+		Payload p = BLE.Instance.Manager.GetExpectedPayload ();
+		Act a = actSet.GetActForPayload (p);
+		StartCoroutine (SendWhenLoaded (a, false));
+	}
+
+	public void SendCustomActWhenLoaded(Act a){
+		StartCoroutine (SendWhenLoaded (a, false));
+	}
+
+	private IEnumerator SendWhenLoaded(Act a, bool forced){
+		TracklistEntry toPlay = a.GetFirstTracklistEntry ();
+		LoadTrack (toPlay.GetTrack ());
+		while (!toPlay.GetTrack ().IsLoaded ()) {
+			yield return null;
+		}
+		if (forced) {
+			Payload toSend = actSet.GetPayloadForDefinedAct (a.definedAct);
+			Diglbug.Log ("Forcing Payload Send from TracklistPlayer " + toSend);
+			BLE.Instance.Manager.ForceSendPayload (toSend);
+		} else {
+			Diglbug.Log ("Sending Expected from TracklistPlayer ");
+			BLE.Instance.Manager.SendExpectedPayload ();
+		}
+	}
+
+	public void BeginActFromSignal(Act a, Signal s){
+		StartCoroutine (PlayActWhenLoaded (a, s));
+	}
+
+	private IEnumerator PlayActWhenLoaded(Act a, Signal s){
+		int timeToSkip = SignalUtils.GetSignalTimeOffset (s.GetSignalTime());
+		TracklistEntry toPlay = a.GetEntryAtActTime (timeToSkip);
+
+		LoadTrack (toPlay.GetTrack());
+		while (!toPlay.GetTrack ().IsLoaded ()) {
+			yield return null;
+		}
+//		float newOffset = SignalUtils.GetSignalTimeOffset (s.GetSignalTime());
+//		float timeToPlayFrom = a.GetEntryTimeAtActTime (timeToSkip);
+
+		RecoveryManager.Instance.RecoveryComplete ();// TODO: Move this somewhere nicer. Maybe sub.
+		int postLoadTimeToSkip = SignalUtils.GetSignalTimeOffset (s.GetSignalTime());
+		float timeToPlayFrom = a.GetSpecificEntryTimeAtActTime (toPlay, postLoadTimeToSkip);
+		PlayTrackEntry (toPlay, timeToPlayFrom);
 	}
 
 	public void AddPreservedTrack(ITrack track){
@@ -138,14 +187,18 @@ public class TracklistPlayer : WrappedTrackOutput{
 	}
 
 	public void PlayTrackEntry(TracklistEntry entry){
+		PlayTrackEntry (entry, 0f);
+	}
+
+	private void PlayTrackEntry(TracklistEntry entry, float timeSkip){
 		int requestedIndex = IndexOfEntryInTracklist (entry);
 		if (requestedIndex != -1) {
 			if (IsExpectedIndex (requestedIndex)) {
-				PlayTrackEntryAtIndex (requestedIndex);
+				PlayTrackEntryAtIndex (requestedIndex, timeSkip);
 			} else {
 				Diglbug.Log ("Detected unorthodox track request ("+requestedIndex+") - unloading previously loaded tracks", PrintStream.MEDIA_LOAD);
 				UnloadAllTracksExcept (entry.GetTrack());
-				PlayTrackEntryAtIndex (requestedIndex);
+				PlayTrackEntryAtIndex (requestedIndex, timeSkip);
 			}
 		} else {
 			Diglbug.LogError ("Requested play of TrackEntry failed - entry not initialised in the Tracklist player's Tracklist");
@@ -171,10 +224,14 @@ public class TracklistPlayer : WrappedTrackOutput{
 	}
 
 	public void PlayTrackEntryAtIndex(int index){
+		PlayTrackEntryAtIndex (index, 0f);
+	}
+
+	private void PlayTrackEntryAtIndex(int index, float timeSkip){
 		if (index < tracklist.entries.Length) {
 			trackIndex = index;
 			TracklistEntry entry = tracklist.GetTrackEntryAtIndex (index);
-			HandlePlayRequest (entry);
+			HandlePlayRequest (entry, timeSkip);
 		} else {
 			Diglbug.Log ("Refused to play track at invalid index: " + index);
 		}
@@ -189,7 +246,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 		return -1;
 	}
 
-	private void HandlePlayRequest(TracklistEntry entry){
+	private void HandlePlayRequest(TracklistEntry entry, float timeSkip){
 		float fadeTime = entry.GetEntranceFadeTime ();
 		ITrack nextTrack = entry.GetTrack ();
 
@@ -219,6 +276,12 @@ public class TracklistPlayer : WrappedTrackOutput{
 		currentOutput.FadeIn(fadeTime);
 		if (NewTrackBeginsEvent != null) {
 			NewTrackBeginsEvent (nextTrack);
+		}
+		if (timeSkip != 0) {
+			Diglbug.Log ("TracklistPlayer Skipping to catch up with signal delay: " + timeSkip, PrintStream.AUDIO_PLAYBACK);
+			currentOutput.SetTrackTime (timeSkip);
+		} else {
+			Diglbug.Log ("TracklistPlayer timeSkip neglibile", PrintStream.AUDIO_PLAYBACK);
 		}
 	}
 

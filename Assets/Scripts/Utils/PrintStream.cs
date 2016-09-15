@@ -15,5 +15,6 @@ public enum PrintStream {
 	PRINT_STREAMS,
 	ACTS,
 	ACTORS,
+	RECOVERY,
 	MISC
 };

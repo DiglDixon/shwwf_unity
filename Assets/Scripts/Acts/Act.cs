@@ -42,6 +42,10 @@ public abstract class Act : EnsureDefinedActChild{
 		//
 	}
 
+	public EventTracklistEntry GetFirstTracklistEntry(){
+		return trackEntries [0];
+	}
+
 	public virtual void Begin(){
 		player.PlayTrackEntry (trackEntries [0]);
 	}
@@ -138,6 +142,58 @@ public abstract class Act : EnsureDefinedActChild{
 			}
 
 		}
+	}
+
+	public TracklistEntry GetEntryAtActTime(float time){
+		float totalTime = time;
+		TracklistEntry te;
+		for (int k = 0; k < trackEntries.Length; k++) {
+			te = trackEntries [k];
+			if (totalTime - te.GetTrackLength () < 0f) {
+				return te;
+			} else {
+				totalTime -= te.GetTrackLength ();
+			}
+		}
+
+		// The time is beyond all of the track lengths - therefore we must be looping.
+		return trackEntries [trackEntries.Length - 1];
+	}
+
+	public float GetEntryTimeAtActTime(float time){
+		float totalTime = time;
+		TracklistEntry te;
+		for (int k = 0; k < trackEntries.Length; k++) {
+			te = trackEntries [k];
+			if (totalTime - te.GetTrackLength () < 0f) {
+				return totalTime;
+			} else {
+				totalTime -= te.GetTrackLength ();
+			}
+		}
+		// Else, we must be looping, so...
+		te = trackEntries[trackEntries.Length-1];
+		while (totalTime > te.GetTrackLength ()) {
+			totalTime -= te.GetTrackLength ();
+		}
+
+		return totalTime;
+	}
+
+	public float GetSpecificEntryTimeAtActTime(TracklistEntry entry, float time){
+		float totalTime = time;
+		TracklistEntry te;
+		for (int k = 0; k < trackEntries.Length; k++) {
+			te = trackEntries [k];
+			if (te == entry) {
+				return Mathf.Min(totalTime, te.GetTrackLength()-0.1f);
+			} else {
+				totalTime -= te.GetTrackLength ();
+			}
+		}
+		// else, we mustn't have found the track here :(
+		Diglbug.LogError("GetSpecificEntryTimeAtActTime request in "+name+" track not present "+entry.name);
+		return -1f;
 	}
 
 
