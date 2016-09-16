@@ -100,11 +100,11 @@ public abstract class EventTrack : AbstractTrack{
 
 	private void CheckEvents(List<TimingEvent> events, float previousTime, float currentTime){
 		
-		for (int i = events.Count - 1; i >= 0; i--) {
+		for (int k = 0; k<events.Count; k++) {
 //			Diglbug.Log ("Iterating " + name + " at time " + currentTime+", prev:"+previousTime+" (def:"+events[i].time+")", PrintStream.DELEGATES);
-			if (EventShouldOccur(events[i], previousSourceTime, currentTime)) {
-				Diglbug.Log ("Event fired for " + name + " at time " + currentTime+" (def:"+events[i].time+")", PrintStream.DELEGATES);
-				events [i].function ();
+			if (EventShouldOccur(events[k], previousSourceTime, currentTime)) {
+				Diglbug.Log ("Event fired for " + name + " at time " + currentTime+" (def:"+events[k].time+")", PrintStream.DELEGATES);
+				events [k].function ();
 			}
 		}
 

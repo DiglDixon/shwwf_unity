@@ -4,7 +4,7 @@ public abstract class CustomTrackTimeEvent : MonoBehaviour{
 	/// <summary>
 	/// Means this will occur even if skipped over.
 	/// </summary>
-	public bool isStateEvent = false;
+	public bool isStateEvent = true;
 	private float minimumOccurAtTime = 0.1f;
 	public float occurAtTime = 0.1f;
 	public bool occurAtTimeFromEnd = false;
@@ -13,14 +13,18 @@ public abstract class CustomTrackTimeEvent : MonoBehaviour{
 
 	public abstract void CustomEvent();
 
-	private void OnValidate(){
+	protected virtual void OnValidate(){
 		updateName = false;
 		gameObject.name = GetObjectName();
 		occurAtTime = Mathf.Max (minimumOccurAtTime, occurAtTime);
 	}
 
 	protected virtual string GetObjectName(){
-		return this.GetType ().Name;
+		return this.GetType ().Name+GetTimeAtString();
+	}
+
+	protected virtual string GetTimeAtString(){
+		return "@" + (occurAtTimeFromEnd ? "-" : "+") + occurAtTime;
 	}
 
 }

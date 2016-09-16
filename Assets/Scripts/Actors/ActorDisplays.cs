@@ -30,6 +30,11 @@ public class ActorDisplays : MonoBehaviour{
 
 	public TracklistPlayer player;
 
+	public Slider scrubSlider;
+	private bool scrubDown = false;
+
+	public bool playerWasPlaying = false;
+
 	private void Awake(){
 		assistantSoundSource = GetComponent<AudioSource> ();
 		ClearedIgnored ();
@@ -124,7 +129,7 @@ public class ActorDisplays : MonoBehaviour{
 	}
 
 	private void ActorBeganAct(Act a){
-		assistantSoundSource.Stop ();
+//		assistantSoundSource.Stop ();
 		SetActName (a);
 		statusText.text = Variables.Instance.language == Language.ENGLISH ? "Scene underway." : "正在演出";
 	}
@@ -138,7 +143,7 @@ public class ActorDisplays : MonoBehaviour{
 	}
 
 	private void ActorComplete(ActorActSet a){
-		assistantSoundSource.Play ();
+//		assistantSoundSource.Play ();
 	}
 
 	private void MarkerComplete(int index){
@@ -151,9 +156,43 @@ public class ActorDisplays : MonoBehaviour{
 
 	private void Update(){
 		if (currentActorSet != null) {
-			progressSlider.value = currentActorSet.GetActingProgress ();
+			float cProg = currentActorSet.GetActingProgress ();
+			progressSlider.value = cProg;
 			loadingNote.SetActive (!player.GetTrack ().IsLoaded ());
+
+			if (scrubDown) {
+				// wait up
+			} else {
+//				if (player.IsPlaying ()) {
+				scrubSlider.value = cProg;
+//				}
+			}
+			if (!playerWasPlaying && player.IsPlaying ()) {
+				assistantSoundSource.Stop ();
+			}
+			if (playerWasPlaying && !player.IsPlaying ()) {
+				if (!scrubDown) {
+					assistantSoundSource.Play ();
+				}
+			}
+			playerWasPlaying = player.IsPlaying ();
 		}
+	}
+
+
+
+	public void ScrubPressed(){
+		scrubDown = true;
+		player.Pause ();
+	}
+
+	public void ScrubReleased(){
+		scrubDown = false;
+		player.Unpause ();
+
+//		player.BeginActFromSignal
+		float skipAmount = scrubSlider.value;
+		actorPlayer.Rehearse_SkipToProgress (scrubSlider.value);
 	}
 
 

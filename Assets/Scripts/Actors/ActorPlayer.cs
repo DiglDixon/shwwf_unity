@@ -180,4 +180,8 @@ public class ActorPlayer : MonoBehaviour{
 	public void Rehearse_Stop(){
 		ActorSetFinished(currentActorSet);
 	}
+
+	public void Rehearse_SkipToProgress(float p){
+		currentActorSet.Rehearse_SkipToProgress (p);
+	}
 }

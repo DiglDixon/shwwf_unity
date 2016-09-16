@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class RehearsalControls : MonoBehaviour {
@@ -13,6 +14,8 @@ public class RehearsalControls : MonoBehaviour {
 
 	public GameObject rehearsalControlPanel;
 
+	public Slider scrubSlider;
+
 	public void PlayPressed(){
 //		player.Play ();
 		actorPlayer.Rehearse_Play();
@@ -25,10 +28,12 @@ public class RehearsalControls : MonoBehaviour {
 	}
 
 	public void OpenControls(){
+		scrubSlider.gameObject.SetActive (true);
 		rehearsalControlPanel.SetActive (true);
 	}
 
 	public void HideControls(){
+		scrubSlider.gameObject.SetActive (false);
 		rehearsalControlPanel.SetActive (false);
 	}
 

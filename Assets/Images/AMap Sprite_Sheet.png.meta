@@ -1,0 +1,367 @@
+fileFormatVersion: 2
+guid: 4c0f94e04ff3f4b5899b9b49c261b9a5
+timeCreated: 1473833628
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: AMap Sprite_Sheet_0
+    21300002: AMap Sprite_Sheet_1
+    21300004: AMap Sprite_Sheet_2
+    21300006: AMap Sprite_Sheet_3
+    21300008: Zoom_Button_Amap
+    21300010: AMap Sprite_Sheet_5
+    21300012: AMap Sprite_Sheet_6
+    21300014: AMap Sprite_Sheet_7
+    21300016: AMap Sprite_Sheet_8
+    21300018: AMap Sprite_Sheet_9
+    21300020: AMap Sprite_Sheet_10
+    21300022: AMap Sprite_Sheet_11
+    21300024: AMap Sprite_Sheet_12
+    21300026: AMap Sprite_Sheet_13
+    21300028: AMap Sprite_Sheet_15
+    21300030: Amap_Direction_button
+    21300032: Location_Amap
+    21300034: Big_Button_amap
+    21300036: Navigation_Amap_TopBar
+    21300038: Other_Search_amap
+    21300040: Search_main_Amap
+    21300042: AMap Sprite_Sheet_4
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 5613
+        width: 928
+        height: 931
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1215
+        y: 5613
+        width: 927
+        height: 931
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 2362
+        y: 5613
+        width: 928
+        height: 931
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 3493
+        y: 5613
+        width: 928
+        height: 931
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Zoom_Button_Amap
+      rect:
+        serializedVersion: 2
+        x: 4549
+        y: 4398
+        width: 993
+        height: 2140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 5829
+        y: 5897
+        width: 451
+        height: 643
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 7872
+        y: 3532
+        width: 461
+        height: 643
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 6990
+        y: 5820
+        width: 647
+        height: 720
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 7839
+        y: 5326
+        width: 275
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 7745
+        y: 5816
+        width: 588
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 4364
+        width: 928
+        height: 927
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 1227
+        y: 4364
+        width: 927
+        height: 927
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 2374
+        y: 4364
+        width: 928
+        height: 927
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 3505
+        y: 4368
+        width: 925
+        height: 925
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 5804
+        y: 4481
+        width: 506
+        height: 781
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Amap_Direction_button
+      rect:
+        serializedVersion: 2
+        x: 6480
+        y: 4547
+        width: 610
+        height: 699
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Location_Amap
+      rect:
+        serializedVersion: 2
+        x: 7190
+        y: 4321
+        width: 1013
+        height: 1013
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Big_Button_amap
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 3379
+        width: 7645
+        height: 866
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Navigation_Amap_TopBar
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 2303
+        width: 8029
+        height: 973
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Other_Search_amap
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 1426
+        width: 8080
+        height: 712
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Search_main_Amap
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 61
+        width: 8166
+        height: 1054
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: AMap Sprite_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 6410
+        y: 5866
+        width: 475
+        height: 676
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -193,4 +193,19 @@ public class ActorActSet : EnsureActSetChild{
 		}
 	}
 
+	public void Rehearse_SkipToProgress(float p){
+		float destTime = totalActingLength * p;
+
+		for (int k = 0; k < acts.Length; k++) {
+			if (destTime - acts [k].GetActingLength () < 0f) {
+				TracklistEntry entry = acts [k].GetEntryAtActTime (destTime);
+				float delay = acts [k].GetSpecificEntryTimeAtActTime (entry, destTime);
+				player.PlayTrackEntry(entry, delay);
+				return;
+			} else {
+				destTime -= acts [k].GetActingLength ();
+			}
+		}
+	}
+
 }

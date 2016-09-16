@@ -1,0 +1,300 @@
+fileFormatVersion: 2
+guid: ad1a6a97ca5fb4564b80bb4703aaddf7
+timeCreated: 1473812007
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Sent_Message
+    21300002: HedderBar
+    21300004: Profile_Mask
+    21300006: Text_Box
+    21300008: Receved_Message
+    21300010: Back_Button
+    21300012: Profile
+    21300014: Add
+    21300016: Emoji_Stickers
+    21300018: Attach
+    21300020: Notification_Number_Dot
+    21300022: Chats_icon
+    21300024: Discover
+    21300026: Wechat Sprite Sheet_Sprite Sheet_13
+    21300028: Wechat Sprite Sheet_Sprite Sheet_14
+    21300030: Profile_2
+    21300032: Wechat Sprite Sheet_Sprite Sheet_16
+    21300034: Wechat Sprite Sheet_Sprite Sheet_17
+    21300036: Wechat Sprite Sheet_Sprite Sheet_18
+    21300038: Wechat Sprite Sheet_Sprite Sheet_19
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 512
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sent_Message
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 3730
+        width: 1724
+        height: 1615
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 144, y: 141, z: 245, w: 183}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: HedderBar
+      rect:
+        serializedVersion: 2
+        x: 1917
+        y: 4989
+        width: 4283
+        height: 469
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Profile_Mask
+      rect:
+        serializedVersion: 2
+        x: 6294
+        y: 4208
+        width: 1310
+        height: 1310
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Text_Box
+      rect:
+        serializedVersion: 2
+        x: 1900
+        y: 4249
+        width: 4320
+        height: 576
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Receved_Message
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 1881
+        width: 1724
+        height: 1615
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 241, y: 132, z: 133, w: 159}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Back_Button
+      rect:
+        serializedVersion: 2
+        x: 5644
+        y: 3349
+        width: 459
+        height: 821
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Profile
+      rect:
+        serializedVersion: 2
+        x: 6512
+        y: 3368
+        width: 847
+        height: 798
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Add
+      rect:
+        serializedVersion: 2
+        x: 1903
+        y: 1926
+        width: 1318
+        height: 1314
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Emoji_Stickers
+      rect:
+        serializedVersion: 2
+        x: 3289
+        y: 1932
+        width: 1321
+        height: 1337
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Attach
+      rect:
+        serializedVersion: 2
+        x: 4746
+        y: 1932
+        width: 1321
+        height: 1334
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Notification_Number_Dot
+      rect:
+        serializedVersion: 2
+        x: 6282
+        y: 1915
+        width: 1333
+        height: 1333
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Chats_icon
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 525
+        width: 1374
+        height: 1213
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Discover
+      rect:
+        serializedVersion: 2
+        x: 1798
+        y: 574
+        width: 1468
+        height: 1167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Wechat Sprite Sheet_Sprite Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 3413
+        y: 537
+        width: 1246
+        height: 1246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Profile_2
+      rect:
+        serializedVersion: 2
+        x: 4788
+        y: 574
+        width: 1238
+        height: 1167
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Wechat Sprite Sheet_Sprite Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 6275
+        y: 454
+        width: 1321
+        height: 1336
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Wechat Sprite Sheet_Sprite Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 126
+        width: 7429
+        height: 19
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

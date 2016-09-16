@@ -2,7 +2,7 @@
 public class PreloadNextFileEvent : CustomTrackTimeEvent{
 
 	public TracklistPlayer tracklistPlayer;
-	private int indicesAhead = 2;
+	public int indicesAhead = 2;
 
 	public override void CustomEvent (){
 		tracklistPlayer.LoadNextTrack (indicesAhead);

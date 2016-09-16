@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: d19cff514602e494d8208ffd87b43eb8
-timeCreated: 1473312691
+timeCreated: 1473903409
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -72,17 +72,18 @@ TextureImporter:
     21300130: OSX Sprite_Sheet_65
     21300132: OSX Sprite_Sheet_66
     21300134: On_Call_Contacts
-    21300136: Contacts
+    21300136: LetterNav
     21300138: Phone
     21300140: Music
     21300142: Health
     21300144: Live App
     21300146: STOP
     21300148: Mask
+    21300150: OSX Sprite_Sheet_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -101,7 +102,7 @@ TextureImporter:
   cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -3
   maxTextureSize: 2048
   textureSettings:
     filterMode: 2
@@ -137,15 +138,15 @@ TextureImporter:
         height: 519
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 152, y: 150, z: 222, w: 150}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Battery
       rect:
         serializedVersion: 2
-        x: 2437
-        y: 8065
+        x: 4531
+        y: 5703
         width: 561
         height: 226
       alignment: 0
@@ -157,8 +158,8 @@ TextureImporter:
       name: Search Icon
       rect:
         serializedVersion: 2
-        x: 3089
-        y: 8077
+        x: 3877
+        y: 6541
         width: 206
         height: 206
       alignment: 0
@@ -176,15 +177,15 @@ TextureImporter:
         height: 517
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 204, y: 154, z: 161, w: 154}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
       name: Answer
       rect:
         serializedVersion: 2
-        x: 2582
-        y: 7148
+        x: 3455
+        y: 7028
         width: 709
         height: 714
       alignment: 0
@@ -196,8 +197,8 @@ TextureImporter:
       name: Decline
       rect:
         serializedVersion: 2
-        x: 3382
-        y: 7144
+        x: 4340
+        y: 6351
         width: 714
         height: 714
       alignment: 0
@@ -209,13 +210,13 @@ TextureImporter:
       name: Slidebar
       rect:
         serializedVersion: 2
-        x: 4633
-        y: 6480
+        x: 5105
+        y: 6941
         width: 660
-        height: 1165
+        height: 882
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 234, z: 0, w: 287}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
@@ -235,8 +236,8 @@ TextureImporter:
       name: Contact_Send_message
       rect:
         serializedVersion: 2
-        x: 2821
-        y: 6327
+        x: 4257
+        y: 7125
         width: 735
         height: 664
       alignment: 0
@@ -248,8 +249,8 @@ TextureImporter:
       name: Contact_Call_Voice
       rect:
         serializedVersion: 2
-        x: 3684
-        y: 6278
+        x: 2597
+        y: 7021
         width: 718
         height: 718
       alignment: 0
@@ -274,8 +275,8 @@ TextureImporter:
       name: Contact_Call_Facetime
       rect:
         serializedVersion: 2
-        x: 3638
-        y: 5679
+        x: 2835
+        y: 6222
         width: 813
         height: 491
       alignment: 0
@@ -287,8 +288,8 @@ TextureImporter:
       name: Dot
       rect:
         serializedVersion: 2
-        x: 4633
-        y: 5609
+        x: 3715
+        y: 5634
         width: 713
         height: 710
       alignment: 0
@@ -352,10 +353,10 @@ TextureImporter:
       name: Search
       rect:
         serializedVersion: 2
-        x: 3811
-        y: 992
-        width: 525
-        height: 4448
+        x: 2500
+        y: 7827
+        width: 3242
+        height: 419
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -365,8 +366,8 @@ TextureImporter:
       name: Add_To_Call
       rect:
         serializedVersion: 2
-        x: 4637
-        y: 4834
+        x: 4359
+        y: 4836
         width: 714
         height: 713
       alignment: 0
@@ -378,8 +379,8 @@ TextureImporter:
       name: Mute
       rect:
         serializedVersion: 2
-        x: 4637
-        y: 4070
+        x: 4358
+        y: 4072
         width: 714
         height: 714
       alignment: 0
@@ -443,8 +444,8 @@ TextureImporter:
       name: Keypad
       rect:
         serializedVersion: 2
-        x: 4637
-        y: 3299
+        x: 4356
+        y: 3295
         width: 714
         height: 713
       alignment: 0
@@ -508,8 +509,8 @@ TextureImporter:
       name: FaceTime
       rect:
         serializedVersion: 2
-        x: 4637
-        y: 2539
+        x: 4360
+        y: 2528
         width: 714
         height: 714
       alignment: 0
@@ -521,10 +522,10 @@ TextureImporter:
       name: Notofication drop down
       rect:
         serializedVersion: 2
-        x: 5598
-        y: 114
+        x: 5851
+        y: 6315
         width: 599
-        height: 3252
+        height: 2135
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -586,8 +587,8 @@ TextureImporter:
       name: Speeker
       rect:
         serializedVersion: 2
-        x: 4637
-        y: 1764
+        x: 4359
+        y: 1762
         width: 714
         height: 714
       alignment: 0
@@ -651,8 +652,8 @@ TextureImporter:
       name: On_Call_Contacts
       rect:
         serializedVersion: 2
-        x: 4637
-        y: 976
+        x: 4356
+        y: 973
         width: 714
         height: 714
       alignment: 0
@@ -661,13 +662,13 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Contacts
+      name: LetterNav
       rect:
         serializedVersion: 2
-        x: 4400
-        y: 1420
-        width: 106
-        height: 4018
+        x: 4132
+        y: 1434
+        width: 110
+        height: 4015
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -743,7 +744,20 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4637
-        y: 52
+        y: 63
+        width: 821
+        height: 821
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OSX Sprite_Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 5509
+        y: 67
         width: 821
         height: 821
       alignment: 0

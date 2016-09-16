@@ -195,7 +195,8 @@ public class TracklistPlayer : WrappedTrackOutput{
 		PlayTrackEntry (entry, 0f);
 	}
 
-	private void PlayTrackEntry(TracklistEntry entry, float timeSkip){
+	// public for rehearsal controls scrub.
+	public void PlayTrackEntry(TracklistEntry entry, float timeSkip){
 		int requestedIndex = IndexOfEntryInTracklist (entry);
 		if (requestedIndex != -1) {
 			if (!IsExpectedIndex (requestedIndex)) {

@@ -1,0 +1,297 @@
+fileFormatVersion: 2
+guid: 19789f7ef491d48c98dc55f598580c32
+timeCreated: 1473897876
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: News Apps Sprite Sheet_v_0
+    21300002: News Apps Sprite Sheet_v_1
+    21300004: News Apps Sprite Sheet_v_2
+    21300006: News Apps Sprite Sheet_v_3
+    21300008: News Apps Sprite Sheet_v_4
+    21300010: News Apps Sprite Sheet_v_6
+    21300012: News Apps Sprite Sheet_v_7
+    21300014: News Apps Sprite Sheet_v_8
+    21300016: News Apps Sprite Sheet_v_9
+    21300018: News Apps Sprite Sheet_v_10
+    21300020: SinaNews_Share
+    21300022: News Apps Sprite Sheet_v_12
+    21300024: News Apps Sprite Sheet_v_13
+    21300026: TencentNews_Chillis
+    21300028: TencentNew_share
+    21300030: TencentNews_Comment
+    21300032: News Apps Sprite Sheet_v_17
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 512
+  textureSettings:
+    filterMode: 2
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: News Apps Sprite Sheet_v_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 1348
+        width: 522
+        height: 523
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: News Apps Sprite Sheet_v_1
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 1352
+        width: 588
+        height: 481
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: News Apps Sprite Sheet_v_2
+      rect:
+        serializedVersion: 2
+        x: 1389
+        y: 1348
+        width: 439
+        height: 554
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: News Apps Sprite Sheet_v_3
+      rect:
+        serializedVersion: 2
+        x: 1910
+        y: 1350
+        width: 544
+        height: 505
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: News Apps Sprite Sheet_v_4
+      rect:
+        serializedVersion: 2
+        x: 2536
+        y: 1348
+        width: 413
+        height: 566
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: News Apps Sprite Sheet_v_6
+      rect:
+        serializedVersion: 2
+        x: 3057
+        y: 1348
+        width: 749
+        height: 523
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: News Apps Sprite Sheet_v_7
+      rect:
+        serializedVersion: 2
+        x: 3926
+        y: 1342
+        width: 452
+        height: 565
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: News Apps Sprite Sheet_v_8
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 658
+        width: 394
+        height: 363
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: News Apps Sprite Sheet_v_9
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 658
+        width: 847
+        height: 583
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: News Apps Sprite Sheet_v_10
+      rect:
+        serializedVersion: 2
+        x: 1418
+        y: 658
+        width: 465
+        height: 445
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SinaNews_Share
+      rect:
+        serializedVersion: 2
+        x: 1997
+        y: 658
+        width: 392
+        height: 392
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: News Apps Sprite Sheet_v_12
+      rect:
+        serializedVersion: 2
+        x: 2619
+        y: 658
+        width: 429
+        height: 372
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: News Apps Sprite Sheet_v_13
+      rect:
+        serializedVersion: 2
+        x: 3129
+        y: 658
+        width: 1347
+        height: 510
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TencentNews_Chillis
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 61
+        width: 448
+        height: 452
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TencentNew_share
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 61
+        width: 487
+        height: 468
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: TencentNews_Comment
+      rect:
+        serializedVersion: 2
+        x: 1159
+        y: 87
+        width: 466
+        height: 452
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: News Apps Sprite Sheet_v_17
+      rect:
+        serializedVersion: 2
+        x: 2314
+        y: 63
+        width: 2200
+        height: 326
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 63, y: 0, z: 70, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
