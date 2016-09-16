@@ -164,7 +164,17 @@ public class TracklistPlayer : WrappedTrackOutput{
 
 	public void UnloadPreviousTrack(){
 		if (trackIndex > 0) {
-			UnloadTrack(tracklist.entries [trackIndex - 1].GetTrack ());
+			for (int k = 0; k < trackIndex; k++) {
+				if (tracklist.entries [k] is LoopingTracklistEntry) {
+					LoopingTracklistEntry lte = (LoopingTracklistEntry)tracklist.entries [k];
+					UnloadTrack (lte.GetTrack ());
+					lte.SwitchTracks ();
+					UnloadTrack (lte.GetTrack ());
+				} else {
+					UnloadTrack(tracklist.entries [k].GetTrack ());
+				}
+			}
+//			UnloadTrack(tracklist.entries [trackIndex - 1].GetTrack ());
 		}
 	}
 	// this wasn't public until the weird video stuff happened.
