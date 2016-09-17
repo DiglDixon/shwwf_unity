@@ -7,6 +7,8 @@ public abstract class EventTrackPlayer : AbstractTrackPlayer{
 	private bool eventsEnabled = false;
 
 	public override void Play(){
+		base.Play();
+		eventTrack.Reset();
 		EnableEvents ();
 	}
 
@@ -47,7 +49,7 @@ public abstract class EventTrackPlayer : AbstractTrackPlayer{
 
 	public override void Skipped (){
 		FireRemainingStateEvents ();
-		base.TrackReachedEnd ();
+//		base.TrackReachedEnd ();
 	}
 
 	public void FireRemainingStateEvents(){
@@ -60,10 +62,10 @@ public abstract class EventTrackPlayer : AbstractTrackPlayer{
 		eventTrack.UpdateTimeElapsed (GetTrack ().GetTrackLength());
 	}
 
-	protected override void TrackReachedEnd (){
-		FireRemainingEvents();
-		base.TrackReachedEnd ();
-	}
+//	protected override void TrackReachedEnd (){
+////		FireRemainingEvents(); // Think this was busted, and causing big problems.
+////		base.TrackReachedEnd ();
+//	}
 
 	protected void EnableEvents(){
 //		if (eventTrack != null) {

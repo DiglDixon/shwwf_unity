@@ -175,6 +175,6 @@ public abstract class BluetoothManager : MonoBehaviour {
 
 	public void RecoverFromPreviousSignal(Signal s){
 		ForceSignalSend (s); // this will keep the time intact
-		FireBeaconFoundEvent (s);
+//		FireBeaconFoundEvent (s);
 	}
 }

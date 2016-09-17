@@ -16,6 +16,7 @@ public class MobileVideoTrack : VideoTrack{
 
 	public void SetControls(MediaPlayerCtrl controls){
 		this.controls = controls;
+		this.controls.Load (videoFileName); // trying load once, never unload.
 	}
 
 	public override string GetTrackName(){
@@ -48,12 +49,12 @@ public class MobileVideoTrack : VideoTrack{
 
 	protected override void RunLoad(){
 		Diglbug.Log ("Loading MobileTrackVideo " + videoFileName, PrintStream.MEDIA_LOAD);
-		controls.Load (videoFileName); // this is where its parameter is set m_str;
+//		controls.Load (videoFileName);
 	}
 
 	protected override void RunUnload(){
 		Diglbug.Log ("Unloading MobileTrackVideo " + videoFileName, PrintStream.MEDIA_LOAD);
-		controls.UnLoad ();
+//		controls.UnLoad ();
 	}
 
 	public override bool IsLoaded(){

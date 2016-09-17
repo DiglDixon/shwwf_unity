@@ -31,13 +31,13 @@ public class ShowAct : Act{
 		bool addToRest = false;
 		for (int k = 0; k < trackEntries.Length; k++) {
 			if (addToRest) { // this ensures if we skip to a track beyond the defined one, we still proc.
-				trackEntries[k].AddStateEventAtTime (ExpectedTimeReached, 0.1f);
+				trackEntries[k].AddStateEventAtTime (ExpectedTimeReached, 0.5f);
 			}
 			if (trackEntries [k] == expectingPayloadFrom) {
 				if (isTimeFromEnd) {
-					expectingPayloadFrom.AddStateEventAtTimeRemaining (ExpectedTimeReached, expectedTime);
+					trackEntries [k].AddStateEventAtTimeRemaining (ExpectedTimeReached, expectedTime);
 				} else {
-					expectingPayloadFrom.AddStateEventAtTime (ExpectedTimeReached, expectedTime);
+					trackEntries [k].AddStateEventAtTime (ExpectedTimeReached, expectedTime);
 				}
 				addToRest = true;
 			}

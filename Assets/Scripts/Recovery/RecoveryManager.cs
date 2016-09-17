@@ -21,6 +21,7 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 	private bool showUnderway = false;
 
 	public GameObject recoverLoadScreen;
+	public GameObject recoverFromPauseScreen;
 
 	protected override void Awake(){
 		base.Awake ();
@@ -74,6 +75,7 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 			int previousMinute = PlayerPrefs.GetInt (lastSignalMinuteKey, 0);
 			int previousSecond = PlayerPrefs.GetInt (lastSignalSecondKey, 0);
 			Signal s = new Signal (previousSignature, previousPayload, previousMinute, previousSecond);
+			BLE.Instance.ClearPreviousSignalsFound (); // this shouldn't be required, but doesn't hurt.
 			BLE.Instance.Manager.RecoverFromPreviousSignal (s);
 			Diglbug.Log ("Guide recovery complete");
 		} else {
@@ -84,6 +86,7 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 
 	public void RecoveryComplete(){
 		recoverLoadScreen.SetActive (false);
+//		recoverFromPauseScreen.SetActive (false);
 	}
 
 	public void ResumeComplete(){
@@ -153,7 +156,10 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 //		isPaused = pauseStatus;
 		if (pauseStatus == false) {
 			if (showUnderway) {
-				Recover ();
+				if (!RunningRecovery ()) {
+//					recoverFromPauseScreen.SetActive (true);
+					Recover ();
+				}
 			}
 		}
 	}

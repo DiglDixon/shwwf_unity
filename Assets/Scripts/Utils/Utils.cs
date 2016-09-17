@@ -41,4 +41,9 @@ public static class Utils{
 		return comp as T;
 	}
 
+//	public DateTime GetTime(){
+//		TimeSpan span = new TimeSpan(0, 
+//			
+//	}
+
 }

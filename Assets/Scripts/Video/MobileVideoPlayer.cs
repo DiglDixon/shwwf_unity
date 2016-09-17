@@ -15,6 +15,10 @@ public class MobileVideoPlayer : VideoPlayer {
 		Diglbug.LogMobile ("ControlCount:" + controls.Length, "ODD");
 	}
 
+	protected override void TrackReachedEnd (){
+		Diglbug.Log("Track Reached End for MobileVideoPlayer "+name+" - overriding standard behaviour", PrintStream.VIDEO);
+	}
+
 	public void InitialiseMobileVideoTracksInList(Tracklist list){
 		TracklistEntry entry;
 		for(int k = 0; k< list.entries.Length; k++) {
@@ -49,7 +53,7 @@ public class MobileVideoPlayer : VideoPlayer {
 		}
 		base.Play ();
 		mobileVideoTrack.controls.ActivatePlane ();
-		Diglbug.Log ("Play "+name, PrintStream.AUDIO_PLAYBACK);
+		Diglbug.Log ("Playing movile video track "+name, PrintStream.AUDIO_PLAYBACK);
 		Unpause ();
 		mobileVideoTrack.controls.Play ();
 		SetSourceTime(0f);
@@ -66,7 +70,7 @@ public class MobileVideoPlayer : VideoPlayer {
 		base.Stop ();
 		StopCoroutine ("RunWhenLoaded");
 		mobileVideoTrack.controls.DeactivatePlane ();
-		Diglbug.Log ("Stop "+name, PrintStream.AUDIO_PLAYBACK);
+		Diglbug.Log ("Stopping mobile video track "+name, PrintStream.AUDIO_PLAYBACK);
 		mobileVideoTrack.controls.Stop ();
 		SetSourceTime(0f);
 	}

@@ -11,11 +11,12 @@ public abstract class EnsureDefinedActChild : MonoBehaviour{
 	}
 
 	protected virtual string GetNameString(){
-		return GetDefinedAct().ToString ();
+		return EnumDisplayNamesEnglish.DefinedActName(GetDefinedAct());
 	}
 
 	protected virtual void OnValidate(){
 		if (updateName) {
+			updateName = false;
 			UpdateName ();
 		}
 	}

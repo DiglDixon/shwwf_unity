@@ -23,6 +23,10 @@ public class DesktopVideoPlayer : VideoPlayer {
 		base.Update ();
 	}
 
+	protected override void TrackReachedEnd (){
+		Diglbug.Log("Track Reached End for DesktopVideoPlayer "+name+" - overriding standard behaviour", PrintStream.VIDEO);
+	}
+
 	public override void SetTrack(ITrack t){
 		DesktopVideoTrack desktopVideoTrack = (DesktopVideoTrack)t;
 		Diglbug.Log ("Set Track "+name+", "+desktopVideoTrack.GetTrackName(), PrintStream.AUDIO_PLAYBACK);

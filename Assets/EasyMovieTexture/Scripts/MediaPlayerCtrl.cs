@@ -233,21 +233,22 @@ public class MediaPlayerCtrl : MonoBehaviour {
 	
 	bool m_bCheckFBO = false;
 
-	void OnDisable() 
-	{
-		if( GetCurrentState() == MEDIAPLAYER_STATE.PLAYING)
-		{
-			Pause();
-		}
-	}
-
-	void OnEnable()
-	{
-		if( GetCurrentState() == MEDIAPLAYER_STATE.PAUSED)
-		{
-			Play();
-		}
-	}
+	// DIGL REMOVING THESE - THEY'RE MESSING WITH PAUSE RECOVERY
+//	void OnDisable() 
+//	{
+//		if( GetCurrentState() == MEDIAPLAYER_STATE.PLAYING)
+//		{
+//			Pause();
+//		}
+//	}
+//
+//	void OnEnable()
+//	{
+//		if( GetCurrentState() == MEDIAPLAYER_STATE.PAUSED)
+//		{
+//			Play();
+//		}
+//	}
 	
 	void Update()
 	{
@@ -599,7 +600,7 @@ public class MediaPlayerCtrl : MonoBehaviour {
     //The error code is the following sites related documents.
     //http://developer.android.com/reference/android/media/MediaPlayer.OnErrorListener.html 
     void OnError(MEDIAPLAYER_ERROR iCode, MEDIAPLAYER_ERROR iCodeExtra)
-    {
+	{
         string strError = "";
 
         switch (iCode)
@@ -676,7 +677,8 @@ public class MediaPlayerCtrl : MonoBehaviour {
 	}
 
 	bool m_bPause = false;
-	
+	// DIGL REMOVING THIS, MESSING WITH EXISTING RECOVERY PROCESS
+	/*
 	void OnApplicationPause(bool bPause)
 	{
 		Debug.Log ("ApplicationPause : " +bPause);
@@ -717,7 +719,7 @@ public class MediaPlayerCtrl : MonoBehaviour {
 		}
 		
 	}
-	
+	*/
 	
 	public MEDIAPLAYER_STATE GetCurrentState()
 	{

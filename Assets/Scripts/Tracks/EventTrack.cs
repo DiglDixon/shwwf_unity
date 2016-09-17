@@ -14,6 +14,10 @@ public abstract class EventTrack : AbstractTrack{
 	public bool updateName = false;
 	#endif
 
+	public void Reset(){
+		previousSourceTime = 0f;
+	}
+
 	public void GatherEventsFromChildren(){
 		CustomTrackTimeEvent[] childEvents = GetComponentsInChildren<CustomTrackTimeEvent> ();
 		for (int k = 0; k < childEvents.Length; k++) {

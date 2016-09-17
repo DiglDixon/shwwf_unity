@@ -38,13 +38,15 @@ public static class SignalUtils{
 
 		DateTime now = System.DateTime.Now;
 
+
 		int nowMinute = now.Minute;
 		int prevMinute = s.minute;
 
 		// If the current minute is smaller than the previous one, we must have ticked an hour
 		if (nowMinute < prevMinute) {
 			nowMinute += 60;
-		}
+		} 
+
 		int minuteDifference = nowMinute - prevMinute;
 		if (minuteDifference == 0) {
 			return now.Second - s.second;
