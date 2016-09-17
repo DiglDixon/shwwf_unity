@@ -6,6 +6,8 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 	public Mode startingMode;
 	public Mode Mode{ get; private set; }
 
+	private float timeCorrectionOffsetISeconds;
+
 	private Signature _Signature;
 	public Signature Signature {
 		get {

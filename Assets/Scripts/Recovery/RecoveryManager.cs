@@ -151,7 +151,7 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 	{
 		Diglbug.Log("Application paused: "+pauseStatus, PrintStream.RECOVERY);
 //		isPaused = pauseStatus;
-		if (pauseStatus == true) {
+		if (pauseStatus == false) {
 			if (showUnderway) {
 				Recover ();
 			}

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 67c8c8a10ae564bd5aa15b3015a9d1b1
-timeCreated: 1473794481
+timeCreated: 1474071860
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -60,6 +60,7 @@ TextureImporter:
     21300106: if_uk_flag
     21300108: if_china_flag
     21300110: duality_app_icon
+    21300112: if_time_icon
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -675,6 +676,19 @@ TextureImporter:
         y: 293
         width: 278
         height: 278
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_time_icon
+      rect:
+        serializedVersion: 2
+        x: 799
+        y: 456
+        width: 88
+        height: 88
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

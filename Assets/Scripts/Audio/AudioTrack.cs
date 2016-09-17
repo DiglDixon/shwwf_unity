@@ -46,27 +46,31 @@ public class AudioTrack : EventTrack {
 	}
 
 	protected override bool ShouldLoad(){
-		return (!IsLoaded () && !IsLoading ());
+//		return (!IsLoaded () && !IsLoading ());
+		return false;
 	}
 
 	protected override void RunLoad(){
-		audioClip.LoadAudioData ();
+//		audioClip.LoadAudioData ();
 	}
 
 	protected override bool ShouldUnload(){
-		return IsLoaded () || IsLoading ();
+//		return IsLoaded () || IsLoading ();
+		return false;
 	}
 
 	protected override void RunUnload(){
-		audioClip.UnloadAudioData ();
+//		audioClip.UnloadAudioData ();
 	}
 
 	public override bool IsLoaded(){
-		return audioClip.loadState == AudioDataLoadState.Loaded;
+		return true;
+//		return audioClip.loadState == AudioDataLoadState.Loaded;
 	}
 
 	public override bool IsLoading(){
-		return audioClip.loadState == AudioDataLoadState.Loading;
+		return false;
+//		return audioClip.loadState == AudioDataLoadState.Loading;
 	}
 
 	public override float EntranceFadeTime(){
