@@ -3,18 +3,19 @@ using System.Collections;
 public class DesktopBluetoothManager : BluetoothManager{
 
 	Signal currentSendingSignal = null;
-	private float latencyMin = 0.1f;
-	private float latencyMax = 1f;
-	private bool useLatencySimulation = false;
+	private float latencyMin = 0.5f;
+	private float latencyMax = 4f;
+	private bool useLatencySimulation = true;
 	private bool holdingLatency = false;
 
 	protected override void SendSignal (Signal s){
-		Diglbug.Log ("DT Signal Send");
 //		Beacon b = s.ToBeacon ();
-		currentSendingSignal = s;
-		RecoveryManager.Instance.SignalSent (currentSendingSignal);
-		StopCoroutine ("RunFakeReceiving");
-		StartCoroutine ("RunFakeReceiving");
+		if (s != currentSendingSignal) {
+			currentSendingSignal = s;
+			RecoveryManager.Instance.SignalSent (currentSendingSignal);
+			StopCoroutine ("RunFakeReceiving");
+			StartCoroutine ("RunFakeReceiving");
+		}
 	}
 
 	private IEnumerator RunFakeReceiving(){
@@ -34,7 +35,7 @@ public class DesktopBluetoothManager : BluetoothManager{
 
 		while (true) {
 			FireBeaconFoundEvent (currentSendingSignal);
-			yield return new WaitForSeconds (0.5f);
+			yield return new WaitForSeconds (GetSimulatedLatency ());
 		}
 	}
 

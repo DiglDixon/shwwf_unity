@@ -36,10 +36,12 @@ public static class SignalUtils{
 
 	public static int GetSignalTimeOffset(SignalTime s){
 
-		DateTime now = System.DateTime.Now;
+		DateTime now = Variables.Instance.GetCurrentTimeWithOffset ();
 
+		int timeSecond = now.Second;
+		int timeMinute = now.Minute;
 
-		int nowMinute = now.Minute;
+		int nowMinute = timeMinute;
 		int prevMinute = s.minute;
 
 		// If the current minute is smaller than the previous one, we must have ticked an hour
@@ -49,9 +51,9 @@ public static class SignalUtils{
 
 		int minuteDifference = nowMinute - prevMinute;
 		if (minuteDifference == 0) {
-			return now.Second - s.second;
+			return timeSecond - s.second;
 		} else {
-			int ret = (60 - s.second) + now.Second + 60 * (Mathf.Max (minuteDifference - 1, 0));
+			int ret = (60 - s.second) + timeSecond + 60 * (Mathf.Max (minuteDifference - 1, 0));
 			return ret;
 		}
 	}

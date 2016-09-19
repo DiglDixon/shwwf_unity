@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent (typeof(AudioSource))]
 [RequireComponent (typeof(EnsureActorSets))]
 public class ActorPlayer : MonoBehaviour{
 
 	public ActorActSet currentActorSet{ get; private set;}
 	private ActorActSet[] actorSets;
 
-	public AudioSource sfxSource;
+	private AudioSource sfxSource;
 	public AudioClip sceneBeginsSound;
 
 	public TracklistPlayer player;
@@ -40,6 +41,7 @@ public class ActorPlayer : MonoBehaviour{
 	private void Awake(){
 		actorSets = GetComponentsInChildren<ActorActSet>();
 		eventSystem.ExternallyDefinedEvent += SignalReceived;
+		sfxSource = GetComponent<AudioSource> ();
 	}
 
 //	private IEnumerator Start(){
@@ -56,6 +58,9 @@ public class ActorPlayer : MonoBehaviour{
 			ActorChangedEvent (currentActorSet);
 		}
 		player.AddPreservedTrack (currentActorSet.GetFirstTrackEntry ().GetTrack ());
+		RecoveryManager.Instance.ShowUnderway ();
+		RecoveryManager.Instance.RecoveryComplete ();
+		RecoveryManager.Instance.ChosenAsActor (actor);
 	}
 
 	private void ResetCurrentActor(){
@@ -94,7 +99,7 @@ public class ActorPlayer : MonoBehaviour{
 						BeginAct (actToBegin, s);
 						SetCurrentGroup (s.GetSignature ());
 						AddIgnoredSignal (s); // cache this here so we don't re-trigger if a foreign signal jockeys us.
-						sfxSource.PlayOneShot(sceneBeginsSound, 1f);
+						sfxSource.PlayOneShot(sceneBeginsSound);
 						Diglbug.Log ("Accepted new signal " + s.GetPrint ());
 					} else {
 						Diglbug.Log ("Rejected signal " + s.GetPrint () + " and it's not relevant for this actor", PrintStream.ACTORS);
@@ -184,4 +189,5 @@ public class ActorPlayer : MonoBehaviour{
 	public void Rehearse_SkipToProgress(float p){
 		currentActorSet.Rehearse_SkipToProgress (p);
 	}
+
 }

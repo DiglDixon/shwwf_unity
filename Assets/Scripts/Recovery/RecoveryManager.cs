@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using System;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +16,15 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 
 	private const string showUnderwayKey = "underway";
 
+	private const string lastActorKey = "actor";
+
+	private const string offsetMinuteKey = "off_min";
+	private const string offsetSecondKey = "off_sec";
+	private const string offsetMillisKey = "off_millis";
+
 	public UILightbox recoveryResumeLightbox;
+	public UILightbox actorecoveryResumeLightbox;
+	public Text previousActorText;
 
 	private bool runningRecovery = false;
 
@@ -27,8 +37,27 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 		base.Awake ();
 		bool wasUnderway = (PlayerPrefs.GetInt (showUnderwayKey, 0) == 1);
 		if (wasUnderway) {
-			recoveryResumeLightbox.Open ();
 			runningRecovery = true;
+		}
+	}
+
+	protected void Start(){
+		
+		bool wasUnderway = (PlayerPrefs.GetInt (showUnderwayKey, 0) == 1);
+		if (wasUnderway) {
+			ModeName prevMode = (ModeName)PlayerPrefs.GetInt (oldModeKey);
+			if (prevMode == ModeName.ACTOR) {
+				actorecoveryResumeLightbox.Open ();
+				Actor previousActor = (Actor)PlayerPrefs.GetInt (lastActorKey, -1);
+
+				if (Variables.Instance.language == Language.ENGLISH) {
+					previousActorText.text = EnumDisplayNamesEnglish.ActorName (previousActor);
+				} else {
+					previousActorText.text = EnumDisplayNamesMandarin.ActorName (previousActor);
+				}
+			} else {
+				recoveryResumeLightbox.Open ();
+			}
 		}
 	}
 
@@ -51,11 +80,22 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 		}
 		ShowMode.Instance.SetMode ((ModeName)oldModeName);
 		yield return null;
-		SceneManager.LoadScene (Scenes.MonoScene);
+		if ((ModeName)oldModeName == ModeName.ACTOR) {
+			SceneManager.LoadScene (Scenes.Actor);
+		} else {
+			SceneManager.LoadScene (Scenes.MonoScene);
+		}
 		yield return new WaitForSeconds (0.5f);
 		while (!SceneManager.GetActiveScene ().isLoaded) {
 			yield return null;
 		}
+
+		int oldOffsetMinute = PlayerPrefs.GetInt (offsetMinuteKey, -1);
+		int oldOffsetSecond = PlayerPrefs.GetInt (offsetSecondKey, -1);
+		int oldOffsetMillis = PlayerPrefs.GetInt (offsetMillisKey, -1);
+		Diglbug.Log ("Restoring time offset: " + oldOffsetMinute + ", " + oldOffsetSecond + ", " + oldOffsetMillis, PrintStream.RECOVERY);
+		Variables.Instance.RestoreTimeOffsetValues (oldOffsetMinute, oldOffsetSecond, oldOffsetMillis);
+
 		Recover ();
 	}
 
@@ -69,24 +109,39 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 
 		runningRecovery = false;
 		ShowUnderway ();
+
 		if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
-			Signature previousSignature = (Signature)PlayerPrefs.GetInt (lastSignalSignatureKey, 0);
-			Payload previousPayload = (Payload)PlayerPrefs.GetInt (lastSignalPayloadKey, 0);
-			int previousMinute = PlayerPrefs.GetInt (lastSignalMinuteKey, 0);
-			int previousSecond = PlayerPrefs.GetInt (lastSignalSecondKey, 0);
-			Signal s = new Signal (previousSignature, previousPayload, previousMinute, previousSecond);
-			BLE.Instance.ClearPreviousSignalsFound (); // this shouldn't be required, but doesn't hurt.
-			BLE.Instance.Manager.RecoverFromPreviousSignal (s);
+			BLE.Instance.ClearPreviousSignalsFound ();
+			BLE.Instance.Manager.RecoverFromPreviousSignal (GetPreviousSignal());
 			Diglbug.Log ("Guide recovery complete");
+
+		} else if (ShowMode.Instance.Mode.ModeName == ModeName.ACTOR){
+			BLE.Instance.ClearPreviousSignalsFound ();
+			ActorPlayer player = FindObjectOfType<ActorPlayer> ();
+			if (player != null) {
+				player.ClearPreviousSignals ();
+				player.SetActor ((Actor)PlayerPrefs.GetInt (lastActorKey, 0));
+			} else {
+				Diglbug.Log ("Unexpected lack of ActorPlayer object during Actor Recovery.");
+			}
+			Diglbug.Log ("Actor recovery complete, waiting for signals");
 		} else {
-			BLE.Instance.ClearPreviousSignalsFound (); // this shouldn't be required, but doesn't hurt.
+			BLE.Instance.ClearPreviousSignalsFound ();
 			Diglbug.Log ("Recovery complete - waiting to pick up signals");
 		}
 	}
 
+	private Signal GetPreviousSignal(){
+		Signature previousSignature = (Signature)PlayerPrefs.GetInt (lastSignalSignatureKey, 0);
+		Payload previousPayload = (Payload)PlayerPrefs.GetInt (lastSignalPayloadKey, 0);
+		int previousMinute = PlayerPrefs.GetInt (lastSignalMinuteKey, 0);
+		int previousSecond = PlayerPrefs.GetInt (lastSignalSecondKey, 0);
+		return new Signal (previousSignature, previousPayload, previousMinute, previousSecond);
+	}
+
 	public void RecoveryComplete(){
 		recoverLoadScreen.SetActive (false);
-//		recoverFromPauseScreen.SetActive (false);
+		runningRecovery = false;
 	}
 
 	public void ResumeComplete(){
@@ -96,6 +151,10 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 
 	public bool RunningRecovery(){
 		return runningRecovery;
+	}
+
+	public void ChosenAsActor(Actor a){
+		PlayerPrefs.SetInt (lastActorKey, (int)a);
 	}
 
 	public void ShowUnderway(){
@@ -116,8 +175,12 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 		PlayerPrefs.SetInt (showUnderwayKey, 0);
 	}
 
-	public void ShowMinimised(){
+	public bool ResumeAvailable(){
+		return showUnderway;
+	}
 
+	public void ResumeRequested(){
+		ResumeAccepted ();
 	}
 
 	public void SignalSent(Signal s){
@@ -140,24 +203,30 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 		PlayerPrefs.SetInt(oldModeKey, (int)modeName);
 	}
 
+	public void SetTimeOffsetMinute(int minuteOff){
+		PlayerPrefs.SetInt (offsetMinuteKey, minuteOff);
+		Diglbug.Log("Setting Minute offset: "+PlayerPrefs.GetInt(offsetMinuteKey, -1), PrintStream.RECOVERY);
+	}
+	public void SetTimeOffsetSecond(int secondOff){
+		PlayerPrefs.SetInt (offsetSecondKey, secondOff);
+		Diglbug.Log("Setting Second offset: "+PlayerPrefs.GetInt(offsetSecondKey, -1), PrintStream.RECOVERY);
+	}
+	public void SetTimeOffsetMillis(int millisOff){
+		PlayerPrefs.SetInt (offsetMillisKey, millisOff);
+		Diglbug.Log("Setting Millis offset: "+PlayerPrefs.GetInt(offsetMillisKey, -1), PrintStream.RECOVERY);
+	}
+
 	private void OnApplicationFocus( bool focusStatus )
 	{
 		Diglbug.Log("Application focused: "+focusStatus, PrintStream.RECOVERY);
-//		if (focusStatus == true) {
-//			if (showUnderway) {
-//				Recover ();
-//			}
-//		}
 	}
 
 	private void OnApplicationPause( bool pauseStatus )
 	{
 		Diglbug.Log("Application paused: "+pauseStatus, PrintStream.RECOVERY);
-//		isPaused = pauseStatus;
 		if (pauseStatus == false) {
 			if (showUnderway) {
 				if (!RunningRecovery ()) {
-//					recoverFromPauseScreen.SetActive (true);
 					Recover ();
 				}
 			}

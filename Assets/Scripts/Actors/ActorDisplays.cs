@@ -129,7 +129,7 @@ public class ActorDisplays : MonoBehaviour{
 	}
 
 	private void ActorBeganAct(Act a){
-//		assistantSoundSource.Stop ();
+
 		SetActName (a);
 		statusText.text = Variables.Instance.language == Language.ENGLISH ? "Scene underway." : "正在演出";
 	}
@@ -143,7 +143,7 @@ public class ActorDisplays : MonoBehaviour{
 	}
 
 	private void ActorComplete(ActorActSet a){
-//		assistantSoundSource.Play ();
+
 	}
 
 	private void MarkerComplete(int index){
@@ -163,9 +163,7 @@ public class ActorDisplays : MonoBehaviour{
 			if (scrubDown) {
 				// wait up
 			} else {
-//				if (player.IsPlaying ()) {
 				scrubSlider.value = cProg;
-//				}
 			}
 			if (!playerWasPlaying && player.IsPlaying ()) {
 				assistantSoundSource.Stop ();
@@ -190,15 +188,8 @@ public class ActorDisplays : MonoBehaviour{
 		scrubDown = false;
 		player.Unpause ();
 
-//		player.BeginActFromSignal
 		float skipAmount = scrubSlider.value;
 		actorPlayer.Rehearse_SkipToProgress (scrubSlider.value);
 	}
-
-
-//	public void Rehearsel_Begins(){
-//		assistantSoundSource.Stop ();
-//	}
-
 
 }

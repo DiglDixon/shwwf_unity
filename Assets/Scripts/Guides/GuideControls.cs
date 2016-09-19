@@ -26,6 +26,9 @@ public class GuideControls : MonoBehaviour{
 
 	public TracklistPlayer player;
 
+	public GuidePhotos guidePhotos;
+	public Image guideImage;
+
 	private void OnEnable(){
 		BLE.Instance.Manager.ExpectedPayloadClearedEvent += ExpectedPayloadCleared;
 		BLE.Instance.Manager.ExpectedPayloadReadyEvent += ExpectedPayloadBeings;
@@ -33,6 +36,7 @@ public class GuideControls : MonoBehaviour{
 		BLE.Instance.Manager.NewUpcomingPayloadEvent += UpcomingPayloadChanged;
 
 		actSet.ActChangedEvent += ActChanged;
+		actSet.FinalActBeginsEvent += FinalActReached;
 	}
 
 	private void OnDisable(){
@@ -43,6 +47,7 @@ public class GuideControls : MonoBehaviour{
 			BLE.Instance.Manager.NewUpcomingPayloadEvent -= UpcomingPayloadChanged;
 		}
 		actSet.ActChangedEvent -= ActChanged;
+		actSet.FinalActBeginsEvent -= FinalActReached;
 	}
 
 	public void BeginExpectedScene(){
@@ -65,6 +70,14 @@ public class GuideControls : MonoBehaviour{
 	private void ActChanged(Act a){
 		act = (ShowAct)a;
 		markerSlider.value = act.GetLastTrackStartProgress ();
+
+		// modify the positions.
+	}
+
+	private void FinalActReached(Act a){
+		Diglbug.Log ("Guide display Final Act reached: " + a.definedAct);
+		upcomingActText.gameObject.SetActive (false);
+		guideImage.overrideSprite = guidePhotos.GetFinalActSprite ();
 		// modify the positions.
 	}
 
@@ -78,11 +91,23 @@ public class GuideControls : MonoBehaviour{
 	}
 
 	private void UpcomingPayloadChanged(Payload p){
+		Diglbug.Log ("Upcoming guide display payload changed: " + p);
+		// This is a hack around some nasty OOO stuff during setup.
+		if (p == Payload.BEGIN_SHOW) {
+			p = Payload.HAMBURGER;
+		}
 		if (p == Payload.NONE) {
-			upcomingActText.gameObject.SetActive (false);
+//			upcomingActText.gameObject.SetActive (false);
 		} else {
 			upcomingActText.gameObject.SetActive (true);
-			upcomingActText.UpdateValue(actSet.GetDefinedActForPayload(p));
+			DefinedAct upcomingAct = actSet.GetDefinedActForPayload (p);
+			if (Variables.Instance.language == Language.ENGLISH) {
+				upcomingActText.UpdateValue(upcomingAct);
+			} else {
+				upcomingActText.UpdateValue(upcomingAct);
+			}
+
+			guideImage.overrideSprite = guidePhotos.GetSpriteForAct (upcomingAct);
 		}
 	}
 

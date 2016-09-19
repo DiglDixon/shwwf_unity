@@ -14,6 +14,9 @@ public class ActSet : EnsureDefinedActsInChildren<ShowAct>{
 	public delegate void ActChangedDelegate(Act newAct);
 	public event ActChangedDelegate ActChangedEvent;
 
+	public delegate void FinalActBeginsDelegate(Act finalAct);
+	public event FinalActBeginsDelegate FinalActBeginsEvent;
+
 	private void Awake(){
 		acts = GetComponentsInChildren<Act> ();
 	}
@@ -51,6 +54,11 @@ public class ActSet : EnsureDefinedActsInChildren<ShowAct>{
 		currentAct.ActChangedTo ();
 		if (ActChangedEvent != null) {
 			ActChangedEvent (currentAct);
+		}
+		if(currentAct == acts[acts.Length-1]){
+			if(FinalActBeginsEvent != null){
+				FinalActBeginsEvent(currentAct);
+			}
 		}
 	}
 

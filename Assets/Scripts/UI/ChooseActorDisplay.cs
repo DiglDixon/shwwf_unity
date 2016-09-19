@@ -11,8 +11,10 @@ public class ChooseActorDisplay : MonoBehaviour {
 
 	private Actor pendingActor;
 
-	public void Awake(){
-		Open ();
+	public void Start(){
+		if (!RecoveryManager.Instance.RunningRecovery ()) {
+			Open ();
+		}
 	}
 
 	public void OptionSelected(ChooseActorDisplayItem item){

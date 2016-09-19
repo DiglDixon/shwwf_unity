@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class ShowAct : Act{
@@ -13,16 +14,29 @@ public class ShowAct : Act{
 
 	private bool delegatesAdded = false;
 
-	// TODO: Shift these delegates somewhere much better...
-	public override void ActChangedTo(){
-		BLE.Instance.Manager.ClearExpectedPayload ();
-		BLE.Instance.Manager.ClearUpcomingPayload ();
-		BLE.Instance.Manager.SetUpcomingPayload (exitPayload);
-		SetExpectedPayloadProgress ();
+	protected override void Start(){
+		base.Start ();
+		StartCoroutine (RunDelegatesAfterFrame ());
+	}
+
+	private IEnumerator RunDelegatesAfterFrame(){
+		yield return new WaitForEndOfFrame ();
 		if (!delegatesAdded) {
 			AddDelegates ();
 			delegatesAdded = true;
 		}
+	}
+
+	// TODO: Shift these delegates somewhere much better...
+	public override void ActChangedTo(){
+		if (!delegatesAdded) {
+			AddDelegates ();
+			delegatesAdded = true;
+		}
+		BLE.Instance.Manager.ClearExpectedPayload ();
+		BLE.Instance.Manager.ClearUpcomingPayload ();
+		BLE.Instance.Manager.SetUpcomingPayload (exitPayload);
+		SetExpectedPayloadProgress ();
 
 		RecalculateTotalTimeUntilExpected ();
 	}

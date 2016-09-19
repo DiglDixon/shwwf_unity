@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class ModeSpecificObject : MonoBehaviour {
@@ -25,11 +26,14 @@ public class ModeSpecificObject : MonoBehaviour {
 			Destroy (gameObject);
 		} else if (disableType == ObjectDisableType.DISABLE) {
 			gameObject.SetActive (false);
+		} else if (disableType == ObjectDisableType.INTERACTABLE_SLIDER) {
+			gameObject.GetComponent<Slider> ().interactable = false;
 		}
 	}
 }
 
 public enum ObjectDisableType{
 	DESTORY,
-	DISABLE
+	DISABLE,
+	INTERACTABLE_SLIDER
 }
