@@ -3,13 +3,15 @@ using UnityEngine.SceneManagement;
 
 public abstract class Mode : MonoBehaviour{
 
-	public string[] validPasswords;
+	private PasswordCheck[] validPasswords;
+
+	private void Awake(){
+		validPasswords = GetComponentsInChildren<PasswordCheck> ();
+	}
 
 	public bool PasswordIsCorrect(string password) {
-		string s;
 		for(int k = 0; k<validPasswords.Length; k++) {
-			s = validPasswords[k];
-			if (s.Equals (password)) {
+			if(validPasswords[k].IsValidPassword(password)){
 				return true;
 			}
 		}
