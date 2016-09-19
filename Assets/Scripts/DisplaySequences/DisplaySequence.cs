@@ -36,7 +36,6 @@ public class DisplaySequence : MonoBehaviour{
 				}
 			}
 		}
-		Diglbug.Log ("Found " + sequences.Count + " sequences");
 	}
 
 	protected virtual void OnEnable(){
@@ -69,7 +68,6 @@ public class DisplaySequence : MonoBehaviour{
 	}
 
 	private void RunSequenceAtIndex(int index){
-		Diglbug.Log ("Running sequence at index " + index+": "+sequences [index].name);
 		sequenceIndex = index;
 		sequences [index].BeginSequence ();
 	}

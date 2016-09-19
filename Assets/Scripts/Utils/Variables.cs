@@ -29,6 +29,12 @@ public class Variables : ConstantSingleton<Variables>{
 		}
 	}
 
+	void Update(){
+		if (Input.GetKeyDown (KeyCode.O)) {
+			Debug.Log("Testing over-hour: "+SignalUtils.GetSignalTimeOffset(new SignalTime(3, 58)));
+		}
+	}
+
 	public void RestoreTimeOffsetValues(int minute, int second, int millis){
 		offsetMinute = minute;
 		offsetSecond = second;
@@ -38,6 +44,43 @@ public class Variables : ConstantSingleton<Variables>{
 	public void SetLanguage(Language l){
 		language = l;
 		languageViewer.SetLanguage (l);
+	}
+
+	public void IncrementAppMillisecond(int millis){
+		if (offsetMillis + millis < 0) {
+			IncrementAppSecond (-1);
+		} else if (offsetMillis + millis >= 1000) {
+			IncrementAppSecond (1);
+		}
+
+		offsetMillis += millis;
+		while (offsetMillis < 0) {
+			offsetMillis += 1000;
+		}
+		offsetMillis = offsetMillis % 1000;
+	}
+
+	public void IncrementAppSecond(int seconds){
+		if (offsetSecond + seconds < 0) {
+			IncrementAppMinute (-1);
+		} else if (offsetSecond + seconds >= 60) {
+			IncrementAppMinute (1);
+		}
+
+		offsetSecond += seconds;
+		while (offsetSecond < 0) {
+			offsetSecond += 60;
+		}
+		offsetSecond = offsetSecond % 60;
+	}
+
+	public void IncrementAppMinute(int minutes){
+
+		offsetMinute += minutes;
+		while (offsetMinute < 0) {
+			offsetMinute += 60;
+		}
+		offsetMinute = offsetMinute % 60;
 	}
 
 	public void SetAppSecond(int second){

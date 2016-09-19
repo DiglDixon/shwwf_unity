@@ -7,6 +7,43 @@ public class TimeSyncSetter : MonoBehaviour{
 
 	private bool hasHadRoughSet = false;
 
+	public Text minuteText;
+	public Text secondText;
+
+	public void SetRoughSyncFromSignal(Signal s){
+		if (!hasHadRoughSet) {
+			if (ShowMode.Instance.Mode.ModeName != ModeName.GUIDE) {
+				Variables.Instance.SetAppSecond (s.GetSignalTime ().second);
+				Variables.Instance.SetAppMinute (s.GetSignalTime ().minute);
+			}
+			hasHadRoughSet = true;
+		}
+	}
+
+	private void Update(){
+		DateTime offsetTime = Variables.Instance.GetCurrentTimeWithOffset ();
+		minuteText.text = offsetTime.Minute.ToString("00");
+		secondText.text = offsetTime.Second.ToString ("00");
+	}
+
+	public void MillisUpPressed(){
+		Variables.Instance.IncrementAppMillisecond (-100);
+	}
+
+	public void MillisDownPressed(){
+		Variables.Instance.IncrementAppMillisecond (200);
+	}
+
+}
+
+
+
+/* PRE-SIMPLIFIED
+ * 
+public class TimeSyncSetter : MonoBehaviour{
+
+	private bool hasHadRoughSet = false;
+
 	public TimeAdjustSlider minuteAdjustSlider;
 	public TimeAdjustSlider secondAdjustSlider;
 
@@ -48,4 +85,4 @@ public class TimeSyncSetter : MonoBehaviour{
 	}
 
 
-}
+}*/

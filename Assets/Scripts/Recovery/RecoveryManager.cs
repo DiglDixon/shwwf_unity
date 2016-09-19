@@ -83,6 +83,7 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 		if ((ModeName)oldModeName == ModeName.ACTOR) {
 			SceneManager.LoadScene (Scenes.Actor);
 		} else {
+			RecoverSignature ();
 			SceneManager.LoadScene (Scenes.MonoScene);
 		}
 		yield return new WaitForSeconds (0.5f);
@@ -99,13 +100,17 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 		Recover ();
 	}
 
-	private void Recover(){
-		Diglbug.Log ("Beginning Recovery...", PrintStream.RECOVERY);
+	private void RecoverSignature(){
 		int oldSignature = PlayerPrefs.GetInt(oldSignatureKey, 0);
 		if (oldSignature == 0) {
-			Diglbug.Log ("Old Signature was None! This should not happen", PrintStream.RECOVERY);
+			Diglbug.Log ("Old Signature was None! This may happen for Actors", PrintStream.RECOVERY);
 		}
 		ShowMode.Instance.Signature = (Signature)oldSignature;
+	}
+
+	private void Recover(){
+		Diglbug.Log ("Beginning Recovery...", PrintStream.RECOVERY);
+//		RecoverSignature ();
 
 		runningRecovery = false;
 		ShowUnderway ();
@@ -216,10 +221,10 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 		Diglbug.Log("Setting Millis offset: "+PlayerPrefs.GetInt(offsetMillisKey, -1), PrintStream.RECOVERY);
 	}
 
-	private void OnApplicationFocus( bool focusStatus )
-	{
-		Diglbug.Log("Application focused: "+focusStatus, PrintStream.RECOVERY);
-	}
+//	private void OnApplicationFocus( bool focusStatus )
+//	{
+//		Diglbug.Log("Application focused: "+focusStatus, PrintStream.RECOVERY);
+//	}
 
 	private void OnApplicationPause( bool pauseStatus )
 	{

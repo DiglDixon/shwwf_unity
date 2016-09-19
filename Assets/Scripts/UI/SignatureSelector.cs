@@ -6,25 +6,57 @@ public class SignatureSelector : MonoBehaviour {
 
 	public Image[] selectedSignatureImages;
 	public TextToSignatureString signatureText;
+	private SignatureGridItem[] items;
 
 	void Awake(){
-		SignatureGridItem[] items = GetComponentsInChildren<SignatureGridItem> ();
-		for (int k = 0; k < items.Length; k++) {
-			items [k].SetCallback (this);
+		GatherItems ();
+	}
+
+	private void GatherItems(){
+		if (items == null) {
+			items = GetComponentsInChildren<SignatureGridItem> (true);
+			for (int k = 0; k < items.Length; k++) {
+				items [k].SetCallback (this);
+			}
 		}
 	}
 
+	public void ResetSignatureDisplays(){
+		GatherItems ();
+		SignatureGridItem selected = null;
+		for (int k = 0; k < items.Length; k++) {
+			if (items [k].GetSignature () == ShowMode.Instance.Signature) {
+				selected = items[k];
+				break;
+			}
+		}
+		Diglbug.Log ("Found " + selectedSignatureImages.Length + " with sigselect sreahc");
+		if (selected != null) {
+			for (int k = 0; k < selectedSignatureImages.Length; k++) {
+				selectedSignatureImages [k].color = selected.SignatureSpriteColour ();
+			}
+			signatureText.UpdateValue (selected.GetSignature ());
+		} else {
+			// Probably none.
+		}
+
+	}
+
 	public void SignatureSelected(SignatureGridItem selected){
+		
 		Signature sig = selected.GetSignature ();
 
 		Diglbug.Log ("Selected Signature " + sig);
 
-		for (int k = 0; k < selectedSignatureImages.Length; k++) {
-			selectedSignatureImages[k].color = selected.SignatureSpriteColour ();
-		}
-		signatureText.UpdateValue (sig);
+//		for (int k = 0; k < selectedSignatureImages.Length; k++) {
+//			selectedSignatureImages[k].color = selected.SignatureSpriteColour ();
+//		}
+//		signatureText.UpdateValue (sig);
 
 		ShowMode.Instance.Signature = sig;
+
+		ResetSignatureDisplays();
+
 
 		gameObject.GetComponent<UILightbox> ().Close ();
 	}

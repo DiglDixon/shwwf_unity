@@ -15,6 +15,8 @@ public class ShowSetup : MonoBehaviour {
 
 	public GameObject setupDisplay;
 
+	public SignatureSelector signatureSelector;
+
 	private int stepIndex = 0;
 
 	private void Awake(){
@@ -46,6 +48,7 @@ public class ShowSetup : MonoBehaviour {
 		for (int k = 0; k < steps.Length; k++) {
 			steps [k].SkipStep ();
 		}
+		signatureSelector.ResetSignatureDisplays ();
 		StepsComplete ();
 	}
 

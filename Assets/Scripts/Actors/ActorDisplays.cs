@@ -114,7 +114,6 @@ public class ActorDisplays : MonoBehaviour{
 		float accum = 0f;
 		for (int k = 0; k < markerSliders.Length; k++) {
 			if (k < markerPositions.Length) {
-				Diglbug.Log ("Marker set: " + markerPositions [k], PrintStream.DEBUGGING);
 				accum += markerPositions [k];
 				markerSliders [k].value = accum;
 				markerSliders [k].gameObject.SetActive (true);

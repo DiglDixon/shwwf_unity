@@ -15,8 +15,6 @@ public class PlayActAction : PayloadEventAction{
 	}
 
 	public override void FireEvent (Signal s){
-		Diglbug.Log ("FIRING PLAYACT: time: " + s.GetSignalTime ().GetPrint());
-		Diglbug.Log ("CTIME: " + SignalUtils.GetSignalTime ().GetPrint ());
 		player.BeginActFromSignal (act, s);
 	}
 

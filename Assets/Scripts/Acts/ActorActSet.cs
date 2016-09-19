@@ -60,7 +60,7 @@ public class ActorActSet : EnsureActSetChild{
 			totalActingLength += acts [k].GetActingLength ();
 		}
 		inverse_totalActingLength = 1f / totalActingLength;
-		Diglbug.Log ("Set acting length: " + totalActingLength + ", inverse: " + inverse_totalActingLength+" for "+name);
+//		Diglbug.Log ("Set acting length: " + totalActingLength + ", inverse: " + inverse_totalActingLength+" for "+name);
 	}
 
 	public TracklistEntry GetFirstTrackEntry(){

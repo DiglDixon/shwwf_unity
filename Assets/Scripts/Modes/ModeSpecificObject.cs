@@ -28,6 +28,8 @@ public class ModeSpecificObject : MonoBehaviour {
 			gameObject.SetActive (false);
 		} else if (disableType == ObjectDisableType.INTERACTABLE_SLIDER) {
 			gameObject.GetComponent<Slider> ().interactable = false;
+		} else if (disableType == ObjectDisableType.INTERACTABLE_BUTTON) {
+			gameObject.GetComponent<Button> ().interactable = false;
 		}
 	}
 }
@@ -35,5 +37,6 @@ public class ModeSpecificObject : MonoBehaviour {
 public enum ObjectDisableType{
 	DESTORY,
 	DISABLE,
-	INTERACTABLE_SLIDER
+	INTERACTABLE_SLIDER,
+	INTERACTABLE_BUTTON
 }

@@ -1,4 +1,4 @@
-﻿//#if !UNITY_EDITOR
+﻿#if !UNITY_EDITOR
 #if UNITY_IOS
 using UnityEngine;
 using UnityEditor;
@@ -27,4 +27,4 @@ public static class PostProcessBuildTrigger {
 	}
 }
 #endif
-//#endif
+#endif

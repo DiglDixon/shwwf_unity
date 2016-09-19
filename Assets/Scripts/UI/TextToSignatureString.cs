@@ -29,7 +29,6 @@ public class TextToSignatureString : LanguageElement {
 
 	public void UpdateValue(Signature s){
 		signature = s;
-		Diglbug.Log ("Switching display signature to: " + s);
 		SwitchToLanguage (Variables.Instance.language);
 	}
 

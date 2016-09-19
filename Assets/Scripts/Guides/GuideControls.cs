@@ -120,7 +120,10 @@ public class GuideControls : MonoBehaviour{
 		for (int k = 0; k < mandarinTimeUntilExpectedTexts.Length; k++) {
 			mandarinTimeUntilExpectedTexts [k].gameObject.SetActive (false);
 		}
-		OpenLargeControls ();
+		Diglbug.Log ("Guide Display opening for Expected Payload " + p);
+		if ((int)p > (int)Payload.BEGIN_SHOW) {
+			OpenLargeControls ();
+		}
 		sendExpectedButton.interactable = true;
 	}
 

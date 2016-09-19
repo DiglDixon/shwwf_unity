@@ -19,7 +19,6 @@ public class PlayTrackAction : PayloadEventAction{
 		player.PlayTrackEntry (trackEntry);
 		int offset = SignalUtils.GetSignalTimeOffset (s.GetSignalTime ());
 		Diglbug.Log ("Skipping track by " + offset + " seconds due to latency", PrintStream.AUDIO_PLAYBACK);
-		Diglbug.LogMobile ("LATSKIP:" + offset, "SKIPS");
 		player.SetTrackTime (offset);
 	}
 

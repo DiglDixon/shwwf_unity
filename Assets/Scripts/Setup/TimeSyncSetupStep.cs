@@ -35,6 +35,7 @@ public class TimeSyncSetupStep : SetupStep{
 
 	public override void Activate (ShowSetup callback){
 		base.Activate (callback);
+//		changeTimeLightbox.Open ();
 //		BeginAutomaticCalibration ();
 	}
 
