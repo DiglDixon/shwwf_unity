@@ -9,9 +9,9 @@ public class Variables : ConstantSingleton<Variables>{
 
 	public Language language;
 
-	private int offsetMinute;
-	private int offsetSecond;
-	private int offsetMillis;
+	public int offsetMinute{ private set; get;}
+	public int offsetSecond{ private set; get;}
+	public int offsetMillis{ private set; get;}
 
 	protected override void Awake(){
 		base.Awake ();
@@ -83,6 +83,11 @@ public class Variables : ConstantSingleton<Variables>{
 		offsetMinute = offsetMinute % 60;
 	}
 
+	// this will need to be called after SetAppSecond, or else it will be overwritten
+	public void SetAppMillis(int millis){
+		offsetMillis = millis;
+	}
+
 	public void SetAppSecond(int second){
 		offsetSecond = DateTime.Now.Second - second;
 		offsetMillis = DateTime.Now.Millisecond;
@@ -90,11 +95,6 @@ public class Variables : ConstantSingleton<Variables>{
 
 	public void SetAppMinute(int minute){
 		offsetMinute = DateTime.Now.Minute - minute;
-	}
-
-	// this will need to be called after SetAppSecond, or else it will be overwritten
-	public void SetAppMillis(int millis){
-		offsetMillis = millis;
 	}
 
 	public DateTime GetCurrentTimeWithOffset(){
