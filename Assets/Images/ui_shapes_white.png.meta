@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 67c8c8a10ae564bd5aa15b3015a9d1b1
-timeCreated: 1474417171
+timeCreated: 1474480800
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -66,6 +66,8 @@ TextureImporter:
     21300118: if_circle_stroke
     21300120: if_lock
     21300122: if_pause_white
+    21300124: if_refresh_icon
+    21300126: if_magic_wand_icon
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -746,6 +748,32 @@ TextureImporter:
         y: 472
         width: 41
         height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_refresh_icon
+      rect:
+        serializedVersion: 2
+        x: 1098
+        y: 455
+        width: 79
+        height: 87
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_magic_wand_icon
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 453
+        width: 95
+        height: 93
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

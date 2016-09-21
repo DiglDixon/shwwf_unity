@@ -23,7 +23,7 @@ public class Variables : ConstantSingleton<Variables>{
 		} else if (Application.systemLanguage == SystemLanguage.ChineseTraditional) {
 			SetLanguage (Language.MANDARIN);
 		} else if (Application.systemLanguage == SystemLanguage.English) {
-			SetLanguage (Language.MANDARIN);
+			SetLanguage (Language.ENGLISH);
 		} else {
 			SetLanguage (Language.ENGLISH);
 		}

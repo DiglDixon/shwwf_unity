@@ -5,8 +5,6 @@ using System.Collections;
 
 public class TimeSyncSetter : MonoBehaviour{
 
-	private bool hasHadDetailedSet = false;
-
 	public Text minuteText;
 	public Text secondText;
 	public FontSizeLerp minuteFontSizeLerp;
@@ -28,11 +26,54 @@ public class TimeSyncSetter : MonoBehaviour{
 
 	public UILightbox lightbox;
 
+	private bool sendingSignalA = true;
+	private float alternatingSignalRate = 4f;
+
+	private bool firstRoughSet = false;
+
+	private bool runningAutomaticSet = false;
+	private float automaticSetTimeout = 10f;
+	public GameObject[] automaticSetLoadingObjects;
+
 	public void SetRoughSyncFromSignal(Signal s){
-		if (!hasHadDetailedSet) {
-			if (ShowMode.Instance.Mode.ModeName != ModeName.GUIDE) {
-				SetModifications(s.GetSignalTime ().minute, s.GetSignalTime ().second);
+		if (!firstRoughSet) {
+			RefreshRoughSignal (s);
+			firstRoughSet = true;
+		} else if (runningAutomaticSet) {
+			RefreshRoughSignal (s);
+			StopAutomaticSet ();
+		}
+	}
+
+	public void StartAutomaticSet(){
+		if (!runningAutomaticSet) {
+			runningAutomaticSet = true;
+			for (int k = 0; k < automaticSetLoadingObjects.Length; k++) {
+				automaticSetLoadingObjects [k].SetActive (true);
 			}
+//			automaticSetLoadingObject.SetActive (true);
+			StartCoroutine ("RunAutomaticSet");
+		}
+	}
+
+	private IEnumerator RunAutomaticSet(){
+		float elapsed = 0f;
+		while (elapsed < automaticSetTimeout) {
+			elapsed += Time.deltaTime;
+			yield return null;
+		}
+		// timed out
+		StopAutomaticSet();
+		Diglbug.Log ("Run Automatic Time Sync Set timed out", PrintStream.SIGNALS);
+	}
+
+	private void StopAutomaticSet(){
+		if (runningAutomaticSet) {
+			runningAutomaticSet = false;
+			for (int k = 0; k < automaticSetLoadingObjects.Length; k++) {
+				automaticSetLoadingObjects [k].SetActive (false);
+			}
+			StopCoroutine ("RunAutomaticSet");
 		}
 	}
 
@@ -65,14 +106,37 @@ public class TimeSyncSetter : MonoBehaviour{
 		minuteAtOpen = Variables.Instance.offsetMinute;
 		secondAtOpen = Variables.Instance.offsetSecond;
 		millisAtOpen = Variables.Instance.offsetMillis;
+		if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
+			StartCoroutine ("RunAlternatingSignals");
+		}
+	}
+
+	public void RefreshRoughSignal(Signal s){
+		if (ShowMode.Instance.Mode.ModeName != ModeName.GUIDE) {
+			SetModifications(s.GetSignalTime().minute, s.GetSignalTime().second);
+		}
+	}
+
+	private IEnumerator RunAlternatingSignals(){
+		while (true) {
+			if (sendingSignalA) {
+				BLE.Instance.Manager.ForceSendPayload (Payload.TIME_SYNC_A);
+			} else {
+				BLE.Instance.Manager.ForceSendPayload (Payload.TIME_SYNC_B);
+			}
+			sendingSignalA = !sendingSignalA;
+			yield return new WaitForSeconds (alternatingSignalRate);
+		}
 	}
 
 	public void AcceptAndClose(){
-		hasHadDetailedSet = true;
 		Close ();
 	}
 
 	private void Close(){
+		if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
+			StopCoroutine ("RunAlternatingSignals");
+		}
 		lightbox.Close ();
 	}
 

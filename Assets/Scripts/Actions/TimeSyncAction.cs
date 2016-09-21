@@ -1,10 +1,10 @@
 ﻿
 public class TimeSyncAction : PayloadEventAction{
 
-	public TimeSyncSetupStep syncStep;
+	public TimeSyncSetter setter;
 
 	public override void FireEvent (Signal s){
-//		syncStep.AlternatingSignalReceived (s);
+		setter.SetRoughSyncFromSignal (s);
 	}
 
 }
