@@ -31,7 +31,7 @@ public class Variables : ConstantSingleton<Variables>{
 
 	void Update(){
 		if (Input.GetKeyDown (KeyCode.O)) {
-			Debug.Log("Testing over-hour: "+SignalUtils.GetSignalTimeOffset(new SignalTime(3, 58)));
+			Debug.Log("Testing over-hour: "+SignalUtils.GetSignalTimeOffset(new SignalTime(00, 59)));
 		}
 	}
 

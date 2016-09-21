@@ -22,5 +22,6 @@ public enum Payload{
 	TIME_SYNC_A,
 	TIME_SYNC_B,
 	EMERGENCY_PAUSE,
-	EMERGENCY_UNPAUSE
+	EMERGENCY_UNPAUSE,
+	NULL_SIGNAL // this is used as a "no-response" signal. Implemented for triggering a re-fire of the same signal.
 }

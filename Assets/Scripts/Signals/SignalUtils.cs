@@ -18,16 +18,7 @@ public static class SignalUtils{
 	}
 
 	private static readonly string[] uuids = {
-		"5ff99f07-d609-4553-9dfb-37028ebd49bc",
-		/*"ea742c3c-3497-4cd6-a6c6-a276408cb4cf",
-		"aec3df34-0445-412a-9fc6-1eb3c07748d6",
-		"cca5270c-a586-4b24-858e-fd08c6038f8e",
-		"9f5028ff-0cf7-40a0-842c-9f9aa48e8dc6",
-		"aeb88bf2-ad75-4d95-83f4-19d523a437f3",
-		"75700bbe-fc8f-41e5-b603-a5e7386b5a48",
-		"e29e4015-2700-44ed-ae4c-92340b27dbe3",
-		"291aa227-25c7-4e13-b956-3ce118140a22",
-		"c9ab85d8-f017-42f7-9c49-7e563e3a165c"*/ // REMOVING these, going back to single UUID.
+		"5ff99f07-d609-4553-9dfb-37028ebd49bc"
 	};
 
 	public static string GetSignaureUUID(Signature signature){
@@ -36,6 +27,50 @@ public static class SignalUtils{
 
 	public static int GetSignalTimeOffset(SignalTime s){
 
+
+		//New method. Presumes gap is less that 30 minutes. 
+
+		DateTime ours = Variables.Instance.GetCurrentTimeWithOffset ();
+
+		int ourMinute = ours.Minute;
+		int ourSecond = ours.Second;
+		int theirMinute = s.minute;
+		int theirSecond = s.second;
+
+
+//		Debug.Log ("Testing GetSignalOffsetTime: " + ourMinute + ", " + ourSecond + ", " + theirMinute + ", " + theirSecond);
+
+		if (ourMinute == theirMinute) {
+			// Happy days, we'll just grab the difference. Limit to min 0 - we can't skip backwards. Yet...
+			return Mathf.Max(ourSecond-theirSecond, 0);
+		}
+		// else, someone is ahead of the other.
+
+		// Cheap abs
+		int minuteDiff = (ourMinute > theirMinute ? ourMinute - theirMinute : theirMinute - ourMinute);
+
+		if (minuteDiff > 30) {
+			// Someone has ticked the hour.
+			if (ourMinute < theirMinute) {
+				// We are ahead, and have ticked the hour
+				return GetTimeDifferenceBetweenDifferentHours(ourMinute, ourSecond, theirMinute, theirSecond);
+			} else {
+				// They are ahead, and have ticked the hour
+				return 0;// We min at 0 for now. // GetTimeDifferenceBetweenDifferentHours(theirMinute, theirSecond, ourMinute, ourSecond);
+			}
+		} else {
+			// We are within the same hour
+			if (ourMinute > theirMinute) {
+				// We are ahead
+				return GetTimeDifferenceWithinSameHour(ourMinute, ourSecond, theirMinute, theirSecond);
+			} else {
+				// They are ahead
+				return 0;// We min at 0 for now.
+			}
+		}
+
+		// Old method below. Presumes gap less than 60 minutes. Presumes receiver has a larger time than sender.
+		/*
 		DateTime now = Variables.Instance.GetCurrentTimeWithOffset ();
 
 		int timeSecond = now.Second;
@@ -55,12 +90,24 @@ public static class SignalUtils{
 		} else {
 			int ret = (60 - s.second) + timeSecond + 60 * (Mathf.Max (minuteDifference - 1, 0));
 			return ret;
-		}
+		}*/
+	}
+
+	private static int GetTimeDifferenceBetweenDifferentHours(int nextHourMinute, int nextHourSecond, int prevHourMinute, int prevHourSecond){
+		TimeSpan aheadSpan = new TimeSpan (1, nextHourMinute, nextHourSecond);
+		TimeSpan behindSpan = new TimeSpan (0, prevHourMinute, prevHourSecond);
+		return (int)aheadSpan.Subtract (behindSpan).TotalSeconds; // I think rounding is redundant. The figure will be clean.
+	}
+
+	private static int GetTimeDifferenceWithinSameHour(int aheadMinute, int aheadSecond, int behindMinute, int behindSecond){
+		TimeSpan aheadSpan = new TimeSpan (0, aheadMinute, aheadSecond);
+		TimeSpan behindSpan = new TimeSpan (0, behindMinute, behindSecond);
+		return (int)aheadSpan.Subtract (behindSpan).TotalSeconds;
 	}
 
 	public static SignalTime GetSignalTime(){
 		return new SignalTime (
-			System.DateTime.Now.Minute,
+			System.DateTime.Now.Minute, // These do not pull from the offsets. I think this is ok - prevents guides having offsets
 			System.DateTime.Now.Second
 		);
 	}

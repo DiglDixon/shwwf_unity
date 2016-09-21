@@ -8,7 +8,6 @@ public class GuideControls : SceneControls{
 	public Text cueStatusText;
 	public Button sendExpectedButton;
 
-	public ActSet actSet;
 	private ShowAct act;
 
 	public Slider actProgressSlider;

@@ -46,10 +46,12 @@ public class ActorPlayer : MonoBehaviour{
 		sfxSource = GetComponent<AudioSource> ();
 	}
 
-//	private IEnumerator Start(){
-//		yield return new WaitForSeconds (1f);
-////		SetActor (currentActorSet.actor);
-//	}
+	public void ResetActorPressed(){
+		CancelAct ();
+		ClearPreviousSignals ();
+//		BLE.Instance.ClearPreviousSignalsFound (); // Leaving this out for now... A whole-scene restart will involed an alternated signal, which will fire us anyway.
+		SetActor (currentActorSet.actor);
+	}
 
 	public void SetActor(Actor actor){
 		player.ClearPreservedTracks ();
