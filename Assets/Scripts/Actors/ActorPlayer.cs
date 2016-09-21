@@ -108,7 +108,7 @@ public class ActorPlayer : MonoBehaviour{
 							BeginAct (actToBegin, s);
 							SetCurrentGroup (s.GetSignature ());
 							AddIgnoredSignal (s); // cache this here so we don't re-trigger if a foreign signal jockeys us.
-							sfxSource.PlayOneShot(sceneBeginsSound);
+							sfxSource.PlayOneShot(sceneBeginsSound, 0.5f);
 							Diglbug.Log ("Accepted new signal " + s.GetPrint ());
 						} else {
 							Diglbug.Log ("Rejected signal " + s.GetPrint () + " and it's not relevant for this actor", PrintStream.ACTORS);
