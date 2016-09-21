@@ -14,7 +14,9 @@ public class AudienceMode : Mode{
 	}
 
 	public override void BeginShow (){
-		SceneManager.LoadScene (Scenes.MonoScene);
+		if(!RecoveryManager.Instance.RunningRecovery()){
+			SceneManager.LoadScene (Scenes.MonoScene);
+		}
 	}
 
 	public override void ModeDeselected (){
@@ -24,9 +26,11 @@ public class AudienceMode : Mode{
 	}
 
 	public override void ModeSelected (){
-		Diglbug.Log ("Welcome to the show, Audience Member");
-		BLE.Instance.Manager.StartReceiving ();
-		StartCoroutine ("RunBeginShowRoutine");
+		if (!RecoveryManager.Instance.RunningRecovery ()) {
+			Diglbug.Log ("Welcome to the show, Audience Member");
+			BLE.Instance.Manager.StartReceiving ();
+			StartCoroutine ("RunBeginShowRoutine");
+		}
 //		BeginShow ();
 	}
 

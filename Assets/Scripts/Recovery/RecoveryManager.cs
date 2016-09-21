@@ -130,6 +130,7 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 		ShowUnderway ();
 
 		if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
+			RecoverSignature ();
 			BLE.Instance.ClearPreviousSignalsFound ();
 			BLE.Instance.Manager.RecoverySendPreviousSignal (GetPreviousSignal());
 			Diglbug.Log ("Guide recovery complete");
@@ -161,6 +162,8 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 			} else {
 				BLE.Instance.Manager.RecoveryReceivePreviousSignal (previous);
 			}
+		} else {
+			Diglbug.Log ("Error: Couldn't load previous signal during recovery", PrintStream.RECOVERY);
 		}
 		BLE.Instance.ClearPreviousSignalsFound ();
 	}
@@ -178,6 +181,7 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 	}
 
 	public void RecoveryComplete(){
+		Diglbug.Log ("Recovery complete called", PrintStream.RECOVERY);
 		recoverLoadScreen.SetActive (false);
 		runningRecovery = false;
 	}

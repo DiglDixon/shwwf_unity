@@ -24,6 +24,7 @@ public class ShowSetup : MonoBehaviour {
 	}
 
 	private void Start(){
+		Diglbug.Log ("Setup Start Called");
 		for (int k = 0; k < steps.Length; k++) {
 			steps [k].Deactivate ();
 		}
@@ -33,11 +34,12 @@ public class ShowSetup : MonoBehaviour {
 			SkipSetup ();
 			setupDisplay.SetActive (false);
 		} else if (ShowMode.Instance.SkippingSetup ()) {
+			setupDisplay.SetActive (false);
 			SkipSetup ();
 			signatureSelector.ForceChange ();
 		}else {
+			Diglbug.Log ("Enabling setup display");
 			setupDisplay.SetActive (true);
-//			Diglbug.LogError("Disabled setup auto-open for testing");
 		}
 	}
 
@@ -108,12 +110,17 @@ public class ShowSetup : MonoBehaviour {
 		Diglbug.Log ("All Setup steps complete. Beginning show!", PrintStream.SETUP);
 		ensureFadedOutOnStart.FadeTo (0f);
 		if (skipped) {
-			BLE.Instance.Manager.PayloadExpected (Payload.BEGIN_SHOW);
-			if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
-				player.SendExpectedActWhenLoaded ();
+			if (ShowMode.Instance.IsFabMode ()) {
+					BLE.Instance.Manager.PayloadExpected (Payload.BEGIN_SHOW);
+					if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
+						player.SendExpectedActWhenLoaded ();
+					}
 			}
 		} else {
 			introSequence.Begin ();
+		}
+		if (RecoveryManager.Instance.RunningRecovery ()) {
+			RecoveryManager.Instance.RecoveryComplete ();
 		}
 		RecoveryManager.Instance.ShowUnderway ();
 		BLE.Instance.EnableJockeyProtection ();

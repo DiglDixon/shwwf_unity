@@ -24,11 +24,13 @@ public class ActorMode : Mode{
 	public override void ModeDeselected (){
 	}
 
-	public override void ModeSelected (){
-		Signature[] sigs = SignalUtils.GetAllSignatures ();
-		BLE.Instance.Manager.SetReceivedSignatures (sigs);
-		BLE.Instance.Manager.StartReceiving ();
-		BeginShow ();
+public override void ModeSelected (){
+		if (!RecoveryManager.Instance.RunningRecovery ()) {
+			Signature[] sigs = SignalUtils.GetAllSignatures ();
+			BLE.Instance.Manager.SetReceivedSignatures (sigs);
+			BLE.Instance.Manager.StartReceiving ();
+			BeginShow ();
+		}
 	}
 
 	public override void NewSceneLoaded (UnityEngine.SceneManagement.Scene scene){

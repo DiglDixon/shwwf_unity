@@ -11,11 +11,13 @@ public class GuideMode : Mode{
 	}
 
 	public override void BeginShow (){
-		SceneManager.LoadScene (Scenes.MonoScene);
+			SceneManager.LoadScene (Scenes.MonoScene);
 	}
 
-	public override void ModeSelected (){
-		BeginShow ();
+public override void ModeSelected (){
+		if (!RecoveryManager.Instance.RunningRecovery ()) {
+			BeginShow ();
+		}
 	}
 
 	public override void ModeDeselected (){

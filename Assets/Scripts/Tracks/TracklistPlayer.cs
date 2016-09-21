@@ -89,7 +89,7 @@ public class TracklistPlayer : WrappedTrackOutput{
 		while (!toPlay.GetTrack ().IsLoaded ()) {
 			yield return null;
 		}
-		RecoveryManager.Instance.RecoveryComplete ();// TODO: Move this somewhere nicer. Maybe sub.
+//		RecoveryManager.Instance.RecoveryComplete ();// TODO: Move this somewhere nicer. Maybe sub.
 
 		int postLoadTimeToSkip = SignalUtils.GetSignalTimeOffset (s.GetSignalTime());
 		float timeToPlayFrom = a.GetSpecificEntryTimeAtActTime (toPlay, postLoadTimeToSkip);
