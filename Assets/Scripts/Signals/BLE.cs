@@ -55,11 +55,13 @@ public class BLE : ConstantSingleton<BLE>{
 		restrictToSetupSignals = false;
 	}
 
-//	private bool IsSetupSignal(Signal s){ TODO: Finish this.
+//	private bool IsMidShowSignal(Signal s){
 //		Payload p = s.GetPayload ();
 //		return (p == Payload.BLUETOOTH_TEST
 //			||	p == Payload.STOP_BLUETOOTH_TEST
 //			||	p == Payload.FINISH_SETUP
+//			||	p == Payload.TIME_SYNC_A
+//			||	p == Payload.TIME_SYNC_B
 //	}
 
 	public void EnableJockeyProtection(){

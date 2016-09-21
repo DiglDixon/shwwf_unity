@@ -8,6 +8,13 @@ public class SignatureSelector : MonoBehaviour {
 	public TextToSignatureString signatureText;
 	private SignatureGridItem[] items;
 
+	public GameObject closeButton;
+
+	public void ForceChange(){
+		closeButton.SetActive (false);
+		GetComponent<UILightbox> ().Open ();
+	}
+
 	void Awake(){
 		GatherItems ();
 	}
@@ -56,7 +63,7 @@ public class SignatureSelector : MonoBehaviour {
 
 		ResetSignatureDisplays();
 
-
+		closeButton.SetActive (true);
 		gameObject.GetComponent<UILightbox> ().Close ();
 	}
 }

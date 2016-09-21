@@ -29,10 +29,13 @@ public class ShowSetup : MonoBehaviour {
 		}
 		ActivateStepAtIndex (0);
 		BLE.Instance.SetupBegins ();
-		if (RecoveryManager.Instance.RunningRecovery () || ShowMode.Instance.IsFabMode()) {
+		if (RecoveryManager.Instance.RunningRecovery () || ShowMode.Instance.IsFabMode ()) {
 			SkipSetup ();
 			setupDisplay.SetActive (false);
-		} else {
+		} else if (ShowMode.Instance.SkippingSetup ()) {
+			SkipSetup ();
+			signatureSelector.ForceChange ();
+		}else {
 			setupDisplay.SetActive (true);
 //			Diglbug.LogError("Disabled setup auto-open for testing");
 		}

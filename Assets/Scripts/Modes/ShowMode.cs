@@ -18,7 +18,17 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 		return fabMode;
 	}
 
-	private float timeCorrectionOffsetISeconds;
+	private bool skippingSetup;
+
+	public void SetSkippingSetup(bool v){
+		skippingSetup = v;
+	}
+
+	public bool SkippingSetup(){
+		return skippingSetup;
+	}
+
+//	private float timeCorrectionOffsetISeconds;
 
 	private Signature _Signature;
 	public Signature Signature {
@@ -30,6 +40,7 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 			_Signature = value;
 			BLE.Instance.Manager.SetSendingSignature (Signature);
 			BLE.Instance.Manager.SetReceivedSignature (Signature);
+			BLE.Instance.ClearPreviousSignalsFound (); // this is new 09-22-0314, required for Skip
 			RecoveryManager.Instance.SignatureSet (Signature);
 		}
 	}
