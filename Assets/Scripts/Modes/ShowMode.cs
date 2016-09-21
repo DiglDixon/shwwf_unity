@@ -6,6 +6,18 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 	public Mode startingMode;
 	public Mode Mode{ get; private set; }
 
+	private bool fabMode = false;
+
+	public void SetFabMode(bool v){
+		Diglbug.Log ("Set Fab Mode: " + v);
+		fabMode = v;
+		RecoveryManager.Instance.SetFabMode (v);
+	}
+
+	public bool IsFabMode(){
+		return fabMode;
+	}
+
 	private float timeCorrectionOffsetISeconds;
 
 	private Signature _Signature;
@@ -101,6 +113,7 @@ public class ShowMode : ConstantSingleton<ShowMode>{
 			Mode.ModeDeselected ();
 		}
 		Mode = m;
+		SetFabMode (false);
 		Mode.ModeSelected ();
 		RecoveryManager.Instance.SetMode (m.ModeName);
 		Diglbug.Log ("Set Mode to " + Mode.ModeName, PrintStream.MODES);

@@ -32,6 +32,7 @@ public abstract class Mode : MonoBehaviour{
 
 	protected void EnableObjectsWithTag(string tag){
 		GameObject[] gs =  GameObject.FindGameObjectsWithTag (tag);
+		Diglbug.Log ("Running EnableObjectsWithTag " + tag + ", " + gs.Length + " found");
 		for (int k = 0; k < gs.Length; k++) {
 			gs [k].SetActive (true);
 		}

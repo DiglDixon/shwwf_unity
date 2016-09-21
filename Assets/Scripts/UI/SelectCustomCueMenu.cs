@@ -13,14 +13,20 @@ public class SelectCustomCueMenu : EnsureDefinedActsInChildren<SelectCustomCueIt
 	private SelectCustomCueItem pendingItem;
 	public UILightbox startCustomSceneConfirmationLightbox;
 
-	public GuideControls guideControls;
+	public SceneControls sceneControls;
+
+	public bool requiresConfirmation = true;
 
 	public void ItemPressed(SelectCustomCueItem item){
 		// do stuff
 		pendingItem = item;
-		confirmText.UpdateValue (item.act);
-		startCustomSceneConfirmationLightbox.Open ();
-		Diglbug.Log ("Custom act requested select " + item.act);
+		if (requiresConfirmation) {
+			confirmText.UpdateValue (item.act);
+			startCustomSceneConfirmationLightbox.Open ();
+			Diglbug.Log ("Custom act requested select " + item.act);
+		} else {
+			CustomSceneConfirmed ();
+		}
 	}
 
 	public void CustomSceneConfirmed(){
@@ -28,7 +34,7 @@ public class SelectCustomCueMenu : EnsureDefinedActsInChildren<SelectCustomCueIt
 			Diglbug.LogError ("Confirmed an undefined custom scene start.");
 			return;
 		}
-		guideControls.BeginCustomAct (actPayloadPairs.GetActForDefinedAct(pendingItem.act));
+		sceneControls.BeginCustomAct (actPayloadPairs.GetActForDefinedAct(pendingItem.act));
 		Diglbug.Log ("Confirmed: Sending custom act from item select " + pendingItem.act);
 	}
 

@@ -20,10 +20,15 @@ public class SelectCustomCueItem : EnsureDefinedActChild{
 		if (label == null) {
 			label = GetComponentInChildren<Text> ();
 		}
-		if (Variables.Instance.language == Language.ENGLISH) {
-			label.text = EnumDisplayNamesEnglish.DefinedActName (act);
+		string actNumber = ((int)act)+".";
+		if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
+			if (Variables.Instance.language == Language.ENGLISH) {
+				label.text = actNumber+" "+EnumDisplayNamesEnglish.DefinedActName (act);
+			} else {
+				label.text = actNumber+" "+EnumDisplayNamesMandarin.DefinedActName (act);
+			}
 		} else {
-			label.text = EnumDisplayNamesMandarin.DefinedActName (act);
+			label.text = actNumber;
 		}
 	}
 

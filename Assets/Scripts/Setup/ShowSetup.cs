@@ -29,7 +29,7 @@ public class ShowSetup : MonoBehaviour {
 		}
 		ActivateStepAtIndex (0);
 		BLE.Instance.SetupBegins ();
-		if (RecoveryManager.Instance.RunningRecovery ()) {
+		if (RecoveryManager.Instance.RunningRecovery () || ShowMode.Instance.IsFabMode()) {
 			SkipSetup ();
 			setupDisplay.SetActive (false);
 		} else {
@@ -50,7 +50,7 @@ public class ShowSetup : MonoBehaviour {
 			steps [k].SkipStep ();
 		}
 		signatureSelector.ResetSignatureDisplays ();
-		StepsComplete ();
+		StepsComplete (true);
 	}
 
 	public void SetupStepComplete(){
@@ -63,7 +63,7 @@ public class ShowSetup : MonoBehaviour {
 
 	private void ActivateStepAtIndex(int index){
 		if (index >= steps.Length) {
-			StepsComplete ();
+			StepsComplete (false);
 		}
 		else {
 			if (currentStep) {
@@ -101,15 +101,16 @@ public class ShowSetup : MonoBehaviour {
 		}
 	}
 
-	private void StepsComplete(){
+	private void StepsComplete(bool skipped){
 		Diglbug.Log ("All Setup steps complete. Beginning show!", PrintStream.SETUP);
 		ensureFadedOutOnStart.FadeTo (0f);
-		if (!RecoveryManager.Instance.RunningRecovery()) {
-			introSequence.Begin ();
+		if (skipped) {
 			BLE.Instance.Manager.PayloadExpected (Payload.BEGIN_SHOW);
 			if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
 				player.SendExpectedActWhenLoaded ();
 			}
+		} else {
+			introSequence.Begin ();
 		}
 		RecoveryManager.Instance.ShowUnderway ();
 		BLE.Instance.EnableJockeyProtection ();

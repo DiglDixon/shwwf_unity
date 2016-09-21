@@ -24,15 +24,15 @@ public class AudienceMode : Mode{
 	}
 
 	public override void ModeSelected (){
-//		canvas.gameObject.SetActive (true);
 		Diglbug.Log ("Welcome to the show, Audience Member");
-//		welcomeLightbox.Open ();
-//		StartCoroutine ("RunBeginShowRoutine");
 		BLE.Instance.Manager.StartReceiving ();
-		BeginShow ();
+		StartCoroutine ("RunBeginShowRoutine");
+//		BeginShow ();
 	}
 
 	private IEnumerator RunBeginShowRoutine(){
+		canvas.gameObject.SetActive (true);
+		welcomeLightbox.Open ();
 		yield return new WaitForSeconds (1f);
 		BeginShow ();
 		yield return new WaitForSeconds (1f);

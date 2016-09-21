@@ -22,6 +22,8 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 	private const string offsetSecondKey = "off_sec";
 	private const string offsetMillisKey = "off_millis";
 
+	private const string fabModeKey = "fab";
+
 	public UILightbox recoveryResumeLightbox;
 	public UILightbox actorecoveryResumeLightbox;
 	public Text previousActorText;
@@ -74,13 +76,11 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 	private IEnumerator RunRecovery(){
 		runningRecovery = true;
 		recoverLoadScreen.SetActive (true);
-		int oldModeName = PlayerPrefs.GetInt (oldModeKey, -1);
-		if (oldModeName == -1) {
-			Diglbug.Log ("Old Mode Name was -1 - this should never happen!", PrintStream.RECOVERY);
-		}
-		ShowMode.Instance.SetMode ((ModeName)oldModeName);
+
+		RecoverMode ();
+
 		yield return null;
-		if ((ModeName)oldModeName == ModeName.ACTOR) {
+		if (ShowMode.Instance.Mode.ModeName == ModeName.ACTOR) {
 			SceneManager.LoadScene (Scenes.Actor);
 		} else {
 			RecoverSignature ();
@@ -98,6 +98,20 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 		Variables.Instance.RestoreTimeOffsetValues (oldOffsetMinute, oldOffsetSecond, oldOffsetMillis);
 
 		Recover ();
+	}
+
+	private void RecoverMode(){
+
+		int oldModeName = PlayerPrefs.GetInt (oldModeKey, -1);
+		if (oldModeName == -1) {
+			Diglbug.Log ("Old Mode Name was -1 - this should never happen!", PrintStream.RECOVERY);
+		}
+		// This needs to come after we set the mode
+		bool wasFabMode = (PlayerPrefs.GetInt (fabModeKey, 0) == 1);
+
+		ShowMode.Instance.SetMode ((ModeName)oldModeName);
+
+		ShowMode.Instance.SetFabMode (wasFabMode);
 	}
 
 	private void RecoverSignature(){
@@ -131,6 +145,7 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 			}
 			RecoverFromMostRecentSignal ();
 			Diglbug.Log ("Actor recovery complete, waiting for signals");
+
 		} else {
 			RecoverFromMostRecentSignal ();
 			Diglbug.Log ("Recovery complete - waiting to pick up signals");
@@ -141,7 +156,11 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 		RecoverSignature ();
 		Signal previous = GetPreviousSignal ();
 		if (previous != null) {
-			BLE.Instance.Manager.RecoveryReceivePreviousSignal (previous);
+			if (ShowMode.Instance.IsFabMode ()) {
+				BLE.Instance.FabModeSignal (previous);
+			} else {
+				BLE.Instance.Manager.RecoveryReceivePreviousSignal (previous);
+			}
 		}
 		BLE.Instance.ClearPreviousSignalsFound ();
 	}
@@ -200,6 +219,10 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 
 	public void ResumeRequested(){
 		ResumeAccepted ();
+	}
+
+	public void SetFabMode(bool v){
+		PlayerPrefs.SetInt (fabModeKey, v ? 1 : 0);
 	}
 
 	public void SignalReceived(Signal s){

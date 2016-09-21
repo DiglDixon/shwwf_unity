@@ -2,7 +2,7 @@
 using System;
 using UnityEngine.UI;
 
-public class GuideControls : MonoBehaviour{
+public class GuideControls : SceneControls{
 
 	public DefinedActText upcomingActText;
 	public Text cueStatusText;
@@ -23,8 +23,6 @@ public class GuideControls : MonoBehaviour{
 	private Payload previousPayload;
 
 	public GameObject largeControls;
-
-	public TracklistPlayer player;
 
 	public GuidePhotos guidePhotos;
 	public Image guideImage;
@@ -48,14 +46,6 @@ public class GuideControls : MonoBehaviour{
 		}
 		actSet.ActChangedEvent -= ActChanged;
 		actSet.FinalActBeginsEvent -= FinalActReached;
-	}
-
-	public void BeginExpectedScene(){
-		player.SendExpectedActWhenLoaded ();
-	}
-
-	public void BeginCustomAct(Act a){
-		player.SendCustomActWhenLoaded (a);
 	}
 
 

@@ -30,7 +30,6 @@ public class SignatureSelector : MonoBehaviour {
 				break;
 			}
 		}
-		Diglbug.Log ("Found " + selectedSignatureImages.Length + " with sigselect sreahc");
 		if (selected != null) {
 			for (int k = 0; k < selectedSignatureImages.Length; k++) {
 				selectedSignatureImages [k].color = selected.SignatureSpriteColour ();

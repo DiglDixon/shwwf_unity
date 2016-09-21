@@ -136,13 +136,20 @@ public class BLE : ConstantSingleton<BLE>{
 	}
 
 	private void NewSignalFound(Signal s){
+		if (ShowMode.Instance.IsFabMode ()) {
+			return;
+		}
+		AcceptNewSignal (s);
+	}
+
+	private void AcceptNewSignal(Signal s){
 		Diglbug.Log ("New signal received: " + s.GetPrint (), PrintStream.SIGNALS);
 		Diglbug.LogMobile("UNIQUE: "+s.GetPrint(), "FIRE");
 		signalsDisabled.Add (s);
 		signalDisableTimes.Add (signalDisableTime);
 		currentSignal = s;
 		RecoveryManager.Instance.SignalReceived (s);
-//		currentSignal = s;
+		//		currentSignal = s;
 		if (NewSignalFoundEvent != null) {
 			NewSignalFoundEvent (s);
 		}
@@ -154,6 +161,10 @@ public class BLE : ConstantSingleton<BLE>{
 		for (int k = 0; k < eventSystems.Length; k++) {
 			eventSystems [k].HandleNewSignal (s);
 		}
+	}
+
+	public void FabModeSignal(Signal s){
+		AcceptNewSignal (s);
 	}
 
 

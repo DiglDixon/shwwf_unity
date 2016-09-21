@@ -9,6 +9,8 @@ public class PasswordControls : MonoBehaviour{
 	public Color passwordFailedColour;
 
 	public void PasswordAttempted(string password){
+		if (password.Trim ().Length == 0)
+			return;
 		ShowMode.Instance.PasswordEntered (password);
 		if (ShowMode.Instance.PasswordIsValid (password)) {
 			//
@@ -28,7 +30,7 @@ public class PasswordControls : MonoBehaviour{
 		if(Variables.Instance.language == Language.ENGLISH){
 			fieldPlaceholderText.text = "Password incorrect";
 		}else{
-			fieldPlaceholderText.text = "<Password Incorrect>";
+			fieldPlaceholderText.text = "密码错误";
 		}
 		fieldPlaceholderText.color = passwordFailedColour;
 		yield return new WaitForSeconds (2f);
