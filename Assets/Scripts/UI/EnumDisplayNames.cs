@@ -1,46 +1,4 @@
 ﻿
-public static class EnumDisplayNames{
-//	
-//	public static string LanuageName(Language l){
-//		if (Variables.Instance.language == Language.ENGLISH) {
-//			return EnumDisplayNamesEnglish.LanuageName (l);
-//		} else {
-//			return EnumDisplayNamesMandarin.LanuageName (l);
-//		}
-//	}
-//
-//	public static string PayloadName(Payload p){
-//		if (Variables.Instance.language == Language.ENGLISH) {
-//			return EnumDisplayNamesEnglish.PayloadName (p);
-//		} else {
-//			return EnumDisplayNamesMandarin.PayloadName (p);
-//		}
-//	}
-//
-//	public static string SignatureName(Signature s){
-//		if (Variables.Instance.language == Language.ENGLISH) {
-//			return EnumDisplayNamesEnglish.SignatureName (s);
-//		} else {
-//			return EnumDisplayNamesMandarin.SignatureName (s);
-//		}
-//	}
-//
-//	public static string DefinedActName(DefinedAct da){
-//		if (Variables.Instance.language == Language.ENGLISH) {
-//			return EnumDisplayNamesEnglish.DefinedActName (da);
-//		} else {
-//			return EnumDisplayNamesMandarin.DefinedActName (da);
-//		}
-//	}
-//
-//	public static string ActorName(Actor a){
-//		if (Variables.Instance.language == Language.ENGLISH) {
-//			return EnumDisplayNamesEnglish.ActorName (a);
-//		} else {
-//			return EnumDisplayNamesMandarin.ActorName (a);
-//		}
-//	}
-}
 
 public static class EnumDisplayNamesEnglish{
 
@@ -95,7 +53,7 @@ public static class EnumDisplayNamesEnglish{
 		case DefinedAct.ACT_BAI_ROOM:
 			return "Bai's Room";
 		case DefinedAct.ACT_CROSSING_TO_SCHOOL:
-			return "Crossing to STA";
+			return "Midnight Hamburger";
 		case DefinedAct.ACT_DORM:
 			return "Dorm";
 		case DefinedAct.ACT_DUANJUN:

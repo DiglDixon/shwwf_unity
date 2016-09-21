@@ -34,8 +34,10 @@ public class DatedPasswordSet : PasswordCheck{
 		existingChildren = GetComponentsInChildren<DatePassword> ();
 		for (int k = 0; k < existingChildren.Length; k++) {
 			existing = GetExistingDatePassword (existingChildren, beginDate+k);
-			existing.transform.SetSiblingIndex (k);
-			existing.UpdateName ();
+			if (existing != null) { // editor load catch only - we should be full.
+				existing.transform.SetSiblingIndex (k);
+				existing.UpdateName ();
+			}
 		}
 
 		gameObject.name = "DatePasswordSet ("+existingChildren.Length+")";

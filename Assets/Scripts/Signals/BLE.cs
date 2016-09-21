@@ -7,7 +7,6 @@ public class BLE : ConstantSingleton<BLE>{
 
 
 	public BluetoothManager Manager;
-	public BLETools bleTools;
 
 	public delegate void NewSignalFoundDelegate(Signal signal);
 	public NewSignalFoundDelegate NewSignalFoundEvent;
@@ -36,7 +35,6 @@ public class BLE : ConstantSingleton<BLE>{
 //		#endif
 
 //		lastSignals = new Signal[0];
-		Manager.bleTools = bleTools;
 		Manager.SignalReceivedEvent += ManagerReceivedSignal;
 
 
@@ -143,6 +141,7 @@ public class BLE : ConstantSingleton<BLE>{
 		signalsDisabled.Add (s);
 		signalDisableTimes.Add (signalDisableTime);
 		currentSignal = s;
+		RecoveryManager.Instance.SignalReceived (s);
 //		currentSignal = s;
 		if (NewSignalFoundEvent != null) {
 			NewSignalFoundEvent (s);

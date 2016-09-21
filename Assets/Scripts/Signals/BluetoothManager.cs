@@ -6,7 +6,7 @@ public abstract class BluetoothManager : MonoBehaviour {
 	
 	protected string regionName = "com.storybox.shwwf";
 
-	public BLETools bleTools;
+//	public BLETools bleTools;
 
 	private bool expectingPayload = false;
 	private Payload upcomingPayload;
@@ -14,7 +14,7 @@ public abstract class BluetoothManager : MonoBehaviour {
 	private Signature sendingSignature;
 	private Signature[] receivingSignatures;
 
-	private UnexpectedSignalConfirmation confirmationScreen;
+//	private UnexpectedSignalConfirmation confirmationScreen;
 
 	public delegate void SignalReceivedDelegate(Signal s);
 	public event SignalReceivedDelegate SignalReceivedEvent;
@@ -42,7 +42,7 @@ public abstract class BluetoothManager : MonoBehaviour {
 
 	protected virtual void Start(){
 
-		confirmationScreen = bleTools.unexpectedSignalConfirmationScreen;
+//		confirmationScreen = bleTools.unexpectedSignalConfirmationScreen;
 
 		SetReceivedSignature (Signature.NONE);
 		SetSendingSignature (Signature.NONE);
@@ -121,7 +121,7 @@ public abstract class BluetoothManager : MonoBehaviour {
 				ClearAndSendSignal (s);
 			} else {
 				Diglbug.LogWarning ("Trying to send unexpected Signal " + s.GetPrint()+", expected: "+upcomingPayload);
-				confirmationScreen.OpenWithAttemptedSignal (s);
+//				confirmationScreen.OpenWithAttemptedSignal (s);
 			}
 		} else {
 			SendSignal (s);
@@ -173,7 +173,12 @@ public abstract class BluetoothManager : MonoBehaviour {
 		}
 	}
 
-	public void RecoverFromPreviousSignal(Signal s){
+	public void RecoveryReceivePreviousSignal (Signal s){
+		BLE.Instance.ClearPreviousSignalsFound ();
+		FireBeaconFoundEvent (s);
+	}
+
+	public void RecoverySendPreviousSignal(Signal s){
 		ForceSignalSend (s); // this will keep the time intact
 //		FireBeaconFoundEvent (s);
 	}

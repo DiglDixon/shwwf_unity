@@ -17,6 +17,9 @@ public class ActSet : EnsureDefinedActsInChildren<ShowAct>{
 	public delegate void FinalActBeginsDelegate(Act finalAct);
 	public event FinalActBeginsDelegate FinalActBeginsEvent;
 
+//	public ActSetEventRegionParent eventsParent;
+//	public bool eventsEnabled = false;
+
 	private void Awake(){
 		acts = GetComponentsInChildren<Act> ();
 	}
@@ -25,6 +28,36 @@ public class ActSet : EnsureDefinedActsInChildren<ShowAct>{
 		for (int k = 0; k < acts.Length; k++) {
 			acts [k].Initialise ();
 		}
+	}
+
+//	public void DisableEvents(){
+//		eventsEnabled = false;
+//	}
+//
+//	public void EnableEvents(){
+//		eventsEnabled = true;
+//	}
+//
+//	private void Update(){
+//		if (eventsEnabled) {
+//			eventsParent.UpdateTimeElapsed (GetActSetTimeElapsed ());
+//		}
+//	}
+
+	public float GetActSetTimeElapsed(){
+		if (currentAct != null) {
+			float total = 0f;
+			for (int k = 0; k < acts.Length; k++) {
+				if (currentAct == acts [k]) {
+					total += acts [k].GetActTimeElapsed ();
+					break;
+				} else {
+					total += acts [k].GetTotalActTime ();
+				}
+			}
+			return total;
+		}
+		return 0f;
 	}
 
 	private void OnEnable(){

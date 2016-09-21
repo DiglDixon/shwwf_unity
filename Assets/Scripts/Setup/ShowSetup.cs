@@ -34,6 +34,7 @@ public class ShowSetup : MonoBehaviour {
 			setupDisplay.SetActive (false);
 		} else {
 			setupDisplay.SetActive (true);
+//			Diglbug.LogError("Disabled setup auto-open for testing");
 		}
 	}
 

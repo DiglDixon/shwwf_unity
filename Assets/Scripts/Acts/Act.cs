@@ -38,6 +38,10 @@ public abstract class Act : EnsureDefinedActChild{
 
 	}
 
+	public float GetTotalActTime(){
+		return totalTrackLength;
+	}
+
 	public virtual void Initialise(){
 		//
 	}

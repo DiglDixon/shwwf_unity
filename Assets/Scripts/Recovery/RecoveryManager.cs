@@ -117,7 +117,7 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 
 		if (ShowMode.Instance.Mode.ModeName == ModeName.GUIDE) {
 			BLE.Instance.ClearPreviousSignalsFound ();
-			BLE.Instance.Manager.RecoverFromPreviousSignal (GetPreviousSignal());
+			BLE.Instance.Manager.RecoverySendPreviousSignal (GetPreviousSignal());
 			Diglbug.Log ("Guide recovery complete");
 
 		} else if (ShowMode.Instance.Mode.ModeName == ModeName.ACTOR){
@@ -129,19 +129,33 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 			} else {
 				Diglbug.Log ("Unexpected lack of ActorPlayer object during Actor Recovery.");
 			}
+			RecoverFromMostRecentSignal ();
 			Diglbug.Log ("Actor recovery complete, waiting for signals");
 		} else {
-			BLE.Instance.ClearPreviousSignalsFound ();
+			RecoverFromMostRecentSignal ();
 			Diglbug.Log ("Recovery complete - waiting to pick up signals");
 		}
+	}
+
+	public void RecoverFromMostRecentSignal(){
+		RecoverSignature ();
+		Signal previous = GetPreviousSignal ();
+		if (previous != null) {
+			BLE.Instance.Manager.RecoveryReceivePreviousSignal (previous);
+		}
+		BLE.Instance.ClearPreviousSignalsFound ();
 	}
 
 	private Signal GetPreviousSignal(){
 		Signature previousSignature = (Signature)PlayerPrefs.GetInt (lastSignalSignatureKey, 0);
 		Payload previousPayload = (Payload)PlayerPrefs.GetInt (lastSignalPayloadKey, 0);
-		int previousMinute = PlayerPrefs.GetInt (lastSignalMinuteKey, 0);
-		int previousSecond = PlayerPrefs.GetInt (lastSignalSecondKey, 0);
-		return new Signal (previousSignature, previousPayload, previousMinute, previousSecond);
+		int previousMinute = PlayerPrefs.GetInt (lastSignalMinuteKey, -1);
+		int previousSecond = PlayerPrefs.GetInt (lastSignalSecondKey, -1);
+		if (previousMinute == -1 || previousSecond == 1) {
+			return null;
+		} else {
+			return new Signal (previousSignature, previousPayload, previousMinute, previousSecond);
+		}
 	}
 
 	public void RecoveryComplete(){
@@ -188,9 +202,13 @@ public class RecoveryManager : ConstantSingleton<RecoveryManager> {
 		ResumeAccepted ();
 	}
 
-	public void SignalSent(Signal s){
+	public void SignalReceived(Signal s){
 		if (runningRecovery) {
 			Diglbug.Log ("Blocked a signal while we're running recovery", PrintStream.RECOVERY);
+			return;
+		}
+		if (s.GetPayload () == Payload.EMERGENCY_PAUSE || s.GetPayload () == Payload.EMERGENCY_UNPAUSE) {
+			Diglbug.Log ("Blocked saving emergency pause signal", PrintStream.RECOVERY);
 			return;
 		}
 		Diglbug.Log ("Saving accepted signal: " + s.GetFullPrint (), PrintStream.RECOVERY);

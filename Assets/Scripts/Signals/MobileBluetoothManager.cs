@@ -145,7 +145,6 @@ public class MobileBluetoothManager : BluetoothManager{
 				pipe.Digl_Start ();
 			}
 		}
-		RecoveryManager.Instance.SignalSent (s);
 		AutoAcceptOwnSignal (s);
 		DisableReinitialiseCountdown ();
 	}

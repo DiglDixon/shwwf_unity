@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1db6b0a4c259c449b8cc6f88123e2652
-timeCreated: 1473733811
+timeCreated: 1474259781
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -10,10 +10,13 @@ TextureImporter:
     21300006: Notifcation_Drop
     21300008: Full_Screen_Call
     21300010: OSX Sprite_Sheet_PhoneBackdrop
+    21300012: OSX Sprite_Sheet_Wallpaper_0
+    21300014: LockScreen Divider
+    21300016: Notification_Drop
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -32,7 +35,7 @@ TextureImporter:
   cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
@@ -59,13 +62,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Wallpaper
+      name: OSX Sprite_Sheet_Wallpaper_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 1301
-        width: 4486
-        height: 7972
+        y: 1381
+        width: 4485
+        height: 7969
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -75,10 +78,10 @@ TextureImporter:
       name: OSX Sprite_Sheet_Wallpaper_1
       rect:
         serializedVersion: 2
-        x: 4808
-        y: 1301
-        width: 4486
-        height: 7972
+        x: 4809
+        y: 1381
+        width: 4485
+        height: 7969
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -90,47 +93,34 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 4478
-        height: 1070
+        width: 4485
+        height: 1075
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Notifcation_Drop
+      name: LockScreen Divider
       rect:
         serializedVersion: 2
-        x: 4818
+        x: 4809
+        y: 1016
+        width: 4485
+        height: 109
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Notification_Drop
+      rect:
+        serializedVersion: 2
+        x: 4809
         y: 0
-        width: 4476
-        height: 812
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Full_Screen_Call
-      rect:
-        serializedVersion: 2
-        x: 4815
-        y: 1308
-        width: 4479
-        height: 7965
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: OSX Sprite_Sheet_PhoneBackdrop
-      rect:
-        serializedVersion: 2
-        x: 4815
-        y: 1308
-        width: 4479
-        height: 7965
+        width: 4485
+        height: 819
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

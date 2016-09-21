@@ -2,6 +2,10 @@
 
 public class AppController : MonoBehaviour{
 
+
+
+
+
 	public GameObject[] amapObjects;
 	public GameObject[] phoneBaiObjects;
 	public GameObject[] phoneCallFromMumObjects;

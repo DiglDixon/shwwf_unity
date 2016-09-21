@@ -12,7 +12,6 @@ public class DesktopBluetoothManager : BluetoothManager{
 //		Beacon b = s.ToBeacon ();
 		if (s != currentSendingSignal) {
 			currentSendingSignal = s;
-			RecoveryManager.Instance.SignalSent (currentSendingSignal);
 			StopCoroutine ("RunFakeReceiving");
 			StartCoroutine ("RunFakeReceiving");
 		}

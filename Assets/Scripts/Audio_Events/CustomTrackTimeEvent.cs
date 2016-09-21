@@ -20,7 +20,11 @@ public abstract class CustomTrackTimeEvent : MonoBehaviour{
 	}
 
 	protected virtual string GetObjectName(){
-		return this.GetType ().Name+GetTimeAtString();
+		return (isStateEvent?"S_":"M_")+GetNameDetails()+GetTimeAtString();
+	}
+
+	protected virtual string GetNameDetails(){
+		return this.GetType ().Name;
 	}
 
 	protected virtual string GetTimeAtString(){

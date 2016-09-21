@@ -14,9 +14,11 @@ public class ActorPlayer : MonoBehaviour{
 
 	public TracklistPlayer player;
 
-	private List<Signal> ignoredSignals = new List<Signal> ();
-
 	public PayloadEventSystem eventSystem;
+
+	public EmergencyPauseManager pauseManager;
+
+	private List<Signal> ignoredSignals = new List<Signal> ();
 
 	public delegate void ActorChangedDelegate(ActorActSet aas);
 	public event ActorChangedDelegate ActorChangedEvent;
@@ -94,15 +96,21 @@ public class ActorPlayer : MonoBehaviour{
 				if (SignalIsIgnored (s)) {
 					Diglbug.Log ("Rejected signal " + s.GetPrint () + " as it it's ignored", PrintStream.ACTORS);
 				} else {
-					Act actToBegin = GetActSignalStarts (s);
-					if (actToBegin != null) {
-						BeginAct (actToBegin, s);
-						SetCurrentGroup (s.GetSignature ());
-						AddIgnoredSignal (s); // cache this here so we don't re-trigger if a foreign signal jockeys us.
-						sfxSource.PlayOneShot(sceneBeginsSound);
-						Diglbug.Log ("Accepted new signal " + s.GetPrint ());
+					if (s.GetPayload () == Payload.EMERGENCY_PAUSE) {
+						pauseManager.EmergencyPauseSignalReceived ();
+					} else if (s.GetPayload() == Payload.EMERGENCY_UNPAUSE) {
+						pauseManager.EmergencyUnpauseSignalReceived ();
 					} else {
-						Diglbug.Log ("Rejected signal " + s.GetPrint () + " and it's not relevant for this actor", PrintStream.ACTORS);
+						Act actToBegin = GetActSignalStarts (s);
+						if (actToBegin != null) {
+							BeginAct (actToBegin, s);
+							SetCurrentGroup (s.GetSignature ());
+							AddIgnoredSignal (s); // cache this here so we don't re-trigger if a foreign signal jockeys us.
+							sfxSource.PlayOneShot(sceneBeginsSound);
+							Diglbug.Log ("Accepted new signal " + s.GetPrint ());
+						} else {
+							Diglbug.Log ("Rejected signal " + s.GetPrint () + " and it's not relevant for this actor", PrintStream.ACTORS);
+						}
 					}
 				}
 			} else {

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: d19cff514602e494d8208ffd87b43eb8
-timeCreated: 1473903409
+timeCreated: 1474324251
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -79,11 +79,23 @@ TextureImporter:
     21300144: Live App
     21300146: STOP
     21300148: Mask
-    21300150: OSX Sprite_Sheet_0
+    21300150: Amaps
+    21300152: PhoneButton_Pressed
+    21300154: Phone_button_unpressed
+    21300156: OSX Sprite_Sheet_2
+    21300158: Phone_Faves
+    21300160: Phone_Recent_Calls
+    21300162: Phone_KeyPad
+    21300164: Phone_Incommingcall
+    21300166: Phone_Voice_Mail
+    21300168: Phone_info
+    21300170: Send_Voice
+    21300172: Send_Image
+    21300174: Input_field
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -184,8 +196,8 @@ TextureImporter:
       name: Answer
       rect:
         serializedVersion: 2
-        x: 3455
-        y: 7028
+        x: 3464
+        y: 7030
         width: 709
         height: 714
       alignment: 0
@@ -204,19 +216,6 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Slidebar
-      rect:
-        serializedVersion: 2
-        x: 5105
-        y: 6941
-        width: 660
-        height: 882
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 234, z: 0, w: 287}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
@@ -354,9 +353,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2500
-        y: 7827
+        y: 7870
         width: 3242
-        height: 419
+        height: 376
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -513,19 +512,6 @@ TextureImporter:
         y: 2528
         width: 714
         height: 714
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Notofication drop down
-      rect:
-        serializedVersion: 2
-        x: 5851
-        y: 6315
-        width: 599
-        height: 2135
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -717,7 +703,7 @@ TextureImporter:
       name: Live App
       rect:
         serializedVersion: 2
-        x: 2864
+        x: 2853
         y: 82
         width: 784
         height: 784
@@ -753,13 +739,169 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: OSX Sprite_Sheet_0
+      name: Amaps
       rect:
         serializedVersion: 2
         x: 5509
         y: 67
         width: 821
         height: 821
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PhoneButton_Pressed
+      rect:
+        serializedVersion: 2
+        x: 5505
+        y: 5945
+        width: 791
+        height: 305
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Phone_button_unpressed
+      rect:
+        serializedVersion: 2
+        x: 5506
+        y: 6260
+        width: 791
+        height: 305
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: OSX Sprite_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 5544
+        y: 6793
+        width: 253
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Phone_Faves
+      rect:
+        serializedVersion: 2
+        x: 5537
+        y: 7134
+        width: 275
+        height: 262
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Phone_Recent_Calls
+      rect:
+        serializedVersion: 2
+        x: 6029
+        y: 7135
+        width: 256
+        height: 259
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Phone_KeyPad
+      rect:
+        serializedVersion: 2
+        x: 6031
+        y: 6795
+        width: 251
+        height: 253
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Phone_Incommingcall
+      rect:
+        serializedVersion: 2
+        x: 5478
+        y: 7489
+        width: 265
+        height: 258
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Phone_Voice_Mail
+      rect:
+        serializedVersion: 2
+        x: 5991
+        y: 7543
+        width: 314
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Phone_info
+      rect:
+        serializedVersion: 2
+        x: 5979
+        y: 7974
+        width: 224
+        height: 237
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Send_Voice
+      rect:
+        serializedVersion: 2
+        x: 5514
+        y: 1766
+        width: 772
+        height: 764
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Send_Image
+      rect:
+        serializedVersion: 2
+        x: 5521
+        y: 1073
+        width: 761
+        height: 572
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Input_field
+      rect:
+        serializedVersion: 2
+        x: 5959
+        y: 2689
+        width: 339
+        height: 3144
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

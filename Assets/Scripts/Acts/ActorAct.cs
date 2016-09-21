@@ -1,7 +1,6 @@
 ﻿
 
 public class ActorAct : Act{
-	// uhm.
 
 	public EventTracklistEntry lastTrackWithActingContent;
 	public float timeActingContentEnds = 3f;

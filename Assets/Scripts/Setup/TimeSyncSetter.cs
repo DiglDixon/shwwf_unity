@@ -5,7 +5,7 @@ using System.Collections;
 
 public class TimeSyncSetter : MonoBehaviour{
 
-	private bool hasHadRoughSet = false;
+	private bool hasHadDetailedSet = false;
 
 	public Text minuteText;
 	public Text secondText;
@@ -29,11 +29,10 @@ public class TimeSyncSetter : MonoBehaviour{
 	public UILightbox lightbox;
 
 	public void SetRoughSyncFromSignal(Signal s){
-		if (!hasHadRoughSet) {
+		if (!hasHadDetailedSet) {
 			if (ShowMode.Instance.Mode.ModeName != ModeName.GUIDE) {
-				SetModifications(s.GetSignalTime ().second, s.GetSignalTime ().minute);
+				SetModifications(s.GetSignalTime ().minute, s.GetSignalTime ().second);
 			}
-			hasHadRoughSet = true;
 		}
 	}
 
@@ -68,7 +67,12 @@ public class TimeSyncSetter : MonoBehaviour{
 		millisAtOpen = Variables.Instance.offsetMillis;
 	}
 
-	public void Close(){
+	public void AcceptAndClose(){
+		hasHadDetailedSet = true;
+		Close ();
+	}
+
+	private void Close(){
 		lightbox.Close ();
 	}
 

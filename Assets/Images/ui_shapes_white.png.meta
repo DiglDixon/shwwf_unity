@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 67c8c8a10ae564bd5aa15b3015a9d1b1
-timeCreated: 1474279584
-licenseType: Free
+timeCreated: 1474417171
+licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
     21300000: if_tri_button_left
@@ -13,7 +13,7 @@ TextureImporter:
     21300012: if_corner_modal
     21300014: if_tab_right
     21300016: ui_shapes_white_11
-    21300018: ui_shapes_white_12
+    21300018: if_input_tight
     21300020: tri_image_middle
     21300022: if_tri_image_right
     21300024: if_corner_tab_left
@@ -64,10 +64,12 @@ TextureImporter:
     21300114: if_triangle
     21300116: if_circle_fill
     21300118: if_circle_stroke
+    21300120: if_lock
+    21300122: if_pause_white
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -217,13 +219,13 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: ui_shapes_white_12
+      name: if_input_tight
       rect:
         serializedVersion: 2
         x: 611
         y: 1799
         width: 361
-        height: 54
+        height: 55
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 17, y: 16, z: 14, w: 14}
@@ -672,19 +674,6 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: duality_app_icon
-      rect:
-        serializedVersion: 2
-        x: 1715
-        y: 293
-        width: 278
-        height: 278
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
       name: if_time_icon
       rect:
         serializedVersion: 2
@@ -731,6 +720,32 @@ TextureImporter:
         y: 1183
         width: 68
         height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_lock
+      rect:
+        serializedVersion: 2
+        x: 919
+        y: 455
+        width: 78
+        height: 91
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: if_pause_white
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 472
+        width: 41
+        height: 49
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
