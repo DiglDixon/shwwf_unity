@@ -19,6 +19,8 @@ public class ShowSetup : MonoBehaviour {
 
 	private int stepIndex = 0;
 
+	public bool autoOpenSetup = true; // this is here for testing animations.
+
 	private void Awake(){
 		steps = GetComponentsInChildren<SetupStep> ();
 	}
@@ -39,7 +41,7 @@ public class ShowSetup : MonoBehaviour {
 			signatureSelector.ForceChange ();
 		}else {
 			Diglbug.Log ("Enabling setup display");
-			setupDisplay.SetActive (true);
+			setupDisplay.SetActive (autoOpenSetup);
 		}
 	}
 

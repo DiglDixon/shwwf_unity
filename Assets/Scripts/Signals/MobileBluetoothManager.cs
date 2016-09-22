@@ -31,7 +31,7 @@ public class MobileBluetoothManager : BluetoothManager{
 	}
 
 	private void StateChangeEvent(BluetoothLowEnergyState state){
-		Debug.Log ("State changed: " + state);
+		Diglbug.Log ("State changed: " + state, PrintStream.SIGNALS);
 		canSend = iBeaconServer.checkTransmissionSupported();
 		validateReady = state == BluetoothLowEnergyState.POWERED_ON;
 		if (state == BluetoothLowEnergyState.POWERED_OFF) {

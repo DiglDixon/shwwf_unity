@@ -23,12 +23,12 @@ public class AnimatedAppDisplayElement : AppDisplayElement{
 	}
 
 	public void AppFinishedOpening(){
-		Diglbug.Log ("OPENED "+name);
+		Diglbug.Log ("OPENED "+name, PrintStream.ANIMATION);
 	}
 
 	public void AppFinishedClosing(){
 		gameObject.SetActive (false);
-		Diglbug.Log ("CLOSED "+name);
+		Diglbug.Log ("CLOSED "+name, PrintStream.ANIMATION);
 	}
 
 

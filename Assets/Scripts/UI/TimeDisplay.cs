@@ -8,6 +8,8 @@ public class TimeDisplay : MonoBehaviour {
 
 	private Text text;
 
+	public bool includeAmPm = true;
+
 	void Awake () {
 		text = GetComponent<Text> ();
 	}
@@ -19,7 +21,9 @@ public class TimeDisplay : MonoBehaviour {
 		sb.Append ((time.Hour > 12 ? time.Hour - 12 : time.Hour).ToString());
 		sb.Append (":");
 		sb.Append (time.Minute.ToString("00"));
-		sb.Append (time.Hour > 11 ? "PM" : "AM");
+		if (includeAmPm) {
+			sb.Append (time.Hour > 11 ? "PM" : "AM");
+		}
 		text.text = sb.ToString ();
 	}
 }
