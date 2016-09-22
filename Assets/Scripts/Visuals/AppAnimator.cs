@@ -20,7 +20,7 @@ public class AppAnimator : Singleton<AppAnimator>{
 			PhoneLocked ();
 		}
 		if (Input.GetKeyDown (KeyCode.Alpha2)) {
-			lockScreenDark.Exit ();
+			PhoneAwoken ();
 		}
 		if (Input.GetKeyDown (KeyCode.Q)) {
 			PhoneUnlocked ();
@@ -29,6 +29,10 @@ public class AppAnimator : Singleton<AppAnimator>{
 
 	public void PhoneLocked(){
 		StartCoroutine (RunPhoneLockedRoutine());
+	}
+
+	public void PhoneAwoken(){
+		lockScreenDark.Exit ();
 	}
 
 	public void PhoneUnlocked(){

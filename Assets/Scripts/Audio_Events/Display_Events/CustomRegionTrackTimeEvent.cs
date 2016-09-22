@@ -13,4 +13,10 @@ public abstract class CustomRegionTrackTimeEvent : CustomTrackTimeEvent{
 		return base.GetTimeAtString ()+"->"+GetRegionEndTime();
 	}
 
+	public abstract void CustomExitRegionEvent ();
+
+	public virtual void SkipRegionEvent (){
+		// empty, but full of potential ;)
+	}
+
 }
